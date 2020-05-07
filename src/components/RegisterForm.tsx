@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import Axios from "axios"
+import axios from "axios"
 import { navigate } from "gatsby"
 
 export default function RegisterForm() {
@@ -20,8 +20,11 @@ export default function RegisterForm() {
         password: password,
         avatar: avatar,
       }
-      console.log(data)
-      navigate("/")
+      axios({
+        method: "post",
+        url: "http://localhost:3001/register",
+        data: data,
+      }).then(() => navigate('/'))
     } else {
       setError(true)
     }
