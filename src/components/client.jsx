@@ -3,26 +3,32 @@ import socketIOClient from 'socket.io-client';
 
 const ENDPOINT = 'http://localhost:3001';
 
-function App() {
+function Chat() {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [connection, setConnection] = useState({});
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const conn = socketIOClient(ENDPOINT);
+    //server connection
+    const conn = socketIOClient(ENDPOINT); 
     setConnection(conn);
 
+    //connection is opened
     conn.on('intial', data => {
       console.log(data);
       setUser(data.user);
       setUsers([...data.users]);
     })
+
+    // runs a callback on users
     conn.on('users', data => {
       console.log("ON USERS");
       setUsers([...data.users]);
     })
-    
+
+    //called when a message is received from the server
+    //runs a cb on message event
     conn.on('message', (data) => {
       setMessages(prev => [...prev, data]);
       console.log(messages);
@@ -31,6 +37,7 @@ function App() {
 
   }, [])
 
+  //messaging
   const handleSubmit = (evt) => {
     evt.preventDefault();
     console.log(connection);
@@ -41,7 +48,7 @@ function App() {
 
 
   return (
-    <div className="App">
+    <div className="chat">
         {users.map(u => <li>{u.username}</li>)}
         {messages.map(msg => <li><b>{msg.user.username}:</b>{msg.message}</li>)}
         <form onSubmit={handleSubmit}>
@@ -52,4 +59,4 @@ function App() {
   );
 }
 
-export default App;
+export default Chat; 

@@ -1,7 +1,9 @@
 const cors = require('cors');
+const express = require('express');
 const socketio = require('socket.io');
 const http = require('http');
 const ikea = require('ikea-name-generator');
+
 
 const PORT = 3001;
 
@@ -16,6 +18,7 @@ app.get('/test', (req,res) => {
 })
 
 io.on('connection', (socket) => {
+    //user
     console.log("user has connected!");
     let temp = {username: ikea.getName(false)};
     users.push(temp);
@@ -23,11 +26,13 @@ io.on('connection', (socket) => {
     socket.user = temp;
     io.emit('users', {users})
 
+    //message
     socket.on('message', (data) => {
         console.log(data);
         io.emit('message', data);
     })
 
+    //disconnect
     socket.on('disconnect', () => {
         console.log(socket.user);
         let pos = users.map(user => user.username).indexOf(socket.user.username);
