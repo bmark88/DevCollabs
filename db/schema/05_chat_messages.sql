@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS chat_messages CASCADE;
+CREATE TABLE chat_messages
+(
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  group_id INTEGER REFERENCES groups(id) ON DELETE CASCADE,
+  text TEXT,
+  created_at DATE NOT NULL
+);
