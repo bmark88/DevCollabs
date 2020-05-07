@@ -11,6 +11,7 @@ import Add from "../components/add"
 import Send from "../components/send"
 import Message from "../components/message"
 import Navbar from "../components/Navbar"
+import CodeSnippet from "../components/CodeSnippet"
 import App from "./App"
 
 const Main = styled.main`
@@ -58,7 +59,8 @@ const IndexPage = () => (
       </Topic>
     </Topics>
 
-    <App/>
+    {/* <App/> */}
+    {/* <CodeSnippet/> */}
     
     <Chat>
       <Message>User 1: Hello</Message>
