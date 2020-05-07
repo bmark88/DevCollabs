@@ -74,7 +74,7 @@ export default function IndexPage() {
         </Topic>
       </Topics>
 
-      <Chat users={users} messages={messages} onClick={() => handleSubmit}/>
+      <Chat users={users} messages={messages} handleSubmit={handleSubmit}/>
 
       </Main>
   </>

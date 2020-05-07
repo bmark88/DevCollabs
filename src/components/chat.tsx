@@ -3,7 +3,10 @@ import styled from "styled-components"
 import App from "./hooks/App"
 
 interface Props {
-  children: ReactNode
+  children: ReactNode,
+  users: any,
+  messages: any,
+  handleSubmit: any
 }
 
 const Div = styled.div`
@@ -15,28 +18,27 @@ const Div = styled.div`
   width: 40%;
   opacity: 80%;
   float: right;
-
+  background-color: green;
 
   @media (max-width: 1000px) {
     display: none;
   }
 `
-const UserList = styled.li`
+const UserList = styled.div`
 
 `
 
-const SubmitButton = styled.li`
-bottom: 0px;
-position: sticky;
-`
+const SubmitButton = styled.form`
+  bottom: 0;
+  position: fixed;
+  background-color: red;
+`;
 
 const Chat = ({ users, messages, handleSubmit }: Props) => {
   // const { users, messages, handleSubmit } = props
-  console.log(users)
   return (
     <Div>
-      <div>
-        <UserList>
+      <UserList>
           {users.map(user => (
             <li>{user}</li>
           ))}
@@ -47,13 +49,10 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
               {msg.message}
             </li>
           ))}
-            <SubmitButton>
-        <form onSubmit={handleSubmit}>
-          <input type="text" name="message" />
-          <button>Submit</button>
-        </form>
+        <SubmitButton onSubmit={handleSubmit}>
+            <input type="text" name="message" />
+            <button>Submit</button>
         </SubmitButton>
-      </div>
     </Div>
   )
 }
