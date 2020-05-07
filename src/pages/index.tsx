@@ -10,13 +10,15 @@ import { Topics, Topic, SubTopic } from "../components/topics"
 import Add from "../components/add"
 import Send from "../components/send"
 import Message from "../components/message"
+import Navbar from "../components/Navbar"
 
 const Main = styled.main`
-  margin-top: 180px;
+  margin-top: 80px;
 `;
 
 const IndexPage = () => (
   <>
+  <Navbar/> 
   <Main>
     <Topics>
       <Topic>

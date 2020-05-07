@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 const Navigation = styled.nav`
   width: 100vw;
-  height: 10vh;
+  height: 60px;
   display: flex;
   background-color: #fff;
   position: fixed;
@@ -15,6 +15,7 @@ const Navigation = styled.nav`
   padding: 0 5vw;
   z-index: 2;
   align-items: center;
+  top: 0;
 `
 
 const Navbar = () => {
