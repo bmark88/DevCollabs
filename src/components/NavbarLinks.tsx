@@ -30,7 +30,7 @@ const NavbarLinks = () => {
       </NavItem>
       <Drop>Features</Drop>
       <NavItem to="/page-2">Login</NavItem>
-      <NavItem to="/page-2">Register</NavItem>
+      <NavItem to="/register">Register</NavItem>
       
     </>
   )
