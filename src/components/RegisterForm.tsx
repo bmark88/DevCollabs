@@ -24,7 +24,8 @@ export default function RegisterForm() {
         method: "post",
         url: "http://localhost:3001/register",
         data: data,
-      }).then(() => navigate('/'))
+      }).then((res) => console.log(res))
+      navigate('/')
     } else {
       setError(true)
     }
