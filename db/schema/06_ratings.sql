@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS chat_messages CASCADE;
+CREATE TABLE chat_messages
+(
+  id SERIAL PRIMARY KEY NOT NULL,
+  rater_user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  rated_user_id VARCHAR(255) NOT NULL,
+  rating SMALLINT NOT NULL DEFAULT 0
+);
