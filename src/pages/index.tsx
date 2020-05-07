@@ -11,6 +11,7 @@ import Add from "../components/add"
 import Send from "../components/send"
 import Message from "../components/message"
 import Navbar from "../components/Navbar"
+import App from "./App"
 
 const Main = styled.main`
   margin-top: 80px;
@@ -56,6 +57,9 @@ const IndexPage = () => (
         <Add>Add Topic</Add>
       </Topic>
     </Topics>
+
+    <App/>
+    
     <Chat>
       <Message>User 1: Hello</Message>
       <Message>User 2: What's up?</Message>
