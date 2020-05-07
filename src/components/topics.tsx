@@ -15,7 +15,7 @@ const Container = styled.div`
 
   @media (max-width: 1000px) {
     width: 90%;
-    min-width: 450px;
+    margin: 1.4em;
   }
 `;
 
@@ -30,7 +30,7 @@ const Section = styled.section`
   color: black;
   // display: none;
   height: 80px;
-  margin: 2em;
+  margin: 1em;
   width: 80%;
   border-radius: 12px;
   position: relative;
