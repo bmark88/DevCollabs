@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client"
 
 const ENDPOINT = "http://localhost:3001"
 
-function App() {
+export default function App() {
   const [users, setUsers] = useState([])
   const [user, setUser] = useState({})
   const [connection, setConnection] = useState({})
@@ -37,30 +37,30 @@ function App() {
   }, [])
 
   //messaging
-  const handleSubmit = evt => {
-    evt.preventDefault()
+  const handleSubmit = event => {
+    event.preventDefault()
     console.log(connection)
-    console.log(evt.target.message.value)
-    connection.emit("message", { user, message: evt.target.message.value })
+    console.log(event.target.message.value)
+    connection.emit("message", { user, message: event.target.message.value })
   }
 
-  return (
-    <div className="app">
-      {users.map(u => (
-        <li>{u}</li>
-      ))}
-      {messages.map(msg => (
-        <li>
-          <b>{msg.user}:</b>
-          {msg.message}
-        </li>
-      ))}
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="message" />
-        <button>Submit</button>
-      </form>
-    </div>
-  )
+  // return (
+  //   <div className="app">
+  //     {users.map(u => (
+  //       <li>{u}</li>
+  //     ))}
+  //     {messages.map(msg => (
+  //       <li>
+  //         <b>{msg.user}:</b>
+  //         {msg.message}
+  //       </li>
+  //     ))}
+  //     <form onSubmit={handleSubmit}>
+  //       <input type="text" name="message" />
+  //       <button>Submit</button>
+  //     </form>
+  //   </div>
+  // )
+  return { handleSubmit, users, messages }
 }
 
-export default App
