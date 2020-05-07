@@ -1,9 +1,7 @@
-const cors = require('cors');
 const express = require('express');
+const cors = require('cors');
 const socketio = require('socket.io');
 const http = require('http');
-const ikea = require('ikea-name-generator');
-
 
 const PORT = 3001;
 
@@ -12,6 +10,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 const users = [];
+let userCount = 0;
 
 app.get('/test', (req,res) => {
     res.send("OK");
@@ -20,7 +19,8 @@ app.get('/test', (req,res) => {
 io.on('connection', (socket) => {
     //user
     console.log("user has connected!");
-    let temp = {username: ikea.getName(false)};
+    userCount += 1;
+    let temp = `User ${userCount}`
     users.push(temp);
     socket.emit('intial', {user: temp, users});
     socket.user = temp;
