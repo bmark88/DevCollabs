@@ -6,7 +6,7 @@ VALUES
 INSERT INTO posts
   (group_id, user_id, data, created_at)
 VALUES
-  (2, 3, { "test":"test post in group 3" }, NOW());
+  (2, 3, { "test":"test post in group 2" }, NOW());
 
 INSERT INTO posts
   (group_id, user_id, data, created_at)
