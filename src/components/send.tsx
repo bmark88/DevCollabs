@@ -6,10 +6,11 @@ interface Props {
 }
 
 const Form = styled.form`
-  bottom: -60px;
+  bottom: -62px;
   position: absolute;
   height: 80px;
   width: 100%;
+  display: flex;
 `;
 
 const Input = styled.input`
@@ -33,7 +34,7 @@ const Send = ({ children } :Props) => {
     <Div>
       <Form>
         <Input name="message" placeholder="Type Your Message Here" required></Input>
-            <Button>Send Message</Button>
+            <Button>Send</Button>
       </Form>
     </Div>
   )

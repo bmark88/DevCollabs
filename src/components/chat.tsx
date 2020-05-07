@@ -7,7 +7,7 @@ interface Props {
 
 const Div = styled.div`
   border: solid;
-  min-height: 600px;
+  height: 80%;
   position: fixed;
   right: 0;
   margin: 2em;
