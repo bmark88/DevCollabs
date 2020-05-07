@@ -3,7 +3,7 @@ import socketIOClient from 'socket.io-client';
 
 const ENDPOINT = 'http://localhost:3001';
 
-function Chat() {
+function App() {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [connection, setConnection] = useState({});
@@ -48,7 +48,7 @@ function Chat() {
 
 
   return (
-    <div className="chat">
+    <div className="app">
         {users.map(u => <li>{u.username}</li>)}
         {messages.map(msg => <li><b>{msg.user.username}:</b>{msg.message}</li>)}
         <form onSubmit={handleSubmit}>
@@ -59,4 +59,4 @@ function Chat() {
   );
 }
 
-export default Chat; 
+export default App; 
