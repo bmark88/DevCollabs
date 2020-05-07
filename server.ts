@@ -2,8 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require('cors');
-const bodyparser = require("body-parser");
+const bodyParser = require("body-parser");
 const http = require('http');
+app.use(bodyParser.json())
+app.use(cors());
 
 const PORT = 3001;
 
@@ -20,8 +22,9 @@ const dbParams = {
 const db = new Pool(dbParams);
 
 const indexRoutes = require('./routes/index.ts')
+
 app.use("/", indexRoutes(db));
 
-app.use(cors());
+
 
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
