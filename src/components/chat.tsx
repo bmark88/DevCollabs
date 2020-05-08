@@ -3,7 +3,6 @@ import styled from "styled-components"
 // import App from "./hooks/App"
 
 interface Props {
-  children: ReactNode,
   users: any,
   messages: any,
   handleSubmit: any
