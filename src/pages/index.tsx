@@ -79,13 +79,7 @@ export default function IndexPage() {
       </Main>
   </>
   )
-      /* <Chat>
-      <Message>User 1: Hello</Message>
-      <Message>User 2: What's up?</Message>
-      <Message>User 3: Goodbye</Message>
-      <Message>User 4: Ipsum</Message>
-      <Send>Send a Message</Send>
-    </Chat> */
+
   // <Layout>
   //   {/* <SEO title="Home" /> */}
   //   <h1>Hi people</h1>
