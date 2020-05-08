@@ -99,5 +99,28 @@ module.exports = db => {
       .catch(e => null)
   }
 
-  return { getUserWithEmail, addUser, getGroup, addGroup, getPostWithGroupID }
+  const changeUserInfo = (user) => {
+    const userID = 1; // change later to use logged in user's ID
+    
+    return db
+      .query(
+        `
+        UPDATE users
+        SET username = $1, email = $2, password = $3, avatar_image = $4
+        WHERE id = $5
+        RETURNING *;
+        `,
+        [
+          user.username,
+          user.email,
+          user.password, //this should use bcrypt.hashSync on real passwords
+          user.avatar,
+          userID
+        ]
+      )
+      .then(res => res.rows[0])
+      .catch(e => console.error(e.stack))
+  }
+
+  return { getUserWithEmail, addUser, getGroup, addGroup, getPostWithGroupID, changeUserInfo }
 }
