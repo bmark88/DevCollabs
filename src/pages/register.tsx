@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 import RegisterForm from '../components/RegisterForm'
-import Navbar from '../components/Navbar'
 import Layout from '../components/layout'
 
 
