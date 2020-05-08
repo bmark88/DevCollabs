@@ -8,8 +8,6 @@ import styled from "styled-components"
 import Chat from "../components/chat"
 import { Topics, Topic, SubTopic } from "../components/topics"
 import Add from "../components/add"
-import Send from "../components/send"
-import Message from "../components/message"
 import Navbar from "../components/Navbar"
 import App from "../components/hooks/App"
 

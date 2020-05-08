@@ -1,9 +1,8 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
-import App from "./hooks/App"
+// import App from "./hooks/App"
 
 interface Props {
-  children: ReactNode,
   users: any,
   messages: any,
   handleSubmit: any
@@ -48,12 +47,12 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
   return (
     <Div>
       <UserList>
-          {users.map(user => (
+          {users.map((user: string) => (
             <li>{user}</li>
           ))}
         </UserList>
         
-            {messages.map(msg => (
+            {messages.map((msg: any) => (
               <li>
                 <b>{msg.user}:</b>
                 {msg.message}
