@@ -46,6 +46,26 @@ module.exports = db => {
       .then(res => res.rows[0])
       .catch(e => null)
   }
+    /**
+   * Get a single user from the db given their email.
+   * @param {Interger} group_id  group id
+   * @return {Promise<{}>} A promise to the user.
+   */
+  const getPostWithGroupID = function (group_id) {
+    return db
+      .query(
+        `
+        SELECT posts.* , users.username, users.avatar_image FROM posts
+        JOIN users ON users.id = posts.user_id
+        WHERE posts.group_id = $1
+        `,
+        [group_id]
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
+  }
 
-  return { getUserWithEmail, addUser }
+  return { getUserWithEmail, addUser, getPostWithGroupID }
 }

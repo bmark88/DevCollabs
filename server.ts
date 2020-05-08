@@ -22,8 +22,10 @@ const dbParams = {
 const db = new Pool(dbParams);
 
 const indexRoutes = require('./routes/index.ts')
+const groupRoutes = require('./routes/group.ts')
 
 app.use("/", indexRoutes(db));
+app.use("/group", groupRoutes(db))
 
 
 
