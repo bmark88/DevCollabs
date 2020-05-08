@@ -46,7 +46,7 @@ module.exports = db => {
       .then(res => res.rows[0])
       .catch(e => null)
   }
-    /**
+  /**
    * Get a single user from the db given their email.
    * @param {Interger} group_id  group id
    * @return {Promise<{}>} A promise to the user.
@@ -66,7 +66,6 @@ module.exports = db => {
         return res.rows[0]
       })
   }
-
 
   const getGroup = function (groupId) {
     return db
@@ -99,9 +98,9 @@ module.exports = db => {
       .catch(e => null)
   }
 
-  const changeUserInfo = (user) => {
-    const userID = 1; // change later to use logged in user's ID
-    
+  const changeUserInfo = user => {
+    const userID = 1 // change later to use logged in user's ID
+
     return db
       .query(
         `
@@ -115,12 +114,49 @@ module.exports = db => {
           user.email,
           user.password, //this should use bcrypt.hashSync on real passwords
           user.avatar,
-          userID
+          userID,
         ]
       )
       .then(res => res.rows[0])
       .catch(e => console.error(e.stack))
   }
 
-  return { getUserWithEmail, addUser, getGroup, addGroup, getPostWithGroupID, changeUserInfo }
+  const deleteGroup = group_id => {
+    return db
+      .query(
+        `
+        DELETE FROM groups
+        WHERE id = $1
+        `,
+        [group_id]
+      )
+      .then(res => res.rows[0])
+      .catch(e => console.error(e.stack))
+  }
+
+  const getSubscriptionsWithUser = (user_id, group_id) => {
+    return db
+      .query(
+        `
+      SELECT * FROM subscriptions
+      WHERE user_id = $1 
+      AND group_id = $2
+      LIMIT 1;
+        `,
+        [user_id, group_id]
+      )
+      .then(res => res.rows[0])
+      .catch(e => console.error(e.stack))
+  }
+
+  return {
+    getUserWithEmail,
+    addUser,
+    getGroup,
+    addGroup,
+    getPostWithGroupID,
+    changeUserInfo,
+    deleteGroup,
+    getSubscriptionsWithUser
+  }
 }
