@@ -11,5 +11,14 @@ module.exports = db => {
     const user = req.body
     dbHelpers.addUser(user).then(data => console.log(data))
   })
+  
+  router.get("/group/:id", (req, res) => {
+    dbHelpers.getGroup(req.params.id).then(data => res.send(data))
+  })
+
+  router.post("/group/:name", (req, res) => {
+    dbHelpers.addGroup(req.params.name).then(data => console.log(data))
+  })
+
   return router
 }
