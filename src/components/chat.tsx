@@ -23,7 +23,8 @@ const Div = styled.div`
   }
 `
 const UserList = styled.div`
-
+  border-bottom: solid;
+  background-color: lightgreen;
 `
 
 const SubmitButton = styled.form`
@@ -36,27 +37,28 @@ const SubmitButton = styled.form`
 `;
 
 const Input = styled.input`
-  width: 90%;
+  width: 100%;
 `;
 
 const Button = styled.button`
 `;
 
 const Chat = ({ users, messages, handleSubmit }: Props) => {
-  // const { users, messages, handleSubmit } = props
+
   return (
     <Div>
       <UserList>
-          {users.map((user: string) => (
-            <li>{user}</li>
-          ))}
+        <h1>Online Members</h1>
+            {users.map((user: string) => (
+              <h3>{user}</h3>
+              ))}
         </UserList>
         
             {messages.map((msg: any) => (
-              <li>
-                <b>{msg.user}:</b>
-                {msg.message}
-              </li>
+              <div>
+                <b>{msg.user} says: {msg.message}</b>
+                <div style={{float: 'right'}}>{msg.date}</div>
+              </div>
             ))}
           <SubmitButton onSubmit={handleSubmit}>
               <Input type="text" name="message" />

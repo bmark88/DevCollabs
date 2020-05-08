@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import socketIOClient from "socket.io-client"
+import * as moment from 'moment';
 
 const ENDPOINT = "http://localhost:3001"
 
@@ -8,35 +9,29 @@ export default function App() {
   const [user, setUser] = useState({})
   const [connection, setConnection] = useState({})
   const [messages, setMessages] = useState([])
-
+  
   useEffect(() => {
     //server connection
     const conn = socketIOClient(ENDPOINT)
     setConnection(conn)
-
-    //connection is opened
+    
     conn.on("intial", data => {
-      console.log(data)
       setUser(data.user)
       setUsers([...data.users])
     })
-
-    // runs a callback on users
+    
     conn.on("users", data => {
-      console.log("ON USERS")
       setUsers([...data.users])
     })
-
-    //called when a message is received from the server
-    //runs a cb on message event
+    
     conn.on("message", data => {
+      let now = moment().format('lll');
+      data.date = now
       setMessages(prev => [...prev, data])
-      console.log(messages)
       console.log(data)
     })
   }, [])
 
-  //messaging
   const handleSubmit = event => {
     event.preventDefault()
     console.log(connection)
@@ -44,23 +39,6 @@ export default function App() {
     connection.emit("message", { user, message: event.target.message.value })
   }
 
-  // return (
-  //   <div className="app">
-  //     {users.map(u => (
-  //       <li>{u}</li>
-  //     ))}
-  //     {messages.map(msg => (
-  //       <li>
-  //         <b>{msg.user}:</b>
-  //         {msg.message}
-  //       </li>
-  //     ))}
-  //     <form onSubmit={handleSubmit}>
-  //       <input type="text" name="message" />
-  //       <button>Submit</button>
-  //     </form>
-  //   </div>
-  // )
   return { handleSubmit, users, messages }
 }
 
