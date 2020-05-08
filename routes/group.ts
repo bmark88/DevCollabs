@@ -9,10 +9,10 @@ module.exports = db => {
       console.log(queryResults)
       const { username, data, created_at, avatar_image } = queryResults
       console.log(username, data, created_at, avatar_image)
-      console.log(JSON.parse(data))
+      
       res.send({
         username, 
-        data: JSON.parse(data),
+        data,
         created_at,
         avatar_image
       })
