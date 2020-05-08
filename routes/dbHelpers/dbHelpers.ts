@@ -67,5 +67,37 @@ module.exports = db => {
       })
   }
 
-  return { getUserWithEmail, addUser, getPostWithGroupID }
+
+  const getGroup = function (groupId) {
+    return db
+      .query(
+        `
+        SELECT * FROM groups
+        WHERE groups.id = $1
+        LIMIT 1;
+        `,
+        [groupId]
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
+  }
+  const addGroup = function (name) {
+    return db
+      .query(
+        `
+      INSERT INTO groups
+      (name)
+      VALUES
+      ($1)
+      RETURNING *;
+      `,
+        [name]
+      )
+      .then(res => res.rows[0])
+      .catch(e => null)
+  }
+
+  return { getUserWithEmail, addUser, getGroup, addGroup, getPostWithGroupID }
 }

@@ -11,5 +11,6 @@ module.exports = db => {
     const user = req.body
     dbHelpers.addUser(user).then(data => console.log(data))
   })
+
   return router
 }
