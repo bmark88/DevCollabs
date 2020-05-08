@@ -11,14 +11,13 @@ interface Props {
 
 const Div = styled.div`
   border: solid;
-  height: 80%;
+  height: 85%;
   position: fixed;
   right: 0;
   margin: 2em;
   width: 40%;
   opacity: 80%;
   float: right;
-  background-color: green;
 
   @media (max-width: 1000px) {
     display: none;
@@ -30,8 +29,18 @@ const UserList = styled.div`
 
 const SubmitButton = styled.form`
   bottom: 0;
-  position: fixed;
-  background-color: red;
+  margin: 0;
+  display: flex;
+  height: 50px;
+  position: absolute;
+  width: 100%;
+`;
+
+const Input = styled.input`
+  width: 90%;
+`;
+
+const Button = styled.button`
 `;
 
 const Chat = ({ users, messages, handleSubmit }: Props) => {
@@ -43,16 +52,18 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
             <li>{user}</li>
           ))}
         </UserList>
-          {messages.map(msg => (
-            <li>
-              <b>{msg.user}:</b>
-              {msg.message}
-            </li>
-          ))}
-        <SubmitButton onSubmit={handleSubmit}>
-            <input type="text" name="message" />
-            <button>Submit</button>
-        </SubmitButton>
+        
+            {messages.map(msg => (
+              <li>
+                <b>{msg.user}:</b>
+                {msg.message}
+              </li>
+            ))}
+          <SubmitButton onSubmit={handleSubmit}>
+              <Input type="text" name="message" />
+              <Button>Send</Button>
+          </SubmitButton>
+        
     </Div>
   )
 }
