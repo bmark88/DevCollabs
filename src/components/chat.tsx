@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
-import App from "./hooks/App"
 
 interface Props {
   children: ReactNode,
@@ -24,7 +23,8 @@ const Div = styled.div`
   }
 `
 const UserList = styled.div`
-
+  border-bottom: solid;
+  background-color: lightgreen;
 `
 
 const SubmitButton = styled.form`
@@ -37,27 +37,27 @@ const SubmitButton = styled.form`
 `;
 
 const Input = styled.input`
-  width: 90%;
+  width: 100%;
 `;
 
 const Button = styled.button`
 `;
 
 const Chat = ({ users, messages, handleSubmit }: Props) => {
-  // const { users, messages, handleSubmit } = props
+
   return (
     <Div>
       <UserList>
+        <h1>Online Members</h1>
           {users.map(user => (
-            <li>{user}</li>
+            <h3>{user}</h3>
           ))}
         </UserList>
-        
             {messages.map(msg => (
-              <li>
-                <b>{msg.user}:</b>
-                {msg.message}
-              </li>
+              <div>
+                <b>{msg.user} says: {msg.message}</b>
+                <div style={{float: 'right'}}>{msg.date}</div>
+              </div>
             ))}
           <SubmitButton onSubmit={handleSubmit}>
               <Input type="text" name="message" />

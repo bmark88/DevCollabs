@@ -20,7 +20,7 @@ const Main = styled.main`
 export default function IndexPage() {
   
   let { users, messages, handleSubmit } = App()
-  console.log('INDEX', users, messages)
+
   return(
   <>
     <Navbar />
