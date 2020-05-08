@@ -31,10 +31,10 @@ function Dropdown(props) {
       {open && (
         <Menu>
           <li>
-            <Link to="/404"> Chat </Link>
+            <Link to="/"> Chat </Link>
           </li>
           <li>
-            <Link to="/"> Groups </Link>
+            <Link to="/group"> Groups </Link>
           </li>
           <li>
             <Link to="/page-2"> Hackathons </Link>

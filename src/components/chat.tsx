@@ -1,8 +1,8 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
+// import App from "./hooks/App"
 
 interface Props {
-  children: ReactNode,
   users: any,
   messages: any,
   handleSubmit: any
@@ -49,11 +49,12 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
     <Div>
       <UserList>
         <h1>Online Members</h1>
-          {users.map(user => (
-            <h3>{user}</h3>
-          ))}
+            {users.map((user: string) => (
+              <h3>{user}</h3>
+              ))}
         </UserList>
-            {messages.map(msg => (
+        
+            {messages.map((msg: any) => (
               <div>
                 <b>{msg.user} says: {msg.message}</b>
                 <div style={{float: 'right'}}>{msg.date}</div>
