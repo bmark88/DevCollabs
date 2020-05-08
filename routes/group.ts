@@ -20,5 +20,10 @@ module.exports = db => {
     })
   })
 
+  router.post("/:name", (req, res) => {
+    dbHelpers.addGroup(req.params.name).then(data => console.log(data))
+  })
+
+
   return router
 }
