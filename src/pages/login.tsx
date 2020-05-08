@@ -6,7 +6,6 @@ import Layout from '../components/layout'
 
 const RegisterPage = () => (
    <Layout>
-      <h1>Login</h1>
       <LoginForm />
    </Layout>
 )

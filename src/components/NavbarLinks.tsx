@@ -23,7 +23,7 @@ const Drop = styled(Dropdown)`
 `
 
 const NavbarLinks = (props: any) => {
-  const logout = (event) =>  {
+  const logout = (event :any) =>  {
     event.preventDefault();
     localStorage.removeItem('session');
     navigate('/')
