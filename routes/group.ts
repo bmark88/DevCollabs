@@ -11,8 +11,13 @@ module.exports = db => {
       console.log(username, data, created_at, avatar_image)
       
       res.send({
+<<<<<<< HEAD
         username, 
         data,
+=======
+        username,
+        data: JSON.parse(data),
+>>>>>>> 9b2633f7f3b56bd9f3e643270a75147e5d3a8bd4
         created_at,
         avatar_image,
       })
@@ -43,5 +48,21 @@ module.exports = db => {
         })
   })
 
+<<<<<<< HEAD
+=======
+  router.delete("/:group_id", (req, res) => {
+    let user = JSON.parse(window.localStorage.getItem("user"))
+    console.log('1-user', user)
+    dbHelpers.addGroup(user.id, req.params.group_id).then(subscription => {
+      console.log('2-subscription', subscription)
+      if (subscription.is_admin === true) {
+        dbHelpers.deleteGroup(group_id).then(data => console.log(data))
+      } else {
+        throw new Error("error: unable to delete group")
+      }
+    })
+  })
+
+>>>>>>> 9b2633f7f3b56bd9f3e643270a75147e5d3a8bd4
   return router
 }
