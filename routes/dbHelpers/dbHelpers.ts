@@ -46,7 +46,7 @@ module.exports = db => {
       .then(res => res.rows[0])
       .catch(e => null)
   }
-    /**
+  /**
    * Get a single user from the db given their email.
    * @param {Interger} group_id  group id
    * @return {Promise<{}>} A promise to the user.
@@ -66,7 +66,6 @@ module.exports = db => {
         return res.rows[0]
       })
   }
-
 
   const getGroup = function (groupId) {
     return db
@@ -98,6 +97,27 @@ module.exports = db => {
       .then(res => res.rows[0])
       .catch(e => null)
   }
+  const checkForUser = function (username) {
+    return db
+      .query(
+        `
+        SELECT * FROM users
+        WHERE username = $1
+        `,
+        [username]
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
+  }
 
-  return { getUserWithEmail, addUser, getGroup, addGroup, getPostWithGroupID }
+  return {
+    getUserWithEmail,
+    addUser,
+    getGroup,
+    addGroup,
+    getPostWithGroupID,
+    checkForUser,
+  }
 }
