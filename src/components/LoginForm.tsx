@@ -21,11 +21,15 @@ export default function RegisterForm() {
         url: "http://localhost:3001/login",
         data: data,
       })
-      .then((data) => localStorage.setItem('session', JSON.stringify(data)))
+      .then((data) => {
+        localStorage.setItem('session', JSON.stringify(data))
+        navigate("/")
+      })
       .catch(e => console.log(e))
     } else {
       setError(true)
     }
+    
   }
   return (
     <form onSubmit={onSubmitFunction}>
