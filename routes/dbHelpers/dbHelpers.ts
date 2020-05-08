@@ -46,7 +46,7 @@ module.exports = db => {
       .then(res => res.rows[0])
       .catch(e => null)
   }
-    /**
+  /**
    * Get a single user from the db given their email.
    * @param {Interger} group_id  group id
    * @return {Promise<{}>} A promise to the user.
@@ -67,7 +67,6 @@ module.exports = db => {
       })
   }
 
-
   const getGroup = function (groupId) {
     return db
       .query(
@@ -84,7 +83,6 @@ module.exports = db => {
       })
   }
   const addGroup = function (name) {
-    console.log('ADD GROUP')
     return db
       .query(
         `
@@ -101,23 +99,27 @@ module.exports = db => {
   }
 
   const addSubscription = function (subscription) {
-    console.log('addSubscription', subscription);
     return db
-    .query(
-      `
+      .query(
+        `
     INSERT INTO subscriptions
     (group_id, user_id, is_admin)
     VALUES
     ($1, $2, true)
     RETURNING *;
     `,
-      [ subscription.group_id,
-        subscription.user_id
-      ]
-    )
-    .then(res => res.rows[0])
-    .catch(e => null)
+        [subscription.group_id, subscription.user_id]
+      )
+      .then(res => res.rows[0])
+      .catch(e => null)
   }
 
-  return { getUserWithEmail, addUser, getGroup, addGroup, getPostWithGroupID, addSubscription }
+  return {
+    getUserWithEmail,
+    addUser,
+    getGroup,
+    addGroup,
+    getPostWithGroupID,
+    addSubscription,
+  }
 }
