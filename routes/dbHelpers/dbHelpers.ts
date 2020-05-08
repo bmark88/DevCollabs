@@ -84,6 +84,7 @@ module.exports = db => {
       })
   }
   const addGroup = function (name) {
+    console.log('ADD GROUP')
     return db
       .query(
         `
@@ -99,5 +100,24 @@ module.exports = db => {
       .catch(e => null)
   }
 
-  return { getUserWithEmail, addUser, getGroup, addGroup, getPostWithGroupID }
+  const addSubscription = function (subscription) {
+    console.log('addSubscription', subscription);
+    return db
+    .query(
+      `
+    INSERT INTO subscriptions
+    (group_id, user_id, is_admin)
+    VALUES
+    ($1, $2, true)
+    RETURNING *;
+    `,
+      [ subscription.group_id,
+        subscription.user_id
+      ]
+    )
+    .then(res => res.rows[0])
+    .catch(e => null)
+  }
+
+  return { getUserWithEmail, addUser, getGroup, addGroup, getPostWithGroupID, addSubscription }
 }
