@@ -15,24 +15,24 @@ export default function App() {
     const conn = socketIOClient(ENDPOINT)
     setConnection(conn)
     
-    conn.on("intial", data => {
+    conn.on("intial", (data: any) => {
       setUser(data.user)
       setUsers([...data.users])
     })
     
-    conn.on("users", data => {
+    conn.on("users", (data: any) => {
       setUsers([...data.users])
     })
     
-    conn.on("message", data => {
-      let now = moment().format('lll');
+    conn.on("message", (data: any) => {
+      let now: string = moment().format('lll');
       data.date = now
       setMessages(prev => [...prev, data])
       console.log(data)
     })
   }, [])
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: any) => {
     event.preventDefault()
     console.log(connection)
     console.log(event.target.message.value)

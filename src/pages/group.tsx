@@ -25,6 +25,6 @@ const GroupPage = () => {
       </Rooms>
     </Layout>
   )
-};
+}
 
-export default GroupPage;
+export default GroupPage

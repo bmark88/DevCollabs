@@ -34,5 +34,13 @@ module.exports = db => {
     .catch(e => console.error(e))
   })
 
+  router.post("/settings", (req, res) => {
+    const user = req.body
+    console.log(user)
+    dbHelpers.changeUserInfo(user)
+      .then(data => console.log({data}))
+  })
+
   return router
-}
+} 
+

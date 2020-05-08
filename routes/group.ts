@@ -11,19 +11,37 @@ module.exports = db => {
       console.log(username, data, created_at, avatar_image)
       console.log(JSON.parse(data))
       res.send({
-        username, 
+        username,
         data: JSON.parse(data),
         created_at,
-        avatar_image
+        avatar_image,
       })
-
     })
   })
 
   router.post("/:name", (req, res) => {
-    dbHelpers.addGroup(req.params.name).then(data => console.log(data))
+    const subscription = { group_id: "", user_id: "" }
+    dbHelpers
+      .addGroup(req.params.name)
+      .then(group => {
+        subscription.group_id = group.id
+        console.log("1-subscription group", subscription)
+      })
+      .then(() => {
+        dbHelpers
+          .getUserWithEmail("alice@hotmail.com")
+          .then(user => {
+            subscription.user_id = user.id
+            console.log("2-subscription user", subscription)
+          })
+          .then(() => {
+            console.log("3-subscription object: ", subscription),
+              dbHelpers
+                .addSubscription(subscription)
+                .then(result => console.log("result ", result))
+          })
+        })
   })
-
 
   return router
 }
