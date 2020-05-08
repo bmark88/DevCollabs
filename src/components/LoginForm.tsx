@@ -7,7 +7,11 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
 import Typography from "@material-ui/core/Typography"
 import { makeStyles } from "@material-ui/core/styles"
 import Container from "@material-ui/core/Container"
-import Alert from '@material-ui/lab/Alert';
+import Alert from "@material-ui/lab/Alert"
+import Visibility from "@material-ui/icons/Visibility"
+import VisibilityOff from "@material-ui/icons/VisibilityOff"
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
 
 import axios from "axios"
 import { navigate } from "gatsby"
@@ -37,6 +41,7 @@ export default function RegisterForm() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const onSubmitFunction = (event: any) => {
     setError(false)
@@ -79,16 +84,27 @@ export default function RegisterForm() {
             value={username}
             onChange={event => setUsername(event.target.value)}
           />
-          <TextField
+      <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             value={password}
             onChange={event => setPassword(event.target.value)}
+            InputProps={{
+              endAdornment:  
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+            }}
           />
           <Button
             type="submit"
