@@ -97,6 +97,20 @@ module.exports = db => {
       .then(res => res.rows[0])
       .catch(e => null)
   }
+  const checkForUser = function (username) {
+    return db
+      .query(
+        `
+        SELECT * FROM users
+        WHERE username = $1
+        `,
+        [username]
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
+  }
 
   const addSubscription = function (subscription) {
     return db
@@ -144,6 +158,7 @@ module.exports = db => {
     addGroup,
     getPostWithGroupID,
     addSubscription,
-    changeUserInfo
+    changeUserInfo,
+    checkForUser,
   }
 }

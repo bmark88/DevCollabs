@@ -1,13 +1,13 @@
 import React from "react"
 import styled from "styled-components"
-import RegisterForm from '../components/RegisterForm'
+import LoginForm from '../components/LoginForm'
 import Layout from '../components/layout'
 
 
 const RegisterPage = () => (
    <Layout>
-      <h1>Register</h1>
-      <RegisterForm />
+      <h1>Login</h1>
+      <LoginForm />
    </Layout>
 )
 

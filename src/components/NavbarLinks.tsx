@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import styled from "styled-components"
 
 import Dropdown from "./Dropdown"
@@ -22,15 +22,20 @@ const Drop = styled(Dropdown)`
   
 `
 
-const NavbarLinks = () => {
+const NavbarLinks = (props: any) => {
+  const logout = (event) =>  {
+    event.preventDefault();
+    localStorage.removeItem('session');
+    navigate('/')
+
+  }
   return (
     <>
-      <NavItem className="avatar" to="/404">
-        Avatar
-      </NavItem>
+      {props.username && <NavItem className="avatar" to="/404">{props.username}</NavItem>}
       <Drop>Features</Drop>
-      <NavItem to="/page-2">Login</NavItem>
-      <NavItem to="/register">Register</NavItem>
+      {!props.username && <NavItem to="/login">Login</NavItem>}
+      {!props.username && <NavItem to="/register">Register</NavItem>}
+      {props.username && <button onClick= {logout}>Logout</button> }
       
     </>
   )
