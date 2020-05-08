@@ -1,8 +1,12 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
+import App from "./hooks/App"
 
 interface Props {
-  children: ReactNode
+  children: ReactNode,
+  users: any,
+  messages: any,
+  handleSubmit: any
 }
 
 const Div = styled.div`
@@ -14,14 +18,43 @@ const Div = styled.div`
   width: 40%;
   opacity: 80%;
   float: right;
+  background-color: green;
 
   @media (max-width: 1000px) {
     display: none;
   }
+`
+const UserList = styled.div`
+
+`
+
+const SubmitButton = styled.form`
+  bottom: 0;
+  position: fixed;
+  background-color: red;
 `;
 
-const Chat = ({ children } :Props) => {
-  return <Div>{children}</Div>
-};
+const Chat = ({ users, messages, handleSubmit }: Props) => {
+  // const { users, messages, handleSubmit } = props
+  return (
+    <Div>
+      <UserList>
+          {users.map(user => (
+            <li>{user}</li>
+          ))}
+        </UserList>
+          {messages.map(msg => (
+            <li>
+              <b>{msg.user}:</b>
+              {msg.message}
+            </li>
+          ))}
+        <SubmitButton onSubmit={handleSubmit}>
+            <input type="text" name="message" />
+            <button>Submit</button>
+        </SubmitButton>
+    </Div>
+  )
+}
 
-export default Chat;
+export default Chat

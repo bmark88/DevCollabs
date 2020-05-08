@@ -11,66 +11,75 @@ import Add from "../components/add"
 import Send from "../components/send"
 import Message from "../components/message"
 import Navbar from "../components/Navbar"
-import CodeSnippet from "../components/CodeSnippet"
-import App from "./App"
+import App from "../components/hooks/App"
 
 const Main = styled.main`
   margin-top: 80px;
-`;
+`
 
-const IndexPage = () => (
+export default function IndexPage() {
+  
+  let { users, messages, handleSubmit } = App()
+  console.log('INDEX', users, messages)
+  return(
   <>
-  <Navbar/> 
-  <Main>
-    <Topics>
-      <Topic>
+    <Navbar />
+    <Main>
+      <Topics>
+        <Topic>
           <Add>Add Topic</Add>
-          <SubTopic>SubTopic - Change my display to none and add JS for accordion to unhide and slide down</SubTopic>
-      </Topic>
-      <Topic>
-        <Add>Add Topic</Add>
-        <SubTopic>SubTopic - Change my display to none and add JS for accordion to unhide and slide down</SubTopic>
-        <SubTopic>SubTopic - Change my display to none and add JS for accordion to unhide and slide down</SubTopic>
-        <SubTopic>SubTopic - Change my display to none and add JS for accordion to unhide and slide down</SubTopic>
-      </Topic>
-      <Topic>
-        New Topic
-        <Add>Add Topic</Add>
-      </Topic>
-      <Topic>
-        New Topic
-        <Add>Add Topic</Add>
-      </Topic>
-      <Topic>
-        New Topic
-        <Add>Add Topic</Add>
-      </Topic>
-      <Topic>
-        New Topic
-        <Add>Add Topic</Add>
-      </Topic>
-      <Topic>
-        New Topic
-        <Add>Add Topic</Add>
-      </Topic>
-      <Topic>
-        New Topic
-        <Add>Add Topic</Add>
-      </Topic>
-    </Topics>
+          <SubTopic>
+            SubTopic - Change my display to none and add JS for accordion to
+            unhide and slide down
+          </SubTopic>
+        </Topic>
+        <Topic>
+          <Add>Add Topic</Add>
+          <SubTopic>
+            SubTopic - Change my display to none and add JS for accordion to
+            unhide and slide down
+          </SubTopic>
+          <SubTopic>
+            SubTopic - Change my display to none and add JS for accordion to
+            unhide and slide down
+          </SubTopic>
+          <SubTopic>
+            SubTopic - Change my display to none and add JS for accordion to
+            unhide and slide down
+          </SubTopic>
+        </Topic>
+        <Topic>
+          New Topic
+          <Add>Add Topic</Add>
+        </Topic>
+        <Topic>
+          New Topic
+          <Add>Add Topic</Add>
+        </Topic>
+        <Topic>
+          New Topic
+          <Add>Add Topic</Add>
+        </Topic>
+        <Topic>
+          New Topic
+          <Add>Add Topic</Add>
+        </Topic>
+        <Topic>
+          New Topic
+          <Add>Add Topic</Add>
+        </Topic>
+        <Topic>
+          New Topic
+          <Add>Add Topic</Add>
+        </Topic>
+      </Topics>
 
-    {/* <App/> */}
-    {/* <CodeSnippet/> */}
-    
-    <Chat>
-      <Message>User 1: Hello</Message>
-      <Message>User 2: What's up?</Message>
-      <Message>User 3: Goodbye</Message>
-      <Message>User 4: Ipsum</Message>
-      <Send>Send a Message</Send>
-    </Chat>
-  </Main>
-    </>
+      <Chat users={users} messages={messages} handleSubmit={handleSubmit}/>
+
+      </Main>
+  </>
+  )
+
   // <Layout>
   //   {/* <SEO title="Home" /> */}
   //   <h1>Hi people</h1>
@@ -81,6 +90,6 @@ const IndexPage = () => (
   //   </div>
   //   <Link to="/page-2/">Go to page 2</Link>
   // </Layout>
-)
 
-export default IndexPage
+
+  }
