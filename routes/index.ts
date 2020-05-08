@@ -21,7 +21,8 @@ module.exports = db => {
         if (bcrypt.compareSync(password, user.password)) {
           jwt.sign({ user }, "secretkey", { expiresIn: "30s" }, (err, token) => {
               const id = user.id
-              res.json({token , username, id })
+              const email = user.email
+              res.json({token , username, email, id })
             })
         } else {
           res.status(400).send("Wrong Password")
