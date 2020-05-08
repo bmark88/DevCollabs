@@ -6,7 +6,7 @@
  */
 
 import React, { ReactNode } from "react"
-import { useStaticQuery, graphql } from "gatsby"
+// import { useStaticQuery, graphql } from "gatsby"
 import Navbar from './Navbar' 
 
 import "./layout.css"
@@ -16,24 +16,24 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+  // const data = useStaticQuery(graphql`
+  //   query SiteTitleQuery {
+  //     site {
+  //       siteMetadata {
+  //         title
+  //       }
+  //     }
+  //   }
+  // `)
 
   return (
     <>
       <Navbar />
       <div
         style={{
-          marginTop: `20vh`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
+          marginTop: `60px`,
+          // maxWidth: 960,
+          // padding: `0 1.0875rem 1.45rem`,
         }}
       >
         <main>{children}</main>
