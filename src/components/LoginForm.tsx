@@ -40,8 +40,6 @@ export default function RegisterForm() {
   const classes = useStyles()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [email, setEmail] = useState("")
-  const [avatar, setAvatar] = useState("")
   const [error, setError] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
@@ -50,21 +48,20 @@ export default function RegisterForm() {
     event.preventDefault()
     const data: object = {
       username: username,
-      email: email,
       password: password,
-      avatar: avatar,
     }
     axios({
       method: "post",
-      url: "http://localhost:3001/register",
+      url: "http://localhost:3001/login",
       data: data,
-    }).then(res => {
-      console.log(res.data)
-      localStorage.setItem("session", JSON.stringify(res))
-      navigate("/")
     })
-    
+      .then(data => {
+        localStorage.setItem("session", JSON.stringify(data))
+        navigate("/")
+      })
+      .catch(() => setError(true))
   }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -73,7 +70,7 @@ export default function RegisterForm() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign Up
+          Sign in
         </Typography>
         <form className={classes.form} onSubmit={onSubmitFunction}>
           <TextField
@@ -87,18 +84,7 @@ export default function RegisterForm() {
             value={username}
             onChange={event => setUsername(event.target.value)}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email"
-            autoFocus
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-          />
-          <TextField
+      <TextField
             variant="outlined"
             margin="normal"
             required
@@ -120,17 +106,6 @@ export default function RegisterForm() {
                 </InputAdornment>
             }}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="avatar"
-            label="Avatar"
-            autoFocus
-            value={avatar}
-            onChange={event => setAvatar(event.target.value)}
-          />
           <Button
             type="submit"
             fullWidth
@@ -138,11 +113,11 @@ export default function RegisterForm() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Sign In
           </Button>
         </form>
       </div>
-      {error && <Alert severity="error">Could Not Register</Alert>}
+      {error && <Alert severity="error">Could Not Sign In</Alert>}
     </Container>
   )
 }

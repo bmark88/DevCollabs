@@ -6,10 +6,12 @@ import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
 
 interface Props {
-  children: ReactNode
+    children: ReactNode
 }
-
-const GroupPage = () => {
+let data = JSON.parse(localStorage.getItem("session"))
+// data.data.id 
+console.log('data', data)
+const deletePage = () => {
   return (
     <Layout>
       <Users>Users</Users>
@@ -27,4 +29,4 @@ const GroupPage = () => {
   )
 }
 
-export default GroupPage
+export default deletePage

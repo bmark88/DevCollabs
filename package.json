@@ -6,6 +6,9 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "proxy": "http://localhost:3001",
   "dependencies": {
+    "@material-ui/core": "^4.9.13",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.52",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "@types/react-helmet": "^5.0.15",
@@ -38,6 +41,7 @@
     "react-onclickoutside": "^6.9.0",
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.0",
+    "typeface-roboto": "0.0.75",
     "typescript": "^3.8.3"
   },
   "devDependencies": {
