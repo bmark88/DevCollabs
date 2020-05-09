@@ -9,10 +9,8 @@ module.exports = db => {
     const { userId, data } = req.body
     dbHelpers
       .createPost(groupId, userId, data)
-      .then(post => res.send(`Post #${post.id} 
-      Data: ${post.data}
-      created by group:${post.group_id} by user:${post.user_id}`))
-      .catch(e => res.status(400).send("Could not create post"))
+      .then(post => res.send(post))
+      .catch(() => res.status(400).send("Could not create post"))
   })
 
   router.get("/:group_id", (req, res) => {
