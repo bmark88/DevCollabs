@@ -56,7 +56,7 @@ export default function RegisterForm() {
       data: data,
     })
       .then(data => {
-        localStorage.setItem("session", JSON.stringify(data))
+        localStorage.setItem("session", JSON.stringify(data.data))
         navigate("/")
       })
       .catch(() => setError(true))
