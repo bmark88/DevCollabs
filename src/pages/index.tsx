@@ -10,6 +10,7 @@ import { Topics, Topic, SubTopic } from "../components/topics"
 import Add from "../components/add"
 import Navbar from "../components/Navbar"
 import App from "../components/hooks/App"
+import { navigate } from "gatsby"
 
 const Main = styled.main`
   margin-top: 80px;
@@ -17,6 +18,11 @@ const Main = styled.main`
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = App()
+
+  if(!localStorage.getItem('session')) {
+    navigate('/login')
+    return null;
+  }
 
   return (
     <>
