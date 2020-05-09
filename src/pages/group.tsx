@@ -4,15 +4,25 @@ import Users from "../components/users"
 import Groups from "../components/groups"
 import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
+import App from "../components/hooks/App"
+import Chat from "../components/chat"
 
 interface Props {
   children: ReactNode
+  users: any,
+  messages: any,
+  handleSubmit: any
 }
 
+
 const GroupPage = () => {
+  let { users, messages, handleSubmit } = App()
+
   return (
     <Layout>
-      <Users>Users</Users>
+      <Users>
+      <Chat users={users} messages={messages} handleSubmit={handleSubmit}/>
+      </Users>
       <Groups>Groups</Groups>
       <Rooms>
         <Room>Room 1</Room>
