@@ -131,6 +131,20 @@ module.exports = db => {
       .catch(e => null)
   }
 
+  const removeSubscription = (userID, groupID) => {
+
+    return db
+      .query(`
+        DELETE FROM subscriptions
+        WHERE user_id = $1
+        AND group_id = $2 
+      `,
+      [userID, groupID]
+      )
+      .then(res => res.rows[0])
+      .catch(e => console.error('error ===>', e.stack))
+  };
+
   const changeUserInfo = user => {
     const userID = 1 // change later to use logged in user's ID
 
@@ -192,6 +206,7 @@ module.exports = db => {
     deleteGroup,
     getSubscriptionsWithUser,
     addSubscription,
+    removeSubscription,
     checkForUser
   }
 }
