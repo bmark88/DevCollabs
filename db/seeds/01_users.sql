@@ -1,29 +1,29 @@
 INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
-    ('aliceLand1', 'password', 'alice@hotmail.com', '/src/images/profile-hex.png');
+    ('aliceLand1', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'alice@hotmail.com', '/src/images/profile-hex.png');
 
 INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
-    ('johnDoe2', 'password', 'john@hotmail.com', '/src/images/johnDoe.png');
+    ('johnDoe2', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'john@hotmail.com', '/src/images/johnDoe.png');
 
 INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
-    ('alex3', 'password', 'alex@hotmail.com', '/src/images/profile-hex.png');
+    ('alex3', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'alex@hotmail.com', '/src/images/profile-hex.png');
 
 INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
-    ('ben4', 'password', 'ben@hotmail.com', '/src/images/johnDoe.png');
+    ('ben4', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'ben@hotmail.com', '/src/images/johnDoe.png');
 
 INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
-    ('kate5', 'password', 'kate@hotmail.com', '/src/images/profile-hex.png');
+    ('kate5', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'kate@hotmail.com', '/src/images/profile-hex.png');
 
 INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
-    ('zack6', 'password', 'zack@hotmail.com', '/src/images/johnDoe.png');
+    ('zack6', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');

@@ -9,10 +9,10 @@ module.exports = db => {
       console.log(queryResults)
       const { username, data, created_at, avatar_image } = queryResults
       console.log(username, data, created_at, avatar_image)
-      console.log(JSON.parse(data))
+
       res.send({
         username,
-        data: JSON.parse(data),
+        data,
         created_at,
         avatar_image,
       })
@@ -20,20 +20,45 @@ module.exports = db => {
   })
 
   router.post("/:name", (req, res) => {
-    dbHelpers.addGroup(req.params.name).then(data => console.log(data))
+    const subscription = { group_id: "", user_id: "" }
+    dbHelpers
+      .addGroup(req.params.name)
+      .then(group => {
+        subscription.group_id = group.id
+        console.log("1-subscription group", subscription)
+      })
+      .then(() => {
+        dbHelpers
+          .getUserWithEmail("alice@hotmail.com")
+          .then(user => {
+            subscription.user_id = user.id
+            console.log("2-subscription user", subscription)
+          })
+          .then(() => {
+            console.log("3-subscription object: ", subscription),
+              dbHelpers
+                .addSubscription(subscription)
+                .then(result => console.log("result ", result))
+          })
+      })
   })
 
-  router.delete("/:group_id", (req, res) => {
-    let user = JSON.parse(window.localStorage.getItem("user"))
-    console.log('1-user', user)
-    dbHelpers.addGroup(user.id, req.params.group_id).then(subscription => {
-      console.log('2-subscription', subscription)
-      if (subscription.is_admin === true) {
-        dbHelpers.deleteGroup(group_id).then(data => console.log(data))
-      } else {
-        throw new Error("error: unable to delete group")
-      }
-    })
+  router.delete("/delete/:group_id", (req, res) => {
+    console.log(req.body)
+    console.log(req.params)
+    const userId = req.body.id
+    const groupId = req.params.group_id
+
+    dbHelpers
+      .getSubscriptionsWithUser(userId, groupId)
+      .then(subscription => {
+        console.log("2-subscription", subscription)
+        if (subscription.is_admin === true) {
+          dbHelpers.deleteGroup(groupId).then(data => console.log(data))
+        } else {
+          throw new Error("error: unable to delete group")
+        }
+      })
   })
 
   return router

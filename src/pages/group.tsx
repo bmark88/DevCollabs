@@ -2,6 +2,7 @@ import React, { ReactNode } from "react"
 
 import Users from "../components/users"
 import Groups from "../components/groups"
+import { Link, navigate } from "gatsby"
 import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
 import App from "../components/hooks/App"
@@ -16,6 +17,7 @@ interface Props {
 
 
 const GroupPage = () => {
+<<<<<<< HEAD
   let { users, messages, handleSubmit } = App()
 
   return (
@@ -23,6 +25,18 @@ const GroupPage = () => {
       <Users>
       <Chat users={users} messages={messages} handleSubmit={handleSubmit}/>
       </Users>
+=======
+
+  if(!localStorage.getItem('session')) {
+    navigate('/login')
+    return null;
+  }
+
+  return (
+    <Layout>
+      <Link to="/room/"> Room Link </Link>
+      <Users>Users</Users>
+>>>>>>> ee021c0aefa5c9353857b7d184fba968e32fb9bb
       <Groups>Groups</Groups>
       <Rooms>
         <Room>Room 1</Room>
@@ -35,6 +49,6 @@ const GroupPage = () => {
       </Rooms>
     </Layout>
   )
-};
+}
 
-export default GroupPage;
+export default GroupPage

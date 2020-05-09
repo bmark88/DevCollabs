@@ -5,77 +5,84 @@ import styled from "styled-components"
 // import Layout from "../components/layout"
 // import Image from "../components/image"
 // import SEO from "../components/seo"
+import LoginForm from "../components/LoginForm"
+import Layout from "../components/layout"
+import { navigate } from "gatsby"
 import Chat from "../components/chat"
 import { Topics, Topic, SubTopic } from "../components/topics"
 import Add from "../components/add"
 import Navbar from "../components/Navbar"
 import App from "../components/hooks/App"
+import { navigate } from "gatsby"
 
 const Main = styled.main`
   margin-top: 80px;
 `
 
 export default function IndexPage() {
-  
   let { users, messages, handleSubmit } = App()
 
-  return(
-  <>
-    <Navbar />
-    <Main>
-      <Topics>
-        <Topic>
-          <Add>Add Topic</Add>
-          <SubTopic>
-            SubTopic - Change my display to none and add JS for accordion to
-            unhide and slide down
-          </SubTopic>
-        </Topic>
-        <Topic>
-          <Add>Add Topic</Add>
-          <SubTopic>
-            SubTopic - Change my display to none and add JS for accordion to
-            unhide and slide down
-          </SubTopic>
-          <SubTopic>
-            SubTopic - Change my display to none and add JS for accordion to
-            unhide and slide down
-          </SubTopic>
-          <SubTopic>
-            SubTopic - Change my display to none and add JS for accordion to
-            unhide and slide down
-          </SubTopic>
-        </Topic>
-        <Topic>
-          New Topic
-          <Add>Add Topic</Add>
-        </Topic>
-        <Topic>
-          New Topic
-          <Add>Add Topic</Add>
-        </Topic>
-        <Topic>
-          New Topic
-          <Add>Add Topic</Add>
-        </Topic>
-        <Topic>
-          New Topic
-          <Add>Add Topic</Add>
-        </Topic>
-        <Topic>
-          New Topic
-          <Add>Add Topic</Add>
-        </Topic>
-        <Topic>
-          New Topic
-          <Add>Add Topic</Add>
-        </Topic>
-      </Topics>
+  if(!localStorage.getItem('session')) {
+    navigate('/login')
+    return null;
+  }
 
-      <Chat users={users} messages={messages} handleSubmit={handleSubmit}/>
+  return (
+    <>
+      <Navbar />
+      <Main>
+        <Topics>
+          <Topic>
+            <Add>Add Topic</Add>
+            <SubTopic>
+              SubTopic - Change my display to none and add JS for accordion to
+              unhide and slide down
+            </SubTopic>
+          </Topic>
+          <Topic>
+            <Add>Add Topic</Add>
+            <SubTopic>
+              SubTopic - Change my display to none and add JS for accordion to
+              unhide and slide down
+            </SubTopic>
+            <SubTopic>
+              SubTopic - Change my display to none and add JS for accordion to
+              unhide and slide down
+            </SubTopic>
+            <SubTopic>
+              SubTopic - Change my display to none and add JS for accordion to
+              unhide and slide down
+            </SubTopic>
+          </Topic>
+          <Topic>
+            New Topic
+            <Add>Add Topic</Add>
+          </Topic>
+          <Topic>
+            New Topic
+            <Add>Add Topic</Add>
+          </Topic>
+          <Topic>
+            New Topic
+            <Add>Add Topic</Add>
+          </Topic>
+          <Topic>
+            New Topic
+            <Add>Add Topic</Add>
+          </Topic>
+          <Topic>
+            New Topic
+            <Add>Add Topic</Add>
+          </Topic>
+          <Topic>
+            New Topic
+            <Add>Add Topic</Add>
+          </Topic>
+        </Topics>
 
+        <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>
-  </>
+    </>
   )
 
   // <Layout>
@@ -88,6 +95,4 @@ export default function IndexPage() {
   //   </div>
   //   <Link to="/page-2/">Go to page 2</Link>
   // </Layout>
-
-
-  }
+}

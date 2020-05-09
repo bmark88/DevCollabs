@@ -43,7 +43,10 @@ module.exports = db => {
           user.avatar,
         ]
       )
-      .then(res => res.rows[0])
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
       .catch(e => null)
   }
   /**
@@ -93,6 +96,36 @@ module.exports = db => {
       RETURNING *;
       `,
         [name]
+      )
+      .then(res => res.rows[0])
+      .catch(e => null)
+  }
+  const checkForUser = function (username) {
+    return db
+      .query(
+        `
+        SELECT * FROM users
+        WHERE username = $1
+        `,
+        [username]
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
+  }
+
+  const addSubscription = function (subscription) {
+    return db
+      .query(
+        `
+    INSERT INTO subscriptions
+    (group_id, user_id, is_admin)
+    VALUES
+    ($1, $2, true)
+    RETURNING *;
+    `,
+        [subscription.group_id, subscription.user_id]
       )
       .then(res => res.rows[0])
       .catch(e => null)
@@ -157,6 +190,8 @@ module.exports = db => {
     getPostWithGroupID,
     changeUserInfo,
     deleteGroup,
-    getSubscriptionsWithUser
+    getSubscriptionsWithUser,
+    addSubscription,
+    checkForUser
   }
 }
