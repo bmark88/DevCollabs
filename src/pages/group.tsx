@@ -2,6 +2,7 @@ import React, { ReactNode } from "react"
 
 import Users from "../components/users"
 import Groups from "../components/groups"
+import { Link } from "gatsby"
 import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
 
@@ -12,6 +13,7 @@ interface Props {
 const GroupPage = () => {
   return (
     <Layout>
+      <Link to="/room/"> Room Link </Link>
       <Users>Users</Users>
       <Groups>Groups</Groups>
       <Rooms>
