@@ -5,6 +5,8 @@ import styled from "styled-components"
 // import Layout from "../components/layout"
 // import Image from "../components/image"
 // import SEO from "../components/seo"
+import LoginForm from "../components/LoginForm"
+import Layout from "../components/layout"
 import Chat from "../components/chat"
 import { Topics, Topic, SubTopic } from "../components/topics"
 import Add from "../components/add"
@@ -17,6 +19,14 @@ const Main = styled.main`
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = App()
+  
+  if(!localStorage.getItem('session')) {
+    return (
+      <Layout>
+        <LoginForm />
+      </Layout>
+    )
+  }
 
   return (
     <>
