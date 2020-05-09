@@ -24,9 +24,9 @@ module.exports = db => {
   })
 
   router.delete("/:group_id", (req, res) => {
-    let user = JSON.parse(window.localStorage.getItem("user"))
-    console.log('1-user', user)
-    dbHelpers.addGroup(user.id, req.params.group_id).then(subscription => {
+    let data = JSON.parse(window.localStorage.getItem("session"))
+    console.log('1-data', data)
+    dbHelpers.getSubscriptionsWithUser(data.id, req.params.group_id).then(subscription => {
       console.log('2-subscription', subscription)
       if (subscription.is_admin === true) {
         dbHelpers.deleteGroup(group_id).then(data => console.log(data))
