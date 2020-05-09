@@ -58,8 +58,12 @@ export default function RegisterForm() {
       method: "post",
       url: "http://localhost:3001/register",
       data: data,
-    }).then(res => console.log(res))
-    navigate("/")
+    }).then(res => {
+      console.log(res.data)
+      localStorage.setItem("session", JSON.stringify(res))
+      navigate("/")
+    })
+    
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -69,7 +73,7 @@ export default function RegisterForm() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign Up
         </Typography>
         <form className={classes.form} onSubmit={onSubmitFunction}>
           <TextField
@@ -134,7 +138,7 @@ export default function RegisterForm() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Sign Up
           </Button>
         </form>
       </div>
