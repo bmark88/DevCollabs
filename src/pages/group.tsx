@@ -17,15 +17,8 @@ interface Props {
 
 
 const GroupPage = () => {
-<<<<<<< HEAD
   let { users, messages, handleSubmit } = App()
 
-  return (
-    <Layout>
-      <Users>
-      <Chat users={users} messages={messages} handleSubmit={handleSubmit}/>
-      </Users>
-=======
 
   if(!localStorage.getItem('session')) {
     navigate('/login')
@@ -34,9 +27,11 @@ const GroupPage = () => {
 
   return (
     <Layout>
+      <Users>
+      <Chat users={users} messages={messages} handleSubmit={handleSubmit}/>
+      </Users>
       <Link to="/room/"> Room Link </Link>
       <Users>Users</Users>
->>>>>>> ee021c0aefa5c9353857b7d184fba968e32fb9bb
       <Groups>Groups</Groups>
       <Rooms>
         <Room>Room 1</Room>
