@@ -9,9 +9,9 @@ module.exports = db => {
       console.log(queryResults)
       const { username, data, created_at, avatar_image } = queryResults
       console.log(username, data, created_at, avatar_image)
-      
+
       res.send({
-        username, 
+        username,
         data,
         created_at,
         avatar_image,
@@ -40,7 +40,25 @@ module.exports = db => {
                 .addSubscription(subscription)
                 .then(result => console.log("result ", result))
           })
-        })
+      })
+  })
+
+  router.delete("/delete/:group_id", (req, res) => {
+    console.log(req.body)
+    console.log(req.params)
+    const userId = req.body.id
+    const groupId = req.params.group_id
+
+    dbHelpers
+      .getSubscriptionsWithUser(userId, groupId)
+      .then(subscription => {
+        console.log("2-subscription", subscription)
+        if (subscription.is_admin === true) {
+          dbHelpers.deleteGroup(groupId).then(data => console.log(data))
+        } else {
+          throw new Error("error: unable to delete group")
+        }
+      })
   })
 
   return router

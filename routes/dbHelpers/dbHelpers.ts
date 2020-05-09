@@ -154,14 +154,44 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
+  const deleteGroup = group_id => {
+    return db
+      .query(
+        `
+        DELETE FROM groups
+        WHERE id = $1
+        `,
+        [group_id]
+      )
+      .then(res => res.rows[0])
+      .catch(e => console.error(e.stack))
+  }
+
+  const getSubscriptionsWithUser = (user_id, group_id) => {
+    return db
+      .query(
+        `
+      SELECT * FROM subscriptions
+      WHERE user_id = $1 
+      AND group_id = $2
+      LIMIT 1;
+        `,
+        [user_id, group_id]
+      )
+      .then(res => res.rows[0])
+      .catch(e => console.error(e.stack))
+  }
+
   return {
     getUserWithEmail,
     addUser,
     getGroup,
     addGroup,
     getPostWithGroupID,
-    addSubscription,
     changeUserInfo,
-    checkForUser,
+    deleteGroup,
+    getSubscriptionsWithUser,
+    addSubscription,
+    checkForUser
   }
 }
