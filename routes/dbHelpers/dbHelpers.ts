@@ -43,7 +43,10 @@ module.exports = db => {
           user.avatar,
         ]
       )
-      .then(res => res.rows[0])
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
       .catch(e => null)
   }
   /**
@@ -128,9 +131,9 @@ module.exports = db => {
       .catch(e => null)
   }
 
-  const changeUserInfo = (user) => {
-    const userID = 1; // change later to use logged in user's ID
-    
+  const changeUserInfo = user => {
+    const userID = 1 // change later to use logged in user's ID
+
     return db
       .query(
         `
@@ -144,7 +147,7 @@ module.exports = db => {
           user.email,
           user.password, //this should use bcrypt.hashSync on real passwords
           user.avatar,
-          userID
+          userID,
         ]
       )
       .then(res => res.rows[0])

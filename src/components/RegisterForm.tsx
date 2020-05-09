@@ -1,59 +1,148 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
+import React, { useState } from "react"
+import Avatar from "@material-ui/core/Avatar"
+import Button from "@material-ui/core/Button"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import TextField from "@material-ui/core/TextField"
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
+import Typography from "@material-ui/core/Typography"
+import { makeStyles } from "@material-ui/core/styles"
+import Container from "@material-ui/core/Container"
+import Alert from "@material-ui/lab/Alert"
+import Visibility from "@material-ui/icons/Visibility"
+import VisibilityOff from "@material-ui/icons/VisibilityOff"
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+
 import axios from "axios"
 import { navigate } from "gatsby"
 
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%",
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}))
+
 export default function RegisterForm() {
+  const classes = useStyles()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const [avatar, setAvatar] = useState("")
   const [error, setError] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const onSubmitFunction = (event: any) => {
     setError(false)
     event.preventDefault()
-    if (username && email && password && avatar) {
-      const data: object = {
-        username: username,
-        email: email,
-        password: password,
-        avatar: avatar,
-      }
-      axios({
-        method: "post",
-        url: "http://localhost:3001/register",
-        data: data,
-      }).then((res) => console.log(res))
-      navigate('/')
-    } else {
-      setError(true)
+    const data: object = {
+      username: username,
+      email: email,
+      password: password,
+      avatar: avatar,
     }
+    axios({
+      method: "post",
+      url: "http://localhost:3001/register",
+      data: data,
+    }).then(res => {
+      console.log(res.data)
+      localStorage.setItem("session", JSON.stringify(res))
+      navigate("/")
+    })
+    
   }
   return (
-    <form onSubmit={onSubmitFunction}>
-      <input
-        placeholder="Username"
-        value={username}
-        onChange={event => setUsername(event.target.value)}
-      />
-      <input
-        placeholder="Email"
-        value={email}
-        onChange={event => setEmail(event.target.value)}
-      />
-      <input
-        placeholder="Password"
-        value={password}
-        onChange={event => setPassword(event.target.value)}
-      />
-      <input
-        placeholder="Avatar Link?"
-        value={avatar}
-        onChange={event => setAvatar(event.target.value)}
-      />
-      <button> Submit </button>
-      {error && <h3> Please do not leave any field blank</h3>}
-    </form>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign Up
+        </Typography>
+        <form className={classes.form} onSubmit={onSubmitFunction}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            autoFocus
+            value={username}
+            onChange={event => setUsername(event.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email"
+            autoFocus
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            label="Password"
+            type={showPassword ? "text" : "password"}
+            id="password"
+            value={password}
+            onChange={event => setPassword(event.target.value)}
+            InputProps={{
+              endAdornment:  
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+            }}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="avatar"
+            label="Avatar"
+            autoFocus
+            value={avatar}
+            onChange={event => setAvatar(event.target.value)}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign Up
+          </Button>
+        </form>
+      </div>
+      {error && <Alert severity="error">Could Not Register</Alert>}
+    </Container>
   )
 }
