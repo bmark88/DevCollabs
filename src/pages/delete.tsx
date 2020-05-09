@@ -12,12 +12,14 @@ interface Props {
 
 let data = JSON.parse(localStorage.getItem("session"))
 
-axios({
-  method: "delete",
-  url: "http://localhost:8000/delete/1",
-  data: data.id 
-}) //TODO change from hard coded
-console.log("data", data)
+if(data) {
+  axios({
+    method: "delete",
+    url: "http://localhost:8000/delete/1",
+    data: data.id 
+  }) //TODO change from hard coded
+}
+
 const deletePage = () => {
   return (
     <Layout>
