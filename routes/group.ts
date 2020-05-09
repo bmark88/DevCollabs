@@ -7,10 +7,17 @@ module.exports = db => {
     //req.body should be JSON of { "userId" : id, "data": "string"}
     const { groupId } = req.params
     const { userId, data } = req.body
-    dbHelpers
-      .createPost(groupId, userId, data)
-      .then(post => res.send(post))
-      .catch(() => res.status(400).send("Could not create post"))
+    dbHelpers.getSubscriptionsWithUser( userId, groupId).then(subscription => {
+      if (subscription) {
+        dbHelpers
+        .createPost(groupId, userId, data)
+        .then(post => res.send(post))
+        .catch(() => res.status(400).send("Could not create post"))
+      } else {
+        res.send(null)
+      }
+    })
+
   })
 
   router.get("/:group_id", (req, res) => {
