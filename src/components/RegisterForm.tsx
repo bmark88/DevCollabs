@@ -59,8 +59,8 @@ export default function RegisterForm() {
       url: "http://localhost:3001/register",
       data: data,
     }).then(res => {
-      console.log(res.data)
-      localStorage.setItem("session", JSON.stringify(res))
+      
+      localStorage.setItem("session", JSON.stringify(res.data))
       navigate("/")
     })
     
