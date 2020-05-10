@@ -5,14 +5,10 @@ module.exports = db => {
   const dbHelpers = require("./dbHelpers/dbHelpers.ts")(db)
 
   router.get("/u/:userId", (req, res) => {
-    console.log('group root')
     const { userId } = req.params
-    console.log('userId', userId)
-
     dbHelpers.getGroups(userId).then(data => {
       console.log('db data', data)
       res.send(data)
-      console.log('sent')
     })
   })
 

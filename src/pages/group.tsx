@@ -1,52 +1,67 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import axios from "axios"
 
 import Users from "../components/users"
-import Groups from "../components/groups"
-import { Link, navigate } from "gatsby"
+import GroupList from "../components/GroupList"
+import { Link, navigate, StaticQuery } from "gatsby"
 import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
 import App from "../components/hooks/socketChat"
-
+import useApplicationData from "../components/hooks/useApplicationData"
+/* sudo code -liz
+[]chat using websockets works
+[]render groups on group page
+[]render posts on group page
+*/
 interface Props {
   children: ReactNode
-  users: any,
-  messages: any,
+  users: any
+  messages: any
   handleSubmit: any
 }
 
 toast.configure()
 
-const GroupPage = () => {
+
+const GroupPage = (Props) => {
   let { users, messages, handleSubmit } = App()
+  // const {  fetchGroups } = useApplicationData();
+  // console.log(fetchGroups)
+  const { state } = useApplicationData();
+  const { groups } = state
+console.log(state)
+
+  if (!localStorage.getItem("session")) {
+    navigate("/login")
+    return null
+  }
+// const groups = [ { id: 1, group_id: 1, user_id: 1, is_admin: true },
+//   { id: 7, group_id: 2, user_id: 1, is_admin: false },
+//   { id: 8, group_id: 3, user_id: 1, is_admin: false } ]
+
 
   const notifyRoomCreated = () => {
-    const user = JSON.parse(localStorage.getItem('session')).username.toString()
-    toast(`${user} has created a new room!`, { 
-      position: 'bottom-right',
+    const user = JSON.parse(localStorage.getItem("session")).username.toString()
+    toast(`${user} has created a new room!`, {
+      position: "bottom-right",
       autoClose: 2500,
       closeOnClick: false,
       pauseOnHover: false,
-      hideProgressBar: true
+      hideProgressBar: true,
     })
-  }
-
-  if(!localStorage.getItem('session')) {
-    navigate('/login')
-    return null;
   }
 
   return (
     <Layout>
-      <Groups>Groups</Groups>
-      <Users users={users} messages={messages} handleSubmit={handleSubmit}/>
+      <GroupList groups={groups}/>
+      <Users users={users} messages={messages} handleSubmit={handleSubmit} />
 
       <Link to="/room/"> Room Link </Link>
       <Rooms>
         <Room>
-          Room 1
-          <button onClick={notifyRoomCreated}>Create a New Room</button>
+          Room 1<button onClick={notifyRoomCreated}>Create a New Room</button>
         </Room>
         <Room>Room 2</Room>
         <Room>Room 3</Room>
