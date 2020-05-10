@@ -1,13 +1,13 @@
+// router.get("/", (req, res) => {
+//   console.log('group root')
+//   let user = JSON.parse(window.localStorage.getItem("user"))
+//   dbHelpers.getGroups(user.id).then(data => res.send(data))
+// })
+
 const router = require("express").Router()
 
 module.exports = db => {
   const dbHelpers = require("./dbHelpers/dbHelpers.ts")(db)
-
-  router.get("/", (req, res) => {
-    console.log('group root')
-    let user = JSON.parse(window.localStorage.getItem("user"))
-    dbHelpers.getGroups(user.id).then(data => res.send(data))
-  })
 
   router.post("/:groupId/post/create", (req, res) => {
     //req.body should be JSON of { "userId" : id, "data": "string"}
@@ -35,7 +35,7 @@ module.exports = db => {
 
       res.send({
         username,
-        data: JSON.parse(data),
+        data,
         created_at,
         avatar_image,
       })

@@ -43,7 +43,10 @@ module.exports = db => {
           user.avatar,
         ]
       )
-      .then(res => res.rows[0])
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
       .catch(e => null)
   }
   /**
@@ -66,6 +69,7 @@ module.exports = db => {
         return res.rows[0]
       })
   }
+
   /**
    * Get a groups data from db using groupId.
    * @param {{integer}} groupId
@@ -87,7 +91,7 @@ module.exports = db => {
       })
   }
 
-  /**
+    /**
    * Get all groups data from db using userId.
    * @param {{integer}} userId
    * @return {Promise<{}>} A promise to the user.
@@ -107,7 +111,7 @@ module.exports = db => {
       })
   }
 
-    /**
+  /**
    * Add a group to db.
    * @param {{string}} name
    * @return {Promise<{}>} A promise to the user.
@@ -127,8 +131,6 @@ module.exports = db => {
       .then(res => res.rows[0])
       .catch(e => null)
   }
-
-
   const checkForUser = function (username) {
     return db
       .query(
@@ -164,6 +166,20 @@ module.exports = db => {
       .then(res => res.rows[0])
       .catch(e => null)
   }
+
+  const removeSubscription = (userID, groupID) => {
+
+    return db
+      .query(`
+        DELETE FROM subscriptions
+        WHERE user_id = $1
+        AND group_id = $2 
+      `,
+      [userID, groupID]
+      )
+      .then(res => res.rows[0])
+      .catch(e => console.error('error ===>', e.stack))
+  };
 
   const changeUserInfo = user => {
     const userID = 1 // change later to use logged in user's ID
@@ -249,9 +265,7 @@ module.exports = db => {
     getGroups,
     addGroup,
     getPostWithGroupID,
-    addSubscription,
     changeUserInfo,
-    checkForUser,
     deleteGroup,
     getSubscriptionsWithUser,
     addSubscription,
