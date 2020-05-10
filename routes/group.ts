@@ -4,6 +4,7 @@ module.exports = db => {
   const dbHelpers = require("./dbHelpers/dbHelpers.ts")(db)
 
   router.get("/", (req, res) => {
+    console.log('group root')
     let user = JSON.parse(window.localStorage.getItem("user"))
     dbHelpers.getGroups(user.id).then(data => res.send(data))
   })

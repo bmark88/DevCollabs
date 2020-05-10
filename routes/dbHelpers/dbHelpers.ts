@@ -87,6 +87,26 @@ module.exports = db => {
       })
   }
 
+  /**
+   * Get all groups data from db using userId.
+   * @param {{integer}} userId
+   * @return {Promise<{}>} A promise to the user.
+   */
+  const getGroups = function (userId) {
+    return db
+      .query(
+        `
+        SELECT * FROM groups
+        WHERE user_id = $1
+        `,
+        [userId]
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
+  }
+
     /**
    * Add a group to db.
    * @param {{string}} name
@@ -211,6 +231,7 @@ module.exports = db => {
     getUserWithEmail,
     addUser,
     getGroup,
+    getGroups,
     addGroup,
     getPostWithGroupID,
     addSubscription,

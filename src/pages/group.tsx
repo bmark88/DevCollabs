@@ -7,8 +7,7 @@ import Groups from "../components/groups"
 import { Link, navigate } from "gatsby"
 import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
-import App from "../components/hooks/App"
-import Chat from "../components/Chat"
+import App from "../components/hooks/socketChat"
 
 interface Props {
   children: ReactNode
@@ -42,6 +41,7 @@ const GroupPage = () => {
     <Layout>
       <Groups>Groups</Groups>
       <Users users={users} messages={messages} handleSubmit={handleSubmit}/>
+
       <Link to="/room/"> Room Link </Link>
       <Rooms>
         <Room>
