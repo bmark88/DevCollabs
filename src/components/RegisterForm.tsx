@@ -1,17 +1,17 @@
 import React, { useState } from "react"
-import Avatar from "@material-ui/core/Avatar"
-import Button from "@material-ui/core/Button"
-import CssBaseline from "@material-ui/core/CssBaseline"
-import TextField from "@material-ui/core/TextField"
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined"
-import Typography from "@material-ui/core/Typography"
-import { makeStyles } from "@material-ui/core/styles"
-import Container from "@material-ui/core/Container"
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Typography,
+  Container,
+  InputAdornment,
+  IconButton,
+  makeStyles,
+} from "@material-ui/core"
+import { LockOutlined, VisibilityOff, Visibility } from "@material-ui/icons"
 import Alert from "@material-ui/lab/Alert"
-import Visibility from "@material-ui/icons/Visibility"
-import VisibilityOff from "@material-ui/icons/VisibilityOff"
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
 
 import axios from "axios"
 import { navigate } from "gatsby"
@@ -58,19 +58,19 @@ export default function RegisterForm() {
       method: "post",
       url: "http://localhost:3001/register",
       data: data,
-    }).then(res => {
-      
-      localStorage.setItem("session", JSON.stringify(res.data))
-      navigate("/")
     })
-    
+      .then(res => {
+        localStorage.setItem("session", JSON.stringify(res.data))
+        navigate("/")
+      })
+      .catch(() => setError(true))
   }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <LockOutlined />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign Up
@@ -109,7 +109,7 @@ export default function RegisterForm() {
             value={password}
             onChange={event => setPassword(event.target.value)}
             InputProps={{
-              endAdornment:  
+              endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
@@ -118,6 +118,7 @@ export default function RegisterForm() {
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
+              ),
             }}
           />
           <TextField
