@@ -1,4 +1,6 @@
 import React, { ReactNode } from "react"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 import Users from "../components/users"
 import Groups from "../components/groups"
@@ -6,7 +8,7 @@ import { Link, navigate } from "gatsby"
 import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
 import App from "../components/hooks/App"
-import Chat from "../components/chat"
+import Chat from "../components/Chat"
 
 interface Props {
   children: ReactNode
@@ -15,10 +17,21 @@ interface Props {
   handleSubmit: any
 }
 
+toast.configure()
 
 const GroupPage = () => {
   let { users, messages, handleSubmit } = App()
 
+  const notifyRoomCreated = () => {
+    const user = JSON.parse(localStorage.getItem('session')).username.toString()
+    toast(`${user} has created a new room!`, { 
+      position: 'bottom-right',
+      autoClose: 2500,
+      closeOnClick: false,
+      pauseOnHover: false,
+      hideProgressBar: true
+    })
+  }
 
   if(!localStorage.getItem('session')) {
     navigate('/login')
@@ -27,14 +40,14 @@ const GroupPage = () => {
 
   return (
     <Layout>
-      <Users>
-      <Chat users={users} messages={messages} handleSubmit={handleSubmit}/>
-      </Users>
-      <Link to="/room/"> Room Link </Link>
-      <Users>Users</Users>
       <Groups>Groups</Groups>
+      <Users users={users} messages={messages} handleSubmit={handleSubmit}/>
+      <Link to="/room/"> Room Link </Link>
       <Rooms>
-        <Room>Room 1</Room>
+        <Room>
+          Room 1
+          <button onClick={notifyRoomCreated}>Create a New Room</button>
+        </Room>
         <Room>Room 2</Room>
         <Room>Room 3</Room>
         <Room>Room 4</Room>

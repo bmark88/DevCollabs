@@ -53,7 +53,6 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
               <h3>{user}</h3>
               ))}
         </UserList>
-        
             {messages.map((msg: any) => (
               <div>
                 <b>{msg.user} says: {msg.message}</b>

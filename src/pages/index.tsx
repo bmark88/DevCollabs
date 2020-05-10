@@ -8,15 +8,30 @@ import styled from "styled-components"
 import LoginForm from "../components/LoginForm"
 import Layout from "../components/layout"
 import { navigate } from "gatsby"
-import Chat from "../components/chat"
+import Chat from "../components/Chat"
 import { Topics, Topic, SubTopic } from "../components/topics"
 import Add from "../components/add"
 import Navbar from "../components/Navbar"
 import App from "../components/hooks/App"
+import PostBoard from "../components/PostBoard"
 
 const Main = styled.main`
   margin-top: 80px;
 `
+const TopicsContainer = styled.div`
+  background-color: black;
+  color: white;
+  width: 50%;
+  margin: 2em;
+  position: absolute;
+  height: 85%;
+  float: left;
+
+  @media (max-width: 1000px) {
+    width: 90%;
+    margin: 1.4em;
+  }
+`;
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = App()
@@ -30,7 +45,10 @@ export default function IndexPage() {
     <>
       <Navbar />
       <Main>
-        <Topics>
+        <TopicsContainer>
+      <PostBoard/>
+      </TopicsContainer>
+        {/* <Topics>
           <Topic>
             <Add>Add Topic</Add>
             <SubTopic>
@@ -77,7 +95,7 @@ export default function IndexPage() {
             New Topic
             <Add>Add Topic</Add>
           </Topic>
-        </Topics>
+        </Topics> */}
 
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>
