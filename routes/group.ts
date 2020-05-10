@@ -1,29 +1,35 @@
-// router.get("/", (req, res) => {
-//   console.log('group root')
-//   let user = JSON.parse(window.localStorage.getItem("user"))
-//   dbHelpers.getGroups(user.id).then(data => res.send(data))
-// })
 
 const router = require("express").Router()
 
 module.exports = db => {
   const dbHelpers = require("./dbHelpers/dbHelpers.ts")(db)
 
+  router.get("/u/:userId", (req, res) => {
+    console.log('group root')
+    const { userId } = req.params
+    console.log('userId', userId)
+
+    dbHelpers.getGroups(userId).then(data => {
+      console.log('db data', data)
+      res.send(data)
+      console.log('sent')
+    })
+  })
+
   router.post("/:groupId/post/create", (req, res) => {
     //req.body should be JSON of { "userId" : id, "data": "string"}
     const { groupId } = req.params
     const { userId, data } = req.body
-    dbHelpers.getSubscriptionsWithUser( userId, groupId).then(subscription => {
+    dbHelpers.getSubscriptionsWithUser(userId, groupId).then(subscription => {
       if (subscription) {
         dbHelpers
-        .createPost(groupId, userId, data)
-        .then(post => res.send(post))
-        .catch(() => res.status(400).send("Could not create post"))
+          .createPost(groupId, userId, data)
+          .then(post => res.send(post))
+          .catch(() => res.status(400).send("Could not create post"))
       } else {
         res.send(null)
       }
     })
-
   })
 
   router.get("/:group_id", (req, res) => {

@@ -100,14 +100,14 @@ module.exports = db => {
     return db
       .query(
         `
-        SELECT * FROM groups
+        SELECT * FROM subscriptions
         WHERE user_id = $1
         `,
         [userId]
       )
       .then(res => {
         if (res.rows.length === 0) return null
-        return res.rows[0]
+        return res.rows
       })
   }
 
