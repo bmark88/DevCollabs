@@ -196,6 +196,21 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
+  const createPost = (group_id, user_id, data) => {
+    return db.query(
+      `
+      INSERT INTO posts 
+      (group_id, user_id, data, created_at)
+      VALUES
+      ($1 , $2, $3, NOW())
+      RETURNING *;
+      `, [group_id, user_id, data]
+    )
+    .then(res => res.rows[0])
+    .catch(e => e)
+
+  }
+
   return {
     getUserWithEmail,
     addUser,
@@ -206,7 +221,8 @@ module.exports = db => {
     deleteGroup,
     getSubscriptionsWithUser,
     addSubscription,
+    createPost,
     removeSubscription,
-    checkForUser
+    checkForUser,
   }
 }
