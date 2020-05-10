@@ -6,7 +6,7 @@ module.exports = db => {
 
   router.get("/u/:userId", (req, res) => {
     const { userId } = req.params
-    dbHelpers.getGroups(userId).then(data => {
+    dbHelpers.getGroupsNames(userId).then(data => {
       console.log('db data', data)
       res.send(data)
     })

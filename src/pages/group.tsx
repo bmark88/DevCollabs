@@ -31,16 +31,11 @@ const GroupPage = (Props) => {
   // console.log(fetchGroups)
   const { state } = useApplicationData();
   const { groups } = state
-console.log(state)
 
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
-// const groups = [ { id: 1, group_id: 1, user_id: 1, is_admin: true },
-//   { id: 7, group_id: 2, user_id: 1, is_admin: false },
-//   { id: 8, group_id: 3, user_id: 1, is_admin: false } ]
-
 
   const notifyRoomCreated = () => {
     const user = JSON.parse(localStorage.getItem("session")).username.toString()

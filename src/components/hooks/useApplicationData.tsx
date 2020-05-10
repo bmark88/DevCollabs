@@ -6,44 +6,31 @@ export default function useApplicationData() {
     groups: [],
   })
 
-  /**
-   * @desc Get a users session json data.
-   * @param {username:string, email:string, id:interger ,token:string} session
-   * @return {object<{}>} A promise to the user.
-   */
-
   useEffect(() => {
     fetchGroups()
   }, [])
 
-  //     const groups = () => {
-  //       axios({
-  //         method: "get",
-  //         url: "http://localhost:3001/group/u/1",
-  //         data: session.id,
-  //       }).then(response => {
-  //         console.log("response.response =>", response.data)
-  //         // setGroups(response.data)
-  //       })
-  //     }
-  //     return () => groups()
-  //   }, [groups])
-  // setGroups(groups)
-  const session = JSON.parse(localStorage.getItem("session"))
+  /**
+   * @desc Get a users id from session json data
+   * @return {id:interger}
+   */
+  const userId = JSON.parse(localStorage.getItem("session")).id
+
+  /**
+   * @desc gets all group names of a user
+   * @return {array<[id:interger ,name:string]>} data
+   */
   const fetchGroups = () => {
-    Promise.all([axios.get(`http://localhost:3001/group/u/1`)])
-      .then(([response]) => {
-          console.log(response.data)
+    axios
+      .get(`http://localhost:3001/group/u/${userId}`)
+      .then(response => {
+        console.log(response.data)
         setState({
           groups: response.data,
         })
       })
       .catch(error => console.log(error))
   }
-
-  useEffect(() => {
-    fetchGroups()
-  }, [])
 
   return {
     state,

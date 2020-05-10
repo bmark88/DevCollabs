@@ -91,17 +91,19 @@ module.exports = db => {
       })
   }
 
-    /**
+  /**
    * Get all groups data from db using userId.
    * @param {{integer}} userId
-   * @return {Promise<{}>} A promise to the user.
+   * @return {array<[id:interger, name:string]>} 
    */
-  const getGroups = function (userId) {
+  const getGroupsNames = function (userId) {
     return db
       .query(
         `
-        SELECT * FROM subscriptions
-        WHERE user_id = $1
+        SELECT groups.id, groups.name
+        FROM subscriptions
+        JOIN groups ON group_id = groups.id 
+        WHERE user_id = $1;
         `,
         [userId]
       )
@@ -262,7 +264,7 @@ module.exports = db => {
     getUserWithEmail,
     addUser,
     getGroup,
-    getGroups,
+    getGroupsNames,
     addGroup,
     getPostWithGroupID,
     changeUserInfo,

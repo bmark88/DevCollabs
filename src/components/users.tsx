@@ -20,7 +20,7 @@ border: solid;
 height: 800px;
 width: 20%;
 position: fixed;
-margin: 2em;
+margin: 1em;
 opacity: 80%;
 right: 0;
 float: right;
