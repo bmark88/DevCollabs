@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import socketIOClient from "socket.io-client"
 import * as moment from 'moment';
 
-const ENDPOINT = "http://localhost:3002"
+const ENDPOINT = "http://localhost:3001"
 
 export default function App() {
   const [users, setUsers] = useState([])
