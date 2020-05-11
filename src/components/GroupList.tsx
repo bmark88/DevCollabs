@@ -17,7 +17,7 @@ const Div = styled.div`
 
 export default function GroupList({ groups }: Props) {
   const GroupList = groups.map(group => {
-    return <div>{group.name}</div>
+    return <div key={group.id}>{group.name}</div>
   })
   return <Div>{GroupList}</Div>
 }
