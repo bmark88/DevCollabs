@@ -16,6 +16,7 @@ const Drop = styled(Dropdown)`
   padding: 10px;
   text-decoration: none;
   
+  
   &:hover {
     cursor: progress;
   }
@@ -26,6 +27,7 @@ const Div = styled.div`
   font-family: georgia, serif;
   font-size: 18px;
   color: #551A8B;
+  margin-left: 85vw;
 `;
 
 const NavbarLinks = (props: any) => {
@@ -36,22 +38,18 @@ const NavbarLinks = (props: any) => {
   }
   return (
     <>
-      {props.username && <NavItem className="avatar" to="/404">{props.username}</NavItem>}
-      <Drop>Features</Drop>
+      {props.username && (<NavItem className="avatar" to="/404">{props.username}</NavItem>
+      )}
+      {props.username && <Drop>Features</Drop>}
       {!props.username && 
         <NavItem to="/login">
-          <Div>Login</Div>
+          <Div>Sign In</Div>
         </NavItem>
       }
       {props.username && 
         <NavItem to="/login" onClick={logout}>
-          Logout
+          Sign out
         </NavItem> }
-      {!props.username && 
-        <NavItem to="/register">
-          <Div>Register</Div>
-        </NavItem>
-      }
     </>
   )
 }
