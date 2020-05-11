@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react"
-import axios from "axios"
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export default function useApplicationData() {
+
+
   const [state, setState] = useState({
+    group: 0,
     groups: [],
+    posts: {}
   })
 
   useEffect(() => {
     fetchGroups()
   }, [])
 
-  /**
-   * @desc Get a users id from session json data
-   * @return {id:interger}
-   */
-  const userId = JSON.parse(localStorage.getItem("session")).id
+  //get a users id from session json data. returns {id:interger}
+  const userId = JSON.parse(localStorage.getItem('session')).id
 
-  /**
-   * @desc gets all group names of a user
-   * @return {array<[id:interger ,name:string]>} data
-   */
+  //gets all group names of a user. returns {array<[id:interger ,name:string]>} data
   const fetchGroups = () => {
     axios
       .get(`http://localhost:3001/group/u/${userId}`)
       .then(response => {
         console.log(response.data)
-        setState({
+        setState({...state,
+          group: response.data[0],
           groups: response.data,
         })
       })
