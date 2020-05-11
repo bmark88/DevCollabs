@@ -53,6 +53,8 @@ export default function SettingsForm() {
   const [error, setError] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
+  const userData = JSON.parse(localStorage.getItem('session'))
+
   const updateUser = (event: any) => {
     setError(false)
     event.preventDefault()
@@ -92,7 +94,7 @@ export default function SettingsForm() {
         fullWidth
         id="username"
         label="Username"
-        value={username}
+        value={userData.username}
         onChange={event => setUsername(event.target.value)}
       />
       <TextField
@@ -102,7 +104,7 @@ export default function SettingsForm() {
         fullWidth
         id="email"
         label="Email"
-        value={email}
+        value={userData.email}
         onChange={event => setEmail(event.target.value)}
       />
       <TextField
