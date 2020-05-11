@@ -184,8 +184,6 @@ module.exports = db => {
   };
 
   const changeUserInfo = user => {
-    const userID = 1 // change later to use logged in user's ID
-
     return db
       .query(
         `
@@ -199,7 +197,7 @@ module.exports = db => {
           user.email,
           user.password, //this should use bcrypt.hashSync on real passwords
           user.avatar,
-          userID,
+          user.id
         ]
       )
       .then(res => res.rows[0])

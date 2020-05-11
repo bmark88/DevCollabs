@@ -51,8 +51,7 @@ module.exports = db => {
 
   router.post("/settings", (req, res) => {
     const user = req.body
-    console.log(user)
-    dbHelpers.changeUserInfo(user).then(data => console.log({ data }))
+    dbHelpers.changeUserInfo(user).then(data => data)
   })
 
   return router
