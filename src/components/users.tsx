@@ -51,8 +51,8 @@ const Users = ({ users, messages, handleSubmit }: Props) => {
     <Div>
       <UserList>
         <h1>Online Members</h1>
-        {users.map((user: string) => (
-          <h3>{user}</h3>
+        {users.map((user :string, index :number) => (
+          <h3 key={index}>{user}</h3>
         ))}
       </UserList>
       {messages.map((msg: any) => (
