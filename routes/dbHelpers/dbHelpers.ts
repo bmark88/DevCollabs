@@ -70,6 +70,11 @@ module.exports = db => {
       })
   }
 
+  /**
+   * Get a groups data from db using groupId.
+   * @param {{integer}} groupId
+   * @return {Promise<{}>} A promise to the user.
+   */
   const getGroup = function (groupId) {
     return db
       .query(
@@ -85,6 +90,34 @@ module.exports = db => {
         return res.rows[0]
       })
   }
+
+  /**
+   * Get all groups data from db using userId.
+   * @param {{integer}} userId
+   * @return {array<[id:interger, name:string]>} 
+   */
+  const getGroupsNames = function (userId) {
+    return db
+      .query(
+        `
+        SELECT groups.id, groups.name
+        FROM subscriptions
+        JOIN groups ON group_id = groups.id 
+        WHERE user_id = $1;
+        `,
+        [userId]
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows
+      })
+  }
+
+  /**
+   * Add a group to db.
+   * @param {{string}} name
+   * @return {Promise<{}>} A promise to the user.
+   */
   const addGroup = function (name) {
     return db
       .query(
@@ -115,6 +148,11 @@ module.exports = db => {
       })
   }
 
+  /**
+   * Add a subscription to db using localstorage session to get userId.
+   * @param {{group_id: integer, user_id:interger}} subscription
+   * @return {Promise<{}>} A promise to the user.
+   */
   const addSubscription = function (subscription) {
     return db
       .query(
@@ -168,6 +206,11 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
+  /**
+   * Delete a group using groupId.
+   * @param {{interger}} group_id
+   * @return {Promise<{}>} A promise to the user.
+   */
   const deleteGroup = group_id => {
     return db
       .query(
@@ -181,6 +224,12 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
+  /**
+   * Get a subscription of a user using userId and groupId.
+   * @param {{interger}} user_id 
+   * @param {{interger}} group_id
+   * @return {Promise<{}>} A promise to the user.
+   */
   const getSubscriptionsWithUser = (user_id, group_id) => {
     return db
       .query(
@@ -215,6 +264,7 @@ module.exports = db => {
     getUserWithEmail,
     addUser,
     getGroup,
+    getGroupsNames,
     addGroup,
     getPostWithGroupID,
     changeUserInfo,
