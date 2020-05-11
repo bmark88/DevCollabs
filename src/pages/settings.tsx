@@ -15,7 +15,6 @@ const RegisterPage = () => {
 
    return (
       <Layout>
-         <h1>Settings</h1>
          <SettingsForm />
       </Layout>
    )

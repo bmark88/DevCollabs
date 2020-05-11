@@ -1,8 +1,43 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { navigate } from "gatsby"
+import {
+  Avatar,
+  Button,
+  CssBaseline,
+  TextField,
+  Typography,
+  Container,
+  InputAdornment,
+  IconButton,
+  makeStyles,
+} from "@material-ui/core"
+
+import { LockOutlined, VisibilityOff, Visibility } from "@material-ui/icons"
+import SettingsIcon from "@material-ui/icons/Settings"
+
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%",
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}))
 
 export default function SettingsForm() {
+  const classes = useStyles()
   const currentUser = {
     id: 1,
     username: 'test',
@@ -39,29 +74,69 @@ export default function SettingsForm() {
     }
   }
   return (
+    <Container component="main" maxWidth="xs">
+      {/* <CssBaseline /> */}
+      <div className={classes.paper}>
+      <Avatar className={classes.avatar}>
+          {/* <LockOutlined /> */}
+          <SettingsIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Settings
+        </Typography>
     <form onSubmit={updateUser}>
-      <input
-        placeholder="Username"
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        id="username"
+        label="Username"
         value={username}
         onChange={event => setUsername(event.target.value)}
       />
-      <input
-        placeholder="Email"
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        id="email"
+        label="Email"
         value={email}
         onChange={event => setEmail(event.target.value)}
       />
-      <input
-        placeholder="Password"
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        id="password"
+        label="Password"
         value={password}
         onChange={event => setPassword(event.target.value)}
       />
-      <input
+      <TextField
+        variant="outlined"
+        margin="normal"
+        required
+        fullWidth
+        id="avatar-image"
+        label="Avatar Image"
         placeholder="Avatar Link?"
         value={avatar}
         onChange={event => setAvatar(event.target.value)}
       />
-      <button> Submit </button>
+      <Button
+       type="submit"
+       fullWidth
+       variant="contained"
+       color="primary"
+      > 
+        Submit 
+      </Button>
       {error && <h3> Please do not leave any field blank</h3>}
     </form>
+    </div>
+    </Container>
   )
 }
