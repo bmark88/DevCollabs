@@ -27,8 +27,6 @@ toast.configure()
 
 const GroupPage = (Props) => {
   let { users, messages, handleSubmit } = App()
-  // const {  fetchGroups } = useApplicationData();
-  // console.log(fetchGroups)
   const { state } = useApplicationData();
   const { groups } = state
 
