@@ -38,22 +38,15 @@ const useStyles = makeStyles(theme => ({
 
 export default function SettingsForm() {
   const classes = useStyles()
-  const currentUser = {
-    id: 1,
-    username: 'test',
-    password: '1234',
-    email: 'testing@gmail.com',
-    avatar_image: "null"
-  };
-  const [id, setID] = useState(currentUser.id)
-  const [username, setUsername] = useState(currentUser.username)
-  const [password, setPassword] = useState(currentUser.password)
-  const [email, setEmail] = useState(currentUser.email)
-  const [avatar, setAvatar] = useState(currentUser.avatar_image)
+  const userData = JSON.parse(localStorage.getItem('session'))
+
+  const [id, setID] = useState(userData.id)
+  const [username, setUsername] = useState(userData.username)
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState(userData.email)
+  const [avatar, setAvatar] = useState("")
   const [error, setError] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-
-  const userData = JSON.parse(localStorage.getItem('session'))
 
   const updateUser = (event: any) => {
     setError(false)
@@ -71,87 +64,86 @@ export default function SettingsForm() {
         url: "http://localhost:3001/settings",
         data: data,
       }).then((res) => res)
-      // navigate('/')
+      navigate('/')
     } else {
       setError(true)
     }
   }
   return (
     <Container component="main" maxWidth="xs">
-      {/* <CssBaseline /> */}
       <div className={classes.paper}>
-      <Avatar className={classes.avatar}>
+        <Avatar className={classes.avatar}>
           <SettingsIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Settings
         </Typography>
-    <form onSubmit={updateUser}>
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="username"
-        label="Username"
-        value={userData.username}
-        onChange={event => setUsername(event.target.value)}
-      />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="email"
-        label="Email"
-        value={userData.email}
-        onChange={event => setEmail(event.target.value)}
-      />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="password"
-        label="Password"
-        value={password}
-        type={showPassword ? "text" : "password"}
-        onChange={event => setPassword(event.target.value)}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="avatar-image"
-        label="Avatar Image"
-        placeholder="Avatar Link?"
-        value={avatar}
-        onChange={event => setAvatar(event.target.value)}
-      />
-      <Button
-       type="submit"
-       fullWidth
-       variant="contained"
-       color="primary"
-      > 
-        Submit 
-      </Button>
-      {error && <h3> Please do not leave any field blank</h3>}
-    </form>
-    </div>
+        <form onSubmit={updateUser}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            value={username}
+            onChange={event => setUsername(event.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email"
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="password"
+            label="Password"
+            // value={password}
+            type={showPassword ? "text" : "password"}
+            onChange={event => setPassword(event.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="avatar-image"
+            label="Avatar Image"
+            placeholder="Avatar Link?"
+            // value={avatar}
+            onChange={event => setAvatar(event.target.value)}
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+          > 
+            Submit 
+          </Button>
+          {error && <h3> Please do not leave any field blank</h3>}
+        </form>
+      </div>
     </Container>
   )
 }
