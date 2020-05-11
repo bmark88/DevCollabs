@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 const ENDPOINT = "http://localhost:3002"
 
-export default function App() {
+export default function socketChat() {
   const [users, setUsers] = useState([])
   const [user, setUser] = useState({})
   const [connection, setConnection] = useState({})

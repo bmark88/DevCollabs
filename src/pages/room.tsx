@@ -1,13 +1,13 @@
 import React from "react"
 import { navigate } from "gatsby"
 
-import App from "../components/hooks/socketChat"
+import socketChat from "../components/hooks/socketChat"
 import Chat from "../components/Chat"
 import CodeSnippet from "../components/CodeSnippet"
 import Layout from "../components/layout"
 
 const RoomPage = () => {
-  let { users, messages, handleSubmit } = App()
+  let { users, messages, handleSubmit } = socketChat()
 
   if(!localStorage.getItem('session')) {
     navigate('/login')
