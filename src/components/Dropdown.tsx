@@ -7,7 +7,8 @@ import { Link } from "gatsby"
 
 const Div = styled.div`
   font-family: georgia, serif;
-  // margin: auto;
+  font-size: 18px;
+  color: #551A8B;
 `;
 
 export default function SimpleMenu() {
