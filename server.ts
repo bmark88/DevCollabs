@@ -38,9 +38,16 @@ let userCount = 0
 io.on("connection", socket => {
   //user
   socket.on('join', ({ userName }) => {
-    users.push(userName)
+    if (!users.includes(userName)) users.push(userName)
     
     io.emit("displayUsers", { users })
+  })
+
+  socket.on('disconnect', () => {
+    socket.on('leave', ({ userName }) => {
+      console.log(userName)
+    })
+    console.log('users ===>', users)
   })
 
   // io.emit("displayUsers", { users })

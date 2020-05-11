@@ -21,11 +21,21 @@ export default function App() {
       setConnection(conn)
       conn.emit('join', { userName })
       
+      //users
       conn.on("displayUsers", (data: any) => {
         console.log('users', data)
         setUsers([...data.users])
       })
+
+      conn.emit('leave', { userName})
+
+
+
+
+
+
     }
+
     // conn.on("intial", (data: any) => {
     //   // setUser(data.user)
     //   setUsers([...data.users])
