@@ -38,10 +38,20 @@ const NavbarLinks = (props: any) => {
     <>
       {props.username && <NavItem className="avatar" to="/404">{props.username}</NavItem>}
       <Drop>Features</Drop>
-      {!props.username && <NavItem to="/login">Login</NavItem>}
-      {props.username && <NavItem to="/login" onClick={logout}>Logout</NavItem> }
-      {!props.username && <NavItem to="/register">Register</NavItem>}
-      
+      {!props.username && 
+        <NavItem to="/login">
+          <Div>Login</Div>
+        </NavItem>
+      }
+      {props.username && 
+        <NavItem to="/login" onClick={logout}>
+          Logout
+        </NavItem> }
+      {!props.username && 
+        <NavItem to="/register">
+          <Div>Register</Div>
+        </NavItem>
+      }
     </>
   )
 }
