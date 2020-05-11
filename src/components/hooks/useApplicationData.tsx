@@ -5,12 +5,8 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     group: 0,
     groups: [],
-    posts: {},
+    posts: [],
   })
-
-  useEffect(() => {
-    fetchGroups()
-  }, [])
 
   //get a users id from session json data. returns {id:interger}
   const userId = JSON.parse(localStorage.getItem("session")).id
@@ -33,7 +29,17 @@ export default function useApplicationData() {
       .catch(error => console.log(error))
   }
 
+  const setGroup = (id) => {
+    setState({ ...state, group: id })
+    console.log('setGroup', id)
+  }
+
+  useEffect(() => {
+    fetchGroups()
+  }, [])
+
   return {
     state,
+    setGroup,
   }
 }

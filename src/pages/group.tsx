@@ -5,13 +5,15 @@ import styled from "styled-components"
 
 import Users from "../components/users"
 import GroupList from "../components/GroupList"
+import PostsList from "../components/PostsList"
+
 import { Link, navigate, StaticQuery } from "gatsby"
 import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
 import Chat from "../components/Chat"
 import PostBoard from "../components/PostBoard"
 import PostForm from "../components/PostForm"
-import useGroupData from "../components/useGroupData"
+// import useGroupData from "../components/useGroupData"
 
 import { Topics, Topic, SubTopic } from "../components/topics"
 import Add from "../components/add"
@@ -55,9 +57,11 @@ const GroupPage = Props => {
   let { users, messages, handleSubmit } = socketChat()
   
   //state groups:array[], group:object {id:integer, name:string}
-  const { state } = useApplicationData()
-  const { group, groups } = state
-   console.log(group)
+  const { state, setGroup } = useApplicationData()
+  const { group, groups, posts } = state
+   console.log(state)
+   console.log(posts)
+
   //redirect if not logged in
   if (!localStorage.getItem("session")) {
     navigate("/login")
@@ -77,7 +81,7 @@ const GroupPage = Props => {
 
   return (
     <Layout>
-      <GroupList groups={groups}  />
+      <GroupList groups={groups} group={group} setGroup={setGroup} />
       <Users users={users} messages={messages} handleSubmit={handleSubmit} />
       <Rooms>
         <Room>
@@ -87,10 +91,7 @@ const GroupPage = Props => {
           Room 2<Link to="/room/"> Room Link </Link>
         </Room>
       </Rooms>
-      <TopicsContainer>
-      <PostBoard/>
-      <PostForm/>
-      </TopicsContainer>
+      <PostsList posts={posts}/>
     </Layout>
   )
 }

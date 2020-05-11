@@ -1,13 +1,22 @@
-
 const router = require("express").Router()
 
 module.exports = db => {
   const dbHelpers = require("./dbHelpers/dbHelpers.ts")(db)
 
+  // get all groups ids and names of a user. returns {array<[id:interger, name:string]>}
   router.get("/u/:userId", (req, res) => {
     const { userId } = req.params
     dbHelpers.getGroupsNames(userId).then(data => {
-      console.log('db data', data)
+      console.log("groups array<[id:interger, name:string]>", data)
+      res.send(data)
+    })
+  })
+
+  // get all groups posts. returns {array<[group_id:interger, user_id:interger, data:string, created_at:time]>}
+  router.get("/g/:groupId", (req, res) => {
+    const { groupId } = req.params
+    dbHelpers.getGroupsPosts(groupId).then(data => {
+      console.log("post array<[id:interger, name:string]>", data)
       res.send(data)
     })
   })
@@ -36,7 +45,7 @@ module.exports = db => {
       console.log(username, data, created_at, avatar_image)
 
       res.send({
-        username, 
+        username,
         data,
         created_at,
         avatar_image,
@@ -67,7 +76,6 @@ module.exports = db => {
           })
       })
   })
-
 
   router.delete("/delete/:group_id", (req, res) => {
     console.log(req.body)
