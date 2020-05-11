@@ -51,6 +51,7 @@ export default function SettingsForm() {
   const [email, setEmail] = useState(currentUser.email)
   const [avatar, setAvatar] = useState(currentUser.avatar_image)
   const [error, setError] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const updateUser = (event: any) => {
     setError(false)
@@ -78,7 +79,6 @@ export default function SettingsForm() {
       {/* <CssBaseline /> */}
       <div className={classes.paper}>
       <Avatar className={classes.avatar}>
-          {/* <LockOutlined /> */}
           <SettingsIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -113,7 +113,20 @@ export default function SettingsForm() {
         id="password"
         label="Password"
         value={password}
+        type={showPassword ? "text" : "password"}
         onChange={event => setPassword(event.target.value)}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
       <TextField
         variant="outlined"
