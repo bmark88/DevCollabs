@@ -195,7 +195,7 @@ module.exports = db => {
         [
           user.username,
           user.email,
-          user.password, //this should use bcrypt.hashSync on real passwords
+          bcrypt.hashSync(user.password, 12),
           user.avatar,
           user.id
         ]
