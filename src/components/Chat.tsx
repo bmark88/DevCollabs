@@ -44,27 +44,27 @@ const Button = styled.button`
 `;
 
 const Chat = ({ users, messages, handleSubmit }: Props) => {
-
   return (
     <Div>
       <UserList>
         <h1>Online Members</h1>
-            {users.map((user: string) => (
-              <h3>{user}</h3>
-              ))}
-        </UserList>
-        
-            {messages.map((msg: any) => (
-              <div>
-                <b>{msg.user} says: {msg.message}</b>
-                <div style={{float: 'right'}}>{msg.date}</div>
-              </div>
-            ))}
-          <SubmitButton onSubmit={handleSubmit}>
-              <Input type="text" name="message" />
-              <Button>Send</Button>
-          </SubmitButton>
-        
+        {users.map((user :string, index :number) => (
+          <h3 key={index}>{user}</h3>
+        ))}
+      </UserList>
+      {messages.map((msg: any) => (
+        <div>
+          <b>
+            {msg.user} says: {msg.message}
+          </b>
+          <div style={{ float: "right" }}>{msg.date}</div>
+        </div>
+      ))}
+      <SubmitButton onSubmit={handleSubmit}>
+        <Input type="text" name="message" />
+        <Button>Send</Button>
+      </SubmitButton>
+
     </Div>
   )
 }

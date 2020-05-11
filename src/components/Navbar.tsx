@@ -21,7 +21,7 @@ const Navigation = styled.nav`
 const Navbar = () => {
   const session = JSON.parse(localStorage.getItem('session'))
   let username :string = '';
-  if (session) username = session.data.username
+  if (session) username = session.username
 
   return (
     <Navigation>

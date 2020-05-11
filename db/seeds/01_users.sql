@@ -27,3 +27,4 @@ INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
     ('zack6', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
+

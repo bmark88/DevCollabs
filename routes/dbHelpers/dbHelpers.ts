@@ -43,7 +43,10 @@ module.exports = db => {
           user.avatar,
         ]
       )
-      .then(res => res.rows[0])
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows[0]
+      })
       .catch(e => null)
   }
   /**
@@ -67,6 +70,11 @@ module.exports = db => {
       })
   }
 
+  /**
+   * Get a groups data from db using groupId.
+   * @param {{integer}} groupId
+   * @return {Promise<{}>} A promise to the user.
+   */
   const getGroup = function (groupId) {
     return db
       .query(
@@ -82,6 +90,34 @@ module.exports = db => {
         return res.rows[0]
       })
   }
+
+  /**
+   * Get all groups data from db using userId.
+   * @param {{integer}} userId
+   * @return {array<[id:interger, name:string]>} 
+   */
+  const getGroupsNames = function (userId) {
+    return db
+      .query(
+        `
+        SELECT groups.id, groups.name
+        FROM subscriptions
+        JOIN groups ON group_id = groups.id 
+        WHERE user_id = $1;
+        `,
+        [userId]
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows
+      })
+  }
+
+  /**
+   * Add a group to db.
+   * @param {{string}} name
+   * @return {Promise<{}>} A promise to the user.
+   */
   const addGroup = function (name) {
     return db
       .query(
@@ -112,6 +148,11 @@ module.exports = db => {
       })
   }
 
+  /**
+   * Add a subscription to db using localstorage session to get userId.
+   * @param {{group_id: integer, user_id:interger}} subscription
+   * @return {Promise<{}>} A promise to the user.
+   */
   const addSubscription = function (subscription) {
     return db
       .query(
@@ -127,6 +168,20 @@ module.exports = db => {
       .then(res => res.rows[0])
       .catch(e => null)
   }
+
+  const removeSubscription = (userID, groupID) => {
+
+    return db
+      .query(`
+        DELETE FROM subscriptions
+        WHERE user_id = $1
+        AND group_id = $2 
+      `,
+      [userID, groupID]
+      )
+      .then(res => res.rows[0])
+      .catch(e => console.error('error ===>', e.stack))
+  };
 
   const changeUserInfo = user => {
     const userID = 1 // change later to use logged in user's ID
@@ -151,8 +206,11 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
-<<<<<<< HEAD
-=======
+  /**
+   * Delete a group using groupId.
+   * @param {{interger}} group_id
+   * @return {Promise<{}>} A promise to the user.
+   */
   const deleteGroup = group_id => {
     return db
       .query(
@@ -166,6 +224,12 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
+  /**
+   * Get a subscription of a user using userId and groupId.
+   * @param {{interger}} user_id 
+   * @param {{interger}} group_id
+   * @return {Promise<{}>} A promise to the user.
+   */
   const getSubscriptionsWithUser = (user_id, group_id) => {
     return db
       .query(
@@ -181,23 +245,34 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
->>>>>>> 9b2633f7f3b56bd9f3e643270a75147e5d3a8bd4
+  const createPost = (group_id, user_id, data) => {
+    return db.query(
+      `
+      INSERT INTO posts 
+      (group_id, user_id, data, created_at)
+      VALUES
+      ($1 , $2, $3, NOW())
+      RETURNING *;
+      `, [group_id, user_id, data]
+    )
+    .then(res => res.rows[0])
+    .catch(e => e)
+
+  }
+
   return {
     getUserWithEmail,
     addUser,
     getGroup,
+    getGroupsNames,
     addGroup,
     getPostWithGroupID,
-<<<<<<< HEAD
-    addSubscription,
     changeUserInfo,
+    deleteGroup,
+    getSubscriptionsWithUser,
+    addSubscription,
+    createPost,
+    removeSubscription,
     checkForUser,
   }
 }
-=======
-    changeUserInfo,
-    deleteGroup,
-    getSubscriptionsWithUser
-  }
-}
->>>>>>> 9b2633f7f3b56bd9f3e643270a75147e5d3a8bd4

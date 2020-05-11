@@ -1,26 +1,43 @@
-import React, { ReactNode, useEffect } from "react"
+import React, { ReactNode, useEffect, useState } from "react"
 import AceEditor from "react-ace";
+import styled from "styled-components";
 
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-twilight";
 
-interface Props {
-  children: ReactNode
-}
+const Div = styled.div`
+  position: absolute;  
+  left: 2em;
+  top: 5.5em;
+`;
 
-const CodeSnippet = ({ children } :Props) => {
-  function onChange(newValue) {
-    console.log("change", newValue);
+const CodeSnippet = () => {
+  const [value, setValue] = useState("")
+
+  function onChange(newValue :string) {
+    setValue(newValue)
   }
 
   return (
-  <AceEditor
-    mode="javascript"
-    theme="twilight"
-    onChange={onChange}
-    name="UNIQUE_ID_OF_DIV"
-    editorProps={{ $blockScrolling: true }}
-  />
+    <Div>
+      <AceEditor
+        mode="javascript"
+        theme="twilight"
+        height="84.7vh"
+        width="50vw"
+        value={value}
+        onChange={onChange}
+        name="UNIQUE_ID_OF_DIV"
+        editorProps={{ $blockScrolling: Infinity }}
+        setOptions={{
+          enableBasicAutocompletion: true,
+          enableLiveAutocompletion: true,
+          enableSnippets: true,
+          showLineNumbers: true,
+          tabSize: 2,
+          }}
+      />
+    </Div>
     )
 };
 

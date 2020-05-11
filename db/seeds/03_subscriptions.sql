@@ -27,3 +27,13 @@ INSERT INTO subscriptions
   (group_id, user_id, is_admin)
 VALUES
   (3, 6, false);
+
+  INSERT INTO subscriptions
+  (group_id, user_id, is_admin)
+VALUES
+  (2, 1, false);
+
+  INSERT INTO subscriptions
+  (group_id, user_id, is_admin)
+VALUES
+  (3, 1, false);

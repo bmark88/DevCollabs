@@ -6,6 +6,9 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "proxy": "http://localhost:3001",
   "dependencies": {
+    "@material-ui/core": "^4.9.13",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.52",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "@types/react-helmet": "^5.0.15",
@@ -30,7 +33,7 @@
     "jsonwebtoken": "^8.5.1",
     "libpq": "^1.8.9",
     "moment": "^2.25.3",
-    "pg": "^8.0.3",
+    "pg": "^8.1.0",
     "pg-native": "^3.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -38,8 +41,10 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^6.0.0",
     "react-onclickoutside": "^6.9.0",
+    "react-toastify": "^6.0.0-rc.2-1",
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.0",
+    "typeface-roboto": "0.0.75",
     "typescript": "^3.8.3"
   },
   "devDependencies": {

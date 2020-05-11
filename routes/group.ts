@@ -1,7 +1,32 @@
+
 const router = require("express").Router()
 
 module.exports = db => {
   const dbHelpers = require("./dbHelpers/dbHelpers.ts")(db)
+
+  router.get("/u/:userId", (req, res) => {
+    const { userId } = req.params
+    dbHelpers.getGroupsNames(userId).then(data => {
+      console.log('db data', data)
+      res.send(data)
+    })
+  })
+
+  router.post("/:groupId/post/create", (req, res) => {
+    //req.body should be JSON of { "userId" : id, "data": "string"}
+    const { groupId } = req.params
+    const { userId, data } = req.body
+    dbHelpers.getSubscriptionsWithUser(userId, groupId).then(subscription => {
+      if (subscription) {
+        dbHelpers
+          .createPost(groupId, userId, data)
+          .then(post => res.send(post))
+          .catch(() => res.status(400).send("Could not create post"))
+      } else {
+        res.send(null)
+      }
+    })
+  })
 
   router.get("/:group_id", (req, res) => {
     const { group_id } = req.params
@@ -9,15 +34,10 @@ module.exports = db => {
       console.log(queryResults)
       const { username, data, created_at, avatar_image } = queryResults
       console.log(username, data, created_at, avatar_image)
-      
+
       res.send({
-<<<<<<< HEAD
         username, 
         data,
-=======
-        username,
-        data: JSON.parse(data),
->>>>>>> 9b2633f7f3b56bd9f3e643270a75147e5d3a8bd4
         created_at,
         avatar_image,
       })
@@ -45,24 +65,32 @@ module.exports = db => {
                 .addSubscription(subscription)
                 .then(result => console.log("result ", result))
           })
-        })
+      })
   })
 
-<<<<<<< HEAD
-=======
-  router.delete("/:group_id", (req, res) => {
-    let user = JSON.parse(window.localStorage.getItem("user"))
-    console.log('1-user', user)
-    dbHelpers.addGroup(user.id, req.params.group_id).then(subscription => {
-      console.log('2-subscription', subscription)
+
+  router.delete("/delete/:group_id", (req, res) => {
+    console.log(req.body)
+    console.log(req.params)
+    const userId = req.body.id
+    const groupId = req.params.group_id
+
+    dbHelpers.getSubscriptionsWithUser(userId, groupId).then(subscription => {
+      console.log("2-subscription", subscription)
       if (subscription.is_admin === true) {
-        dbHelpers.deleteGroup(group_id).then(data => console.log(data))
+        dbHelpers.deleteGroup(groupId).then(data => console.log(data))
       } else {
         throw new Error("error: unable to delete group")
       }
     })
   })
 
->>>>>>> 9b2633f7f3b56bd9f3e643270a75147e5d3a8bd4
+  router.delete("/:group_id/leave", (req, res) => {
+    const userID = JSON.parse(localStorage.getItem("session")).id
+    const groupID = req.params.group_id
+
+    dbHelpers.removeSubscription(userID, groupID)
+  })
+
   return router
 }
