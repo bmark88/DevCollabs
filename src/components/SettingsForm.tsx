@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import axios from "axios"
 import { navigate } from "gatsby"
 import {
   Avatar,
   Button,
-  CssBaseline,
   TextField,
   Typography,
   Container,
@@ -13,7 +12,7 @@ import {
   makeStyles,
 } from "@material-ui/core"
 
-import { LockOutlined, VisibilityOff, Visibility } from "@material-ui/icons"
+import { VisibilityOff, Visibility } from "@material-ui/icons"
 import SettingsIcon from "@material-ui/icons/Settings"
 
 const useStyles = makeStyles(theme => ({
@@ -63,10 +62,12 @@ export default function SettingsForm() {
         method: "post",
         url: "http://localhost:3001/settings",
         data: data,
-      }).then((res) => res)
-      navigate('/')
-    } else {
-      setError(true)
+      })
+        .then(res => res)
+        .catch(() => setError(true))
+    
+      localStorage.removeItem("session")
+      navigate('/login')
     }
   }
   return (
