@@ -27,12 +27,12 @@ export default function App() {
         setUsers([...data.users])
       })
 
-      conn.emit('leave', { userName})
-
-
-
-
-
+      conn.on("message", (data: any) => {
+        let now: string = moment().format('lll');
+        data.date = now
+        setMessages(prev => [...prev, data])
+        console.log(data)
+      })
 
     }
 

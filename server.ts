@@ -43,17 +43,17 @@ io.on("connection", socket => {
     io.emit("displayUsers", { users })
   })
 
+    socket.on("message", data => {
+    console.log(data)
+    io.emit("message", data)
+  })
+
   socket.on('disconnect', () => {
-    socket.on('leave', ({ userName }) => {
-      console.log(userName)
-    })
-    console.log('users ===>', users)
+    console.log(users)
   })
 
   // io.emit("displayUsers", { users })
   // console.log({users})
-
-
 
   // console.log("user has connected!")
   // userCount += 1
