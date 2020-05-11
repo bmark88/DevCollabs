@@ -26,16 +26,14 @@ toast.configure()
 
 
 const GroupPage = (Props) => {
-  let { users, messages, handleSubmit } = App()
-  // const {  fetchGroups } = useApplicationData();
-  // console.log(fetchGroups)
-  const { state } = useApplicationData();
-  const { groups } = state
-
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
+
+  let { users, messages, handleSubmit } = App()
+  const { state } = useApplicationData();
+  const { groups } = state
 
   const notifyRoomCreated = () => {
     const user = JSON.parse(localStorage.getItem("session")).username.toString()
