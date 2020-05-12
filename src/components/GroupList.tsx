@@ -17,6 +17,10 @@ const Div = styled.div`
   width: 20%;
   float: left;
   margin: 1em;
+
+  @media (max-width: 1000px) {
+    background-color: blue;
+  }
 `
 
 export default function GroupList({group, groups, setGroup }: Props) {

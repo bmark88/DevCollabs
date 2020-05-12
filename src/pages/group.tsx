@@ -51,6 +51,16 @@ interface Props {
 
 toast.configure()
 
+const Main = styled.main`
+  background-color: green;
+  display: flex;
+`;
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
 const GroupPage = Props => {
 
   //websockets connection for chat
@@ -59,8 +69,6 @@ const GroupPage = Props => {
   //state groups:array[], group:object {id:integer, name:string}
   const { state, setGroup } = useApplicationData()
   const { group, groups, posts } = state
-  //  console.log(state)
-   console.log(posts[0])
 
   //redirect if not logged in
   if (!localStorage.getItem("session")) {
@@ -81,17 +89,21 @@ const GroupPage = Props => {
 
   return (
     <Layout>
-      <GroupList groups={groups} group={group} setGroup={setGroup} />
-      <Users users={users} messages={messages} handleSubmit={handleSubmit} />
-      <Rooms>
-        <Room>
-          Room 1<button onClick={notifyRoomCreated}>Create a New Room</button>
-        </Room>
-        <Room>
-          Room 2<Link to="/room/"> Room Link </Link>
-        </Room>
-      <PostsList posts={posts}/>
-      </Rooms>
+      <Main>
+        <GroupList groups={groups} group={group} setGroup={setGroup} />
+        <Section>
+          <Rooms>
+            <Room>
+              Room 1<button onClick={notifyRoomCreated}>Create a New Room</button>
+            </Room>
+            <Room>
+              Room 2<Link to="/room/"> Room Link </Link>
+            </Room>
+          </Rooms>
+          <PostsList posts={posts}/>
+        </Section>
+        <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
+      </Main>
     </Layout>
   )
 }

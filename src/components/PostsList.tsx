@@ -11,7 +11,7 @@ interface Props {
 const Div = styled.div`
   border: solid;
   height: 800px;
-  width: 80%;
+  // width: 80%;
   float: left;
   margin: 1em;
   // background-color: red;

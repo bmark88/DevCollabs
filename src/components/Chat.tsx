@@ -9,22 +9,24 @@ interface Props {
 }
 
 const Div = styled.div`
-  border: solid;
-  height: 85%;
-  position: fixed;
-  right: 0;
-  margin: 2em;
-  width: 40%;
-  opacity: 80%;
-  float: right;
-
-  @media (max-width: 1000px) {
-    display: none;
-  }
+border: solid;
+height: 800px;
+width: 20%;
+min-width: 400px;
+// position: fixed;
+position: relative;
+margin: 1em;
+opacity: 80%;
+// right: 0;
+// float: right;
+  
+@media (max-width: 1000px) {
+  display: none;
+}
 `
 const UserList = styled.div`
   border-bottom: solid;
-  background-color: lightgreen;
+  background-color: #551A8B;
 `
 
 const SubmitButton = styled.form`
@@ -57,7 +59,7 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
           <b>
             {msg.user} says: {msg.message}
           </b>
-          <div style={{ float: "right" }}>{msg.date}</div>
+          <div>{msg.date}</div>
         </div>
       ))}
       <SubmitButton onSubmit={handleSubmit}>
