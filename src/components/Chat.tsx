@@ -2,6 +2,7 @@ import React, { ReactNode } from "react"
 import styled from "styled-components"
 import { Message, MessageContainer, TimeStamp } from "../components/message"
 // import App from "./hooks/App"
+import { Button } from "@material-ui/core"
 
 interface Props {
   users: any,
@@ -29,9 +30,15 @@ opacity: 80%;
 }
 `
 const UserList = styled.div`
-  border-bottom: solid;
-  background-color: #551A8B;
-`
+  // color: white;
+  border-bottom: solid 0.5px;
+  // background-color: #551A8B;
+`;
+
+const Li = styled.li`
+  list-style: none;
+  margin: 0;
+`;
 
 const SubmitButton = styled.form`
   bottom: 0;
@@ -46,8 +53,8 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const Button = styled.button`
-`;
+// const Button = styled.button`
+// `;
 
 const Chat = ({ users, messages, handleSubmit }: Props) => {
   return (
@@ -55,7 +62,7 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
       <UserList>
         <h1>Online Members</h1>
         {users.map((user :string, index :number) => (
-          <h3 key={index}>{user}</h3>
+          <Li key={index}>{user}</Li>
         ))}
       </UserList>
       <MessageContainer>
@@ -68,7 +75,13 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
       </MessageContainer>
       <SubmitButton onSubmit={handleSubmit}>
         <Input type="text" name="message" />
-        <Button>Send</Button>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
+          Send
+        </Button>
       </SubmitButton>
 
     </Div>
