@@ -14,9 +14,10 @@ interface Props {
 const Div = styled.div`
   border: solid;
   height: 800px;
-  width: 20%;
+  min-width: 250px;
   float: left;
   margin: 1em;
+  // width: 30%;
 
   @media (max-width: 1000px) {
     background-color: blue;

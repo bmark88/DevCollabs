@@ -51,14 +51,16 @@ interface Props {
 
 toast.configure()
 
-const Main = styled.main`
-  background-color: green;
+const Section = styled.section`
+  // background-color: green;
   display: flex;
+  background-color: green;
 `;
 
-const Section = styled.section`
-  display: flex;
-  flex-direction: column;
+const Div = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  background-color: blue;
 `;
 
 const GroupPage = Props => {
@@ -89,9 +91,9 @@ const GroupPage = Props => {
 
   return (
     <Layout>
-      <Main>
+      <Section>
         <GroupList groups={groups} group={group} setGroup={setGroup} />
-        <Section>
+        <Div>
           <Rooms>
             <Room>
               Room 1<button onClick={notifyRoomCreated}>Create a New Room</button>
@@ -101,9 +103,9 @@ const GroupPage = Props => {
             </Room>
           </Rooms>
           <PostsList posts={posts}/>
-        </Section>
+        </Div>
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
-      </Main>
+      </Section>
     </Layout>
   )
 }

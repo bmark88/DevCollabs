@@ -18,15 +18,16 @@ import PostBoard from "../components/PostBoard"
 const Main = styled.main`
   margin-top: 80px;
   display: flex;
+  background-color:
 `
 const TopicsContainer = styled.div`
   background-color: black;
   color: white;
   width: 50%;
-  margin: 2em;
-  // position: absolute;
+  margin: 1em;
   height: 85%;
-  float: left;
+  // position: absolute;
+  // float: left;
 
   @media (max-width: 1000px) {
     width: 90%;
@@ -47,8 +48,8 @@ export default function IndexPage() {
       <Navbar />
       <Main>
         <TopicsContainer>
-      <PostBoard/>
-      </TopicsContainer>
+          <PostBoard/>
+        </TopicsContainer>
         {/* <Topics>
           <Topic>
             <Add>Add Topic</Add>

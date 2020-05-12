@@ -10,13 +10,15 @@ interface Props {
 
 const Div = styled.div`
 border: solid;
+border-color: black;
+color: white;
 height: 800px;
-width: 20%;
 min-width: 400px;
-// position: fixed;
 position: relative;
 margin: 1em;
 opacity: 80%;
+// width: 20%;
+// position: fixed;
 // right: 0;
 // float: right;
   
