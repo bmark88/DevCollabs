@@ -51,33 +51,10 @@ io.on("connection", socket => {
   socket.on('disconnect', () => {
     console.log(users)
   })
-
-  // io.emit("displayUsers", { users })
-  // console.log({users})
-
-  // console.log("user has connected!")
-  // userCount += 1
-  // let temp = `User ${userCount}`
-  // users.push(temp)
-  // socket.emit("intial", { user: temp, users })
-  // socket.user = temp
-  // io.emit("users", { users })
-
-  // //message
-  // socket.on("message", data => {
-  //   console.log(data)
-  //   io.emit("message", data)
-  // })
-
-  // //disconnect
-  // socket.on("disconnect", () => {
-  //   console.log("disconnecting: ", socket.user)
-  //   let pos = users.indexOf(socket.user)
-  //   users.splice(pos, 1)
-  //   console.log(users)
-  //   io.emit("users", { users })
-  //   console.log("user disconnected")
-  // })
+  socket.on('joinRoom', data => {
+    console.log(data)
+    socket.join(data.roomID)
+  })
 })
 
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))

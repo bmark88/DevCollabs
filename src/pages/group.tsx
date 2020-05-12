@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import styled from "styled-components"
-
+import io from "socket.io-client"
 import Users from "../components/users"
 import GroupList from "../components/GroupList"
 import PostsList from "../components/PostsList"
@@ -59,24 +59,33 @@ const GroupPage = Props => {
   //state groups:array[], group:object {id:integer, name:string}
   const { state, setGroup } = useApplicationData()
   const { group, groups, posts } = state
+  const [roomID, setRoomID] = useState('')
+
   //  console.log(state)
    console.log(posts[0])
+
 
   //redirect if not logged in
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
-
-  const notifyRoomCreated = () => {
-    const user = JSON.parse(localStorage.getItem("session")).username.toString()
-    toast(`${user} has created a new room!`, {
+  const socket = io.connect('http://localhost:3001')
+  const createRoomAndNotify = (evt) => {
+    evt.preventDefault()
+    const username = JSON.parse(localStorage.getItem("session")).username.toString()
+    toast(`${username} has created a new room!`, {
       position: "bottom-right",
       autoClose: 2500,
       closeOnClick: false,
       pauseOnHover: false,
       hideProgressBar: true,
     })
+
+    socket.emit('joinRoom', {username, roomID})
+
+
+
   }
 
   return (
@@ -85,7 +94,10 @@ const GroupPage = Props => {
       <Users users={users} messages={messages} handleSubmit={handleSubmit} />
       <Rooms>
         <Room>
-          Room 1<button onClick={notifyRoomCreated}>Create a New Room</button>
+          <form onSubmit={createRoomAndNotify}>
+          <input value={roomID} onChange={(evt) => setRoomID(evt.target.value)} />
+          <button>Create a New Room</button>
+          </form>
         </Room>
         <Room>
           Room 2<Link to="/room/"> Room Link </Link>
