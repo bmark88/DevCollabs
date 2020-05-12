@@ -12,7 +12,7 @@ import Chat from "../components/Chat"
 import { Topics, Topic, SubTopic } from "../components/topics"
 import Add from "../components/add"
 import Navbar from "../components/Navbar"
-import App from "../components/hooks/socketChat"
+import socketChat from "../components/hooks/socketChat"
 import PostBoard from "../components/PostBoard"
 
 const Main = styled.main`
@@ -34,7 +34,7 @@ const TopicsContainer = styled.div`
 `;
 
 export default function IndexPage() {
-  let { users, messages, handleSubmit } = App()
+  let { users, messages, handleSubmit } = socketChat()
 
   if(!localStorage.getItem('session')) {
     navigate('/login')

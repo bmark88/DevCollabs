@@ -1,20 +1,47 @@
 import React, { ReactNode, useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import axios from "axios"
+import styled from "styled-components"
 
 import Users from "../components/users"
 import GroupList from "../components/GroupList"
+import PostsList from "../components/PostsList"
+
 import { Link, navigate, StaticQuery } from "gatsby"
 import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
-import App from "../components/hooks/socketChat"
+import Chat from "../components/Chat"
+import PostBoard from "../components/PostBoard"
+import PostForm from "../components/PostForm"
+// import useGroupData from "../components/useGroupData"
+
+import { Topics, Topic, SubTopic } from "../components/topics"
+import Add from "../components/add"
+
+
+import socketChat from "../components/hooks/socketChat"
 import useApplicationData from "../components/hooks/useApplicationData"
 /* sudo code -liz
-[]chat using websockets works
-[]render groups on group page
+[] use typescript
+[x]chat using websockets works
+[x]render groups on group page
 []render posts on group page
 */
+
+const TopicsContainer = styled.div`
+  background-color: black;
+  color: white;
+  width: 50%;
+  margin: 2em;
+  position: absolute;
+  height: 85%;
+  float: left;
+
+  @media (max-width: 1000px) {
+    width: 90%;
+    margin: 1.4em;
+  }
+`;
 interface Props {
   children: ReactNode
   users: any
@@ -24,16 +51,22 @@ interface Props {
 
 toast.configure()
 
+const GroupPage = Props => {
 
-const GroupPage = (Props) => {
+  //websockets connection for chat
+  let { users, messages, handleSubmit } = socketChat()
+  
+  //state groups:array[], group:object {id:integer, name:string}
+  const { state, setGroup } = useApplicationData()
+  const { group, groups, posts } = state
+  //  console.log(state)
+   console.log(posts[0])
+
+  //redirect if not logged in
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
-
-  let { users, messages, handleSubmit } = App()
-  const { state } = useApplicationData();
-  const { groups } = state
 
   const notifyRoomCreated = () => {
     const user = JSON.parse(localStorage.getItem("session")).username.toString()
@@ -48,20 +81,16 @@ const GroupPage = (Props) => {
 
   return (
     <Layout>
-      <GroupList groups={groups}/>
+      <GroupList groups={groups} group={group} setGroup={setGroup} />
       <Users users={users} messages={messages} handleSubmit={handleSubmit} />
-
-      <Link to="/room/"> Room Link </Link>
       <Rooms>
         <Room>
           Room 1<button onClick={notifyRoomCreated}>Create a New Room</button>
         </Room>
-        <Room>Room 2</Room>
-        <Room>Room 3</Room>
-        <Room>Room 4</Room>
-        <Room>Room 5</Room>
-        <Room>Room 6</Room>
-        <Room>Room 7</Room>
+        <Room>
+          Room 2<Link to="/room/"> Room Link </Link>
+        </Room>
+      <PostsList posts={posts}/>
       </Rooms>
     </Layout>
   )

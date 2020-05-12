@@ -258,6 +258,26 @@ module.exports = db => {
 
   }
 
+  /**
+   * get all groups posts
+   * @param {{integer}} groupId
+   * @return {array<[group_id:interger, user_id:interger, data:string, created_at:time]>}
+   */
+  const getGroupsPosts = function (groupId) {
+    return db
+      .query(
+        `
+        SELECT * 
+        FROM posts
+        WHERE group_id = $1;
+        `,
+        [groupId]
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows
+      })
+  }
   return {
     getUserWithEmail,
     addUser,
@@ -272,5 +292,6 @@ module.exports = db => {
     createPost,
     removeSubscription,
     checkForUser,
+    getGroupsPosts
   }
 }
