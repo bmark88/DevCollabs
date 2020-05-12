@@ -59,8 +59,8 @@ const GroupPage = Props => {
   //state groups:array[], group:object {id:integer, name:string}
   const { state, setGroup } = useApplicationData()
   const { group, groups, posts } = state
-   console.log(state)
-   console.log(posts)
+  //  console.log(state)
+   console.log(posts[0])
 
   //redirect if not logged in
   if (!localStorage.getItem("session")) {
@@ -90,8 +90,8 @@ const GroupPage = Props => {
         <Room>
           Room 2<Link to="/room/"> Room Link </Link>
         </Room>
-      </Rooms>
       <PostsList posts={posts}/>
+      </Rooms>
     </Layout>
   )
 }

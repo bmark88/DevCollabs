@@ -1,53 +1,49 @@
-import React, { useState } from "react"
-import styled from "styled-components"
+import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import styled from "styled-components";
 import { Link } from "gatsby"
-import onClickOutside from "react-onclickoutside"
 
-const Menu = styled.ul`
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  top: 45px;
-  right: 0px;
-  width: 200px;
-  background-color: white;
-  font-weight: bold;
-  position: absolute;
+const Div = styled.div`
+  font-family: georgia, serif;
+  font-size: 18px;
+  color: #551A8B;
+`;
 
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-`
-function Dropdown(props) {
-  const [open, setOpen] = useState(false)
+export default function SimpleMenu() {
+  const [anchorEl, setAnchorEl] = useState(null);
 
-   const openMenu = () => {
-      setOpen(!open)
-   }
-   Dropdown.handleClickOutside = () => setOpen(false)
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <div>
-      <a onClick={openMenu}> {props.children}</a>
-
-      {open && (
-        <Menu>
-          <li>
-            <Link to="/"> Chat </Link>
-          </li>
-          <li>
-            <Link to="/group"> Groups </Link>
-          </li>
-          <li>
-            <Link to="/page-2"> Hackathons </Link>
-          </li>
-        </Menu>
-      )}
-    </div>
-  )
-
+    <>
+      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        <Div>Features</Div>
+      </Button>
+      <Menu
+        id="simple-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose}>
+          <Link to="/">Chat</Link>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link to="/group">Groups</Link>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link to="/page-2">Hackathons</Link>
+        </MenuItem>
+      </Menu>
+    </>
+  );
 }
-
-const clickOutsideConfig = {
-   handleClickOutside: () => Dropdown.handleClickOutside
-}
-
-export default onClickOutside(Dropdown, clickOutsideConfig)

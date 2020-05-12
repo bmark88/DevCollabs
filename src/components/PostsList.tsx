@@ -14,13 +14,14 @@ const Div = styled.div`
   width: 80%;
   float: left;
   margin: 1em;
+  background-color: red;
 `
 
 export default function PostsList({ posts }: Props) {
     console.log(posts)
   const PostsList = posts.map(post => {
     return (
-      <div key={post.id} id={post.id}>{post.data}</div>
+      <div key={post.id} id={post.id}>User {post.user_id} posted: "{post.data}"</div>
     )
   })
   return <Div>{PostsList}</Div>

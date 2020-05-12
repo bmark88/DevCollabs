@@ -9,12 +9,13 @@ import {
   InputAdornment,
   IconButton,
   makeStyles,
+  Grid,
 } from "@material-ui/core"
 import { LockOutlined, VisibilityOff, Visibility } from "@material-ui/icons"
 import Alert from "@material-ui/lab/Alert"
 
 import axios from "axios"
-import { navigate } from "gatsby"
+import { navigate, Link } from "gatsby"
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -116,6 +117,13 @@ export default function RegisterForm() {
           >
             Sign In
           </Button>
+          <Grid container>
+            <Grid item xs>
+            </Grid>
+            <Grid item>
+              Don't have an account? <Link to="/register">SIGN UP</Link>
+            </Grid>
+          </Grid>
         </form>
       </div>
       {error && <Alert severity="error">Could Not Sign In</Alert>}

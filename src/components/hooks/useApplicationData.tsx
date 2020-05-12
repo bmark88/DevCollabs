@@ -29,9 +29,13 @@ export default function useApplicationData() {
       .catch(error => console.log(error))
   }
 
-  const setGroup = (id) => {
-    setState({ ...state, group: id })
-    console.log('setGroup', id)
+  const setGroup = (groupId) => {
+    console.log('setGroup', groupId)
+      axios.get(`http://localhost:3001/group/g/${groupId}`)
+      .then(response => {
+        setState({ ...state, group:groupId, posts: response.data})
+      })
+      .catch(error => console.log(error))
   }
 
   useEffect(() => {
