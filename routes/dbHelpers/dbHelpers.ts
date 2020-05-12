@@ -267,8 +267,9 @@ module.exports = db => {
     return db
       .query(
         `
-        SELECT * 
+        SELECT posts.*, username
         FROM posts
+        JOIN users ON posts.user_id = users.id
         WHERE group_id = $1;
         `,
         [groupId]
