@@ -1,8 +1,9 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
+import { withStyles } from '@material-ui/core/styles';
 import { Message, MessageContainer, TimeStamp } from "../components/message"
 // import App from "./hooks/App"
-import { Button } from "@material-ui/core"
+import { Button, TextField } from "@material-ui/core"
 
 interface Props {
   users: any,
@@ -53,6 +54,23 @@ const Input = styled.input`
   width: 100%;
 `;
 
+const MessageTextField = withStyles({
+  root: {
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        // borderColor: '#551A8B',
+        height: '100%'
+      },
+      '&:hover fieldset': {
+        borderColor: '#551A8B',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#551A8B',
+      },
+    },
+  },
+})(TextField);
+
 // const Button = styled.button`
 // `;
 
@@ -74,7 +92,14 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
         ))}
       </MessageContainer>
       <SubmitButton onSubmit={handleSubmit}>
-        <Input type="text" name="message" />
+        <MessageTextField 
+          type="text" 
+          name="message" 
+          variant="outlined"
+          placeholder="Send a Message"
+          fullWidth
+          autoComplete="off"
+        />
         <Button
           type="submit"
           variant="contained"
