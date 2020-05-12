@@ -34,7 +34,7 @@ const TopicsContainer = styled.div`
 `;
 
 export default function IndexPage() {
-  let { users, messages, handleSubmit } = socketChat()
+  let { users, messages, handleSubmit } = socketChat('public')
 
   if(!localStorage.getItem('session')) {
     navigate('/login')
