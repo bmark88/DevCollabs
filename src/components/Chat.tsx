@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
+import { Message, MessageContainer, TimeStamp } from "../components/message"
 // import App from "./hooks/App"
 
 interface Props {
@@ -10,13 +11,14 @@ interface Props {
 
 const Div = styled.div`
 border: solid;
-border-color: black;
-color: white;
-height: 800px;
+border-color: #f0f0f0;
+border-width: 2px;
 min-width: 400px;
 position: relative;
 margin: 1em;
 opacity: 80%;
+// color: white;
+// height: 800px;
 // width: 20%;
 // position: fixed;
 // right: 0;
@@ -56,14 +58,14 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
           <h3 key={index}>{user}</h3>
         ))}
       </UserList>
-      {messages.map((msg: any) => (
-        <div>
-          <b>
-            {msg.user} says: {msg.message}
-          </b>
-          <div>{msg.date}</div>
-        </div>
-      ))}
+      <MessageContainer>
+        {messages.map((msg: any) => (
+          <>
+            <b>{msg.user}: </b>{msg.message}
+            <TimeStamp>{msg.date}</TimeStamp>
+          </>
+        ))}
+      </MessageContainer>
       <SubmitButton onSubmit={handleSubmit}>
         <Input type="text" name="message" />
         <Button>Send</Button>
