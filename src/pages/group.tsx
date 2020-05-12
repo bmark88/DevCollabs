@@ -54,12 +54,13 @@ toast.configure()
 const GroupPage = Props => {
 
   //websockets connection for chat
-  let { users, messages, handleSubmit } = socketChat()
+  let { users, messages, handleSubmit } = socketChat('group')
   
   //state groups:array[], group:object {id:integer, name:string}
   const { state, setGroup } = useApplicationData()
   const { group, groups, posts } = state
   const [roomID, setRoomID] = useState('')
+
 
   //  console.log(state)
    console.log(posts[0])
@@ -81,9 +82,6 @@ const GroupPage = Props => {
       pauseOnHover: false,
       hideProgressBar: true,
     })
-
-    socket.emit('joinRoom', {username, roomID})
-
 
 
   }
