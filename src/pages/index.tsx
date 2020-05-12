@@ -17,13 +17,14 @@ import PostBoard from "../components/PostBoard"
 
 const Main = styled.main`
   margin-top: 80px;
+  display: flex;
 `
 const TopicsContainer = styled.div`
   background-color: black;
   color: white;
   width: 50%;
   margin: 2em;
-  position: absolute;
+  // position: absolute;
   height: 85%;
   float: left;
 
