@@ -11,11 +11,6 @@ export default function useApplicationData() {
     posts: [],
   })
 
-  // const [state, setState] = useState<User>({
-  //   group: 0,
-  //   groups: []
-  // })
-  // const [posts, setPosts] = useState([])
 
   //get a users id from session json data. returns {id:number}
   const userId: number = JSON.parse(localStorage.getItem("session") || "{}").id

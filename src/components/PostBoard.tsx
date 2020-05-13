@@ -5,6 +5,7 @@ import MuiExpansionPanel from '@material-ui/core/ExpansionPanel';
 import MuiExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import MuiExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
+import useApplicationData from "./hooks/useApplicationData"
 
 const ExpansionPanel = withStyles({
   root: {
@@ -48,21 +49,44 @@ const ExpansionPanelDetails = withStyles((theme) => ({
 }))(MuiExpansionPanelDetails);
 
 interface Props {
-  groups: any
+  publicGroups: any
 }
 
-export default function PostBoard({ groups }: Props) {
+export default function PostBoard({ publicGroups }: Props) {
   const username = JSON.parse(localStorage.getItem('session') || '{}').username.toString();
   const [expanded, setExpanded] = useState('panel1');
 
   const handleChange = (panel:any) => (newExpanded:any) => {
     setExpanded(newExpanded ? panel : false);
   };
+   const { state, setGroup } = useApplicationData()
+ const { group, groups, posts } = state
 
-  const groupsArr = groups.groups
+//   const subscribedGroups = publicGroupsArr.map((groups) => {
+//     console.log(groups)
+// if groups.id ==
+//    if (groupsArr.includes(groups)) {
+//     console.log('YES')
+
+//    }
+//   });
+  //   console.log(subscribedGroups)
+  const groupsArr = publicGroups.groups
   const groupsList = groupsArr.map(group => {
+    let button = '+'
+     const subscribedGroups = groups.map((subscribedGroup) => { 
+      console.log(subscribedGroup)
+      console.log(group)
+
+     if (subscribedGroup.id === group.id) {
+      button = '-'
+     }
+    })
+
     return (
-      <div>{group.name}</div>
+      <div>{group.name}
+      <button>{button}</button>
+      </div>
     );
   })
 

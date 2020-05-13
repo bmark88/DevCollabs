@@ -7,13 +7,16 @@ import Chat from "../components/Chat"
 import Navbar from "../components/Navbar"
 import socketChat from "../components/hooks/socketChat"
 import PostBoard from "../components/PostBoard"
-import publicUse from "../components/hooks/publicUse";
+
+//hooks
+import useApplicationData from "../components/hooks/useApplicationData"
+import publicUse from "../components/hooks/publicUse"
 
 const Main = styled.main`
   margin-top: 80px;
   display: flex;
-  background-color:
-`;
+  background-color: ;
+`
 
 const TopicsContainer = styled.div`
   background-color: black;
@@ -26,15 +29,25 @@ const TopicsContainer = styled.div`
     width: 90%;
     margin: 1.4em;
   }
-`;
+`
 
 export default function IndexPage() {
-  let { users, messages, handleSubmit } = socketChat('public')
-  const { state } = publicUse();
+  let { users, messages, handleSubmit } = socketChat("public")
+  const { state, setGroup } = useApplicationData()
+  const { group, groups, posts } = state
+  const { publicGroups } = publicUse()
+  console.log(publicGroups)
+  console.log(groups)
 
-  if(!localStorage.getItem('session')) {
-    navigate('/login')
-    return null;
+  const groupsArr = groups
+  const publicGroupsArr = publicGroups.groups
+  console.log(publicGroupsArr)
+  console.log(groupsArr)
+
+
+  if (!localStorage.getItem("session")) {
+    navigate("/login")
+    return null
   }
 
   return (
@@ -42,10 +55,10 @@ export default function IndexPage() {
       <Navbar />
       <Main>
         <TopicsContainer>
-          <PostBoard groups={state}/>
+          <PostBoard publicGroups={publicGroups} />
         </TopicsContainer>
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>
     </>
   )
-};
+}
