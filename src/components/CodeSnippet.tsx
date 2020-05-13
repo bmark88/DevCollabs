@@ -13,11 +13,12 @@ const Div = styled.div`
   // position: absolute;  
 `;
 
-const CodeSnippet = () => {
+const CodeSnippet = (props : any) => {
   const [snippetValue, setSnippetValue] = useState("")
 
   function onChange(newValue :string) {
     setSnippetValue(newValue)
+    props.function(newValue)
   }
 
   function copyToClipboard() {
@@ -31,7 +32,7 @@ const CodeSnippet = () => {
         theme="twilight"
         height="84.7vh"
         width="50vw"
-        value={snippetValue}
+        value={props.snippetValue}
         onChange={onChange}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: Infinity }}
