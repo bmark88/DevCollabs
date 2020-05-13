@@ -14,7 +14,6 @@ module.exports = db => {
   router.get("/u/:userId", (req, res) => {
     const { userId } = req.params
     dbHelpers.getGroupsNames(userId).then(data => {
-      
       res.send(data)
     })
   })
@@ -23,7 +22,6 @@ module.exports = db => {
   router.get("/g/:groupId", (req, res) => {
     const { groupId } = req.params
     dbHelpers.getGroupsPosts(groupId).then(data => {
-     
       res.send(data)
     })
   })
@@ -47,9 +45,7 @@ module.exports = db => {
   router.get("/:group_id", (req, res) => {
     const { group_id } = req.params
     dbHelpers.getPostWithGroupID(group_id).then(queryResults => {
-      
       const { username, data, created_at, avatar_image } = queryResults
-      
 
       res.send({
         username,
@@ -101,7 +97,7 @@ module.exports = db => {
   })
 
   router.delete("/:group_id/leave", (req, res) => {
-    const userID = JSON.parse(localStorage.getItem("session") || '{}').id
+    const userID = JSON.parse(localStorage.getItem("session") || "{}").id
     const groupID = req.params.group_id
 
     dbHelpers.removeSubscription(userID, groupID)
