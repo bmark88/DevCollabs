@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { Link, navigate } from "gatsby";
+import io from "socket.io-client";
 import styled from "styled-components";
 
 //components
@@ -28,14 +29,17 @@ const GroupPage = () => {
     return null;
   }
 
-  //websockets connection for chat
-  const { users, messages, handleSubmit } = socketChat();
-  const { state, setGroup } = useApplicationData();
-  const { group, groups, posts } = state;
+//websockets connection for chat
+const { users, messages, handleSubmit } = socketChat();
+const { state, setGroup } = useApplicationData();
+const { group, groups, posts } = state;
+const [roomID, setRoomID] = useState('')
 
-  const notifyRoomCreated = () => {
-    const user = JSON.parse(localStorage.getItem("session")).username.toString();
-    toast(`${user} has created a new room!`, {
+const socket = io.connect('http://localhost:3001')
+  const createRoomAndNotify = (evt) => {
+    evt.preventDefault()
+    const username = JSON.parse(localStorage.getItem("session")).username.toString()
+    toast(`${username} has created a new room!`, {
       position: "bottom-right",
       autoClose: 2500,
       closeOnClick: false,
@@ -52,9 +56,13 @@ const GroupPage = () => {
           <Rooms>
             <Room>
               Room 1
-              <button onClick={notifyRoomCreated}>
-                Create a New Room
-              </button>
+              <form onSubmit={createRoomAndNotify}>
+                <input 
+                  value={roomID} 
+                  onChange={(evt) => setRoomID(evt.target.value)} 
+                />
+                <button>Create a New Room</button>
+              </form>
             </Room>
             <Room>
               Room 2<Link to="/room/"> Room Link </Link>

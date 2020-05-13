@@ -7,7 +7,7 @@ module.exports = db => {
   router.get("/u/:userId", (req, res) => {
     const { userId } = req.params
     dbHelpers.getGroupsNames(userId).then(data => {
-      console.log("groups array<[id:interger, name:string]>", data)
+      
       res.send(data)
     })
   })
@@ -16,7 +16,7 @@ module.exports = db => {
   router.get("/g/:groupId", (req, res) => {
     const { groupId } = req.params
     dbHelpers.getGroupsPosts(groupId).then(data => {
-      console.log("post array<[id:interger, name:string]>", data)
+     
       res.send(data)
     })
   })
@@ -40,9 +40,9 @@ module.exports = db => {
   router.get("/:group_id", (req, res) => {
     const { group_id } = req.params
     dbHelpers.getPostWithGroupID(group_id).then(queryResults => {
-      console.log(queryResults)
+      
       const { username, data, created_at, avatar_image } = queryResults
-      console.log(username, data, created_at, avatar_image)
+      
 
       res.send({
         username,

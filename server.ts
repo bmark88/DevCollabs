@@ -33,51 +33,27 @@ app.use("/group", groupRoutes(db))
 app.use("/room", roomRoutes(io))
 
 const users = []
-let userCount = 0
-
+let rooms = []
 io.on("connection", socket => {
   //user
-  socket.on('join', ({ userName }) => {
+  socket.on('join', ({ userName , roomId}) => {
+   
     if (!users.includes(userName)) users.push(userName)
-    
-    io.emit("displayUsers", { users })
+    socket.room_id = roomId 
+    socket.join(socket.room_id)
+    console.log(`joined room ${socket.room_id}`)
+    io.to(socket.room_id).emit("displayUsers", { users })
   })
 
-    socket.on("message", data => {
+  socket.on("message", data => {
     console.log(data)
-    io.emit("message", data)
+    io.to(data.roomId).emit("message", data)
   })
 
   socket.on('disconnect', () => {
-    console.log(users)
+    socket.leave(socket.room_id)
   })
 
-  // io.emit("displayUsers", { users })
-  // console.log({users})
-
-  // console.log("user has connected!")
-  // userCount += 1
-  // let temp = `User ${userCount}`
-  // users.push(temp)
-  // socket.emit("intial", { user: temp, users })
-  // socket.user = temp
-  // io.emit("users", { users })
-
-  // //message
-  // socket.on("message", data => {
-  //   console.log(data)
-  //   io.emit("message", data)
-  // })
-
-  // //disconnect
-  // socket.on("disconnect", () => {
-  //   console.log("disconnecting: ", socket.user)
-  //   let pos = users.indexOf(socket.user)
-  //   users.splice(pos, 1)
-  //   console.log(users)
-  //   io.emit("users", { users })
-  //   console.log("user disconnected")
-  // })
 })
 
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))
