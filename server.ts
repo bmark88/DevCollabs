@@ -54,6 +54,11 @@ io.on("connection", socket => {
     socket.leave(socket.room_id)
   })
 
+  socket.on('IDE', data => {
+    console.log(data)
+    io.to(data.roomId).emit("IDE", data)
+  })
+
 })
 
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))
