@@ -1,6 +1,8 @@
 import React, { ReactNode, useEffect, useState } from "react"
 import AceEditor from "react-ace";
 import styled from "styled-components";
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import copy from 'copy-to-clipboard';
 
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-twilight";
@@ -12,10 +14,14 @@ const Div = styled.div`
 `;
 
 const CodeSnippet = () => {
-  const [value, setValue] = useState("")
+  const [snippetValue, setSnippetValue] = useState("")
 
   function onChange(newValue :string) {
-    setValue(newValue)
+    setSnippetValue(newValue)
+  }
+
+  function copyToClipboard() {
+    copy(snippetValue)
   }
 
   return (
@@ -25,7 +31,7 @@ const CodeSnippet = () => {
         theme="twilight"
         height="84.7vh"
         width="50vw"
-        value={value}
+        value={snippetValue}
         onChange={onChange}
         name="UNIQUE_ID_OF_DIV"
         editorProps={{ $blockScrolling: Infinity }}
@@ -37,6 +43,7 @@ const CodeSnippet = () => {
           tabSize: 2,
           }}
       />
+      <button onClick={copyToClipboard}><FileCopyIcon /></button>
     </Div>
     )
 };

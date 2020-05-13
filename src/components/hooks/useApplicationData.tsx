@@ -3,7 +3,8 @@ import axios from "axios"
 import { User } from "../../helpers/interfaces"
 
 export default function useApplicationData() {
-  const [state, setState] = useState<User | null>({
+
+  const [state, setState] = useState<User>({
     group: 0,
     groups: [],
     posts: [],
