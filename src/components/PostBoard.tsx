@@ -48,10 +48,10 @@ const ExpansionPanelDetails = withStyles((theme) => ({
 }))(MuiExpansionPanelDetails);
 
 export default function PostBoard() {
-  const username = JSON.parse(localStorage.getItem('session')).username.toString();
+  const username = JSON.parse(localStorage.getItem('session') || '{}').username.toString();
   const [expanded, setExpanded] = useState('panel1');
 
-  const handleChange = (panel) => (event, newExpanded) => {
+  const handleChange = (panel:any) => (newExpanded:any) => {
     setExpanded(newExpanded ? panel : false);
   };
 

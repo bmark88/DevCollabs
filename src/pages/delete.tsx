@@ -14,7 +14,7 @@ interface Props {
  * @desc Get a users session json data.
  * @return {username:string, email:string, id:interger ,token:string} session
  */
-let data = JSON.parse(localStorage.getItem("session"))
+let data = JSON.parse(localStorage.getItem("session") || '{}')
 
 if(data) {
   axios({

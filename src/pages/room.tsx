@@ -12,11 +12,31 @@ const Main = styled.main`
 
 const RoomPage = () => {
   let { users, messages, handleSubmit } = socketChat('Room 1')
+  const [user, setUser] = useState({})
+  const [connection, setConnection] = useState({})
+  // const [users, setUsers] = useState([])
+  // const [messages, setMessages] = useState([])
 
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
+
+  useEffect(() => {
+    const { username } = JSON.parse(localStorage.getItem("session") || '{}')
+    const roomId = "Room1"
+    //server connection
+    const conn = io.connect("http://localhost:3001/room")
+
+    setConnection(conn)
+    //once connection is set send server your username and roomId
+    conn.emit("initial", {
+      username,
+      roomId,
+    })
+  }, [])
+
+  // const handleSubmit = () => {}
 
   return (
     <Layout>

@@ -32,7 +32,7 @@ export default function RegisterForm() {
     setError(false)
     event.preventDefault()
     const groupId = "1" // <---------------- Change accordinly
-    const session = JSON.parse(localStorage.getItem("session"))
+    const session = JSON.parse(localStorage.getItem("session") || '{}')
     const userId = session.id
     const data = { userId, data: postData }
     axios({
