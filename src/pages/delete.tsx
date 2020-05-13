@@ -24,22 +24,22 @@ if(data) {
   }) //TODO change from hard coded
 }
 
-const deletePage = () => {
-  return (
-    <Layout>
-      <Users>Users</Users>
-      <Groups>Groups</Groups>
-      <Rooms>
-        <Room>Room 1</Room>
-        <Room>Room 2</Room>
-        <Room>Room 3</Room>
-        <Room>Room 4</Room>
-        <Room>Room 5</Room>
-        <Room>Room 6</Room>
-        <Room>Room 7</Room>
-      </Rooms>
-    </Layout>
-  )
-}
+// const deletePage = () => {
+//   return (
+//     <Layout>
+//       <Users>Users</Users>
+//       <Groups>Groups</Groups>
+//       <Rooms>
+//         <Room>Room 1</Room>
+//         <Room>Room 2</Room>
+//         <Room>Room 3</Room>
+//         <Room>Room 4</Room>
+//         <Room>Room 5</Room>
+//         <Room>Room 6</Room>
+//         <Room>Room 7</Room>
+//       </Rooms>
+//     </Layout>
+//   )
+// }
 
-export default deletePage
+// export default deletePage

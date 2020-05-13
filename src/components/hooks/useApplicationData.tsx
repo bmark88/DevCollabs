@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { User } from "../../helpers/interfaces"
+import { ThreeDRotationSharp } from "@material-ui/icons"
 
 export default function useApplicationData() {
 
@@ -10,16 +11,25 @@ export default function useApplicationData() {
     posts: [],
   })
 
+  // const [state, setState] = useState<User>({
+  //   group: 0,
+  //   groups: []
+  // })
+  // const [posts, setPosts] = useState([])
+
   //get a users id from session json data. returns {id:number}
   const userId: number = JSON.parse(localStorage.getItem("session") || "{}").id
 
   //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchGroups = () => {
-    axios
+    return axios
       .get(`http://localhost:3001/group/u/${userId}`)
       .then(response => {
-        setState({group: response.data[0].id, groups: response.data })
-        return response.data[0].id 
+        console.log(state)
+        setState({...state, group: response.data[0].id, groups: response.data })
+
+        console.log(response.data[0].id)
+        return response.data[0].id
       })
       .catch(error => console.log(error))
   }
@@ -49,7 +59,9 @@ export default function useApplicationData() {
   }
 
   useEffect(() => {
-    fetchGroups().then(groupId=> {
+    fetchGroups().then(groupId => {
+      console.log(groupId)
+
       fetchPosts(groupId)
     })
   }, [])
