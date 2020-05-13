@@ -38,7 +38,10 @@ const NavbarLinks = (props: any) => {
   }
   return (
     <>
-      {props.username && (<NavItem className="avatar" to="/404">{props.username}</NavItem>
+      {props.username && (
+      <NavItem className="avatar" to="/settings">
+        {props.username}
+      </NavItem>
       )}
       {props.username && <Drop>Features</Drop>}
       {!props.username && 
