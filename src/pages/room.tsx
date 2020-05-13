@@ -4,11 +4,6 @@ import io from "socket.io-client"
 import Chat from "../components/Chat"
 import CodeSnippet from "../components/CodeSnippet"
 import Layout from "../components/layout"
-import styled from "styled-components"
-
-const Main = styled.main`
-  display: flex;
-`;
 
 const RoomPage = () => {
   const [users, setUsers] = useState([])
@@ -39,10 +34,8 @@ const RoomPage = () => {
 
   return (
     <Layout>
-      <Main>
-        <CodeSnippet />
-        <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
-      </Main>
+      <CodeSnippet />
+      <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
     </Layout>
   )
 }

@@ -1,8 +1,11 @@
-import React from "react"
+import React, { ReactNode } from "react"
 import styled from "styled-components"
 import GroupListItem from "./GroupListItem"
 
+// import useGroupData from "../components/useGroupData"
+
 interface Props {
+  // children: ReactNode
   groups: object
   group: any
   setGroup: any
@@ -10,10 +13,11 @@ interface Props {
 
 const Div = styled.div`
   border: solid;
-  min-height: 500px;
-  min-width: 250px;
+  height: 800px;
+  width: 20%;
+  float: left;
   margin: 1em;
-`;
+`
 
 export default function GroupList({group, groups, setGroup }: Props) {
   const GroupList = groups.map(group => {

@@ -1,8 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { withStyles } from "@material-ui/core/styles";
-import { MessageContainer, TimeStamp } from "../components/message";
-import { Button, TextField } from "@material-ui/core";
+import React, { ReactNode } from "react"
+import styled from "styled-components"
+// import App from "./hooks/App"
 
 interface Props {
   users: any,
@@ -12,26 +10,22 @@ interface Props {
 
 const Div = styled.div`
   border: solid;
-  border-radius: 6px;
-  border-color: #f0f0f0;
-  border-width: 2px;
-  min-width: 400px;
-  position: relative;
-  margin: 1em;
+  height: 85%;
+  position: fixed;
+  right: 0;
+  margin: 2em;
+  width: 40%;
   opacity: 80%;
+  float: right;
 
   @media (max-width: 1000px) {
     display: none;
   }
 `
 const UserList = styled.div`
-  border-bottom: solid 0.5px;
-`;
-
-const Li = styled.li`
-  list-style: none;
-  margin: 0;
-`;
+  border-bottom: solid;
+  background-color: lightgreen;
+`
 
 const SubmitButton = styled.form`
   bottom: 0;
@@ -42,58 +36,37 @@ const SubmitButton = styled.form`
   width: 100%;
 `;
 
-const MessageTextField = withStyles({
-  root: {
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        height: '100%'
-      },
-      '&:hover fieldset': {
-        borderColor: '#551A8B',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#551A8B',
-      },
-    },
-  },
-})(TextField);
+const Input = styled.input`
+  width: 100%;
+`;
+
+const Button = styled.button`
+`;
 
 const Chat = ({ users, messages, handleSubmit }: Props) => {
   return (
     <Div>
       <UserList>
-        <h4 >Online Members</h4>
+        <h1>Online Members</h1>
         {users.map((user :string, index :number) => (
-          <Li key={index}>{user}</Li>
+          <h3 key={index}>{user}</h3>
         ))}
       </UserList>
-      <MessageContainer>
-        {messages.map((msg: any) => (
-          <>
-            <b>{msg.user}: </b>{msg.message}
-            <TimeStamp>{msg.date}</TimeStamp>
-          </>
-        ))}
-      </MessageContainer>
+      {messages.map((msg: any) => (
+        <div>
+          <b>
+            {msg.user} says: {msg.message}
+          </b>
+          <div style={{ float: "right" }}>{msg.date}</div>
+        </div>
+      ))}
       <SubmitButton onSubmit={handleSubmit}>
-        <MessageTextField 
-          type="text" 
-          name="message" 
-          variant="outlined"
-          placeholder="Send a Message"
-          fullWidth
-          autoComplete="off"
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
-          Send
-        </Button>
+        <Input type="text" name="message" />
+        <Button>Send</Button>
       </SubmitButton>
+
     </Div>
-  );
-};
+  )
+}
 
 export default Chat
