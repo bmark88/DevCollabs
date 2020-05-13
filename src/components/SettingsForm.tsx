@@ -36,8 +36,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function SettingsForm() {
-  const classes = useStyles()
-  const userData = JSON.parse(localStorage.getItem('session'))
+  const classes:Record<"form" | "submit" | "paper" | "avatar", string> = useStyles()
+  const userData = JSON.parse(localStorage.getItem('session') || '{}')
 
   const [id, setID] = useState(userData.id)
   const [username, setUsername] = useState(userData.username)

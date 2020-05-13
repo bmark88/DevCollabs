@@ -33,7 +33,7 @@ app.use("/group", groupRoutes(db))
 app.use("/room", roomRoutes(io))
 
 const users = []
-let rooms = []
+const rooms = []
 io.on("connection", socket => {
   //user
   socket.on('join', ({ userName , roomId}) => {

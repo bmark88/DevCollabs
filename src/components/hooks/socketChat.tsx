@@ -13,10 +13,9 @@ export default function socketChat(roomName) {
   
   useEffect(() => {
     if(localStorage.getItem('session')) {
-      const userName = JSON.parse(localStorage.getItem('session')).username
+      const userName:string = JSON.parse(localStorage.getItem('session') || '{}').username
       setUser(userName)
 
-    
       //server connection
       const conn = socketIOClient(ENDPOINT)
       setConnection(conn)
