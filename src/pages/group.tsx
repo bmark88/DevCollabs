@@ -66,11 +66,15 @@ const GroupPage = () => {
 let { users, messages, handleSubmit } = socketChat('group')
 const { state, setGroup } = useApplicationData();
 const { group, groups, posts } = state;
-const [roomID, setRoomID] = useState('')
+const [roomID, setRoomID] = useState("")
 
 const createRoomAndNotify = (evt :any) => {
   evt.preventDefault()
   const username = JSON.parse(localStorage.getItem("session") || '{}').username.toString();
+
+  // After room is created, clear state and reset to empty string
+  evt.target.querySelector('input').value = "";
+  setRoomID(evt.target.querySelector('input').value);
   
   toast(`${username} has created a new room!`, {
     position: "bottom-right",
@@ -97,7 +101,6 @@ const createRoomAndNotify = (evt :any) => {
                 value={roomID} 
                 disableUnderline
                 onChange={(evt) => setRoomID(evt.target.value)}
-                
               />
               <Button
                 type="submit"
@@ -119,20 +122,6 @@ const createRoomAndNotify = (evt :any) => {
               <Link to="/room/"> Room 3</Link>
             </Div>
           </RoomCard>
-          {/* <Rooms>
-            <Room>
-              <form onSubmit={createRoomAndNotify}>
-                <input 
-                  value={roomID} 
-                  onChange={(evt) => setRoomID(evt.target.value)} 
-                />
-                <button>Create a New Room</button>
-              </form>
-            </Room>
-            <Room>
-              <Link to="/room/"> Enter Room </Link>
-            </Room>
-          </Rooms> */}
           <PostsList posts={posts}/>
         </RoomContainer>
         <Chat 
