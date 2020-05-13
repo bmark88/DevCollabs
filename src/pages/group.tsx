@@ -7,7 +7,8 @@ import styled from "styled-components";
 //components
 import GroupList from "../components/GroupList";
 import PostsList from "../components/PostsList";
-import { Rooms, Room } from "../components/rooms";
+// import { Rooms, Room } from "../components/rooms";
+import RoomCard from "../components/rooms";
 import Layout from "../components/layout";
 import Chat from "../components/Chat";
 
@@ -76,9 +77,26 @@ const createRoomAndNotify = (evt :any) => {
       <Section>
         <GroupList groups={groups} group={group} setGroup={setGroup} />
         <div>
-          <Rooms>
+          <RoomCard 
+            image="https://economictimes.indiatimes.com/thumb/msid-73420856,width-1200,height-900,resizemode-4,imgsize-272701/getty.jpg?from=mdr" 
+            title="Create A Room"
+          >
+            <form onSubmit={createRoomAndNotify}>
+              <input 
+                value={roomID} 
+                onChange={(evt) => setRoomID(evt.target.value)} 
+              />
+              <button>Create a New Room</button>
+            </form>
+          </RoomCard>
+          <RoomCard 
+            image="https://www.pandasecurity.com/mediacenter/src/uploads/2016/03/pandasecurity-Who-are-the-most-famous-hackers-in-history.jpg" 
+            title="Join A Room"
+          >
+            <Link to="/room/"> Enter Room </Link>
+          </RoomCard>
+          {/* <Rooms>
             <Room>
-              Room 1
               <form onSubmit={createRoomAndNotify}>
                 <input 
                   value={roomID} 
@@ -88,9 +106,9 @@ const createRoomAndNotify = (evt :any) => {
               </form>
             </Room>
             <Room>
-              Room 2<Link to="/room/"> Room Link </Link>
+              <Link to="/room/"> Enter Room </Link>
             </Room>
-          </Rooms>
+          </Rooms> */}
           <PostsList posts={posts}/>
         </div>
         <Chat 
