@@ -8,14 +8,9 @@ const NavItem = styled(Link)`
   text-decoration: none;
   font-family: georgia serif;
   font-size: 18px;
-
-  &.avatar {
-    margin-right: auto;
-  }
 `;
 
 const Drop = styled(Dropdown)`
-  padding: 10px;
   text-decoration: none;
   
   &:hover {
@@ -28,13 +23,16 @@ const Div = styled.div`
   font-size: 18px;
   color: #551A8B;
   position: absolute;
+  display: flex;
   right: 5vw;
 `;
 
 const Img = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 47px;
+  height: 47px;
   border-radius: 50%;
+  border: solid;
+  border-width: thin;
   margin: 0;
   background-color: black;
 `;
