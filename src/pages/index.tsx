@@ -9,7 +9,6 @@ import socketChat from "../components/hooks/socketChat"
 import PostBoard from "../components/PostBoard"
 
 //hooks
-import useApplicationData from "../components/hooks/useApplicationData"
 import publicUse from "../components/hooks/publicUse"
 
 const Main = styled.main`
@@ -33,17 +32,8 @@ const TopicsContainer = styled.div`
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = socketChat("public")
-  const { state, setGroup } = useApplicationData()
-  const { group, groups, posts } = state
   const { publicGroups } = publicUse()
-  console.log(publicGroups)
-  console.log(groups)
-
-  const groupsArr = groups
   const publicGroupsArr = publicGroups.groups
-  console.log(publicGroupsArr)
-  console.log(groupsArr)
-
 
   if (!localStorage.getItem("session")) {
     navigate("/login")
