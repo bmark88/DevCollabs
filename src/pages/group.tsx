@@ -13,7 +13,7 @@ import Chat from "../components/Chat";
 
 //hooks
 import socketChat from "../components/hooks/socketChat";
-import useApplicationData, {Group} from "../components/hooks/useApplicationData";
+import useApplicationData from "../components/hooks/useApplicationData";
 
 toast.configure();
 

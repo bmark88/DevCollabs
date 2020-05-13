@@ -19,7 +19,7 @@ export interface User {
 
 export default function useApplicationData() {
 
-  const [state, setState] = useState<User | null>({
+  const [state, setState] = useState<User>({
     group: 0,
     groups: [],
     posts: [],
