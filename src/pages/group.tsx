@@ -3,18 +3,18 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { Link, navigate } from "gatsby";
 import styled from "styled-components";
+import { Button, Input } from "@material-ui/core";
 
 //components
 import GroupList from "../components/GroupList";
 import PostsList from "../components/PostsList";
-// import { Rooms, Room } from "../components/rooms";
 import { RoomCard, RoomContainer } from "../components/rooms";
 import Layout from "../components/layout";
 import Chat from "../components/Chat";
 
 //hooks
 import socketChat from "../components/hooks/socketChat";
-import useApplicationData, {Group} from "../components/hooks/useApplicationData";
+import useApplicationData from "../components/hooks/useApplicationData";
 
 toast.configure();
 
@@ -45,6 +45,15 @@ class Map<T> {
   }
 }
 */
+
+const Div = styled.div`
+  display: flex;  
+  flex-direction: column;
+`;
+
+const Form = styled.form`
+  width: 64%;
+`;
 
 const GroupPage = () => {
   //redirect if not logged in
@@ -81,19 +90,34 @@ const createRoomAndNotify = (evt :any) => {
             image="https://economictimes.indiatimes.com/thumb/msid-73420856,width-1200,height-900,resizemode-4,imgsize-272701/getty.jpg?from=mdr" 
             title="Create A Room"
           >
-            <form onSubmit={createRoomAndNotify}>
-              <input 
+            <Form onSubmit={createRoomAndNotify}>
+              <Input 
+                type="text"
+                placeholder="Enter Room Name"
                 value={roomID} 
-                onChange={(evt) => setRoomID(evt.target.value)} 
+                disableUnderline
+                onChange={(evt) => setRoomID(evt.target.value)}
+                
               />
-              <button>Create a New Room</button>
-            </form>
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
+                Create
+              </Button>
+            </Form>
           </RoomCard>
           <RoomCard 
             image="https://www.pandasecurity.com/mediacenter/src/uploads/2016/03/pandasecurity-Who-are-the-most-famous-hackers-in-history.jpg" 
             title="Join A Room"
           >
-            <Link to="/room/"> Enter Room </Link>
+            <Div>
+              <Link to="/room/"> Room 1</Link>
+              <Link to="/room/"> Room 2</Link>
+              <Link to="/room/"> Room 3</Link>
+            </Div>
           </RoomCard>
           {/* <Rooms>
             <Room>

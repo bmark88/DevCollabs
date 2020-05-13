@@ -1,44 +1,8 @@
-// import React, { ReactNode } from "react"
-// import styled from "styled-components"
-
-// interface Props {
-//   children: ReactNode
-// }
-
-// const RoomLinks = styled.div`
-//   width: 55vw;
-//   position: relative;
-// `;
-
-// const Div = styled.div`
-//   border: solid;
-//   margin: 1em 0;
-//   height: 120px;
-//   padding: 1em;
-// `;
-
-// const Room = ({ children } :Props) => {
-//   return (
-//     <Div>{children}</Div>
-//   )
-// };
-
-// const Rooms = ({ children } :Props) => {
-//   return (
-//     <RoomLinks>{children}</RoomLinks>
-//   )
-// };
-
-// export { Rooms, Room};
-
 import React, { ReactNode } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import styled from "styled-components";
 
@@ -62,29 +26,30 @@ const RoomContainer = styled.div`
   margin: 1em;
 `;
 
+const Div = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+  font-size: 20px;
+`;
+
 const RoomCard = ({ children, image, title } :Props) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      {/* <CardActionArea> */}
-        <>
+    <Card className={classes.root}>  
         <CardMedia
           className={classes.media}
           image={image}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom align="center" variant="h5" component="h2">
             {title}
           </Typography>
         </CardContent>
-        </>
-      {/* </CardActionArea> */}
-      {/* <CardActions> */}
-        <Button size="large" color="primary">
+        <Div>
           {children}
-        </Button>
-      {/* </CardActions> */}
+        </Div>
     </Card>
   );
 }
