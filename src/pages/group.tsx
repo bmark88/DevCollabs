@@ -8,7 +8,7 @@ import styled from "styled-components";
 import GroupList from "../components/GroupList";
 import PostsList from "../components/PostsList";
 // import { Rooms, Room } from "../components/rooms";
-import RoomCard from "../components/rooms";
+import { RoomCard, RoomContainer } from "../components/rooms";
 import Layout from "../components/layout";
 import Chat from "../components/Chat";
 
@@ -76,7 +76,7 @@ const createRoomAndNotify = (evt :any) => {
     <Layout>
       <Section>
         <GroupList groups={groups} group={group} setGroup={setGroup} />
-        <div>
+        <RoomContainer>
           <RoomCard 
             image="https://economictimes.indiatimes.com/thumb/msid-73420856,width-1200,height-900,resizemode-4,imgsize-272701/getty.jpg?from=mdr" 
             title="Create A Room"
@@ -110,7 +110,7 @@ const createRoomAndNotify = (evt :any) => {
             </Room>
           </Rooms> */}
           <PostsList posts={posts}/>
-        </div>
+        </RoomContainer>
         <Chat 
           users={users} 
           messages={messages} 

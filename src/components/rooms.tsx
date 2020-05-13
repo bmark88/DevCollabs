@@ -40,6 +40,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import styled from "styled-components";
 
 interface Props {
   children: ReactNode
@@ -50,13 +51,18 @@ interface Props {
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    marginBottom: 15,
   },
   media: {
     height: 140,
   },
 });
 
-export default function RoomCard({ children, image, title } :Props) {
+const RoomContainer = styled.div`
+  margin: 1em;
+`;
+
+const RoomCard = ({ children, image, title } :Props) => {
   const classes = useStyles();
 
   return (
@@ -82,3 +88,5 @@ export default function RoomCard({ children, image, title } :Props) {
     </Card>
   );
 }
+
+export { RoomCard, RoomContainer }
