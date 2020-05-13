@@ -1,7 +1,7 @@
 import React from "react"
+import styled from "styled-components"
 
 interface Props {
-  // children: ReactNode
   group: object
   groups: object
   setGroup: any
@@ -9,6 +9,10 @@ interface Props {
   id: any
 }
 
+const Li = styled.li`
+  list-style: none
+`;
+
 export default function DayListItem({ id, name, setGroup } :Props) {
-  return <div onClick={() => setGroup(id)}> {name}</div>
+  return <Li onClick={() => setGroup(id)}> {name}</Li>
 }

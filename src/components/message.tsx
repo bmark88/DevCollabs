@@ -5,29 +5,22 @@ interface Props {
   children: ReactNode
 }
 
-const Span = styled.span`
-  margin: 2em;
-`;
-
 const P = styled.p`
-  margin: 0 1em;
-  font-size: 22px;
+  font-size: 18px;
 `;
 
 const TimeStamp = styled.p`
-  margin: 0 1.8em;
+  margin: -5px 0 5px 0;
   font-size: 12px;
 `;
 
+const MessageContainer = styled.div`
+  font-size: 18px;
+  margin: 0.5em;
+`;
+
 const Message = ({ children } :Props) => {
-  return (
-  <>
-    <Span>
-      <P>{children}</P>
-      <TimeStamp>Created at: Now</TimeStamp>
-    </Span>
-  </>
-  )
+  return <P>{children}</P>;
 };
 
-export default Message;
+export { Message, MessageContainer, TimeStamp }
