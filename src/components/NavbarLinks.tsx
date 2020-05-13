@@ -1,7 +1,6 @@
 import React from "react"
 import { Link, navigate } from "gatsby"
 import styled from "styled-components"
-
 import Dropdown from "./Dropdown"
 
 const NavItem = styled(Link)`
@@ -13,7 +12,8 @@ const NavItem = styled(Link)`
   &.avatar {
     margin-right: auto;
   }
-`
+`;
+
 const Drop = styled(Dropdown)`
   padding: 10px;
   text-decoration: none;
@@ -21,8 +21,7 @@ const Drop = styled(Dropdown)`
   &:hover {
     cursor: progress;
   }
-  
-`
+`;
 
 const Div = styled.div`
   font-family: georgia, serif;
@@ -30,6 +29,14 @@ const Div = styled.div`
   color: #551A8B;
   position: absolute;
   right: 5vw;
+`;
+
+const Img = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0;
+  background-color: black;
 `;
 
 const NavbarLinks = (props: any) => {
@@ -41,9 +48,12 @@ const NavbarLinks = (props: any) => {
   return (
     <>
       {props.username && (
-      <NavItem className="avatar" to="/settings">
-        {props.username}
-      </NavItem>
+      <>
+        <Img src={"https://planetbotanix.com/wp-content/uploads/2017/08/Female-Avatar-1-300x300-300x300.jpg"} alt="avatar-image"/>
+        <NavItem className="avatar" to="/settings">
+            {props.username}
+        </NavItem>
+      </>
       )}
       <Div>
         {props.username && <Drop>Features</Drop>}
