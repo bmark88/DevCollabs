@@ -9,10 +9,13 @@ interface Props {
 }
 
 const Div = styled.div`
-  border: solid;
-  min-height: 500px;
+  border: solid 2px;
+  border-color: #551A8B;
+  border-radius: 6px;
+  padding: 1em;
   min-width: 250px;
   margin: 1em;
+  // min-height: 500px;
 `;
 
 export default function GroupList({groups, setGroup }: Props) {
