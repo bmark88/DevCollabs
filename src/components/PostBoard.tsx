@@ -65,11 +65,13 @@ export default function PostBoard({ publicGroups }: Props) {
     //get a users id from session json data. returns {id:number}
     const userId: number = JSON.parse(localStorage.getItem("session") || "{}")
       .id
+      console.log(userId)
+
     const groupId = 1;
-    const data = {} //{ userId, groupId }
+    const data = {userId} //{ userId, groupId }
     axios({
       method: "post",
-      url: `http://localhost:3001/group/subsciption/${groupId}`,
+      url: `http://localhost:3001/group/subscription/${groupId}`,
       data: data,
     }).then(res => {
       console.log(res.data)

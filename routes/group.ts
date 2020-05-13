@@ -107,10 +107,10 @@ module.exports = db => {
     dbHelpers.removeSubscription(userID, groupID)
   })
 
-  router.post("/subscription/:group_id", (req, res) => {
-    const userId = JSON.parse(localStorage.getItem("session") || "{}").id
-    const groupId = req.params.group_id
-
+  router.post("/subscription/:groupId", (req, res) => {
+    const userId = req.body.userId
+    const groupId = req.params.groupId
+    console.log(userId, groupId)
     dbHelpers
       .addSubscription(groupId, userId, false)
       .then(result => console.log("result ", result))
