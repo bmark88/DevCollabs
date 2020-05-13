@@ -47,13 +47,24 @@ const ExpansionPanelDetails = withStyles((theme) => ({
   },
 }))(MuiExpansionPanelDetails);
 
-export default function PostBoard() {
+interface Props {
+  groups: any
+}
+
+export default function PostBoard({ groups }: Props) {
   const username = JSON.parse(localStorage.getItem('session') || '{}').username.toString();
   const [expanded, setExpanded] = useState('panel1');
 
   const handleChange = (panel:any) => (newExpanded:any) => {
     setExpanded(newExpanded ? panel : false);
   };
+
+  const groupsArr = groups.groups
+  const groupsList = groupsArr.map(group => {
+    return (
+      <div>{group.name}</div>
+    );
+  })
 
   return (
     <div>
@@ -89,6 +100,7 @@ export default function PostBoard() {
         <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
           <Typography>Groups</Typography>
         </ExpansionPanelSummary>
+            {groupsList}
         <ExpansionPanelDetails>
           <Typography>
             

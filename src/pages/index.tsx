@@ -7,6 +7,7 @@ import Chat from "../components/Chat"
 import Navbar from "../components/Navbar"
 import socketChat from "../components/hooks/socketChat"
 import PostBoard from "../components/PostBoard"
+import publicUse from "../components/hooks/publicUse";
 
 const Main = styled.main`
   margin-top: 80px;
@@ -29,6 +30,7 @@ const TopicsContainer = styled.div`
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = socketChat('public')
+  const { state } = publicUse();
 
   if(!localStorage.getItem('session')) {
     navigate('/login')
@@ -40,7 +42,7 @@ export default function IndexPage() {
       <Navbar />
       <Main>
         <TopicsContainer>
-          <PostBoard/>
+          <PostBoard groups={state}/>
         </TopicsContainer>
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>
