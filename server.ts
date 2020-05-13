@@ -32,8 +32,8 @@ app.use("/", indexRoutes(db))
 app.use("/group", groupRoutes(db))
 app.use("/room", roomRoutes(io))
 
-const users = []
-let userCount = 0
+const users:any = []
+let userCount:number = 0
 
 io.on("connection", socket => {
   //user

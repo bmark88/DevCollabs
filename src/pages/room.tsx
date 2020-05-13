@@ -17,7 +17,7 @@ const RoomPage = () => {
   }
 
   useEffect(() => {
-    const { username } = JSON.parse(localStorage.getItem("session"))
+    const { username } = JSON.parse(localStorage.getItem("session") || '{}')
     const roomId = "Room1"
     //server connection
     const conn = io.connect("http://localhost:3001/room")

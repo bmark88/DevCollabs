@@ -1,7 +1,7 @@
-const router = require("express").Router()
+const router:any = require("express").Router()
 
 module.exports = io => {
-  const nsp = io.of("/room")
+  const nsp:any = io.of("/room")
   nsp.on("connect", socket => {
     console.log("someone connected")
     socket.on("initial", data => {

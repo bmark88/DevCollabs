@@ -1,17 +1,34 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 
+export interface Group {
+  id: number,
+  name: string
+}
+export interface Post {
+  id: number,
+  group_id: number,
+  user_id: number,
+  created_at: number
+}
+export interface User {
+  group: number;
+  groups?: Group[];
+  posts?: Post[];
+}
+
 export default function useApplicationData() {
-  const [state, setState] = useState({
+
+  const [state, setState] = useState<User | null>({
     group: 0,
     groups: [],
     posts: [],
   })
 
-  //get a users id from session json data. returns {id:interger}
-  const userId = JSON.parse(localStorage.getItem("session")).id
+  //get a users id from session json data. returns {id:number}
+  const userId: number = JSON.parse(localStorage.getItem("session") || '{}').id
 
-  //gets all group names of a user. returns {array<[id:interger ,name:string]>} data
+  //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchGroups = () => {
     axios
       .get(`http://localhost:3001/group/u/${userId}`)
@@ -19,6 +36,7 @@ export default function useApplicationData() {
         return { group: response.data[0].id, groups: response.data }
       })
       .then(group => {
+        //gets all group posts. returns array<[id:number ,group_id:number, user_id:number, created_at:time]>
         axios
           .get(`http://localhost:3001/group/g/${group.group}`)
           .then(response => {
@@ -29,11 +47,12 @@ export default function useApplicationData() {
       .catch(error => console.log(error))
   }
 
-  const setGroup = (groupId) => {
+  const setGroup = (groupId: number) => {
     console.log('setGroup', groupId)
-      axios.get(`http://localhost:3001/group/g/${groupId}`)
+    //TO DO: too wet, try to either use above or separate above
+    axios.get(`http://localhost:3001/group/g/${groupId}`)
       .then(response => {
-        setState({ ...state, group:groupId, posts: response.data})
+        setState({ ...state, group: groupId, posts: response.data })
       })
       .catch(error => console.log(error))
   }

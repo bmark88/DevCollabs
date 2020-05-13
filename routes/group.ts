@@ -1,4 +1,4 @@
-const router = require("express").Router()
+// const router = require("express").Router()
 
 module.exports = db => {
   const dbHelpers = require("./dbHelpers/dbHelpers.ts")(db)
@@ -94,7 +94,7 @@ module.exports = db => {
   })
 
   router.delete("/:group_id/leave", (req, res) => {
-    const userID = JSON.parse(localStorage.getItem("session")).id
+    const userID = JSON.parse(localStorage.getItem("session") || '{}').id
     const groupID = req.params.group_id
 
     dbHelpers.removeSubscription(userID, groupID)

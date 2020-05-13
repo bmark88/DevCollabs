@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React from "react"
 import styled from "styled-components"
 import GroupListItem from "./GroupListItem"
 
@@ -6,8 +6,8 @@ import GroupListItem from "./GroupListItem"
 
 interface Props {
   // children: ReactNode
-  groups: object
-  group: any
+  groups: object[]
+  group: object
   setGroup: any
 }
 
@@ -19,7 +19,7 @@ const Div = styled.div`
   margin: 1em;
 `
 
-export default function GroupList({group, groups, setGroup }: Props) {
+export default function GroupList({groups, setGroup }: Props) {
   const GroupList = groups.map(group => {
     return (
       <GroupListItem
