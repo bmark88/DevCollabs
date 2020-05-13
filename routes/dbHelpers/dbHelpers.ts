@@ -279,6 +279,19 @@ module.exports = db => {
         return res.rows
       })
   }
+
+  const getAllGroups = function () {
+    return db
+      .query(
+        `
+        SELECT * FROM groups;
+        `
+      )
+      .then(res => {
+        if (res.rows.length === 0) return null
+        return res.rows
+      })
+  }
   return {
     getUserWithEmail,
     addUser,
@@ -293,6 +306,7 @@ module.exports = db => {
     createPost,
     removeSubscription,
     checkForUser,
-    getGroupsPosts
+    getGroupsPosts,
+    getAllGroups
   }
 }

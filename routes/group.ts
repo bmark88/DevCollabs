@@ -3,6 +3,13 @@ const router = require("express").Router()
 module.exports = db => {
   const dbHelpers = require("./dbHelpers/dbHelpers.ts")(db)
 
+  // get all groups that exist. returns {array<[id:interger, name:string]>}
+  router.get("/public", (req, res) => {
+    dbHelpers.getAllGroups().then(data => {
+      console.log(data)
+      res.send(data)
+    })
+  })
   // get all groups ids and names of a user. returns {array<[id:interger, name:string]>}
   router.get("/u/:userId", (req, res) => {
     const { userId } = req.params
