@@ -87,13 +87,11 @@ export default function PostBoard() {
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
         <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Random Post 2</Typography>
+          <Typography>Groups</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-            sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+            
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
