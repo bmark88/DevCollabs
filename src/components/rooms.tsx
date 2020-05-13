@@ -8,8 +8,6 @@ interface Props {
 const RoomLinks = styled.div`
   width: 55vw;
   position: relative;
-  // height: 800px;
-  // margin: 0 auto;
 `;
 
 const Div = styled.div`

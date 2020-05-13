@@ -1,19 +1,16 @@
 import React, { ReactNode } from "react"
 import styled from "styled-components"
 
-// import useGroupData from "../components/useGroupData"
-
 interface Props {
-  // children: ReactNode
   posts: any
 }
 
 const Div = styled.div`
   border: solid;
+  margin: 1em 0;
   // height: 800px;
   // width: 80%;
   // float: left;
-  // margin: 1em;
   // background-color: red;
 `
 
