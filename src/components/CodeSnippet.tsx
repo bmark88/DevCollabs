@@ -6,9 +6,9 @@ import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-twilight";
 
 const Div = styled.div`
-  position: absolute;  
   left: 2em;
   top: 5.5em;
+  // position: absolute;  
 `;
 
 const CodeSnippet = () => {

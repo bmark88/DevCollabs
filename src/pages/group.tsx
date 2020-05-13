@@ -1,77 +1,41 @@
-import React, { ReactNode, useEffect, useState } from "react"
-import { toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
-import styled from "styled-components"
-import io from "socket.io-client"
-import Users from "../components/users"
-import GroupList from "../components/GroupList"
-import PostsList from "../components/PostsList"
+import React, { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { Link, navigate } from "gatsby";
+import io from "socket.io-client";
+import styled from "styled-components";
 
-import { Link, navigate, StaticQuery } from "gatsby"
-import { Rooms, Room } from "../components/rooms"
-import Layout from "../components/layout"
-import Chat from "../components/Chat"
-import PostBoard from "../components/PostBoard"
-import PostForm from "../components/PostForm"
-// import useGroupData from "../components/useGroupData"
+//components
+import GroupList from "../components/GroupList";
+import PostsList from "../components/PostsList";
+import { Rooms, Room } from "../components/rooms";
+import Layout from "../components/layout";
+import Chat from "../components/Chat";
 
-import { Topics, Topic, SubTopic } from "../components/topics"
-import Add from "../components/add"
+//hooks
+import socketChat from "../components/hooks/socketChat";
+import useApplicationData from "../components/hooks/useApplicationData";
 
+toast.configure();
 
-import socketChat from "../components/hooks/socketChat"
-import useApplicationData from "../components/hooks/useApplicationData"
-/* sudo code -liz
-[] use typescript
-[x]chat using websockets works
-[x]render groups on group page
-[]render posts on group page
-*/
-
-const TopicsContainer = styled.div`
-  background-color: black;
-  color: white;
-  width: 50%;
-  margin: 2em;
-  position: absolute;
-  height: 85%;
-  float: left;
-
-  @media (max-width: 1000px) {
-    width: 90%;
-    margin: 1.4em;
-  }
+const Section = styled.section`
+  display: flex;
 `;
-interface Props {
-  children: ReactNode
-  users: any
-  messages: any
-  handleSubmit: any
-}
 
-toast.configure()
-
-const GroupPage = Props => {
-
-  //websockets connection for chat
-  let { users, messages, handleSubmit } = socketChat('group')
-  
-  //state groups:array[], group:object {id:integer, name:string}
-  const { state, setGroup } = useApplicationData()
-  const { group, groups, posts } = state
-  const [roomID, setRoomID] = useState('')
-
-
-  //  console.log(state)
-   console.log(posts[0])
-
-
+const GroupPage = () => {
   //redirect if not logged in
   if (!localStorage.getItem("session")) {
     navigate("/login")
-    return null
+    return null;
   }
-  const socket = io.connect('http://localhost:3001')
+
+//websockets connection for chat
+const { users, messages, handleSubmit } = socketChat();
+const { state, setGroup } = useApplicationData();
+const { group, groups, posts } = state;
+const [roomID, setRoomID] = useState('')
+
+const socket = io.connect('http://localhost:3001')
   const createRoomAndNotify = (evt) => {
     evt.preventDefault()
     const username = JSON.parse(localStorage.getItem("session")).username.toString()
@@ -82,28 +46,38 @@ const GroupPage = Props => {
       pauseOnHover: false,
       hideProgressBar: true,
     })
-
-
-  }
+  };
 
   return (
     <Layout>
-      <GroupList groups={groups} group={group} setGroup={setGroup} />
-      <Users users={users} messages={messages} handleSubmit={handleSubmit} />
-      <Rooms>
-        <Room>
-          <form onSubmit={createRoomAndNotify}>
-          <input value={roomID} onChange={(evt) => setRoomID(evt.target.value)} />
-          <button>Create a New Room</button>
-          </form>
-        </Room>
-        <Room>
-          Room 2<Link to="/room/"> Room Link </Link>
-        </Room>
-      <PostsList posts={posts}/>
-      </Rooms>
+      <Section>
+        <GroupList groups={groups} group={group} setGroup={setGroup} />
+        <div>
+          <Rooms>
+            <Room>
+              Room 1
+              <form onSubmit={createRoomAndNotify}>
+                <input 
+                  value={roomID} 
+                  onChange={(evt) => setRoomID(evt.target.value)} 
+                />
+                <button>Create a New Room</button>
+              </form>
+            </Room>
+            <Room>
+              Room 2<Link to="/room/"> Room Link </Link>
+            </Room>
+          </Rooms>
+          <PostsList posts={posts}/>
+        </div>
+        <Chat 
+          users={users} 
+          messages={messages} 
+          handleSubmit={handleSubmit} 
+        />
+      </Section>
     </Layout>
   )
-}
+};
 
-export default GroupPage
+export default GroupPage;

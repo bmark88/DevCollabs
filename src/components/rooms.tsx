@@ -6,16 +6,14 @@ interface Props {
 }
 
 const RoomLinks = styled.div`
-  height: 800px;
-  width: 55%;
+  width: 55vw;
   position: relative;
-  margin: 0 auto;
 `;
 
 const Div = styled.div`
   border: solid;
   margin: 1em 0;
-  height: 100px;
+  height: 120px;
 `;
 
 const Room = ({ children } :Props) => {
