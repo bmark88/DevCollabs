@@ -8,7 +8,6 @@ const Navigation = styled.nav`
   display: flex;
   background-color: #fff;
   position: fixed;
-  justify-content: space-between;
   text-transform: uppercase;
   border-bottom: 2px solid #33333320;
   margin: 0 auto;

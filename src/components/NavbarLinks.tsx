@@ -7,6 +7,8 @@ import Dropdown from "./Dropdown"
 const NavItem = styled(Link)`
   padding: 10px;
   text-decoration: none;
+  font-family: georgia serif;
+  font-size: 18px;
 
   &.avatar {
     margin-right: auto;
@@ -15,7 +17,6 @@ const NavItem = styled(Link)`
 const Drop = styled(Dropdown)`
   padding: 10px;
   text-decoration: none;
-  
   
   &:hover {
     cursor: progress;
@@ -27,7 +28,8 @@ const Div = styled.div`
   font-family: georgia, serif;
   font-size: 18px;
   color: #551A8B;
-  margin-left: 85vw;
+  position: absolute;
+  right: 5vw;
 `;
 
 const NavbarLinks = (props: any) => {
@@ -43,16 +45,24 @@ const NavbarLinks = (props: any) => {
         {props.username}
       </NavItem>
       )}
-      {props.username && <Drop>Features</Drop>}
-      {!props.username && 
-        <NavItem to="/login">
-          <Div>Sign In</Div>
-        </NavItem>
-      }
-      {props.username && 
-        <NavItem to="/login" onClick={logout}>
-          Sign out
-        </NavItem> }
+      <Div>
+        {props.username && <Drop>Features</Drop>}
+        {!props.username && 
+          <>
+            <NavItem to="/register">
+              Sign Up
+            </NavItem>
+            <NavItem to="/login">
+              Sign In
+            </NavItem>
+          </>
+        }
+        {props.username && 
+          <NavItem to="/login" onClick={logout}>
+            Sign out
+          </NavItem> 
+        }
+      </Div>
     </>
   )
 }
