@@ -6,6 +6,7 @@ import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import Typography from "@material-ui/core/Typography"
 import useApplicationData from "./hooks/useApplicationData"
+import axios from "axios"
 
 const ExpansionPanel = withStyles({
   root: {
@@ -58,9 +59,27 @@ export default function PostBoard({ publicGroups }: Props) {
   ).username.toString()
   const [expanded, setExpanded] = useState("panel1")
 
+  const onSubmitFunction = (event: any) => {
+    console.log("CLICK")
+    event.preventDefault()
+    //get a users id from session json data. returns {id:number}
+    const userId: number = JSON.parse(localStorage.getItem("session") || "{}")
+      .id
+    const groupId = 1;
+    const data = {} //{ userId, groupId }
+    axios({
+      method: "post",
+      url: `http://localhost:3001/group/subsciption/${groupId}`,
+      data: data,
+    }).then(res => {
+      console.log(res.data)
+    })
+  }
+
   const handleChange = (panel: any) => (newExpanded: any) => {
     setExpanded(newExpanded ? panel : false)
   }
+
   const { state, setGroup } = useApplicationData()
   const { group, groups, posts } = state
 
@@ -72,15 +91,14 @@ export default function PostBoard({ publicGroups }: Props) {
         button = "-"
       }
     })
-
+    // router.post("/subscription/:group_id"
     return (
       <div>
         {group.name}
-        <button>{button}</button>
+        <button onClick={onSubmitFunction}>{button}</button>
       </div>
     )
   })
-
   return (
     <div>
       <ExpansionPanel

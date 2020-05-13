@@ -33,7 +33,7 @@ const TopicsContainer = styled.div`
 export default function IndexPage() {
   let { users, messages, handleSubmit } = socketChat("public")
   const { publicGroups } = publicUse()
-  const publicGroupsArr = publicGroups.groups
+  // const publicGroupsArr = publicGroups.groups
 
   if (!localStorage.getItem("session")) {
     navigate("/login")

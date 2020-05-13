@@ -7,11 +7,6 @@ export default function publicUse() {
     groups: [],
   })
   
-//   const { state } = useApplicationData()
-//   console.log(state)
-//   const groupsArr = groups.groups
-//   const subscribedGroups = publicGroups.filter((groups) => groupsArr.include(groups));
-//   console.log(subscribedGroups)
 //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchAllGroups = () => {
     axios

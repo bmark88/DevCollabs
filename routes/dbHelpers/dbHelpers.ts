@@ -153,17 +153,17 @@ module.exports = db => {
    * @param {{group_id: integer, user_id:interger}} subscription
    * @return {Promise<{}>} A promise to the user.
    */
-  const addSubscription = function (subscription) {
+  const addSubscription = function (groupId, userId, is_admin) {
     return db
       .query(
         `
     INSERT INTO subscriptions
     (group_id, user_id, is_admin)
     VALUES
-    ($1, $2, true)
+    ($1, $2, $3)
     RETURNING *;
     `,
-        [subscription.group_id, subscription.user_id]
+        [groupId, userId, is_admin]
       )
       .then(res => res.rows[0])
       .catch(e => null)
