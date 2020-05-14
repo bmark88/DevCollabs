@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import socketIOClient from "socket.io-client"
 import * as moment from 'moment';
 
@@ -6,17 +6,15 @@ const ENDPOINT = "http://localhost:3001/"
 
 interface Props {
   userName :string
-  roomName :string
+  roomId :string
 }
 
-export default function socketChat(roomName) {
-  const roomId = roomName
+export default function socketChat({ roomId } :Props) {
   const [users, setUsers] = useState([])
   const [user, setUser] = useState({})
   const [connection, setConnection] = useState({})
   const [messages, setMessages] = useState([])
   
-
   const conn = socketIOClient(ENDPOINT)
   useEffect(() => {
 
@@ -25,33 +23,25 @@ export default function socketChat(roomName) {
       setUser(userName)
 
       //server connection
-
       setConnection(conn)
       conn.emit('join', { userName, roomId })
       
       //users
       conn.on("displayUsers", (data: any) => {
-        console.log('users ===>', data)
         setUsers([...data.users])
       })
 
       conn.on("message", (data: any) => {
         let now: string = moment().format('lll');
         data.date = now
+
         setMessages(prev => [...prev, data])
-        console.log(data)
       })
     }
-    // console.log(roomId)
+    
     return () => {
       if(localStorage.getItem('session')) {
         const userName:string = JSON.parse(localStorage.getItem('session') || '{}').username
-        const roomId = roomName
-        // console.log(users, 'users (socketChat)')
-        // console.log(userName, roomId)
-
-        console.log(users)
-        console.log(userName)
 
         conn.emit("leaveRoom", { userName, roomId })
         conn.close()
@@ -61,16 +51,13 @@ export default function socketChat(roomName) {
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
-    // console.log(connection)
-    console.log(event.target.message.value)
+    
     connection.emit("message", { user, message: event.target.message.value, roomId })
   }
 
   const websocketIDE = (value) => {
-    // console.log('from socketChat.tsx',value)
     connection.emit("IDE", {value, roomId})
   }
-
 
   return { handleSubmit, users, messages, websocketIDE, conn }
 }

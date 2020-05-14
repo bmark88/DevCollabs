@@ -33,44 +33,40 @@ app.use("/group", groupRoutes(db))
 app.use("/room", roomRoutes(io))
 
 const users = []
-const rooms = {}
+// const rooms = {}
 io.on("connection", socket => {
+
   //user
   socket.on('join', ({ userName , roomId}) => {
     // if room doesn't already exist, initialize an empty array and add the user to the room array
-    if(!rooms[roomId]) rooms[roomId] = []
-    rooms[roomId].push(userName)
-    console.log(rooms)
+    // if(!rooms[roomId]) rooms[roomId] = []
+    // rooms[roomId].push(userName)
 
   if (!users.includes(userName)) users.push(userName)
     socket.room_id = roomId 
     socket.join(socket.room_id)
-    console.log(`joined room ${socket.room_id}`)
+
     io.to(socket.room_id).emit("displayUsers", { users })
   })
 
   socket.on("message", data => {
-    console.log(data)
     io.to(data.roomId).emit("message", data)
   })
 
+  // listens for user leaving room, but not disconnected from browser or socket
   socket.on('leaveRoom', ({ userName, roomId }) => {
-    // console.log('users!!!', users)
-    // console.log('bool', socket.disconnected)
-    // console.log('username, roomID ==>', userName, roomId)
     if(users.includes(userName)) users.splice(users.indexOf(userName), 1)
 
     io.to(socket.room_id).emit("displayUsers", { users })
     socket.leave(socket.room_id)
   })
 
+  // listens for socket disconnect (when browser is closed or refreshed)
   socket.on('disconnect', () => {
     io.to(socket.room_id).emit("displayUsers", { users })
-    
   })
   
   socket.on('IDE', data => {
-    console.log(data)
     io.to(data.roomId).emit("IDE", data)
   })
 
