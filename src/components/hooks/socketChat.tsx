@@ -19,7 +19,6 @@ export default function socketChat(roomName) {
 
   const conn = socketIOClient(ENDPOINT)
   useEffect(() => {
-    const conn = socketIOClient(ENDPOINT)
 
     if(localStorage.getItem('session')) {
       const userName:string = JSON.parse(localStorage.getItem('session') || '{}').username
@@ -42,22 +41,21 @@ export default function socketChat(roomName) {
         setMessages(prev => [...prev, data])
         console.log(data)
       })
-
- 
-
     }
     // console.log(roomId)
     return () => {
-      const userName = JSON.parse(localStorage.getItem('session')).username
-      const roomId = roomName
-      // console.log(users, 'users (socketChat)')
-      // console.log(userName, roomId)
+      if(localStorage.getItem('session')) {
+        const userName:string = JSON.parse(localStorage.getItem('session') || '{}').username
+        const roomId = roomName
+        // console.log(users, 'users (socketChat)')
+        // console.log(userName, roomId)
 
-      console.log(users)
-      console.log(userName)
+        console.log(users)
+        console.log(userName)
 
-      conn.emit("leaveRoom", { userName, roomId })
-      conn.close()
+        conn.emit("leaveRoom", { userName, roomId })
+        conn.close()
+      }
     }
   }, [])
 

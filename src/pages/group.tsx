@@ -11,6 +11,8 @@ import PostsList from "../components/PostsList";
 import { RoomCard, RoomContainer } from "../components/rooms";
 import Layout from "../components/layout";
 import Chat from "../components/Chat";
+import PostForm from '../components/PostForm';
+
 
 //hooks
 import socketChat from "../components/hooks/socketChat";
@@ -22,29 +24,6 @@ const Section = styled.section`
   display: flex;
 `;
 
-/*
-class Map<T> {
-  private items: { [key: string]: T };
-
-  public constructor() {
-    this.items = Object.create(null);
-  }
-
-  public set(key: string, value: T): void {
-    this.items[key] = value;
-  }
-
-  public get(key: string): T {
-    return this.items[key];
-  }
-
-  public remove(key: string): T {
-    let value = this.get(key);
-    delete this.items[key];
-    return value;
-  }
-}
-*/
 
 const Div = styled.div`
   display: flex;  
@@ -123,6 +102,7 @@ const createRoomAndNotify = (evt :any) => {
             </Div>
           </RoomCard>
           <PostsList posts={posts}/>
+          <PostForm />
         </RoomContainer>
         <Chat 
           users={users} 
