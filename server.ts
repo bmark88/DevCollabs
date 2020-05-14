@@ -38,7 +38,7 @@ io.on("connection", socket => {
   //user
   socket.on('join', ({ userName , roomId}) => {
    
-    if (!users.includes(userName)) users.push(userName)
+  if (!users.includes(userName)) users.push(userName)
     socket.room_id = roomId 
     socket.join(socket.room_id)
     console.log(`joined room ${socket.room_id}`)
@@ -50,8 +50,23 @@ io.on("connection", socket => {
     io.to(data.roomId).emit("message", data)
   })
 
-  socket.on('disconnect', () => {
+  socket.on('leaveRoom', ({ userName, roomId }) => {
+    console.log('users!!!', users)
+    console.log('bool', socket.disconnected)
+    console.log('username, roomID ==>', userName, roomId)
+
+    if(users.includes(userName)) users.splice(users.indexOf(userName), 1)
+    
+    io.to(socket.room_id).emit("displayUsers", { users })
     socket.leave(socket.room_id)
+  })
+
+  socket.on('disconnect', () => {
+    console.log('disconnected now', socket.disconnected)
+  })
+
+  socket.on('cleanup', ({users}) => {
+    
   })
 
 })
