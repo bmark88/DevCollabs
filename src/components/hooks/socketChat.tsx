@@ -16,6 +16,8 @@ export default function socketChat(roomName) {
   const [connection, setConnection] = useState({})
   const [messages, setMessages] = useState([])
   
+
+  const conn = socketIOClient(ENDPOINT)
   useEffect(() => {
     const conn = socketIOClient(ENDPOINT)
 
@@ -40,6 +42,8 @@ export default function socketChat(roomName) {
         console.log(data)
       })
 
+ 
+
     }
     // console.log(roomId)
     return () => {
@@ -63,6 +67,12 @@ export default function socketChat(roomName) {
     connection.emit("message", { user, message: event.target.message.value, roomId })
   }
 
-  return { handleSubmit, users, messages }
+  const websocketIDE = (value) => {
+    // console.log('from socketChat.tsx',value)
+    connection.emit("IDE", {value, roomId})
+  }
+
+
+  return { handleSubmit, users, messages, websocketIDE, conn }
 }
 

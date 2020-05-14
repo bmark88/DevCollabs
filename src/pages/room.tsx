@@ -11,37 +11,26 @@ const Main = styled.main`
 `;
 
 const RoomPage = () => {
-  let { users, messages, handleSubmit } = socketChat('Room 1')
-  const [user, setUser] = useState({})
-  const [connection, setConnection] = useState({})
-  // const [users, setUsers] = useState([])
-  // const [messages, setMessages] = useState([])
 
+  let { users, messages, handleSubmit, websocketIDE, conn } = socketChat('Room 1')
+  const [snippetValue, setSnippetValue] = useState('')
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
 
-  useEffect(() => {
-    const { username } = JSON.parse(localStorage.getItem("session") || '{}')
-    const roomId = "Room1"
-    //server connection
-    const conn = io.connect("http://localhost:3001/room")
-
-    setConnection(conn)
-    //once connection is set send server your username and roomId
-    conn.emit("initial", {
-      username,
-      roomId,
-    })
-  }, [])
-
-  // const handleSubmit = () => {}
+  conn.on("IDE", data =>{
+    setSnippetValue(data.value)
+  })
+ 
+  useEffect(()=> {
+    console.log('from use', snippetValue)
+  }, [snippetValue])
 
   return (
     <Layout>
       <Main>
-        <CodeSnippet />
+        <CodeSnippet function={websocketIDE} snippetValue={snippetValue} />
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>
     </Layout>
