@@ -6,7 +6,7 @@ import { navigate } from "gatsby"
 import Chat from "../components/Chat"
 import Navbar from "../components/Navbar"
 import socketChat from "../components/hooks/socketChat"
-import PostBoard from "../components/PostBoard"
+import PostBoard from "../components/TopicBoard"
 
 const Main = styled.main`
   margin-top: 80px;
