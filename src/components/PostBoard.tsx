@@ -58,6 +58,7 @@ export default function PostBoard({ publicGroups }: Props) {
     localStorage.getItem("session") || "{}"
   ).username.toString()
   const [expanded, setExpanded] = useState("panel1")
+  // const [subscription, setSubscription] = useState()
 
   const handleChange = (panel: any) => (newExpanded: any) => {
     setExpanded(newExpanded ? panel : false)
@@ -78,6 +79,7 @@ export default function PostBoard({ publicGroups }: Props) {
     const onSubmitFunction = (event: any) => {
       if (button === subscription.unsubscribe) return console.log('already in group')
       event.preventDefault()
+      button = subscription.unsubscribe
       const userId: number = JSON.parse(localStorage.getItem("session") || "{}")
         .id
       const groupId = group.id
