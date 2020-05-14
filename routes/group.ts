@@ -121,7 +121,7 @@ module.exports = db => {
     const groupId = req.params.groupId
     console.log(userId, groupId)
     dbHelpers
-      .deleteSubscription(groupId, userId)
+      .deleteSubscription(userId, groupId)
       .catch(() => res.status(400).send("Could not delete subscription"))
     })
 

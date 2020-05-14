@@ -94,7 +94,7 @@ module.exports = db => {
   /**
    * Get all groups data from db using userId.
    * @param {{integer}} userId
-   * @return {array<[id:interger, name:string]>} 
+   * @return {array<[id:interger, name:string]>}
    */
   const getGroupsNames = function (userId) {
     return db
@@ -170,18 +170,18 @@ module.exports = db => {
   }
 
   const removeSubscription = (userID, groupID) => {
-
     return db
-      .query(`
+      .query(
+        `
         DELETE FROM subscriptions
         WHERE user_id = $1
         AND group_id = $2 
       `,
-      [userID, groupID]
+        [userID, groupID]
       )
       .then(res => res.rows[0])
-      .catch(e => console.error('error ===>', e.stack))
-  };
+      .catch(e => console.error("error ===>", e.stack))
+  }
 
   const changeUserInfo = user => {
     return db
@@ -197,7 +197,7 @@ module.exports = db => {
           user.email,
           bcrypt.hashSync(user.password, 12),
           user.avatar,
-          user.id
+          user.id,
         ]
       )
       .then(res => res.rows[0])
@@ -224,7 +224,7 @@ module.exports = db => {
 
   /**
    * Get a subscription of a user using userId and groupId.
-   * @param {{interger}} user_id 
+   * @param {{interger}} user_id
    * @param {{interger}} group_id
    * @return {Promise<{}>} A promise to the user.
    */
@@ -244,18 +244,19 @@ module.exports = db => {
   }
 
   const createPost = (group_id, user_id, data) => {
-    return db.query(
-      `
+    return db
+      .query(
+        `
       INSERT INTO posts 
       (group_id, user_id, data, created_at)
       VALUES
       ($1 , $2, $3, NOW())
       RETURNING *;
-      `, [group_id, user_id, data]
-    )
-    .then(res => res.rows[0])
-    .catch(e => e)
-
+      `,
+        [group_id, user_id, data]
+      )
+      .then(res => res.rows[0])
+      .catch(e => e)
   }
 
   /**
@@ -307,7 +308,6 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
-
   return {
     getUserWithEmail,
     addUser,
@@ -324,6 +324,6 @@ module.exports = db => {
     checkForUser,
     getGroupsPosts,
     getAllGroups,
-    deleteSubscription
+    deleteSubscription,
   }
 }
