@@ -8,8 +8,6 @@ import Navbar from "../components/Navbar"
 import socketChat from "../components/hooks/socketChat"
 import PostBoard from "../components/TopicBoard"
 
-//hooks
-import publicUse from "../components/hooks/publicUse"
 
 const Main = styled.main`
   margin-top: 80px;
@@ -32,7 +30,7 @@ const TopicsContainer = styled.div`
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = socketChat("public")
-  const { publicGroups } = publicUse()
+  // const { publicGroups } = publicUse()
   // const publicGroupsArr = publicGroups.groups
 
   if (!localStorage.getItem("session")) {
@@ -45,7 +43,7 @@ export default function IndexPage() {
       <Navbar />
       <Main>
         <TopicsContainer>
-          <PostBoard publicGroups={publicGroups} />
+          <PostBoard />
         </TopicsContainer>
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>

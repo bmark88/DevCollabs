@@ -36,6 +36,26 @@ export default function useApplicationData() {
       })
       .catch(error => console.log(error))
   }
+/*
+const fetchGroups = () => {
+    axios
+      .get(`http://localhost:3001/group/u/${userId}`)
+      .then(response => {
+        return { group: response.data[0].id, groups: response.data }
+      })
+      .then(group => {
+        //gets all group posts. returns array<[id:number ,group_id:number, user_id:number, created_at:time]>
+        axios
+          .get(`http://localhost:3001/group/g/${group.group}`)
+          .then(response => {
+            setState({ ...state, posts: response.data, ...group })
+          })
+          .catch(error => console.log(error))
+      })
+      .catch(error => console.log(error))
+  }
+*/
+
 
   const setGroup = (groupId: number) => {
     console.log("setGroup", groupId)

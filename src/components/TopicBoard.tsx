@@ -5,8 +5,7 @@ import MuiExpansionPanel from "@material-ui/core/ExpansionPanel"
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import Typography from "@material-ui/core/Typography"
-import useApplicationData from "./hooks/useApplicationData"
-import axios from "axios"
+import IndexGroupsList from "./IndexGroupsList"
 
 const ExpansionPanel = withStyles({
   root: {
@@ -59,59 +58,11 @@ export default function PostBoard({ publicGroups }: Props) {
   ).username.toString()
   const [expanded, setExpanded] = useState("panel1")
   // const [subscription, setSubscription] = useState()
-
+console.log(IndexGroupsList)
   const handleChange = (panel: any) => (newExpanded: any) => {
     setExpanded(newExpanded ? panel : false)
   }
-//state includes list of users groups state= { groups{[id:number ,name:string], ...} } 
-  const { state } = useApplicationData()
-  const { groups } = state
-  const unsubscribe = "-"
-  const toSubscribe = "+"
 
-  const groupsArr = publicGroups.groups
-  const groupsList = groupsArr.map(group => {
-    let button = toSubscribe
-    groups.map(subscribedGroup => {
-      console.log(subscribedGroup)
-      if (subscribedGroup.id === group.id) button = unsubscribe
-    })
-    const onSubmitFunction = (event: any) => {
-      event.preventDefault()
-      const userId: number = JSON.parse(localStorage.getItem("session") || "{}")
-        .id
-      const groupId = group.id
-      const data = { userId }
-      if (button === unsubscribe) {
-        console.log('unsubscribe')
-
-        axios({
-          method: "delete",
-          url: `http://localhost:3001/group/subscription/delete/${groupId}`,
-          data: data,
-        }).then(res => {
-          console.log(res.data)
-        })
-      }
-      if (button === toSubscribe) {
-        console.log('toSubscribe')
-
-        axios({
-          method: "post",
-          url: `http://localhost:3001/group/subscription/${groupId}`,
-          data: data,
-        }).then(res => {
-          console.log(res.data)
-        })
-      }
-    }
-    return (
-      <div>
-        {group.name}
-        <button onClick={onSubmitFunction}>{button}</button>
-      </div>
-    )
-  })
   return (
     <div>
       <ExpansionPanel
@@ -160,7 +111,7 @@ export default function PostBoard({ publicGroups }: Props) {
         >
           <Typography>Groups</Typography>
         </ExpansionPanelSummary>
-        {groupsList}
+        <IndexGroupsList/>
         <ExpansionPanelDetails>
           <Typography></Typography>
         </ExpansionPanelDetails>
