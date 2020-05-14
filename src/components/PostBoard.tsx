@@ -59,41 +59,37 @@ export default function PostBoard({ publicGroups }: Props) {
   ).username.toString()
   const [expanded, setExpanded] = useState("panel1")
 
-  const onSubmitFunction = (event: any) => {
-    console.log("CLICK")
-    event.preventDefault()
-    //get a users id from session json data. returns {id:number}
-    const userId: number = JSON.parse(localStorage.getItem("session") || "{}")
-      .id
-      console.log(userId)
-
-    const groupId = 1;
-    const data = {userId} //{ userId, groupId }
-    axios({
-      method: "post",
-      url: `http://localhost:3001/group/subscription/${groupId}`,
-      data: data,
-    }).then(res => {
-      console.log(res.data)
-    })
-  }
-
   const handleChange = (panel: any) => (newExpanded: any) => {
     setExpanded(newExpanded ? panel : false)
   }
 
-  const { state, setGroup } = useApplicationData()
-  const { group, groups, posts } = state
-
+  const { state } = useApplicationData()
+  const { groups } = state
+  const subscription = {
+    unsubscribe: "-",
+    toSubscribe: "+",
+  }
   const groupsArr = publicGroups.groups
   const groupsList = groupsArr.map(group => {
-    let button = "+"
+    let button = subscription.toSubscribe
     groups.map(subscribedGroup => {
-      if (subscribedGroup.id === group.id) {
-        button = "-"
-      }
+      if (subscribedGroup.id === group.id) button = subscription.unsubscribe
     })
-    // router.post("/subscription/:group_id"
+    const onSubmitFunction = (event: any) => {
+      if (button === subscription.unsubscribe) return console.log('already in group')
+      event.preventDefault()
+      const userId: number = JSON.parse(localStorage.getItem("session") || "{}")
+        .id
+      const groupId = group.id
+      const data = { userId }
+      axios({
+        method: "post",
+        url: `http://localhost:3001/group/subscription/${groupId}`,
+        data: data,
+      }).then(res => {
+        console.log(res.data)
+      })
+    }
     return (
       <div>
         {group.name}
