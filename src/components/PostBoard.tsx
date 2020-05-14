@@ -63,7 +63,7 @@ export default function PostBoard({ publicGroups }: Props) {
   const handleChange = (panel: any) => (newExpanded: any) => {
     setExpanded(newExpanded ? panel : false)
   }
-
+//state includes list of users groups state= { groups{[id:number ,name:string], ...} } 
   const { state } = useApplicationData()
   const { groups } = state
   const unsubscribe = "-"

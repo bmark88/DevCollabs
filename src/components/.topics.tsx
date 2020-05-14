@@ -49,4 +49,4 @@ const Topics = ({ children } :Props) => {
   return <Container>{children}</Container>
 };
 
-export { Topics, Topic, SubTopic };
+//export { Topics, Topic, SubTopic };

@@ -5,7 +5,7 @@ import useApplicationData from "./useApplicationData"
 export default function publicUse() {
   const [publicGroups, setPublic] = useState({
     groups: [],
-  })
+  }) //TODO change to array
   
 //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchAllGroups = () => {

@@ -20,10 +20,7 @@ export default function useApplicationData() {
     return axios
       .get(`http://localhost:3001/group/u/${userId}`)
       .then(response => {
-        console.log(state)
         setState({...state, group: response.data[0].id, groups: response.data })
-
-        console.log(response.data[0].id)
         return response.data[0].id
       })
       .catch(error => console.log(error))
@@ -35,8 +32,6 @@ export default function useApplicationData() {
     axios
       .get(`http://localhost:3001/group/g/${groupId}`)
       .then(response => {
-        console.log(response)
-
         setState({ ...state, group: groupId, posts: response.data, ...group })
       })
       .catch(error => console.log(error))
@@ -44,7 +39,8 @@ export default function useApplicationData() {
 
   const setGroup = (groupId: number) => {
     console.log("setGroup", groupId)
-    //TO DO: too wet, try to either use above or separate above
+    // setState({ ...state, group: groupId })
+    //TO DO: too wet
     axios
       .get(`http://localhost:3001/group/g/${groupId}`)
       .then(response => {
@@ -55,8 +51,6 @@ export default function useApplicationData() {
 
   useEffect(() => {
     fetchGroups().then(groupId => {
-      console.log(groupId)
-
       fetchPosts(groupId)
     })
   }, [])
