@@ -116,5 +116,14 @@ module.exports = db => {
       .then(result => console.log("result ", result))
   })
 
+  router.delete("/subscription/delete/:groupId", (req, res) => {
+    const userId = req.body.userId
+    const groupId = req.params.groupId
+    console.log(userId, groupId)
+    dbHelpers
+      .deleteSubscription(groupId, userId)
+      .catch(() => res.status(400).send("Could not delete subscription"))
+    })
+
   return router
 }

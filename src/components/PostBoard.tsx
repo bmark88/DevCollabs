@@ -66,31 +66,44 @@ export default function PostBoard({ publicGroups }: Props) {
 
   const { state } = useApplicationData()
   const { groups } = state
-  const subscription = {
-    unsubscribe: "-",
-    toSubscribe: "+",
-  }
+  const unsubscribe = "-"
+  const toSubscribe = "+"
+
   const groupsArr = publicGroups.groups
   const groupsList = groupsArr.map(group => {
-    let button = subscription.toSubscribe
+    let button = toSubscribe
     groups.map(subscribedGroup => {
-      if (subscribedGroup.id === group.id) button = subscription.unsubscribe
+      console.log(subscribedGroup)
+      if (subscribedGroup.id === group.id) button = unsubscribe
     })
     const onSubmitFunction = (event: any) => {
-      if (button === subscription.unsubscribe) return console.log('already in group')
       event.preventDefault()
-      button = subscription.unsubscribe
       const userId: number = JSON.parse(localStorage.getItem("session") || "{}")
         .id
       const groupId = group.id
       const data = { userId }
-      axios({
-        method: "post",
-        url: `http://localhost:3001/group/subscription/${groupId}`,
-        data: data,
-      }).then(res => {
-        console.log(res.data)
-      })
+      if (button === unsubscribe) {
+        console.log('unsubscribe')
+
+        axios({
+          method: "delete",
+          url: `http://localhost:3001/group/subscription/delete/${groupId}`,
+          data: data,
+        }).then(res => {
+          console.log(res.data)
+        })
+      }
+      if (button === toSubscribe) {
+        console.log('toSubscribe')
+
+        axios({
+          method: "post",
+          url: `http://localhost:3001/group/subscription/${groupId}`,
+          data: data,
+        }).then(res => {
+          console.log(res.data)
+        })
+      }
     }
     return (
       <div>
