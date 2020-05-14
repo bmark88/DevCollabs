@@ -71,6 +71,8 @@ const fetchGroups = () => {
 
   useEffect(() => {
     fetchGroups().then(groupId => {
+      console.log(groupId)
+
       fetchPosts(groupId)
     })
   }, [])

@@ -49,16 +49,13 @@ const ExpansionPanelDetails = withStyles(theme => ({
 }))(MuiExpansionPanelDetails)
 
 interface Props {
-  publicGroups: any
+  // publicGroups: any
 }
 
-export default function PostBoard({ publicGroups }: Props) {
-  const username = JSON.parse(
-    localStorage.getItem("session") || "{}"
-  ).username.toString()
+export default function TopicBoard({  }: Props) {
+  const username = JSON.parse(localStorage.getItem("session") || "{}").username.toString()
   const [expanded, setExpanded] = useState("panel1")
   // const [subscription, setSubscription] = useState()
-console.log(IndexGroupsList)
   const handleChange = (panel: any) => (newExpanded: any) => {
     setExpanded(newExpanded ? panel : false)
   }
@@ -111,7 +108,9 @@ console.log(IndexGroupsList)
         >
           <Typography>Groups</Typography>
         </ExpansionPanelSummary>
-        <IndexGroupsList/>
+
+          <IndexGroupsList />
+
         <ExpansionPanelDetails>
           <Typography></Typography>
         </ExpansionPanelDetails>

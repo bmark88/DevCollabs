@@ -6,7 +6,7 @@ import { navigate } from "gatsby"
 import Chat from "../components/Chat"
 import Navbar from "../components/Navbar"
 import socketChat from "../components/hooks/socketChat"
-import PostBoard from "../components/TopicBoard"
+import TopicBoard from "../components/TopicBoard"
 
 
 const Main = styled.main`
@@ -43,7 +43,7 @@ export default function IndexPage() {
       <Navbar />
       <Main>
         <TopicsContainer>
-          <PostBoard />
+          <TopicBoard />
         </TopicsContainer>
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>

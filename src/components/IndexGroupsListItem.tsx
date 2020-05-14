@@ -7,6 +7,6 @@ interface Props {
 
 
 
-export default function IndexGroupsListItem({ id, name, setGroup } :Props) {
+export default function IndexGroupsListItem({ } :Props) {
 
 }

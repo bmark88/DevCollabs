@@ -63,7 +63,7 @@ const createRoomAndNotify = (evt :any) => {
     hideProgressBar: true,
   })
 };
-
+console.log(state)
   return (
     <Layout>
       <Section>

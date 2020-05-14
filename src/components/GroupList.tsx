@@ -22,7 +22,7 @@ export default function GroupList({groups, setGroup }: Props) {
   const GroupList = groups.map(group => {
     return (
       <GroupListItem
-        key={group.id}
+        // key={group.id}
         id={group.id}
         name={group.name}
         setGroup={setGroup}
