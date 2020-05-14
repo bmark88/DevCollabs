@@ -33,11 +33,15 @@ app.use("/group", groupRoutes(db))
 app.use("/room", roomRoutes(io))
 
 const users = []
-const rooms = []
+const rooms = {}
 io.on("connection", socket => {
   //user
   socket.on('join', ({ userName , roomId}) => {
-   
+    // if room doesn't already exist, initialize an empty array and add the user to the room array
+    if(!rooms[roomId]) rooms[roomId] = []
+    rooms[roomId].push(userName)
+    console.log(rooms)
+
   if (!users.includes(userName)) users.push(userName)
     socket.room_id = roomId 
     socket.join(socket.room_id)
@@ -51,24 +55,19 @@ io.on("connection", socket => {
   })
 
   socket.on('leaveRoom', ({ userName, roomId }) => {
-    console.log('users!!!', users)
-    console.log('bool', socket.disconnected)
-    console.log('username, roomID ==>', userName, roomId)
-
+    // console.log('users!!!', users)
+    // console.log('bool', socket.disconnected)
+    // console.log('username, roomID ==>', userName, roomId)
     if(users.includes(userName)) users.splice(users.indexOf(userName), 1)
-    
+
     io.to(socket.room_id).emit("displayUsers", { users })
     socket.leave(socket.room_id)
   })
 
   socket.on('disconnect', () => {
-    console.log('disconnected now', socket.disconnected)
-  })
-
-  socket.on('cleanup', ({users}) => {
+    io.to(socket.room_id).emit("displayUsers", { users })
     
   })
-
 })
 
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))
