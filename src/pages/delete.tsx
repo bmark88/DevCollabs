@@ -2,7 +2,7 @@ import React, { ReactNode } from "react"
 
 import Users from "../components/users"
 import Groups from "../components/GroupList"
-import { Rooms, Room } from "../components/rooms"
+// import { Rooms, Room } from "../components/rooms"
 import Layout from "../components/layout"
 import axios from "axios"
 

@@ -4,6 +4,11 @@ import * as moment from 'moment';
 
 const ENDPOINT = "http://localhost:3001/"
 
+interface Props {
+  userName :string
+  roomName :string
+}
+
 export default function socketChat(roomName) {
   const roomId = roomName
   const [users, setUsers] = useState([])
@@ -11,19 +16,23 @@ export default function socketChat(roomName) {
   const [connection, setConnection] = useState({})
   const [messages, setMessages] = useState([])
   
+
+  const conn = socketIOClient(ENDPOINT)
   useEffect(() => {
+    const conn = socketIOClient(ENDPOINT)
+
     if(localStorage.getItem('session')) {
       const userName:string = JSON.parse(localStorage.getItem('session') || '{}').username
       setUser(userName)
 
       //server connection
-      const conn = socketIOClient(ENDPOINT)
+
       setConnection(conn)
       conn.emit('join', { userName, roomId })
       
       //users
       conn.on("displayUsers", (data: any) => {
-        console.log('users', data)
+        console.log('users ===>', data)
         setUsers([...data.users])
       })
 
@@ -34,17 +43,37 @@ export default function socketChat(roomName) {
         console.log(data)
       })
 
-    }
+ 
 
+    }
+    // console.log(roomId)
+    return () => {
+      const userName = JSON.parse(localStorage.getItem('session')).username
+      const roomId = roomName
+      // console.log(users, 'users (socketChat)')
+      // console.log(userName, roomId)
+
+      console.log(users)
+      console.log(userName)
+
+      conn.emit("leaveRoom", { userName, roomId })
+      conn.close()
+    }
   }, [])
 
   const handleSubmit = (event: any) => {
     event.preventDefault()
-    console.log(connection)
+    // console.log(connection)
     console.log(event.target.message.value)
     connection.emit("message", { user, message: event.target.message.value, roomId })
   }
 
-  return { handleSubmit, users, messages }
+  const websocketIDE = (value) => {
+    // console.log('from socketChat.tsx',value)
+    connection.emit("IDE", {value, roomId})
+  }
+
+
+  return { handleSubmit, users, messages, websocketIDE, conn }
 }
 
