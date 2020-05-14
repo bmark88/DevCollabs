@@ -11,6 +11,8 @@ import PostsList from "../components/PostsList";
 import { RoomCard, RoomContainer } from "../components/rooms";
 import Layout from "../components/layout";
 import Chat from "../components/Chat";
+import PostForm from '../components/PostForm';
+
 
 //hooks
 import socketChat from "../components/hooks/socketChat";
@@ -100,6 +102,7 @@ const createRoomAndNotify = (evt :any) => {
             </Div>
           </RoomCard>
           <PostsList posts={posts}/>
+          <PostForm />
         </RoomContainer>
         <Chat 
           users={users} 

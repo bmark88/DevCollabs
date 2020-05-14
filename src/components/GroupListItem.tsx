@@ -34,7 +34,7 @@ const Li = styled.li`
   }
 `;
 
-export default function DayListItem({ id, name, setGroup } :Props) {
+export default function GroupListItem({ id, name, setGroup } :Props) {
   return (
   <>
     <Li onClick={() => setGroup(id)}>{name}</Li>

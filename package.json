@@ -12,7 +12,9 @@
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "@types/react-helmet": "^5.0.15",
+    "@types/socket.io-client": "^1.4.32",
     "@types/styled-components": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
     "ace-builds": "^1.4.11",
     "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
@@ -46,10 +48,13 @@
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.0",
     "typeface-roboto": "0.0.75",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.2"
   },
   "devDependencies": {
-    "prettier": "2.0.5"
+    "gatsby-plugin-tslint": "0.0.2",
+    "prettier": "2.0.5",
+    "tslint": "^6.1.2",
+    "tslint-loader": "^3.5.4"
   },
   "keywords": [
     "gatsby"
