@@ -26,6 +26,7 @@ export default function socketChat(roomName) {
       setUser(userName)
 
       //server connection
+
       setConnection(conn)
       conn.emit('join', { userName, roomId })
       
