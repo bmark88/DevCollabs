@@ -30,8 +30,9 @@ const Img = styled.img`
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // maxWidth: 345,
-    
+    border: '1px solid',
+    borderColor: 'black',
+    marginBottom: 15,
   },
   media: {
     height: 0,
@@ -47,9 +48,9 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: red[500],
-  },
+  // avatar: {
+  //   backgroundColor: red[500],
+  // },
 }));
 
 export default function RecipeReviewCard() {

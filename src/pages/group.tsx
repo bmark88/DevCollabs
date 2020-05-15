@@ -147,7 +147,6 @@ const createRoomAndNotify = (evt :any) => {
           handleSubmit={handleSubmit} 
         />
       </Section>
-      <Post></Post>
     </Layout>
   )
 };

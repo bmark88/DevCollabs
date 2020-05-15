@@ -20,7 +20,7 @@ const PostsList = ({ posts }: Props) => {
   const PostsList = posts.map(post => {
     return (
       // <Div key={post.id} id={post.id}>{post.username} posted: "{post.data}"</Div>
-      <Post></Post>
+      <Post key={post.id} id={post.id} user={post.username} >{post.data}</Post>
     )
   })
   return PostsList
