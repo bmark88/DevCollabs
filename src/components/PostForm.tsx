@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function RegisterForm() {
+export default function PostForm(props: any) {
   const classes = useStyles()
   const [postData, setPostData] = useState("")
   const [error, setError] = useState(false)
@@ -31,7 +31,7 @@ export default function RegisterForm() {
   const onSubmitFunction = (event: any) => {
     setError(false)
     event.preventDefault()
-    const groupId = "1" // <---------------- Change accordinly
+    const groupId = props.group // <---------------- Change accordinly
     const session = JSON.parse(localStorage.getItem("session") || '{}')
     const userId = session.id
     const data = { userId, data: postData }
@@ -43,8 +43,10 @@ export default function RegisterForm() {
       .then(res => {
         console.log(res.data)
         setPostData("")
+        props.postFunction(props.group)
       })
       .catch(() => setError(true))
+    
   }
   return (
     <Container component="main" maxWidth="sm">
