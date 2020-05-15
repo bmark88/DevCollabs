@@ -6,13 +6,14 @@ import { navigate } from "gatsby"
 import Chat from "../components/Chat"
 import Navbar from "../components/Navbar"
 import socketChat from "../components/hooks/socketChat"
-import PostBoard from "../components/TopicBoard"
+import TopicBoard from "../components/TopicBoard"
+
 
 const Main = styled.main`
   margin-top: 80px;
   display: flex;
-  background-color:
-`;
+  background-color: ;
+`
 
 const TopicsContainer = styled.div`
   background-color: black;
@@ -25,14 +26,16 @@ const TopicsContainer = styled.div`
     width: 90%;
     margin: 1.4em;
   }
-`;
+`
 
 export default function IndexPage() {
-  let { users, messages, handleSubmit } = socketChat('public')
+  let { users, messages, handleSubmit } = socketChat("public")
+  // const { publicGroups } = usePublic()
+  // const publicGroupsArr = publicGroups.groups
 
-  if(!localStorage.getItem('session')) {
-    navigate('/login')
-    return null;
+  if (!localStorage.getItem("session")) {
+    navigate("/login")
+    return null
   }
 
   return (
@@ -40,10 +43,10 @@ export default function IndexPage() {
       <Navbar />
       <Main>
         <TopicsContainer>
-          <PostBoard/>
+          <TopicBoard />
         </TopicsContainer>
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>
     </>
   )
-};
+}
