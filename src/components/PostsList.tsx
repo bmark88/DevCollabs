@@ -1,24 +1,27 @@
-import React, { ReactNode } from "react"
+import React from "react"
 import styled from "styled-components"
+import Post from "../components/Post"
 
 interface Props {
-  posts: any
+  posts: object[]
 }
 
-const Div = styled.div`
-  border: solid;
-  margin: 1em 0;
-  // height: 800px;
-  // width: 80%;
-  // float: left;
-  // background-color: red;
-`
+const PostContainer = styled.div`
+  // display: flex;
 
-export default function PostsList({ posts }: Props) {
-  const PostsList = posts.map(post => {
+  @media (max-width: 1880px) {
+    width: 80%;
+    margin: 0 auto;
+  }
+`;
+
+const PostsList = ({ posts }: Props) => {
+  const PostsList = posts.map((post :any) => {
     return (
-      <Div key={post.id} id={post.id}>{post.username} posted: "{post.data}"</Div>
+      <Post key={post.id} id={post.id} user={post.username} created_at={post.created_at} >{post.data}</Post>
     )
   })
   return PostsList
 }
+
+export { PostsList, PostContainer }
