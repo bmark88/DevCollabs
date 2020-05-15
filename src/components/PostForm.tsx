@@ -67,6 +67,7 @@ export default function PostForm(props: any) {
           type="submit"
           variant="contained"
           color="primary"
+          fullWidth
           className={classes.submit}
         >
           POST

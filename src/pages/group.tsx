@@ -34,6 +34,11 @@ const Form = styled.form`
   width: 64%;
 `;
 
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+`;
+
 const GroupPage = () => {
   //redirect if not logged in
   if (!localStorage.getItem("session")) {
@@ -73,66 +78,68 @@ const createRoomAndNotify = (evt :any) => {
     <Layout>
       <Section>
         <GroupList groups={groups} group={group} setGroup={setGroup} />
-        <RoomContainer>
-          <RoomCard 
-            image="https://sociorocketnewsen.files.wordpress.com/2014/01/anonymous.jpg?w=580&h=350" 
-            title="Create A Group"
-          >
-            <Form onSubmit={createRoomAndNotify}>
-              <Input 
-                type="text"
-                placeholder="Enter Group Name"
-                value={roomID} 
-                disableUnderline
-                onChange={(evt) => setRoomID(evt.target.value)}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-              >
-                Create
-              </Button>
-            </Form>
-          </RoomCard>
-          <RoomCard 
-            image="https://economictimes.indiatimes.com/thumb/msid-73420856,width-1200,height-900,resizemode-4,imgsize-272701/getty.jpg?from=mdr" 
-            title="Create A Room"
-          >
-            <Form onSubmit={createRoomAndNotify}>
-              <Input 
-                type="text"
-                placeholder="Enter Room Name"
-                value={roomID} 
-                disableUnderline
-                onChange={(evt) => setRoomID(evt.target.value)}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-              >
-                Create
-              </Button>
-            </Form>
-          </RoomCard>
-          <RoomCard 
-            image="https://www.pandasecurity.com/mediacenter/src/uploads/2016/03/pandasecurity-Who-are-the-most-famous-hackers-in-history.jpg" 
-            title="Join A Room"
-          >
-            <Div>
-              <Link to="/room/"> Room 1</Link>
-              <Link to="/room/"> Room 2</Link>
-              <Link to="/room/"> Room 3</Link>
-            </Div>
-          </RoomCard>
-        </RoomContainer>
-        <PostContainer>
-          <PostForm group={group} postFunction = {handlePost}/>
-          <PostsList posts={posts}/>
-        </PostContainer>
+        <Main>
+          <RoomContainer>
+            <RoomCard 
+              image="https://sociorocketnewsen.files.wordpress.com/2014/01/anonymous.jpg?w=580&h=350" 
+              title="Create A Group"
+            >
+              <Form onSubmit={createRoomAndNotify}>
+                <Input 
+                  type="text"
+                  placeholder="Enter Group Name"
+                  value={roomID} 
+                  disableUnderline
+                  onChange={(evt) => setRoomID(evt.target.value)}
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Create
+                </Button>
+              </Form>
+            </RoomCard>
+            <RoomCard 
+              image="https://economictimes.indiatimes.com/thumb/msid-73420856,width-1200,height-900,resizemode-4,imgsize-272701/getty.jpg?from=mdr" 
+              title="Create A Room"
+            >
+              <Form onSubmit={createRoomAndNotify}>
+                <Input 
+                  type="text"
+                  placeholder="Enter Room Name"
+                  value={roomID} 
+                  disableUnderline
+                  onChange={(evt) => setRoomID(evt.target.value)}
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Create
+                </Button>
+              </Form>
+            </RoomCard>
+            <RoomCard 
+              image="https://www.pandasecurity.com/mediacenter/src/uploads/2016/03/pandasecurity-Who-are-the-most-famous-hackers-in-history.jpg" 
+              title="Join A Room"
+            >
+              <Div>
+                <Link to="/room/"> Room 1</Link>
+                <Link to="/room/"> Room 2</Link>
+                <Link to="/room/"> Room 3</Link>
+              </Div>
+            </RoomCard>
+          </RoomContainer>
+          <PostContainer>
+            <PostForm group={group} postFunction = {handlePost}/>
+            <PostsList posts={posts}/>
+          </PostContainer>
+        </Main>
         <Chat 
           users={users} 
           messages={messages} 
