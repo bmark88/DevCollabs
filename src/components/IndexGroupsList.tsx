@@ -48,7 +48,7 @@ export default function IndexGroupsList() {
         url: `http://localhost:3001/group/subscription/delete/${groupId}`,
         data: data,
       }).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
       })
     }
     if (button === toSubscribe) {
@@ -57,7 +57,7 @@ export default function IndexGroupsList() {
         url: `http://localhost:3001/group/subscription/${groupId}`,
         data: data,
       }).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
       })
     }
   }
