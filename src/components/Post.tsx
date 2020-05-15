@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid',
     borderColor: 'black',
     marginBottom: 15,
+    width: '100%',
   },
   media: {
     height: 0,
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
+      // duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
@@ -53,9 +54,16 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-export default function RecipeReviewCard() {
+interface Props {
+  key: number,
+  id: number,
+  user: string,
+  children: string,
+}
+
+export default function Post({ user, children } :Props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -75,7 +83,7 @@ export default function RecipeReviewCard() {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Props Title Ipsum"
+        title={user}
         subheader="Props Date - September 14, 2016"
       />
       {/* <CardMedia
@@ -85,7 +93,7 @@ export default function RecipeReviewCard() {
       /> */}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Post Content - Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum
+          {children}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
