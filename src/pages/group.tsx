@@ -12,6 +12,7 @@ import { RoomCard, RoomContainer } from "../components/rooms";
 import Layout from "../components/layout";
 import Chat from "../components/Chat";
 import PostForm from '../components/PostForm';
+import Post from "../components/Post";
 
 
 //hooks
@@ -146,6 +147,7 @@ const createRoomAndNotify = (evt :any) => {
           handleSubmit={handleSubmit} 
         />
       </Section>
+      <Post></Post>
     </Layout>
   )
 };
