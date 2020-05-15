@@ -41,7 +41,7 @@ export default function SimpleMenu() {
           <Link to="/group">Groups</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <Link to="/page-2">Hackathons</Link>
+          <Link to="/hackathon">Hackathons</Link>
         </MenuItem>
       </Menu>
     </>

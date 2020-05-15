@@ -3,10 +3,10 @@ import LoginForm from '../components/LoginForm'
 import Layout from '../components/layout'
 
 
-const RegisterPage = () => (
+const LoginPage = () => (
    <Layout>
       <LoginForm />
    </Layout>
 )
 
-export default RegisterPage
+export default LoginPage
