@@ -31,7 +31,7 @@ const CodeSnippet = (props : any) => {
         mode="javascript"
         theme="twilight"
         height="84.7vh"
-        width="50vw"
+        width="25vw"
         value={props.snippetValue}
         onChange={onChange}
         name="UNIQUE_ID_OF_DIV"
