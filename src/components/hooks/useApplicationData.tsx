@@ -15,27 +15,26 @@ export default function useApplicationData() {
 
   //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchGroups = () => {
-    return axios
+    axios
       .get(`http://localhost:3001/group/u/${userId}`)
       .then(response => {
-        setState({
-          ...state,
-          group: response.data[0].id,
-          groups: response.data,
+        axios
+        .get(`http://localhost:3001/group/g/${response.data[0].id}`)
+        .then(data => {
+          setState({ ...state,
+             posts: data.data,
+             group: response.data[0].id,
+             groups: response.data,
+          })
         })
-        return response.data[0].id
+        .catch(error => console.log(error))
       })
       .catch(error => console.log(error))
   }
 
   const fetchPosts = (groupId: number) => {
     //gets all group posts. returns array<[id:number ,group_id:number, user_id:number, created_at:time]>
-    axios
-      .get(`http://localhost:3001/group/g/${groupId}`)
-      .then(response => {
-        setState({ ...state, posts: response.data, ...group })
-      })
-      .catch(error => console.log(error))
+   
   }
   /*
 const fetchGroups = () => {
@@ -68,10 +67,7 @@ const fetchGroups = () => {
   }
 
   useEffect(() => {
-    fetchGroups().then(groupId => {
-      console.log(groupId)
-      fetchPosts(groupId)
-    })
+    fetchGroups()
   }, [])
 
   return {
