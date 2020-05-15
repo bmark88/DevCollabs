@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
-import { MessageContainer, TimeStamp } from "../components/message";
+import { MessageContainer, TimeStamp } from "./Message";
 import { Button, TextField } from "@material-ui/core";
 
 interface Props {

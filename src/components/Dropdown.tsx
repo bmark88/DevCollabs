@@ -11,7 +11,7 @@ const Div = styled.div`
   color: #551A8B;
 `;
 
-export default function SimpleMenu() {
+export default function Dropdown() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
