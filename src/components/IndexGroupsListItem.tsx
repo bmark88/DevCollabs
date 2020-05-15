@@ -26,11 +26,9 @@ export default function IndexGroupsListItem({
   }
 
   return (
-    //   <>
     <div>
       {group.name}
       <button onClick={handleClick}>{button}</button>
     </div>
-    // </>
   )
 }
