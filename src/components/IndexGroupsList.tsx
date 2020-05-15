@@ -15,7 +15,7 @@ import subscribeList from "../helpers/selectors"
 
 
 export default function IndexGroupsList() {
-  
+
   //state includes list of users groups state= { groups{[id:number ,name:string], ...} }
   const { state } = useApplicationData()
   const { publicGroups } = usePublic()
@@ -36,7 +36,7 @@ export default function IndexGroupsList() {
     // })
   }, []) //[groupsArr.length, subscribeListResult.length])
 
-  const onSubmitFunction = (event: any, groupId: number, button) => {
+  const onSubmitFunction = (event: any, groupId: number, button: string) => {
     event.preventDefault()
     const userId: number = JSON.parse(localStorage.getItem("session") || "{}")
       .id

@@ -33,7 +33,7 @@ export default function useApplicationData() {
     axios
       .get(`http://localhost:3001/group/g/${groupId}`)
       .then(response => {
-        setState({ ...state, posts: response.data })
+        setState({ ...state, posts: response.data, ...group })
       })
       .catch(error => console.log(error))
   }
