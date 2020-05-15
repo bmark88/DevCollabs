@@ -14,7 +14,7 @@ const PostContainer = styled.div`
 const PostsList = ({ posts }: Props) => {
   const PostsList = posts.map((post :any) => {
     return (
-      <Post key={post.id} id={post.id} user={post.username} >{post.data}</Post>
+      <Post key={post.id} id={post.id} user={post.username} created_at={post.created_at} >{post.data}</Post>
     )
   })
   return PostsList

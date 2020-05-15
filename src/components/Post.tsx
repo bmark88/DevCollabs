@@ -7,15 +7,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { RFC_2822 } from 'moment';
 import styled from "styled-components"
 
 const Img = styled.img`
@@ -43,15 +40,12 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
     transition: theme.transitions.create('transform', {
-      // duration: theme.transitions.duration.shortest,
+      duration: theme.transitions.duration.shortest,
     }),
   },
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  // avatar: {
-  //   backgroundColor: red[500],
-  // },
 }));
 
 interface Props {
@@ -59,9 +53,10 @@ interface Props {
   id: number,
   user: string,
   children: string,
+  created_at: string
 }
 
-export default function Post({ user, children } :Props) {
+export default function Post({ user, children, created_at } :Props) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
 
@@ -74,9 +69,6 @@ export default function Post({ user, children } :Props) {
       <CardHeader
         avatar={
           <Img src={"https://planetbotanix.com/wp-content/uploads/2017/08/Female-Avatar-1-300x300-300x300.jpg"} alt="avatar-image"/>
-          // <Avatar aria-label="recipe" className={classes.avatar}>
-          //   R
-          // </Avatar>
         }
         action={
           <IconButton aria-label="settings">
@@ -84,7 +76,7 @@ export default function Post({ user, children } :Props) {
           </IconButton>
         }
         title={user}
-        subheader="Props Date - September 14, 2016"
+        subheader={created_at}
       />
       {/* <CardMedia
         className={classes.media}
@@ -116,9 +108,9 @@ export default function Post({ user, children } :Props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Reply:</Typography>
+          <Typography paragraph>Replies:</Typography>
           <Typography paragraph>
-            Optional Post Replies from other users - Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum
+            Optional Post Replies from other users (map through replies in db)
           </Typography>
         </CardContent>
       </Collapse>
