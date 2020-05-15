@@ -31,10 +31,14 @@ const useStyles = makeStyles((theme) => ({
     borderColor: 'black',
     marginBottom: 15,
     width: '100%',
+    maxWidth: 1161,
   },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
+  },
+  reply: {
+    maxWidth: '50%'
   },
   expand: {
     transform: 'rotate(0deg)',

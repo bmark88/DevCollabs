@@ -12,8 +12,6 @@ import { RoomCard, RoomContainer } from "../components/rooms";
 import Layout from "../components/layout";
 import Chat from "../components/Chat";
 import PostForm from '../components/PostForm';
-import Post from "../components/Post";
-
 
 //hooks
 import socketChat from "../components/hooks/socketChat";
@@ -21,10 +19,10 @@ import useApplicationData from "../components/hooks/useApplicationData";
 
 toast.configure();
 
-const Section = styled.section`
+const Main = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
-
 
 const Div = styled.div`
   display: flex;  
@@ -35,7 +33,7 @@ const Form = styled.form`
   width: 64%;
 `;
 
-const Main = styled.main`
+const Section = styled.section`
   display: flex;
   flex-direction: column;
 `;
@@ -77,9 +75,9 @@ const createRoomAndNotify = (evt :any) => {
 
   return (
     <Layout>
-      <Section>
+      <Main>
         <GroupList groups={groups} group={group} setGroup={setGroup} />
-        <Main>
+        <Section>
           <RoomContainer>
             <RoomCard 
               image="https://sociorocketnewsen.files.wordpress.com/2014/01/anonymous.jpg?w=580&h=350" 
@@ -140,13 +138,13 @@ const createRoomAndNotify = (evt :any) => {
             <PostForm group={group} postFunction = {handlePost}/>
             <PostsList posts={posts}/>
           </PostContainer>
-        </Main>
+        </Section>
         <Chat 
           users={users} 
           messages={messages} 
           handleSubmit={handleSubmit} 
         />
-      </Section>
+      </Main>
     </Layout>
   )
 };
