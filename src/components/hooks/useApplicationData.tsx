@@ -33,7 +33,7 @@ export default function useApplicationData() {
     axios
       .get(`http://localhost:3001/group/g/${groupId}`)
       .then(response => {
-        setState({ ...state, posts: response.data, ...group })
+        setState({ ...state, posts: response.data })
       })
       .catch(error => console.log(error))
   }
@@ -68,10 +68,11 @@ const fetchGroups = () => {
   }
 
   useEffect(() => {
-    fetchGroups().then(groupId => {
-      console.log(groupId)
-      fetchPosts(groupId)
-    })
+    fetchGroups()
+    // .then(groupId => {
+    //   // console.log(groupId)
+    //   fetchPosts(groupId)
+    // })
   }, [])
 
   return {

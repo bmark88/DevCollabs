@@ -6,7 +6,7 @@ module.exports = db => {
   // get all groups that exist. returns {array<[id:interger, name:string]>}
   router.get("/public", (req, res) => {
     dbHelpers.getAllGroups().then(data => {
-      console.log(data)
+      // console.log(data)
       res.send(data)
     })
   })
