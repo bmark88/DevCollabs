@@ -58,6 +58,7 @@ export default function PostForm(props: any) {
           id="create-post"
           placeholder="What's up?"
           fullWidth
+          autoComplete="off"
           value={postData}
           onChange={event => {
             setPostData(event.target.value)

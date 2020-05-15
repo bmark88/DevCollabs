@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -7,15 +7,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { RFC_2822 } from 'moment';
 import styled from "styled-components"
 
 const Img = styled.img`
@@ -33,10 +30,15 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid',
     borderColor: 'black',
     marginBottom: 15,
+    width: '100%',
+    maxWidth: 1161,
   },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
+  },
+  reply: {
+    maxWidth: '50%'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -48,14 +50,19 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  // avatar: {
-  //   backgroundColor: red[500],
-  // },
 }));
 
-export default function RecipeReviewCard() {
+interface Props {
+  key: number,
+  id: number,
+  user: string,
+  children: string,
+  created_at: string
+}
+
+export default function Post({ user, children, created_at } :Props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -66,17 +73,14 @@ export default function RecipeReviewCard() {
       <CardHeader
         avatar={
           <Img src={"https://planetbotanix.com/wp-content/uploads/2017/08/Female-Avatar-1-300x300-300x300.jpg"} alt="avatar-image"/>
-          // <Avatar aria-label="recipe" className={classes.avatar}>
-          //   R
-          // </Avatar>
         }
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
           </IconButton>
         }
-        title="Props Title Ipsum"
-        subheader="Props Date - September 14, 2016"
+        title={user}
+        subheader={created_at}
       />
       {/* <CardMedia
         className={classes.media}
@@ -85,7 +89,7 @@ export default function RecipeReviewCard() {
       /> */}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          Post Content - Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum
+          {children}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -108,9 +112,9 @@ export default function RecipeReviewCard() {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Reply:</Typography>
+          <Typography paragraph>Replies:</Typography>
           <Typography paragraph>
-            Optional Post Replies from other users - Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum
+            Optional Post Replies from other users (map through replies in db)
           </Typography>
         </CardContent>
       </Collapse>
