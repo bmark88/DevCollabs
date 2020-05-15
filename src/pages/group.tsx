@@ -21,10 +21,13 @@ toast.configure();
 
 const Main = styled.div`
   display: flex;
-  justify-content: space-between;
 
-  @media (max-width:1880px) {
+  @media (max-width:1011px) {
     flex-direction: column;
+  }
+
+  @media (min-width:1890px) {
+    justify-content: space-between;
   }
 `;
 
@@ -34,17 +37,21 @@ const Div = styled.div`
 `;
 
 const Form = styled.form`
-  width: 64%;
+  width: 80%;
 `;
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
-
-  @media (max-width:1000px) {
-    // width: 10%;
-  }
 `;
+
+const HideChat = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 1880px) {
+    display: none
+  }
+`
 
 const GroupPage = () => {
   //redirect if not logged in
@@ -94,7 +101,7 @@ const createRoomAndNotify = (evt :any) => {
               <Form onSubmit={createRoomAndNotify}>
                 <Input 
                   type="text"
-                  placeholder="Enter Group Name"
+                  placeholder="Group Name"
                   value={roomID} 
                   disableUnderline
                   onChange={(evt) => setRoomID(evt.target.value)}
@@ -116,7 +123,7 @@ const createRoomAndNotify = (evt :any) => {
               <Form onSubmit={createRoomAndNotify}>
                 <Input 
                   type="text"
-                  placeholder="Enter Room Name"
+                  placeholder="Room Name"
                   value={roomID} 
                   disableUnderline
                   onChange={(evt) => setRoomID(evt.target.value)}
@@ -147,11 +154,13 @@ const createRoomAndNotify = (evt :any) => {
             <PostsList posts={posts}/>
           </PostContainer>
         </Section>
-        <Chat
-          users={users} 
-          messages={messages} 
-          handleSubmit={handleSubmit} 
-        />
+        <HideChat>
+          <Chat
+            users={users} 
+            messages={messages} 
+            handleSubmit={handleSubmit} 
+          />
+        </HideChat>
       </Main>
     </Layout>
   )

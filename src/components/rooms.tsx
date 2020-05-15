@@ -21,6 +21,16 @@ const useStyles = makeStyles({
     ['@media (max-width:1200px)']: {
       maxWidth: 200,
       minWidth: 200,
+    },
+    ['@media (max-width:800px)']: {
+      maxWidth: 190,
+      minWidth: 190,
+      margin: 0,
+    }
+  },
+  font: {
+    ['@media (max-width:800px)']: {
+      // fontSize: '17px',
     }
   },
   media: {
@@ -31,9 +41,9 @@ const useStyles = makeStyles({
 const RoomContainer = styled.div`
   margin: 1em;
   display: flex;
-  flex-wrap: wrap;
-
+  
   @media (max-width: 1880px) {
+    flex-wrap: wrap;
     justify-content: center;
   }
 `;
@@ -55,11 +65,11 @@ const RoomCard = ({ children, image, title } :Props) => {
           image={image}
         />
         <CardContent>
-          <Typography gutterBottom align="center" variant="h5" component="h2">
+          <Typography gutterBottom align="center" variant="h5" component="h2" className={classes.font}>
             {title}
           </Typography>
         </CardContent>
-        <Div>
+        <Div className={classes.font}>
           {children}
         </Div>
     </Card>

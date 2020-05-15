@@ -15,16 +15,12 @@ const Div = styled.div`
   padding: 1em;
   min-width: 250px;
   margin: 1em;
-
-  @media (max-width:1880px) {
-    height: 10%;
-    align-items: center;
-    align-self: center;
-    width: 50%;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+  @media (max-width:1890px) {
+    // height: 10%;
   }
 `
 
