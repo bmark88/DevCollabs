@@ -7,8 +7,12 @@ interface Props {
 }
 
 const PostContainer = styled.div`
-  disply: flex;
-  flex-direction: row;
+  // display: flex;
+
+  @media (max-width: 1880px) {
+    width: 80%;
+    margin: 0 auto;
+  }
 `;
 
 const PostsList = ({ posts }: Props) => {

@@ -22,6 +22,10 @@ toast.configure();
 const Main = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media (max-width:1880px) {
+    flex-direction: column;
+  }
 `;
 
 const Div = styled.div`
@@ -36,6 +40,10 @@ const Form = styled.form`
 const Section = styled.section`
   display: flex;
   flex-direction: column;
+
+  @media (max-width:1000px) {
+    // width: 10%;
+  }
 `;
 
 const GroupPage = () => {
@@ -139,7 +147,7 @@ const createRoomAndNotify = (evt :any) => {
             <PostsList posts={posts}/>
           </PostContainer>
         </Section>
-        <Chat 
+        <Chat
           users={users} 
           messages={messages} 
           handleSubmit={handleSubmit} 

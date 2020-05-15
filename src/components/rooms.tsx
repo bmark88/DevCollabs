@@ -18,6 +18,10 @@ const useStyles = makeStyles({
     minWidth: 345,
     marginTop: 0,
     margin: 15,
+    ['@media (max-width:1200px)']: {
+      maxWidth: 200,
+      minWidth: 200,
+    }
   },
   media: {
     height: 140,
@@ -27,6 +31,11 @@ const useStyles = makeStyles({
 const RoomContainer = styled.div`
   margin: 1em;
   display: flex;
+  flex-wrap: wrap;
+
+  @media (max-width: 1880px) {
+    justify-content: center;
+  }
 `;
 
 const Div = styled.div`
