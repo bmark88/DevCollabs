@@ -8,33 +8,32 @@ import useApplicationData from "./hooks/useApplicationData"
 import usePublic from "./hooks/usePublic"
 
 //components
-import Button from "./Button"
 import IndexGroupsListItem from "./IndexGroupsListItem"
 
 //helpers
 import subscribeList from "../helpers/selectors"
 
-interface Props {}
 
-export default function IndexGroupsList({}: Props) {
+export default function IndexGroupsList() {
+  
   //state includes list of users groups state= { groups{[id:number ,name:string], ...} }
   const { state } = useApplicationData()
   const { publicGroups } = usePublic()
   const unsubscribe = "-"
   const toSubscribe = "+"
 
-  const [groupState, setGroupState] = useState({})
+  // const [groupState, setGroupState] = useState({})
   const subscribeListResult = subscribeList(state, publicGroups)
 
   const groupsArr = publicGroups.groups
   useEffect(() => {
-    groupsArr.forEach(group => {
-      if (subscribeListResult.includes(group.id)) {
-        setGroupState(prev => ({ ...prev, [group.id]: true }))
-      } else {
-        setGroupState(prev => ({ ...prev, [group.id]: false }))
-      }
-    })
+    // groupsArr.forEach(group => {
+    //   if (subscribeListResult.includes(group.id)) {
+    //     setGroupState(prev => ({ ...prev, [group.id]: true }))
+    //   } else {
+    //     setGroupState(prev => ({ ...prev, [group.id]: false }))
+    //   }
+    // })
   }, []) //[groupsArr.length, subscribeListResult.length])
 
   const onSubmitFunction = (event: any, groupId: number, button) => {
