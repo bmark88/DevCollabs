@@ -75,6 +75,28 @@ const createRoomAndNotify = (evt :any) => {
         <GroupList groups={groups} group={group} setGroup={setGroup} />
         <RoomContainer>
           <RoomCard 
+            image="https://sociorocketnewsen.files.wordpress.com/2014/01/anonymous.jpg?w=580&h=350" 
+            title="Create A Group"
+          >
+            <Form onSubmit={createRoomAndNotify}>
+              <Input 
+                type="text"
+                placeholder="Enter Group Name"
+                value={roomID} 
+                disableUnderline
+                onChange={(evt) => setRoomID(evt.target.value)}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                fullWidth
+              >
+                Create
+              </Button>
+            </Form>
+          </RoomCard>
+          <RoomCard 
             image="https://economictimes.indiatimes.com/thumb/msid-73420856,width-1200,height-900,resizemode-4,imgsize-272701/getty.jpg?from=mdr" 
             title="Create A Room"
           >
@@ -106,9 +128,9 @@ const createRoomAndNotify = (evt :any) => {
               <Link to="/room/"> Room 3</Link>
             </Div>
           </RoomCard>
-          <PostsList posts={posts}/>
-          <PostForm group={group} postFunction = {handlePost}/>
         </RoomContainer>
+          <PostForm group={group} postFunction = {handlePost}/>
+          <PostsList posts={posts}/>
         <Chat 
           users={users} 
           messages={messages} 
