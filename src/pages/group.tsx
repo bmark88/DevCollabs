@@ -50,7 +50,6 @@ const [roomID, setRoomID] = useState("")
 const createRoomAndNotify = (evt :any) => {
   evt.preventDefault()
   const username = JSON.parse(localStorage.getItem("session") || '{}').username.toString();
-
   // After room is created, clear state and reset to empty string
   evt.target.querySelector('input').value = "";
   setRoomID(evt.target.querySelector('input').value);
@@ -63,6 +62,10 @@ const createRoomAndNotify = (evt :any) => {
     hideProgressBar: true,
   })
 };
+
+  const handlePost = (groupID) => {
+    setGroup(groupID)
+  }
 
   return (
     <Layout>
@@ -102,7 +105,7 @@ const createRoomAndNotify = (evt :any) => {
             </Div>
           </RoomCard>
           <PostsList posts={posts}/>
-          <PostForm />
+          <PostForm group={group} postFunction = {handlePost}/>
         </RoomContainer>
         <Chat 
           users={users} 
