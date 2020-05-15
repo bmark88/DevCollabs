@@ -7,7 +7,7 @@ import { Button, Input } from "@material-ui/core";
 
 //components
 import GroupList from "../components/GroupList";
-import PostsList from "../components/PostsList";
+import { PostsList, PostContainer } from "../components/PostsList";
 import { RoomCard, RoomContainer } from "../components/rooms";
 import Layout from "../components/layout";
 import Chat from "../components/Chat";
@@ -129,8 +129,10 @@ const createRoomAndNotify = (evt :any) => {
             </Div>
           </RoomCard>
         </RoomContainer>
+        <PostContainer>
           <PostForm group={group} postFunction = {handlePost}/>
           <PostsList posts={posts}/>
+        </PostContainer>
         <Chat 
           users={users} 
           messages={messages} 

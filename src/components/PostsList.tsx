@@ -8,13 +8,14 @@ interface Props {
 const Div = styled.div`
   border: solid;
   margin: 1em 0;
-  // height: 800px;
-  // width: 80%;
-  // float: left;
-  // background-color: red;
-`
+`;
 
-export default function PostsList({ posts }: Props) {
+const PostContainer = styled.div`
+  disply: flex;
+  flex-direction: row;
+`;
+
+const PostsList = ({ posts }: Props) => {
   const PostsList = posts.map(post => {
     return (
       <Div key={post.id} id={post.id}>{post.username} posted: "{post.data}"</Div>
@@ -22,3 +23,5 @@ export default function PostsList({ posts }: Props) {
   })
   return PostsList
 }
+
+export { PostsList, PostContainer } 
