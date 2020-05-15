@@ -30,7 +30,7 @@ const TopicsContainer = styled.div`
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = socketChat("public")
-  // const { publicGroups } = publicUse()
+  // const { publicGroups } = usePublic()
   // const publicGroupsArr = publicGroups.groups
 
   if (!localStorage.getItem("session")) {

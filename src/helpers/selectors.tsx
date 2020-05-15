@@ -1,14 +1,17 @@
 //- gets groups for a user getGroupsForUser(state, userId)
 //- gets posts for a group (state, groupId)
 //hooks
-import useApplicationData from "../components/hooks/useApplicationData"
-import publicUse from "../components/hooks/publicUse"
 
-const subscribeList = () => {
-  const { state } = useApplicationData()
+import useApplicationData from "../components/hooks/useApplicationData"
+import usePublic from "../components/hooks/usePublic"
+
+const subscribeList = (state, publicGroups) => {
+  //contains users group list 
+  // const { state } = useApplicationData()
   const { groups } = state
 
-  const { publicGroups } = publicUse()
+  //contains all group list 
+  // const { publicGroups } = usePublic()
 
   const subscribeListArr = []
 
@@ -20,6 +23,7 @@ const subscribeList = () => {
       }
     }
   }
+
 //   const groupsList = indexGroupsArr.map(group => {
 //     groups.map(indexGroup => {
 //       if (indexGroup.id === group.id) {
