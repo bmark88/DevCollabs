@@ -108,22 +108,45 @@ module.exports = db => {
   })
 
   router.post("/subscription/:groupId", (req, res) => {
+    console.log("1 - POST subscription")
+
     const userId = req.body.userId
     const groupId = req.params.groupId
-    console.log(userId, groupId)
-    dbHelpers
-      .addSubscription(groupId, userId, false)
-      .then(result => console.log("result ", result))
+    console.log("2 - for user and group : ", userId, groupId)
+
+    dbHelpers.checkUserSubscription(userId, groupId).then(isUserSubscribed => {
+      console.log(isUserSubscribed)
+      if (isUserSubscribed === true) {
+        return console.log("User is already subscibed!")
+      } else {
+        console.log("5 - PASS  ~ POSTING")
+
+        dbHelpers
+          .addSubscription(groupId, userId, false)
+          .then(result => console.log("6 - result ", result))
+      }
+    })
   })
 
   router.delete("/subscription/delete/:groupId", (req, res) => {
+    console.log("1 - DELETE subscription")
+
     const userId = req.body.userId
     const groupId = req.params.groupId
-    console.log(userId, groupId)
-    dbHelpers
-      .deleteSubscription(userId, groupId)
-      .catch(() => res.status(400).send("Could not delete subscription"))
+    console.log("2 - user and group : ", userId, groupId)
+
+    dbHelpers.checkUserSubscription(userId, groupId).then(isUserSubscribed => {
+      console.log(isUserSubscribed)
+      if (isUserSubscribed === false) {
+        return console.log("User does not have a subsciption to the group!")
+      } else {
+        console.log("5 - PASS  ~ DELETING")
+        dbHelpers
+          .deleteSubscription(userId, groupId)
+          .catch(() => res.status(400).send("Could not delete subscription"))
+      }
     })
+  })
 
   return router
 }
