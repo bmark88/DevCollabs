@@ -63,7 +63,7 @@ const createRoomAndNotify = (evt :any) => {
   })
 };
 
-  console.log(state)
+  // console.log(state)
 
   const handlePost = (groupID) => {
     setGroup(groupID)
