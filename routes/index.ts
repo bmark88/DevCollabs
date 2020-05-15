@@ -13,7 +13,6 @@ module.exports = db => {
     const user = req.body
     dbHelpers.addUser(user).then(data => {
       if (data) {
-        console.log(data)
         const { id, username, email } = data
         jwt.sign({ data }, "secretkey", { expiresIn: "30s" }, (err, token) => {
           res.json({ token, id, username, email })
