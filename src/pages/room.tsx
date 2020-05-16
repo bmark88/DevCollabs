@@ -8,17 +8,40 @@ import styled from "styled-components"
 
 const Main = styled.main`
   display: flex;
+  justify-content: space-between;
 `;
 
 const LiveHTML = styled.div`
+  min-width: 500px;
+  margin: 1em;
   width: 50%;
   height: 84.7vh;
+  border: solid 1px;
+
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
 
 const RoomPage = () => {
+  const { users, messages, handleSubmit, websocketIDE, conn } = socketChat('Room 1')
+  const welcomeHTML = `<h1>Welcome Devs!</h1>
 
-  let { users, messages, handleSubmit, websocketIDE, conn } = socketChat('Room 1')
-  const [snippetValue, setSnippetValue] = useState('')
+    <p>This is your coding sandbox, feel free to
+    mess around as much as you want.</p>
+    
+    There are some fresh memes below to get you started.
+    Uncomment them at your own risk
+    <!--<img src="https://img.devrant.com/devrant/rant/r_1825530_6oF8Q.jpg">
+    -->
+    <!--<img src="https://i.imgflip.com/3fqnaz.jpg">
+    -->
+    <!--<img src="https://i.redd.it/19fq7c002w021.png"
+    -->
+    <!--<img src="https://i.ytimg.com/vi/hAq443fhyDo/maxresdefault.jpg">
+    -->
+  `;
+  const [snippetValue, setSnippetValue] = useState(welcomeHTML)
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
@@ -30,14 +53,13 @@ const RoomPage = () => {
   
   useEffect(()=> {
     document.getElementById('live-html').innerHTML = snippetValue
-    console.log('from use', snippetValue)
   }, [snippetValue])
 
   return (
     <Layout>
       <Main>
-        <CodeSnippet function={websocketIDE} snippetValue={snippetValue} />
-        <LiveHTML id="live-html">Hello World</LiveHTML>
+          <CodeSnippet function={websocketIDE} snippetValue={snippetValue} />
+          <LiveHTML id="live-html" />
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>
     </Layout>
