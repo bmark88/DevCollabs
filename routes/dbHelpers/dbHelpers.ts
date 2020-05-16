@@ -364,15 +364,12 @@ module.exports = db => {
     return db
       .query(`
         SELECT COUNT(*) FROM posts
-        WHERE user_id = $1
+        WHERE user_id = $1;
       `,
       [user_id])
-      .then(res => {
-        console.log(res.rows)
-        return res.rows[0];
-      })
+      .then(res => res.rows[0])
       .catch(e => console.error('error!!', e.stack))
-  }
+  };
 
   return {
     getUserWithEmail,

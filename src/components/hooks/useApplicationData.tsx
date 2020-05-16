@@ -9,6 +9,7 @@ export default function useApplicationData() {
     groups: [],
     posts: [],
   })
+  const [postCount, setPostCount] = useState(0);
 
   //get a users id from session json data. returns {id:number}
   const userId: number = JSON.parse(localStorage.getItem("session") || "{}").id
@@ -74,12 +75,9 @@ const fetchGroups = () => {
   const fetchUserPosts = (userID :number) => {
     axios
       .get(`http://localhost:3001/profile/${userID}`)
-      .then(response => {
-        console.log('response from fetchUserPosts', response)
-        return response
-      })
+      .then(response => setPostCount(response.data.count))
       .catch(e => console.error('error!!', e.stack))
-  }
+  };
 
   useEffect(() => {
     fetchGroups()
@@ -93,6 +91,7 @@ const fetchGroups = () => {
     state,
     setGroup,
     fetchGroups,
-    fetchUserPosts
+    fetchUserPosts,
+    postCount
   }
 }

@@ -8,11 +8,9 @@ module.exports = db => {
 
     dbHelpers
       .getUserPostsCount(userID)
-      .then(postCount => postCount)
+      .then(result => res.send(result))
       .catch(e => console.error('error in profile.ts', e.stack))
-    
-      res.send()
-  })
+  });
 
-  return router
+  return router;
 }
