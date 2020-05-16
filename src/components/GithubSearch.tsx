@@ -78,12 +78,11 @@ export default function GithubSearch() {
   }
   //repos[0].updated_at
   const reposArr = results.repos
-  console.log(reposArr)
-
+  let sortedReposByDate = [];
   if (reposArr.length > 0 ) {
-    console.log('hi')
+    console.log(reposArr[0].updated_at)
 
-  const sortedReposByDate = reposArr.sort((a, b) => b.updated_at - a.updated_at).slice(0, 4)
+  sortedReposByDate = reposArr.sort((a, b) => b.id - a.id).slice(0, 4)
   console.log(sortedReposByDate)
   }
   return (
@@ -161,12 +160,6 @@ export default function GithubSearch() {
               </ListItem>
             )}
 
-            {results.user.avatar_url && (
-              <ListItem key={`item-1-8`}>
-                <ListItemText primary={`Avatar: ${results.user.avatar_url}`} />
-              </ListItem>
-            )}
-
             {results.user.followers_url && (
               <ListItem key={`item-1-9`}>
                 <ListItemText
@@ -185,21 +178,19 @@ export default function GithubSearch() {
           </ul>
         </li>
 
-        {/* <li key={`section-2}`} className={classes.listSection}>
-          <ul className={classes.ul}>
             {results.repos[0] && (
-              
-              <ListSubheader>{`User's Repos`}</ListSubheader>  )}
-              {results.repos[0] && (
-                // {[0, 1, 2].map((repo) => (
+         <li key={`section-2`} className={classes.listSection}> 
+          <ul className={classes.ul}>
+              <ListSubheader>{`User's Repos`}</ListSubheader>  
+                {sortedReposByDate.map((repo) => (
                   
-                  // ))}
-                <ListItem key={`item-2-${repo.id}`}>
+                  <ListItem key={`item-2-${repo.id}`}>
                 <ListItemText primary={`Name: ${repo.name}`} />
                 <ListItemText primary={`Day Created: ${repo.created_at}`} />
               </ListItem>
+                 ))}
           </ul>
-        </li> */}
+        </li> )}
       </List>
 
       {/* // {results.repos && results.repos.map({ })}  */}
