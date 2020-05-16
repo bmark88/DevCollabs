@@ -12,7 +12,7 @@ import { RoomCard, RoomContainer } from "../components/rooms"
 import Layout from "../components/layout"
 import Chat from "../components/Chat"
 import PostForm from "../components/PostForm"
-import Axios from 'axios'
+import Axios from "axios"
 
 //hooks
 import socketChat from "../components/hooks/socketChat"
@@ -23,14 +23,14 @@ toast.configure()
 const Main = styled.div`
   display: flex;
 
-  @media (max-width:1011px) {
+  @media (max-width: 1011px) {
     flex-direction: column;
   }
 
-  @media (min-width:1890px) {
+  @media (min-width: 1890px) {
     justify-content: space-between;
   }
-`;
+`
 
 const Div = styled.div`
   display: flex;
@@ -39,7 +39,7 @@ const Div = styled.div`
 
 const Form = styled.form`
   width: 80%;
-`;
+`
 
 const Section = styled.section`
   display: flex;
@@ -50,7 +50,7 @@ const HideChat = styled.div`
   display: flex;
   flex-direction: row;
   @media (max-width: 1880px) {
-    display: none
+    display: none;
   }
 `
 
@@ -99,31 +99,28 @@ const GroupPage = () => {
 
   const handleCreateGroup = event => {
     event.preventDefault()
-    const userId = JSON.parse(
-      localStorage.getItem("session") || "{}"
-    ).id
-    console.log('userId ',userId)
-    console.log('groupName ',groupName)
-    Axios.post('http://localhost:3001/group/g/create', {
+    const userId = JSON.parse(localStorage.getItem("session") || "{}").id
+    console.log("userId ", userId)
+    console.log("groupName ", groupName)
+    Axios.post("http://localhost:3001/group/g/create", {
       userId,
-      groupName
+      groupName,
     })
-    .then((data) => {
-      console.log('created')
-      console.log(data)
-      fetchGroups()
-    })
-    .catch((e) => {
-      console.log('already exist')
-      console.log(e)
-      toast(`Group name is already taken`, {
-        position: "bottom-right",
-        autoClose: 2500,
-        closeOnClick: false,
-        pauseOnHover: false,
-        hideProgressBar: true,
+      .then(data => {
+        setGroupName("")
+        fetchGroups()
       })
-    })
+      .catch(e => {
+        console.log("already exist")
+        console.log(e)
+        toast(`Group name is already taken`, {
+          position: "bottom-right",
+          autoClose: 2500,
+          closeOnClick: false,
+          pauseOnHover: false,
+          hideProgressBar: true,
+        })
+      })
   }
 
   return (
@@ -140,7 +137,7 @@ const GroupPage = () => {
                 <Input
                   type="text"
                   placeholder="Group Name"
-                  value={groupName} 
+                  value={groupName}
                   disableUnderline
                   onChange={evt => setGroupName(evt.target.value)}
                 />
@@ -162,7 +159,7 @@ const GroupPage = () => {
                 <Input
                   type="text"
                   placeholder="Room Name"
-                  value={roomID} 
+                  value={roomID}
                   disableUnderline
                   onChange={evt => setRoomID(evt.target.value)}
                 />
@@ -193,11 +190,7 @@ const GroupPage = () => {
           </PostContainer>
         </Section>
         <HideChat>
-          <Chat
-            users={users} 
-            messages={messages} 
-            handleSubmit={handleSubmit} 
-          />
+          <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
         </HideChat>
       </Main>
     </Layout>

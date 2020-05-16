@@ -8,23 +8,24 @@ import styled from "styled-components"
 
 const Main = styled.main`
   display: flex;
-`;
+`
 
 const RoomPage = () => {
-
-  let { users, messages, handleSubmit, websocketIDE, conn } = socketChat('Room 1')
-  const [snippetValue, setSnippetValue] = useState('')
+  let { users, messages, handleSubmit, websocketIDE, conn } = socketChat(
+    "Room 1"
+  )
+  const [snippetValue, setSnippetValue] = useState("")
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
 
-  conn.on("IDE", data =>{
+  conn.on("IDE", data => {
     setSnippetValue(data.value)
   })
- 
-  useEffect(()=> {
-    console.log('from use', snippetValue)
+
+  useEffect(() => {
+    console.log("from use", snippetValue)
   }, [snippetValue])
 
   return (
