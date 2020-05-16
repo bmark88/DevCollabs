@@ -82,5 +82,6 @@ const fetchGroups = () => {
   return {
     state,
     setGroup,
+    fetchGroups
   }
 }
