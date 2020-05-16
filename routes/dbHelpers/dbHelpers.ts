@@ -374,7 +374,7 @@ module.exports = db => {
   const getAllUserSubscriptions = (user_id) => {
     return db
       .query(`
-        SELECT * FROM subscriptions
+        SELECT subscriptions.* FROM subscriptions
         JOIN users ON (user_id = users.id)
         WHERE user_id = $1;
       `,
