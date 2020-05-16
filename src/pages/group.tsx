@@ -12,7 +12,6 @@ import { RoomCard, RoomContainer } from "../components/rooms"
 import Layout from "../components/layout"
 import Chat from "../components/Chat"
 import PostForm from "../components/PostForm"
-import Post from "../components/Post"
 import Axios from 'axios'
 
 //hooks
@@ -21,9 +20,17 @@ import useApplicationData from "../components/hooks/useApplicationData"
 
 toast.configure()
 
-const Section = styled.section`
+const Main = styled.div`
   display: flex;
-`
+
+  @media (max-width:1011px) {
+    flex-direction: column;
+  }
+
+  @media (min-width:1890px) {
+    justify-content: space-between;
+  }
+`;
 
 const Div = styled.div`
   display: flex;
@@ -31,12 +38,20 @@ const Div = styled.div`
 `
 
 const Form = styled.form`
-  width: 64%;
-`
+  width: 80%;
+`;
 
-const Main = styled.main`
+const Section = styled.section`
   display: flex;
   flex-direction: column;
+`
+
+const HideChat = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 1880px) {
+    display: none
+  }
 `
 
 const GroupPage = () => {
@@ -113,9 +128,9 @@ const GroupPage = () => {
 
   return (
     <Layout>
-      <Section>
+      <Main>
         <GroupList groups={groups} group={group} setGroup={setGroup} />
-        <Main>
+        <Section>
           <RoomContainer>
             <RoomCard
               image="https://sociorocketnewsen.files.wordpress.com/2014/01/anonymous.jpg?w=580&h=350"
@@ -124,8 +139,8 @@ const GroupPage = () => {
               <Form onSubmit={handleCreateGroup}>
                 <Input
                   type="text"
-                  placeholder="Enter Group Name"
-                  value={groupName}
+                  placeholder="Group Name"
+                  value={groupName} 
                   disableUnderline
                   onChange={evt => setGroupName(evt.target.value)}
                 />
@@ -146,8 +161,8 @@ const GroupPage = () => {
               <Form onSubmit={createRoomAndNotify}>
                 <Input
                   type="text"
-                  placeholder="Enter Room Name"
-                  value={roomID}
+                  placeholder="Room Name"
+                  value={roomID} 
                   disableUnderline
                   onChange={evt => setRoomID(evt.target.value)}
                 />
@@ -176,9 +191,15 @@ const GroupPage = () => {
             <PostForm group={group} postFunction={handlePost} />
             <PostsList posts={posts} />
           </PostContainer>
-        </Main>
-        <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
-      </Section>
+        </Section>
+        <HideChat>
+          <Chat
+            users={users} 
+            messages={messages} 
+            handleSubmit={handleSubmit} 
+          />
+        </HideChat>
+      </Main>
     </Layout>
   )
 }
