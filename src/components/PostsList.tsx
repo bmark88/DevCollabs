@@ -17,6 +17,7 @@ const PostContainer = styled.div`
 `;
 
 const PostsList = ({ posts }: Props) => {
+  if (!posts) {return null}
   const PostsList = posts.map(post => {
     return (
       // <Div key={post.id} id={post.id}>{post.username} posted: "{post.data}"</Div>
