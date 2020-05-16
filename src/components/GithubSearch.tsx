@@ -16,11 +16,12 @@ import List from "@material-ui/core/List"
 import ListItem from "@material-ui/core/ListItem"
 import ListItemText from "@material-ui/core/ListItemText"
 import ListSubheader from "@material-ui/core/ListSubheader"
+import { sizing } from '@material-ui/system';
 
 /**
  * sudo code
  * [x] search user
- * [] display repos
+ * [x] display repos
  * [] search for multiple
  * [] search using filters
  */
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: "100%",
-      maxWidth: 360,
+      maxWidth: 500,
       backgroundColor: theme.palette.background.paper,
       position: "relative",
       overflow: "auto",
@@ -76,15 +77,13 @@ export default function GithubSearch() {
     //   setResults(res.data.items[0])
     // })
   }
-  //repos[0].updated_at
+  
   const reposArr = results.repos
-  let sortedReposByDate = [];
-  if (reposArr.length > 0 ) {
-    console.log(reposArr[0].updated_at)
-
-  sortedReposByDate = reposArr.sort((a, b) => b.id - a.id).slice(0, 4)
-  console.log(sortedReposByDate)
+  let sortedReposByDate = []
+  if (reposArr.length > 0) {
+    sortedReposByDate = reposArr.sort((a, b) => b.id - a.id).slice(0, 4)
   }
+
   return (
     <div className={classes.margin}>
       <form onSubmit={getUserGithubApi}>
@@ -101,7 +100,7 @@ export default function GithubSearch() {
             />
           </Grid>
         </Grid>
-        <Button
+        <Button 
           type="submit"
           value="Submit"
           onSubmit={getUserGithubApi}
@@ -111,11 +110,11 @@ export default function GithubSearch() {
         </Button>
       </form>
 
-      <List className={classes.root} subheader={<li />}>
+      <List className={classes.root} subheader={<li />} >
         <li key={`section-1`} className={classes.listSection}>
           <ul className={classes.ul}>
             {results.user.name && (
-              <ListSubheader>{`User ${results.user.login}`}</ListSubheader>
+              <ListSubheader><h2>{`User ${results.user.login}`}</h2></ListSubheader>
             )}
 
             {results.user.name && (
@@ -178,22 +177,21 @@ export default function GithubSearch() {
           </ul>
         </li>
 
-            {results.repos[0] && (
-         <li key={`section-2`} className={classes.listSection}> 
-          <ul className={classes.ul}>
-              <ListSubheader>{`User's Repos`}</ListSubheader>  
-                {sortedReposByDate.map((repo) => (
-                  
-                  <ListItem key={`item-2-${repo.id}`}>
-                <ListItemText primary={`Name: ${repo.name}`} />
-                <ListItemText primary={`Day Created: ${repo.created_at}`} />
-              </ListItem>
-                 ))}
-          </ul>
-        </li> )}
+        {results.repos[0] && (
+          <li key={`section-2`} className={classes.listSection}>
+            <ul className={classes.ul}>
+              <ListSubheader><h2>{`User's Repos`}</h2></ListSubheader>
+              {sortedReposByDate.map(repo => (
+                <ListItem key={`item-2-${repo.id}`}>
+                  <ListItemText primary={`Name: ${repo.name}`} />
+                  <ListItemText primary={`Day Created: ${repo.created_at.slice(0, 10)}`} />
+                </ListItem>
+              ))}
+            </ul>
+          </li>
+        )}
       </List>
 
-      {/* // {results.repos && results.repos.map({ })}  */}
       <div>Filters</div>
       <form className={classes.root} noValidate autoComplete="off">
         <TextField
