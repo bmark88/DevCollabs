@@ -35,13 +35,16 @@ export default function Dropdown() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>
-          <Link to="/">Chat</Link>
+          <Link to="/">Home Page</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Link to="/group">Groups</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <Link to="/hackathon">Hackathons</Link>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link to="/settings">Settings</Link>
         </MenuItem>
       </Menu>
     </>

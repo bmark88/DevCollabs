@@ -107,7 +107,7 @@ const StatsTable = styled(Paper)`
 export default function StickyHeadTable() {
   const classes = useStyles();
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(3);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -138,14 +138,14 @@ export default function StickyHeadTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row :any, index :number) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align} className={classes.text}>
-                          {column.format && typeof value === 'number' ? column.format(value) : value}
+                        <TableCell key={column.id} className={classes.text}>
+                          {value}
                         </TableCell>
                       );
                     })}

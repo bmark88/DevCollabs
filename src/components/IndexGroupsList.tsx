@@ -62,7 +62,7 @@ export default function IndexGroupsList() {
     }
   }
 
-  const groupsList = groupsArr.map(group => {
+  const groupsList = groupsArr.map((group, index :number) => {
     let button = toSubscribe
     if (subscribeListResult.includes(group.id)) {
       button = unsubscribe
@@ -70,6 +70,7 @@ export default function IndexGroupsList() {
 
     return (
       <IndexGroupsListItem
+        key={index}
         group={group}
         button={button}
         onSubmitFunction={onSubmitFunction}

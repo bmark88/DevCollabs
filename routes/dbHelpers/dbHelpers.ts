@@ -360,6 +360,29 @@ module.exports = db => {
       })
   }
 
+  const getUserPostsCount = (user_id) => {
+    return db
+      .query(`
+        SELECT COUNT(*) FROM posts
+        WHERE user_id = $1;
+      `,
+      [user_id])
+      .then(res => res.rows[0])
+      .catch(e => console.error('error!!', e.stack));
+  };
+
+  const getAllUserSubscriptions = (user_id) => {
+    return db
+      .query(`
+        SELECT subscriptions.* FROM subscriptions
+        JOIN users ON (user_id = users.id)
+        WHERE user_id = $1;
+      `,
+      [user_id])
+      .then(res => res.rows)
+      .catch(e => console.error('error!!', e.stack));
+  }
+
   return {
     getUserWithEmail,
     addUser,
@@ -379,5 +402,7 @@ module.exports = db => {
     getAllGroups,
     deleteSubscription,
     checkUserSubscription,
+    getUserPostsCount,
+    getAllUserSubscriptions
   }
 }
