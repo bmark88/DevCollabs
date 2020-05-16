@@ -147,6 +147,38 @@ module.exports = db => {
         return res.rows[0]
       })
   }
+  
+  const createGroupAndSubscription = function (userId, groupName) {
+    return db
+      .query(
+        `
+        INSERT INTO groups
+        (name)
+        VALUES
+        ($1)
+        RETURNING *;
+        `,
+        [groupName]
+      )
+      .then(res => res.rows[0].id)
+      .then(groupId => {
+         return db.query(
+          `
+          INSERT INTO subscriptions
+          (group_id, user_id, is_admin)
+          VALUES
+          ($1, $2, $3)
+          RETURNING *;
+          `,
+          [groupId, userId, true]
+        )
+        .then(res => {
+          console.log('sub added', res.rows[0])
+          return res.rows[0]
+        })
+        .catch(e => e)
+      })
+  }
 
   /**
    * Add a subscription to db using localstorage session to get userId.
@@ -334,6 +366,7 @@ module.exports = db => {
     getGroup,
     getGroupsNames,
     addGroup,
+    createGroupAndSubscription,
     getPostWithGroupID,
     changeUserInfo,
     deleteGroup,
