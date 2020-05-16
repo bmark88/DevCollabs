@@ -340,6 +340,26 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
+  const checkUserSubscription = function (user_id, group_id) {
+    console.log("3 - checking db ")
+    return db
+      .query(
+        `
+        SELECT * FROM subscriptions 
+        WHERE user_id = $1 
+        AND group_id = $2;
+        `,
+        [user_id, group_id]
+      )
+      .then(res => {
+        console.log('4 - result from db and length: ', res.rows, res.rows.length)
+        if (res.rows.length === 0) {
+          return false
+        }
+        return true
+      })
+  }
+
   return {
     getUserWithEmail,
     addUser,
@@ -358,5 +378,6 @@ module.exports = db => {
     getGroupsPosts,
     getAllGroups,
     deleteSubscription,
+    checkUserSubscription,
   }
 }

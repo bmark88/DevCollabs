@@ -15,15 +15,19 @@ export default function useApplicationData() {
 
   //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchGroups = () => {
-    return axios
+    axios
       .get(`http://localhost:3001/group/u/${userId}`)
       .then(response => {
-        setState({
-          ...state,
-          group: response.data[0].id,
-          groups: response.data,
+        axios
+        .get(`http://localhost:3001/group/g/${response.data[0].id}`)
+        .then(data => {
+          setState({ ...state,
+             posts: data.data,
+             group: response.data[0].id,
+             groups: response.data,
+          })
         })
-        return response.data[0].id
+        .catch(error => console.log(error))
       })
       .catch(error => console.log(error))
   }

@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import styled from "styled-components"
 
 import Layout from '../components/layout';
+import GithubSearch from '../components/GithubSearch';
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170, },
@@ -164,6 +165,7 @@ export default function StickyHeadTable() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </StatsTable>
+      <GithubSearch/>
     </Layout>
   );
 }
