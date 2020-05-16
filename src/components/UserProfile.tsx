@@ -8,21 +8,31 @@ interface Props {
 }
 
 const Div = styled.div`
-  font-size: 50px;
+  border: solid;
+`;
+
+const Content = styled.div`
+  border: solid;
 `;
 
 const UserProfile = ({ postCount, subscriptions, children } :Props) => {
-  // console.log(subscriptions.map(group => group.id+10))
-  console.log({subscriptions})
+  console.log(subscriptions)
   return (
     <>
-    <Div>{children}</Div>
-    <p>You have a total of ({postCount} ) posts.</p>
-    Subscribed to: {subscriptions.map((group :any, index :number) => {
-      return (
-        <div key={index}>{group.id}</div>
-      )
-    })}
+    <Content>
+      <h3>Total Posts: {postCount}</h3>
+      <h3>Group Subscriptions Below: </h3>
+      {subscriptions.map((group :any, index :number) => {
+        return (
+          <>
+            <Div key={index}>
+              Group: {group.id} 
+              {group.is_admin && <p>You are an Admin for this group</p>} 
+            </Div>
+          </>
+        )
+      })}
+    </Content>
     </>
   )
 };

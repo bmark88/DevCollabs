@@ -12,6 +12,7 @@ const ProfilePage = () => {
     fetchUserSubscriptions 
   } = useApplicationData();
   const userID = JSON.parse(localStorage.getItem('session') || '{}').id
+  const userName = JSON.parse(localStorage.getItem('session') || '{}').username
 
   useEffect(() => {
     fetchUserPosts(userID)
@@ -20,7 +21,7 @@ const ProfilePage = () => {
 
   return (
     <Layout>
-      <UserProfile postCount={postCount} subscriptions={subscriptions}>Hello World</UserProfile>
+      <UserProfile postCount={postCount} subscriptions={subscriptions} />
     </Layout>
   )
 }
