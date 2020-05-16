@@ -379,7 +379,7 @@ module.exports = db => {
         WHERE user_id = $1;
       `,
       [user_id])
-      .then(res => res.rows[0])
+      .then(res => res.rows)
       .catch(e => console.error('error!!', e.stack));
   }
 
