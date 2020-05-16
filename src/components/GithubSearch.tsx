@@ -45,11 +45,21 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 )
 
+interface APIResults {
+  user: any, 
+  repos: any
+}
+
+interface filters {
+  byRepos: number,
+  byFollowers: number
+}
+
 export default function GithubSearch() {
   const classes = useStyles()
 
   const [username, setUsername] = useState("")
-  const [results, setResults] = useState({ user: {}, repos: {} })
+  const [results, setResults] = useState<APIResults>({ user: {}, repos: {} })
   console.log(results)
 
   const getUserGithubApi = (event: any) => {
@@ -58,7 +68,7 @@ export default function GithubSearch() {
     //if username is exact
     Promise.all([
       axios.get(`https://api.github.com/users/${username}`),
-      axios.get(`https://api.github.com/users/ej2brown/repos`),
+      axios.get(`https://api.github.com/users/${username}/repos`),
     ])
       .then(([user, repos]) => {
         console.log(user)
@@ -68,18 +78,32 @@ export default function GithubSearch() {
       })
       .catch(error => console.log(error))
 
+  }
+
+  const getFilterSearch = (event: any) => {
+    event.preventDefault()
+    if (byRepos) username = `${username}+repos:%3E${byRepos}`;
+    if (byFollowers) username = `${username}+followers:%3E${byFollowers}`;
+
     //does a general search
-    // axios.get(`https://api.github.com/search/users?q=${username}`).then(res => {
-    //   //if multiple users returned
+    Promise.all([
+      axios.get(`https://api.github.com/search/users?q=${username}`),
+    ])
+      .then(([user, repos]) => {
+        setResults({ user: user.data, repos: repos.data })
+      })
+      .catch(error => console.log(error))
+
+    // if multiple users returned
     //   if (res.data.items.length > 1) {
     //   }
     //   console.log(res.data.items[0])
     //   setResults(res.data.items[0])
     // })
   }
-  
-  const reposArr = results.repos
-  let sortedReposByDate = []
+
+  const reposArr: Array<any> = results.repos
+  let sortedReposByDate: Array<any> = []
   if (reposArr.length > 0) {
     sortedReposByDate = reposArr.sort((a, b) => b.id - a.id).slice(0, 4)
   }
@@ -209,7 +233,7 @@ export default function GithubSearch() {
         <Button
           type="submit"
           value="Submit"
-          onSubmit={getUserGithubApi}
+          onSubmit={getFilterSearch}
           variant="outlined"
         >
           Search
