@@ -56,32 +56,13 @@ module.exports = db => {
     })
   })
 
-  router.post("/:name", (req, res) => {
-    const subscription = { group_id: "", user_id: "" }
-    dbHelpers
-      .addGroup(req.params.name)
-      .then(group => {
-        subscription.group_id = group.id
-        console.log("1-subscription group", subscription)
-      })
-      .then(() => {
-        dbHelpers
-          .getUserWithEmail("alice@hotmail.com")
-          .then(user => {
-            subscription.user_id = user.id
-            console.log("2-subscription user", subscription)
-          })
-          .then(() => {
-            console.log("3-subscription object: ", subscription),
-              dbHelpers
-                .addSubscription(
-                  subscription.group_id,
-                  subscription.user_id,
-                  true
-                )
-                .then(result => console.log("result ", result))
-          })
-      })
+  router.get("/:group_id/:user_id", (req, res) => {
+    const userId = req.params.user_id
+    const groupId = req.params.group_id
+    dbHelpers.checkUserSubscription(userId, groupId).then(isSubbed => {
+      console.log(isSubbed)
+      res.send(isSubbed)
+    })
   })
 
   router.delete("/delete/:group_id", (req, res) => {
@@ -159,5 +140,7 @@ module.exports = db => {
       })
       .catch(e => res.status(400).send(e))
   })
+
+  
   return router
 }

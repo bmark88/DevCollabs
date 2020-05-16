@@ -6,7 +6,7 @@ import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import Typography from "@material-ui/core/Typography"
 import IndexGroupsList from "./IndexGroupsList"
-
+import Test from './test'
 const ExpansionPanel = withStyles({
   root: {
     border: "1px solid rgba(0, 0, 0, .125)",
@@ -109,7 +109,7 @@ export default function TopicBoard({  }: Props) {
           <Typography>Groups</Typography>
         </ExpansionPanelSummary>
 
-          <IndexGroupsList />
+          <Test />
 
         <ExpansionPanelDetails>
           <Typography></Typography>
