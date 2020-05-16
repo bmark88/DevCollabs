@@ -17,7 +17,7 @@ const PostContainer = styled.div`
 
 const PostsList = ({ posts }: Props) => {
   if (!posts) {return null} 
-  const PostsList = posts.map((post :any) => {
+  const PostsList = posts.reverse().map((post :any) => {
     return (
       <Post key={post.id} id={post.id} user={post.username} created_at={post.created_at} >{post.data}</Post>
     )
