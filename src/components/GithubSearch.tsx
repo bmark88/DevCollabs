@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
 
-import { makeStyles } from "@material-ui/core/styles"
 import Input from "@material-ui/core/Input"
 import InputLabel from "@material-ui/core/InputLabel"
 import InputAdornment from "@material-ui/core/InputAdornment"
@@ -12,25 +11,44 @@ import AccountCircle from "@material-ui/icons/AccountCircle"
 import styled from "styled-components"
 import Button from "@material-ui/core/Button"
 
+import { createStyles, Theme, makeStyles } from "@material-ui/core/styles"
+import List from "@material-ui/core/List"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemText from "@material-ui/core/ListItemText"
+import ListSubheader from "@material-ui/core/ListSubheader"
+
 /**
  * sudo code
- * [] search user
+ * [x] search user
  * [] display repos
  * [] search for multiple
  * [] search using filters
  */
-
-const useStyles = makeStyles(theme => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-}))
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: "100%",
+      maxWidth: 360,
+      backgroundColor: theme.palette.background.paper,
+      position: "relative",
+      overflow: "auto",
+      maxHeight: 300,
+    },
+    listSection: {
+      backgroundColor: "inherit",
+    },
+    ul: {
+      backgroundColor: "inherit",
+      padding: 0,
+    },
+  })
+)
 
 export default function GithubSearch() {
-  const [username, setUsername] = useState("")
-  const [results, setResults] = useState({})
+  const classes = useStyles()
 
-  console.log(username)
+  const [username, setUsername] = useState("")
+  const [results, setResults] = useState({ user: {}, repos: {} })
   console.log(results)
 
   const getUserGithubApi = (event: any) => {
@@ -58,9 +76,16 @@ export default function GithubSearch() {
     //   setResults(res.data.items[0])
     // })
   }
+  //repos[0].updated_at
+  const reposArr = results.repos
+  console.log(reposArr)
 
-  const classes = useStyles()
+  if (reposArr.length > 0 ) {
+    console.log('hi')
 
+  const sortedReposByDate = reposArr.sort((a, b) => b.updated_at - a.updated_at).slice(0, 4)
+  console.log(sortedReposByDate)
+  }
   return (
     <div className={classes.margin}>
       <form onSubmit={getUserGithubApi}>
@@ -86,24 +111,98 @@ export default function GithubSearch() {
           Search
         </Button>
       </form>
-      <h3>User </h3>
-      {results.user.name && <div> Name: {results.user.name} </div>}
-      {results.user.company && <div> Company: {results.user.company} </div>}
-      {results.user.location && <div> Location: {results.user.location} </div>}
-      {results.user.email && <div> Email: {results.user.email} </div>}
-      {results.user.hireable && <div> Name: {results.user.hireable} </div>}
-      {results.user.bio && <div> Bio: {results.user.bio} </div>}
-      {results.user.html_url && <div> URL: {results.user.html_url} </div>}
-      {results.user.avatar_url && <div> Avatar: {results.user.avatar_url} </div>}
-      {results.user.followers_url && <div> Followers: {results.user.followers} </div>}
-      {results.user.following_url && <div> Following: {results.user.following} </div>}
-      {results.user.organizations_url && (
-        <div> Organizations: {results.user.organizations_url} </div>
-      )}
-      {results.user.public_repos && <div> Repos: {results.user.public_repos} </div>}
-      {results.user.repos_url && <div> Repos URL: {results.user.repos_url} </div>}
-      <h3>User's Repo </h3>
-{results.repos && results.repos.map({ })}
+
+      <List className={classes.root} subheader={<li />}>
+        <li key={`section-1`} className={classes.listSection}>
+          <ul className={classes.ul}>
+            {results.user.name && (
+              <ListSubheader>{`User ${results.user.login}`}</ListSubheader>
+            )}
+
+            {results.user.name && (
+              <ListItem key={`item-1-1`}>
+                <ListItemText primary={`Name: ${results.user.name}`} />
+              </ListItem>
+            )}
+
+            {results.user.company && (
+              <ListItem key={`item-1-2`}>
+                <ListItemText primary={`Company: ${results.user.company}`} />
+              </ListItem>
+            )}
+
+            {results.user.location && (
+              <ListItem key={`item-1-3`}>
+                <ListItemText primary={`Location: ${results.user.location}`} />
+              </ListItem>
+            )}
+
+            {results.user.email && (
+              <ListItem key={`item-1-4`}>
+                <ListItemText primary={`Email: ${results.user.email}`} />
+              </ListItem>
+            )}
+
+            {results.user.hireable && (
+              <ListItem key={`item-1-5`}>
+                <ListItemText primary={`hireable: ${results.user.hireable}`} />
+              </ListItem>
+            )}
+
+            {results.user.bio && (
+              <ListItem key={`item-1-6`}>
+                <ListItemText primary={`Bio: "${results.user.bio}"`} />
+              </ListItem>
+            )}
+
+            {results.user.html_url && (
+              <ListItem key={`item-1-7`}>
+                <ListItemText primary={`URL: ${results.user.html_url}`} />
+              </ListItem>
+            )}
+
+            {results.user.avatar_url && (
+              <ListItem key={`item-1-8`}>
+                <ListItemText primary={`Avatar: ${results.user.avatar_url}`} />
+              </ListItem>
+            )}
+
+            {results.user.followers_url && (
+              <ListItem key={`item-1-9`}>
+                <ListItemText
+                  primary={`Followers: ${results.user.followers}`}
+                />
+              </ListItem>
+            )}
+
+            {results.user.following_url && (
+              <ListItem key={`item-1-10`}>
+                <ListItemText
+                  primary={`Following: ${results.user.following}`}
+                />
+              </ListItem>
+            )}
+          </ul>
+        </li>
+
+        {/* <li key={`section-2}`} className={classes.listSection}>
+          <ul className={classes.ul}>
+            {results.repos[0] && (
+              
+              <ListSubheader>{`User's Repos`}</ListSubheader>  )}
+              {results.repos[0] && (
+                // {[0, 1, 2].map((repo) => (
+                  
+                  // ))}
+                <ListItem key={`item-2-${repo.id}`}>
+                <ListItemText primary={`Name: ${repo.name}`} />
+                <ListItemText primary={`Day Created: ${repo.created_at}`} />
+              </ListItem>
+          </ul>
+        </li> */}
+      </List>
+
+      {/* // {results.repos && results.repos.map({ })}  */}
       <div>Filters</div>
       <form className={classes.root} noValidate autoComplete="off">
         <TextField

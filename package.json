@@ -45,6 +45,7 @@
     "react-helmet": "^6.0.0",
     "react-onclickoutside": "^6.9.0",
     "react-toastify": "^6.0.0-rc.2-1",
+    "react-window": "^1.8.5",
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.0",
     "typeface-roboto": "0.0.75",
