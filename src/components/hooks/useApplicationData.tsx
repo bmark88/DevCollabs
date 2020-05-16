@@ -71,6 +71,16 @@ const fetchGroups = () => {
       .catch(error => console.log(error))
   }
 
+  const fetchUserPosts = (userID :number) => {
+    axios
+      .get(`http://localhost:3001/profile/${userID}`)
+      .then(response => {
+        console.log('response from fetchUserPosts', response)
+        return response
+      })
+      .catch(e => console.error('error!!', e.stack))
+  }
+
   useEffect(() => {
     fetchGroups()
     // .then(groupId => {
@@ -82,6 +92,7 @@ const fetchGroups = () => {
   return {
     state,
     setGroup,
-    fetchGroups
+    fetchGroups,
+    fetchUserPosts
   }
 }

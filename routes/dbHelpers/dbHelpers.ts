@@ -360,6 +360,20 @@ module.exports = db => {
       })
   }
 
+  const getUserPostsCount = (user_id) => {
+    return db
+      .query(`
+        SELECT COUNT(*) FROM posts
+        WHERE user_id = $1
+      `,
+      [user_id])
+      .then(res => {
+        console.log(res.rows)
+        return res.rows[0];
+      })
+      .catch(e => console.error('error!!', e.stack))
+  }
+
   return {
     getUserWithEmail,
     addUser,
@@ -379,5 +393,6 @@ module.exports = db => {
     getAllGroups,
     deleteSubscription,
     checkUserSubscription,
+    getUserPostsCount
   }
 }
