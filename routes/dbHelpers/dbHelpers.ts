@@ -60,7 +60,7 @@ module.exports = db => {
         `
         SELECT posts.* , users.username, users.avatar_image FROM posts
         JOIN users ON users.id = posts.user_id
-        WHERE posts.group_id = $1
+        WHERE posts.group_id = $1;
         `,
         [group_id]
       )
@@ -138,13 +138,45 @@ module.exports = db => {
       .query(
         `
         SELECT * FROM users
-        WHERE username = $1
+        WHERE username = $1;
         `,
         [username]
       )
       .then(res => {
         if (res.rows.length === 0) return null
         return res.rows[0]
+      })
+  }
+  
+  const createGroupAndSubscription = function (userId, groupName) {
+    return db
+      .query(
+        `
+        INSERT INTO groups
+        (name)
+        VALUES
+        ($1)
+        RETURNING *;
+        `,
+        [groupName]
+      )
+      .then(res => res.rows[0].id)
+      .then(groupId => {
+         return db.query(
+          `
+          INSERT INTO subscriptions
+          (group_id, user_id, is_admin)
+          VALUES
+          ($1, $2, $3)
+          RETURNING *;
+          `,
+          [groupId, userId, true]
+        )
+        .then(res => {
+          console.log('sub added', res.rows[0])
+          return res.rows[0]
+        })
+        .catch(e => e)
       })
   }
 
@@ -175,7 +207,7 @@ module.exports = db => {
         `
         DELETE FROM subscriptions
         WHERE user_id = $1
-        AND group_id = $2 
+        AND group_id = $2;
       `,
         [userID, groupID]
       )
@@ -214,7 +246,7 @@ module.exports = db => {
       .query(
         `
         DELETE FROM groups
-        WHERE id = $1
+        WHERE id = $1;
         `,
         [group_id]
       )
@@ -300,7 +332,7 @@ module.exports = db => {
         `
       DELETE FROM subscriptions
       WHERE user_id = $1 
-      AND group_id = $2
+      AND group_id = $2;
         `,
         [user_id, group_id]
       )
@@ -314,6 +346,7 @@ module.exports = db => {
     getGroup,
     getGroupsNames,
     addGroup,
+    createGroupAndSubscription,
     getPostWithGroupID,
     changeUserInfo,
     deleteGroup,

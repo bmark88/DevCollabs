@@ -42,15 +42,16 @@ const RoomPage = () => {
     -->
   `;
   const [snippetValue, setSnippetValue] = useState(welcomeHTML)
+
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
 
-  conn.on("IDE", data =>{
+  conn.on("IDE", data => {
     setSnippetValue(data.value)
   })
-  
+
   useEffect(()=> {
     document.getElementById('live-html').innerHTML = snippetValue
   }, [snippetValue])

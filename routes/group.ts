@@ -6,7 +6,7 @@ module.exports = db => {
   // get all groups that exist. returns {array<[id:interger, name:string]>}
   router.get("/public", (req, res) => {
     dbHelpers.getAllGroups().then(data => {
-      console.log(data)
+      // console.log(data)
       res.send(data)
     })
   })
@@ -123,7 +123,18 @@ module.exports = db => {
     dbHelpers
       .deleteSubscription(userId, groupId)
       .catch(() => res.status(400).send("Could not delete subscription"))
-    })
+  })
 
+  router.post("/g/create", (req, res) => {
+    const { userId, groupName } = req.body
+    console.log("userId ", userId)
+    console.log("groupName ", groupName)
+    dbHelpers
+      .createGroupAndSubscription(userId, groupName)
+      .then(data => {
+        res.send(data)
+      })
+      .catch(e => res.status(400).send(e))
+  })
   return router
 }
