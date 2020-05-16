@@ -368,8 +368,20 @@ module.exports = db => {
       `,
       [user_id])
       .then(res => res.rows[0])
-      .catch(e => console.error('error!!', e.stack))
+      .catch(e => console.error('error!!', e.stack));
   };
+
+  const getAllUserSubscriptions = (user_id) => {
+    return db
+      .query(`
+        SELECT * FROM subscriptions
+        JOIN users ON (user_id = users.id)
+        WHERE user_id = $1;
+      `,
+      [user_id])
+      .then(res => res.rows[0])
+      .catch(e => console.error('error!!', e.stack));
+  }
 
   return {
     getUserWithEmail,
@@ -390,6 +402,7 @@ module.exports = db => {
     getAllGroups,
     deleteSubscription,
     checkUserSubscription,
-    getUserPostsCount
+    getUserPostsCount,
+    getAllUserSubscriptions
   }
 }

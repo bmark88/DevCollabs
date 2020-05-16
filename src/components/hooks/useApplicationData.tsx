@@ -75,7 +75,7 @@ const fetchGroups = () => {
   const fetchUserPosts = (userID :number) => {
     axios
       .get(`http://localhost:3001/profile/${userID}`)
-      .then(response => setPostCount(response.data.count))
+      .then(response => setPostCount(response.data.totalPosts.count))
       .catch(e => console.error('error!!', e.stack))
   };
 
