@@ -9,9 +9,6 @@ import socketChat from "../components/hooks/socketChat"
 import TopicBoard from "../components/TopicBoard"
 import News from "../components/News"
 
-import { myContext } from '../../DarkTheme'
-import { Link } from "gatsby"
-
 const Main = styled.main`
   margin-top: 80px;
   display: flex;
@@ -31,32 +28,6 @@ const TopicsContainer = styled.div`
   }
 `
 
-/*
-.colorTheme {
-  
-  height: 100vh;
-  transition: .3s ease-in-out;
-}
-
-.darkTheme {
-
-  height: 100vh;
-  transition: .3s ease-in-out;
-  background-color: #1A202C;
-  color: #fff;
-
-}
-
-.lightTheme {
-
-  height: 100vh;
-  transition: .3s ease-in-out;
-  background-color: #fff;
-  color: #000;
-
-}
-*/
-
 export default function IndexPage() {
   let { users, messages, handleSubmit } = socketChat("public")
 
@@ -68,15 +39,6 @@ export default function IndexPage() {
   return (
     <>
       <Navbar />
-      <myContext.Consumer>
-      {context => (
-        <React.Fragment>
-          <h1>{context.isDark ? "Dark Theme" : "Light Theme"}</h1>
-          <button onClick={() => context.changeTheme()}>{context.isDark ? "Light" : "Dark"}</button>
-          <Link to="/page-2/">Go to page 2</Link>
-        </React.Fragment>
-      )}
-    </myContext.Consumer>
       <Main>
         <div>
           Placeholder for user profile card

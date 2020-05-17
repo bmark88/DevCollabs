@@ -6,7 +6,3 @@
 
 // You can delete this file if you're not using it
 
-import Provider from './DarkTheme'
-
-export const wrapRootElement = Provider
-
