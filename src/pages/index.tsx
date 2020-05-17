@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import styled from "styled-components"
 import { navigate } from "gatsby"
 
@@ -8,6 +8,8 @@ import Navbar from "../components/Navbar"
 import socketChat from "../components/hooks/socketChat"
 import TopicBoard from "../components/TopicBoard"
 import News from "../components/News"
+import UserProfile from "../components/UserProfile";
+import useApplicationData from "../components/hooks/useApplicationData";
 
 
 const Main = styled.main`
@@ -31,18 +33,32 @@ const TopicsContainer = styled.div`
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = socketChat("public")
+  const { 
+    postCount,
+    subscriptions, 
+    fetchUserPosts, 
+    fetchUserSubscriptions 
+  } = useApplicationData();
 
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
 
+  const userID = JSON.parse(localStorage.getItem('session') || '{}').id
+  const userName = JSON.parse(localStorage.getItem('session') || '{}').username
+
+  useEffect(() => {
+    fetchUserPosts(userID)
+    fetchUserSubscriptions(userID)
+  }, [])
+
   return (
     <>
       <Navbar />
       <Main>
         <div>
-          Placeholder for user profile card
+          <UserProfile postCount={postCount} subscriptions={subscriptions} />
         </div>
         <TopicsContainer>
           <TopicBoard />
