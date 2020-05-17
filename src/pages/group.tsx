@@ -100,8 +100,8 @@ const GroupPage = () => {
   const handleCreateGroup = event => {
     event.preventDefault()
     const userId = JSON.parse(localStorage.getItem("session") || "{}").id
-    console.log("userId ", userId)
-    console.log("groupName ", groupName)
+    // console.log("userId ", userId)
+    // console.log("groupName ", groupName)
     Axios.post("http://localhost:3001/group/g/create", {
       userId,
       groupName,
@@ -111,8 +111,8 @@ const GroupPage = () => {
         fetchGroups()
       })
       .catch(e => {
-        console.log("already exist")
-        console.log(e)
+        // console.log("already exist")
+        // console.log(e)
         toast(`Group name is already taken`, {
           position: "bottom-right",
           autoClose: 2500,

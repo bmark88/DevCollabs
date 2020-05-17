@@ -48,17 +48,15 @@ const UserProfile = ({ postCount, subscriptions, userName } :Props) => {
       </ListSubheader>
         {subscriptions.map((group :any, index :number) => {
           return (
-            <>
-              <Div key={index}>
-                <b>{group.name}</b>
-                {group.is_admin && 
-                  <AdminBadge>
-                    <AccountCircleIcon/>
-                    Admin
-                  </AdminBadge>
-                }
-              </Div>
-            </>
+            <Div key={index}>
+              <b>{group.name}</b>
+              {group.is_admin && 
+                <AdminBadge>
+                  <AccountCircleIcon/>
+                  Admin
+                </AdminBadge>
+              }
+            </Div>
           );
         })}
       </List>

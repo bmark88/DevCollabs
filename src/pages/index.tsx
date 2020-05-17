@@ -9,6 +9,7 @@ import socketChat from "../components/hooks/socketChat"
 import TopicBoard from "../components/TopicBoard"
 import News from "../components/News"
 import UserCard from "../components/UserCard"
+import UserList from "../components/UserList"
 
 const Main = styled.main`
   margin-top: 80px;
@@ -41,7 +42,8 @@ export default function IndexPage() {
     <>
       <Navbar />
       <Main>
-        <UserCard />
+        <UserCard/>
+        <UserList />
         <TopicsContainer>
           <TopicBoard />
         </TopicsContainer>

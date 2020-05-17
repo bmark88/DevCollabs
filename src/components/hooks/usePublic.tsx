@@ -12,14 +12,25 @@ export default function usePublic() {
     axios
       .get(`http://localhost:3001/group/public`)
       .then(response => {
-        console.log(response)
+        // console.log(response)
         setPublic({ ...publicGroups, groups: response.data })
       })
       .catch(error => console.log(error))
   }
 
+  const fetchAllUsers = () => {
+    axios
+      .get(`http://localhost:3001/users`)
+      .then(response => {
+        console.log('fetchAllUsers response ==>', response)
+        return
+      })
+      .catch(e => console.error('error ==>', e.stack));
+  }
+
   useEffect(() => {
-    fetchAllGroups()
+    fetchAllGroups();
+    fetchAllUsers();
   }, [])
 
   return {

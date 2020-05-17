@@ -10,10 +10,10 @@ function GroupTestElement(props) {
    .id
    const [sub, setSub] = useState(false)
    const [disable, setDisable] = useState(false)
-   console.log('sub true or not', props.sub)
-   console.log("from grouptestelent", name)
-   console.log("from goruptestele", id)
-   console.log('-------------')
+   // console.log('sub true or not', props.sub)
+   // console.log("from grouptestelent", name)
+   // console.log("from goruptestele", id)
+   // console.log('-------------')
 
    useEffect(()=>{
       axios({
@@ -69,9 +69,9 @@ export default function Test() {
   useEffect(() => {
     const userId: number = JSON.parse(localStorage.getItem("session") || "{}")
       .id
-    console.log("userID", userId)
+   //  console.log("userID", userId)
     axios.get("http://localhost:3001/group/public").then(data => {
-      console.log(data.data)
+      // console.log(data.data)
       setAllGroups(data.data)
     })
 //     axios.get(`http://localhost:3001/group/u/${userId}`).then(data => {
@@ -83,14 +83,14 @@ export default function Test() {
 //     })
   }, [])
 
-  const List = allGroups.map(group => {
+  const List = allGroups.map((group, index :number) => {
       // if (groupBelong.includes(group.name)) {
       //    return <GroupTestElement group={group} sub={true} />
       // } else {
       //   
       // }
-      console.log('group =>' , group)
-      return <GroupTestElement group={group} />
+      // console.log('group =>' , group)
+      return <GroupTestElement key={index} group={group} />
   })
 
   return <div>{List}</div>
