@@ -26,7 +26,7 @@ const Main = styled.main`
 const TopicsContainer = styled.div`
   background-color: black;
   color: white;
-  width: 50%;
+  width: 43%;
   margin: 1em;
   height: 85%;
 
@@ -38,26 +38,12 @@ const TopicsContainer = styled.div`
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = socketChat("public")
-  const { 
-    postCount,
-    subscriptions, 
-    fetchUserPosts, 
-    fetchUserSubscriptions 
-  } = useApplicationData();
   const { usersList } = usePublic();
 
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
-
-  const userID = JSON.parse(localStorage.getItem('session') || '{}').id
-  const userName = JSON.parse(localStorage.getItem('session') || '{}').username
-
-  useEffect(() => {
-    fetchUserPosts(userID)
-    fetchUserSubscriptions(userID)
-  }, [])
 
   return (
     <>
