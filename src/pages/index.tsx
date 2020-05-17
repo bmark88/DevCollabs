@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar"
 import socketChat from "../components/hooks/socketChat"
 import TopicBoard from "../components/TopicBoard"
 import News from "../components/News"
-
+import UserCard from "../components/UserCard"
 
 const Main = styled.main`
   margin-top: 80px;
@@ -43,6 +43,7 @@ export default function IndexPage() {
       <Main>
         <div>
           Placeholder for user profile card
+          <UserCard />
         </div>
         <TopicsContainer>
           <TopicBoard />
