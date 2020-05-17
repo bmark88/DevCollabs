@@ -173,7 +173,7 @@ module.exports = db => {
           [groupId, userId, true]
         )
         .then(res => {
-          console.log('sub added', res.rows[0])
+          // console.log('sub added', res.rows[0])
           return res.rows[0]
         })
         .catch(e => e)
@@ -342,7 +342,7 @@ module.exports = db => {
   }
 
   const checkUserSubscription = function (user_id, group_id) {
-    console.log("3 - checking db ")
+    // console.log("3 - checking db ")
     return db
       .query(
         `
@@ -353,7 +353,7 @@ module.exports = db => {
         [user_id, group_id]
       )
       .then(res => {
-        console.log('4 - result from db and length: ', res.rows, res.rows.length)
+        // console.log('4 - result from db and length: ', res.rows, res.rows.length)
         if (res.rows.length === 0) {
           return false
         }
@@ -376,14 +376,24 @@ module.exports = db => {
   const getAllUserSubscriptions = (user_id) => {
     return db
       .query(`
-        SELECT subscriptions.* FROM subscriptions
-        JOIN users ON (user_id = users.id)
+        SELECT subscriptions.*, groups.name FROM subscriptions
+        JOIN groups ON (subscriptions.group_id = groups.id)
         WHERE user_id = $1;
       `,
       [user_id])
       .then(res => res.rows)
       .catch(e => console.error('error!!', e.stack));
-  }
+  };
+
+  const getAllUsers = () => {
+    return db
+      .query(`
+        SELECT id, username, email, avatar_image 
+        FROM users;
+      `)
+      .then(res => res.rows)
+      .catch(e => console.error('error!!', e.stack));
+  };
 
   return {
     getUserWithEmail,
@@ -405,6 +415,7 @@ module.exports = db => {
     deleteSubscription,
     checkUserSubscription,
     getUserPostsCount,
-    getAllUserSubscriptions
+    getAllUserSubscriptions,
+    getAllUsers
   }
 }

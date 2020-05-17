@@ -2,15 +2,20 @@ import React, {useEffect} from "react"
 import styled from "styled-components"
 import { navigate } from "gatsby"
 
+//hooks
+import socketChat from "../components/hooks/socketChat"
+import usePublic from "../components/hooks/usePublic"
+
 //components
 import Chat from "../components/Chat"
 import Navbar from "../components/Navbar"
-import socketChat from "../components/hooks/socketChat"
 import TopicBoard from "../components/TopicBoard"
 import News from "../components/News"
 import UserProfile from "../components/UserProfile";
 import useApplicationData from "../components/hooks/useApplicationData";
 
+import UserCard from "../components/UserCard"
+import UserList from "../components/UserList"
 
 const Main = styled.main`
   margin-top: 80px;
@@ -39,6 +44,7 @@ export default function IndexPage() {
     fetchUserPosts, 
     fetchUserSubscriptions 
   } = useApplicationData();
+  const { usersList } = usePublic();
 
   if (!localStorage.getItem("session")) {
     navigate("/login")
@@ -57,9 +63,8 @@ export default function IndexPage() {
     <>
       <Navbar />
       <Main>
-        <div>
-          <UserProfile postCount={postCount} subscriptions={subscriptions} />
-        </div>
+        <UserCard/>
+        <UserList users={usersList} />
         <TopicsContainer>
           <TopicBoard />
         </TopicsContainer>

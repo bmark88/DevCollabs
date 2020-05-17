@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import UserProfile from "../components/UserProfile"
+import useApplicationData from "../components/hooks/useApplicationData"
 
-import Layout from "../components/layout";
-import UserProfile from "../components/UserProfile";
-import useApplicationData from "../components/hooks/useApplicationData";
-
-const ProfilePage = () => {
+const UserCard = () => {
   const { 
     postCount,
     subscriptions, 
@@ -20,10 +18,10 @@ const ProfilePage = () => {
   }, [])
 
   return (
-    <Layout>
-      <UserProfile postCount={postCount} subscriptions={subscriptions} />
-    </Layout>
+    <>
+      <UserProfile userName={userName} postCount={postCount} subscriptions={subscriptions} />
+    </>
   )
-} 
+};
 
-export default ProfilePage;
+export default UserCard;
