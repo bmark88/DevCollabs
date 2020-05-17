@@ -5,7 +5,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 interface Props {
   postCount :number
-  // children: any
   subscriptions :any
   userName :string
 }
@@ -20,9 +19,11 @@ const Content = styled.div`
   border: solid;
   margin: 1em;
   min-width: 345px;
+  height: 300px;
 `;
 
 const AdminBadge = styled.div`
+  margin-left: 1em;
   display: flex;
   border-radius: 20px;
   padding: 0.1em;
@@ -30,13 +31,12 @@ const AdminBadge = styled.div`
 `;
 
 const UserProfile = ({ postCount, subscriptions, userName } :Props) => {
-  // console.log(subscriptions)
   return (
     <>
     <Content>
       <h1>{userName}</h1>
       <h3>Total Posts: {postCount}</h3>
-      <List>
+      <List style={{maxHeight: '100%', overflow: 'auto'}}>
       <ListSubheader><h3>{`Your Subbed Groups`}</h3></ListSubheader>
         {subscriptions.map((group :any, index :number) => {
           return (
@@ -51,11 +51,11 @@ const UserProfile = ({ postCount, subscriptions, userName } :Props) => {
                 }
               </Div>
             </>
-          )
+          );
         })}
       </List>
     </Content>
     </>
-  )
+  );
 };
 export default UserProfile;

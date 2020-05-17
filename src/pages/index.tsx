@@ -41,10 +41,7 @@ export default function IndexPage() {
     <>
       <Navbar />
       <Main>
-        <div>
-          Placeholder for user profile card
-          <UserCard />
-        </div>
+        <UserCard />
         <TopicsContainer>
           <TopicBoard />
         </TopicsContainer>
