@@ -14,7 +14,7 @@ import IndexGroupsListItem from "./.IndexGroupsListItem"
 import subscribeList from "../helpers/selectors"
 
 
-export default function IndexGroupsList() {
+function IndexGroupsList() {
 
   //state includes list of users groups state= { groups{[id:number ,name:string], ...} }
   const { state } = useApplicationData()
