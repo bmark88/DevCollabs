@@ -332,7 +332,8 @@ module.exports = db => {
         `
       DELETE FROM subscriptions
       WHERE user_id = $1 
-      AND group_id = $2;
+      AND group_id = $2
+      RETURNING *;
         `,
         [user_id, group_id]
       )
@@ -358,6 +359,7 @@ module.exports = db => {
         }
         return true
       })
+      .catch(e => console.log(e))
   }
 
   return {

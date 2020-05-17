@@ -9,6 +9,7 @@ function GroupTestElement(props) {
    const userId = JSON.parse(localStorage.getItem("session") || "{}")
    .id
    const [sub, setSub] = useState(false)
+   const [disable, setDisable] = useState(false)
    console.log('sub true or not', props.sub)
    console.log("from grouptestelent", name)
    console.log("from goruptestele", id)
@@ -34,10 +35,8 @@ function GroupTestElement(props) {
          })
          .then(() => {
             console.log('unsub success')
-            setSub(!sub)
          })
          .catch(() => console.log('unsub unsuccess'))
-         
       )
       : (
          axios({
@@ -47,11 +46,12 @@ function GroupTestElement(props) {
          })
          .then(() => {
             console.log('sub success')
-            setSub(!sub)
+            
          })
-         .catch(() => console.log('sub unsuccess') )
-           
+         .catch(() => console.log('sub unsuccess') )   
       )
+      setSub(!sub)
+      setDisable(true)
    }
    
    return (
@@ -71,7 +71,7 @@ export default function Test() {
       .id
     console.log("userID", userId)
     axios.get("http://localhost:3001/group/public").then(data => {
- 
+      console.log(data.data)
       setAllGroups(data.data)
     })
 //     axios.get(`http://localhost:3001/group/u/${userId}`).then(data => {
@@ -89,7 +89,8 @@ export default function Test() {
       // } else {
       //   
       // }
-      return <GroupTestElement group={group}  />
+      console.log('group =>' , group)
+      return <GroupTestElement group={group} />
   })
 
   return <div>{List}</div>
