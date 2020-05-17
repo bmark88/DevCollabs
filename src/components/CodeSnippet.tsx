@@ -7,10 +7,14 @@ import copy from 'copy-to-clipboard';
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-twilight";
 
-const Div = styled.div`
-  left: 2em;
-  top: 5.5em;
-  // position: absolute;  
+import { toast } from "react-toastify";
+
+toast.configure();
+
+const ClipBoard = styled.div`
+  bottom: 0;
+  left: 11.5em;
+  position: absolute;
 `;
 
 const CodeSnippet = (props : any) => {
@@ -23,15 +27,28 @@ const CodeSnippet = (props : any) => {
 
   function copyToClipboard() {
     copy(snippetValue)
+
+    toast(`Copied to clipboard!`, {
+      position: "bottom-left",
+      autoClose: 2500,
+      closeOnClick: false,
+      pauseOnHover: false,
+      hideProgressBar: true,
+    })
   }
 
   return (
-    <Div>
+    <>
       <AceEditor
+        style={{
+          margin:"1em",
+          minWidth: "500px"
+        }}
+        fontSize="16px"
         mode="javascript"
         theme="twilight"
         height="84.7vh"
-        width="50vw"
+        width="520px"
         value={props.snippetValue}
         onChange={onChange}
         name="UNIQUE_ID_OF_DIV"
@@ -44,8 +61,11 @@ const CodeSnippet = (props : any) => {
           tabSize: 2,
           }}
       />
-      <button onClick={copyToClipboard}><FileCopyIcon /></button>
-    </Div>
+      <ClipBoard>
+        Copy to Clipboard: 
+        <button onClick={copyToClipboard}><FileCopyIcon /></button>
+      </ClipBoard>
+    </>
     )
 };
 

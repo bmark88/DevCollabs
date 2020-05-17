@@ -207,7 +207,7 @@ module.exports = db => {
         `
         DELETE FROM subscriptions
         WHERE user_id = $1
-        AND group_id = $2; 
+        AND group_id = $2;
       `,
         [userID, groupID]
       )
@@ -332,7 +332,8 @@ module.exports = db => {
         `
       DELETE FROM subscriptions
       WHERE user_id = $1 
-      AND group_id = $2;
+      AND group_id = $2
+      RETURNING *;
         `,
         [user_id, group_id]
       )
@@ -358,6 +359,30 @@ module.exports = db => {
         }
         return true
       })
+      .catch(e => console.log(e))
+  }
+
+  const getUserPostsCount = (user_id) => {
+    return db
+      .query(`
+        SELECT COUNT(*) FROM posts
+        WHERE user_id = $1;
+      `,
+      [user_id])
+      .then(res => res.rows[0])
+      .catch(e => console.error('error!!', e.stack));
+  };
+
+  const getAllUserSubscriptions = (user_id) => {
+    return db
+      .query(`
+        SELECT subscriptions.* FROM subscriptions
+        JOIN users ON (user_id = users.id)
+        WHERE user_id = $1;
+      `,
+      [user_id])
+      .then(res => res.rows)
+      .catch(e => console.error('error!!', e.stack));
   }
 
   return {
@@ -379,5 +404,7 @@ module.exports = db => {
     getAllGroups,
     deleteSubscription,
     checkUserSubscription,
+    getUserPostsCount,
+    getAllUserSubscriptions
   }
 }

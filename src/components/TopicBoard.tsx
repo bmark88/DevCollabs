@@ -6,7 +6,7 @@ import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import Typography from "@material-ui/core/Typography"
 import IndexGroupsList from "./IndexGroupsList"
-
+import Test from './test'
 const ExpansionPanel = withStyles({
   root: {
     border: "1px solid rgba(0, 0, 0, .125)",
@@ -45,6 +45,8 @@ const ExpansionPanelSummary = withStyles({
 const ExpansionPanelDetails = withStyles(theme => ({
   root: {
     padding: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column'
   },
 }))(MuiExpansionPanelDetails)
 
@@ -76,7 +78,7 @@ export default function TopicBoard({  }: Props) {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
+          {/* <Typography> */}
             <p>
               <strong>{username}</strong>, we are happy you've made the decision
               to collaborate with other developers.
@@ -94,7 +96,7 @@ export default function TopicBoard({  }: Props) {
               <li>Consuming post content: See other posts below.</li>
             </ol>
             <div>Created At: {moment().format("lll")}</div>
-          </Typography>
+          {/* </Typography> */}
         </ExpansionPanelDetails>
       </ExpansionPanel>
       <ExpansionPanel
@@ -109,7 +111,7 @@ export default function TopicBoard({  }: Props) {
           <Typography>Groups</Typography>
         </ExpansionPanelSummary>
 
-          <IndexGroupsList />
+          <Test />
 
         <ExpansionPanelDetails>
           <Typography></Typography>

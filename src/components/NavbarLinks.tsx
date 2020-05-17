@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, navigate } from "gatsby"
 import styled from "styled-components"
-import Dropdown from "./Dropdown"
+import DropDown from "../components/Dropdown"
 
 const NavItem = styled(Link)`
   padding: 10px;
@@ -10,21 +10,12 @@ const NavItem = styled(Link)`
   font-size: 18px;
 `;
 
-const Drop = styled(Dropdown)`
-  text-decoration: none;
-  
-  &:hover {
-    cursor: progress;
-  }
-`;
-
 const Div = styled.div`
   font-family: georgia, serif;
   font-size: 18px;
   color: #551A8B;
-  position: absolute;
   display: flex;
-  right: 5vw;
+  align-items: center;
 `;
 
 const Img = styled.img`
@@ -48,16 +39,24 @@ const NavbarLinks = (props: any) => {
     <>
       {props.username && (
       <>
-        <a href="/settings"> 
-        <Img src={"https://planetbotanix.com/wp-content/uploads/2017/08/Female-Avatar-1-300x300-300x300.jpg"} alt="avatar-image"/>
-        </a>
-        <NavItem className="avatar" to="/settings">
-            {props.username}
-        </NavItem>
+        <Div>
+          <Link to="/profile">
+          <Img 
+            src={"https://planetbotanix.com/wp-content/uploads/2017/08/Female-Avatar-1-300x300-300x300.jpg"} 
+            alt="avatar-image"
+          />
+          </Link>
+          <NavItem className="avatar" to="/profile">
+              {props.username}
+          </NavItem>
+        </Div>
       </>
       )}
+      <NavItem to="/">
+        Dev Collabs
+      </NavItem>
       <Div>
-        {props.username && <Drop>Features</Drop>}
+        {props.username && <DropDown />}
         {!props.username && 
           <>
             <NavItem to="/register">
@@ -75,7 +74,7 @@ const NavbarLinks = (props: any) => {
         }
       </Div>
     </>
-  )
-}
+  );
+};
 
-export default NavbarLinks
+export default NavbarLinks;
