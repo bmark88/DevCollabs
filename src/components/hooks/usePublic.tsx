@@ -6,6 +6,7 @@ export default function usePublic() {
   const [publicGroups, setPublic] = useState({
     groups: [],
   }) //TODO change to array
+  const [usersList, setUsersList] = useState([]);
 
   //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchAllGroups = () => {
@@ -22,8 +23,8 @@ export default function usePublic() {
     axios
       .get(`http://localhost:3001/users`)
       .then(response => {
-        console.log('fetchAllUsers response ==>', response)
-        return
+        // console.log('fetchAllUsers response ==>', response.data)
+        setUsersList(response.data);
       })
       .catch(e => console.error('error ==>', e.stack));
   }
@@ -35,5 +36,6 @@ export default function usePublic() {
 
   return {
     publicGroups,
+    usersList
   }
 }

@@ -391,7 +391,9 @@ module.exports = db => {
         SELECT id, username, email, avatar_image 
         FROM users;
       `)
-  }
+      .then(res => res.rows)
+      .catch(e => console.error('error!!', e.stack));
+  };
 
   return {
     getUserWithEmail,

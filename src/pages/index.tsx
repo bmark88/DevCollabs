@@ -2,10 +2,13 @@ import React from "react"
 import styled from "styled-components"
 import { navigate } from "gatsby"
 
+//hooks
+import socketChat from "../components/hooks/socketChat"
+import usePublic from "../components/hooks/usePublic"
+
 //components
 import Chat from "../components/Chat"
 import Navbar from "../components/Navbar"
-import socketChat from "../components/hooks/socketChat"
 import TopicBoard from "../components/TopicBoard"
 import News from "../components/News"
 import UserCard from "../components/UserCard"
@@ -32,6 +35,7 @@ const TopicsContainer = styled.div`
 
 export default function IndexPage() {
   let { users, messages, handleSubmit } = socketChat("public")
+  const { usersList } = usePublic();
 
   if (!localStorage.getItem("session")) {
     navigate("/login")
@@ -43,7 +47,7 @@ export default function IndexPage() {
       <Navbar />
       <Main>
         <UserCard/>
-        <UserList />
+        <UserList users={usersList} />
         <TopicsContainer>
           <TopicBoard />
         </TopicsContainer>
