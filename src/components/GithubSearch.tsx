@@ -18,6 +18,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import ListSubheader from "@material-ui/core/ListSubheader"
 import { sizing } from "@material-ui/system"
 import Paper from "@material-ui/core/Paper"
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       position: "relative",
       overflow: "auto",
-      maxHeight: 300,
+      maxHeight: 600,
       "& div": {},
     },
     listSection: {
@@ -43,13 +44,18 @@ const useStyles = makeStyles((theme: Theme) =>
 const DivFlex = styled.div`
   display: flex;
 `
-const DivFlexAlign = styled.div`
+const FilterContainer = styled.div`
   padding: 20px;
+  border: solid;
   // align-items: flex-start;
   // margin: auto;
   // alignItems: center;
   // margin-left: auto;
-`
+`;
+
+const FormFilter = styled.form`
+  border: solid;
+`;
 
 interface APIResults {
   user: any
@@ -94,10 +100,6 @@ export default function GithubSearch() {
     items: [],
   })
 
-  console.log(results)
-  console.log(reposResults)
-  console.log("-------------------")
-
   const getUserSearch = (event: any) => {
     event.preventDefault()
 
@@ -107,9 +109,6 @@ export default function GithubSearch() {
       axios.get(`https://api.github.com/users/${username}/repos`),
     ])
       .then(([user, repos]) => {
-        console.log(user)
-        console.log(repos)
-
         setResults({ user: user.data, repos: repos.data })
       })
       .catch(error => console.log(error))
@@ -120,7 +119,6 @@ export default function GithubSearch() {
     let searchQuery: string = username
     if (userReposCount) searchQuery = `${username}+repos:%3E${userReposCount}`
     // if (byFollowers) username = `${username}+followers:%3E${byFollowers}`
-    console.log("->", searchQuery)
 
     //does a general query search
     axios
@@ -162,13 +160,15 @@ export default function GithubSearch() {
   const reposResultsArr: Array<any> = reposResults.items
 
   return (
-    <DivFlex className={classes.margin}>
-      <DivFlexAlign>
+    <>
+    {/* <DivFlex className={classes.margin}> */}
+      <FilterContainer>
         {/* \\\\\-----------------------USER-------------------------///// */}
 
         <div className="user-list">
+          <GitHubIcon/>
           <h3>User</h3>
-          <form onSubmit={getUserSearch}>
+          <FormFilter onSubmit={getUserSearch}>
             <Grid container spacing={1} alignItems="flex-end">
               <Grid item>
                 <AccountCircle />
@@ -185,11 +185,12 @@ export default function GithubSearch() {
             <Button type="submit" value="Submit" variant="outlined">
               Search
             </Button>
-          </form>
+          </FormFilter>
 
-          <h5>Filters</h5>
+          <GitHubIcon/>
+          <h5>Filter by Minimum # of Repos</h5>
           <div>
-            <form
+            <FormFilter
               className={classes.root}
               noValidate
               autoComplete="off"
@@ -206,7 +207,7 @@ export default function GithubSearch() {
               <Button type="submit" value="Submit" variant="outlined">
                 Search
               </Button>
-            </form>
+            </FormFilter>
           </div>
 
           {/* \\\\\ ----------------------- RESULTS ------------------------- /////*/}
@@ -319,8 +320,9 @@ export default function GithubSearch() {
                   )}
                   {userFilterArr.map(repo => (
                     <ListItem key={`item-3-${repo.id}-1`}>
-                      <ListItemText primary={`Name: ${repo.login}`} />
-                      <ListItemText primary={`URL: ${repo.html_url}`} />
+                      <ListItemText primary={`GitHub Username: ${repo.login}`} />
+                      {/* <ListItemText primary={`URL: ${repo.html_url}`} /> */}
+                      <a href={repo.html_url}>{repo.html_url}</a>
                     </ListItem>
                   ))}
                 </ul>
@@ -328,12 +330,13 @@ export default function GithubSearch() {
             )}
           </List>
         </div>
-      </DivFlexAlign>
+      </FilterContainer>
       {/* \\\\\ -----------------------REPOS------------------------- /////*/}
-      <DivFlexAlign>
+      <FilterContainer>
         <div className="repos-list">
+          <GitHubIcon/>
           <h3>Repos</h3>
-          <form
+          <FormFilter
             className={classes.root}
             noValidate
             autoComplete="off"
@@ -347,7 +350,7 @@ export default function GithubSearch() {
               value={reposName}
               onChange={event => setReposName(event.target.value)}
             />
-            <h5>Filters</h5>
+            <h5>Additional Filters</h5>
             <TextField
               label="Topic"
               variant="outlined"
@@ -370,7 +373,7 @@ export default function GithubSearch() {
             >
               Search
             </Button>
-          </form>
+          </FormFilter>
 
           {/* \\\\\ ---------------------RESULTS--------------------------- /////*/}
 
@@ -417,7 +420,8 @@ export default function GithubSearch() {
             )}
           </List>
         </div>
-      </DivFlexAlign>
-    </DivFlex>
+      </FilterContainer>
+    {/* </DivFlex> */}
+    </>
   )
 }
