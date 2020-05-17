@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: "inherit",
       padding: 0,
     },
+    field: {
+      margin: "0.2em",
+    },
   })
 )
 
@@ -46,7 +49,8 @@ const DivFlex = styled.div`
 `
 const FilterContainer = styled.div`
   padding: 20px;
-  border: solid;
+  border: solid 2px;
+  margin: 1em;
   // align-items: flex-start;
   // margin: auto;
   // alignItems: center;
@@ -54,7 +58,15 @@ const FilterContainer = styled.div`
 `;
 
 const FormFilter = styled.form`
-  border: solid;
+  // border: solid;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const TitleFilter = styled.div`
+  display: flex;
+  padding: 1em;
 `;
 
 interface APIResults {
@@ -166,28 +178,24 @@ export default function GithubSearch() {
         {/* \\\\\-----------------------USER-------------------------///// */}
 
         <div className="user-list">
-          <GitHubIcon/>
-          <h3>User</h3>
+          <TitleFilter>
+            <GitHubIcon/>
+            <h3>Search By User</h3>
+          </TitleFilter>
           <FormFilter onSubmit={getUserSearch}>
-            <Grid container spacing={1} alignItems="flex-end">
-              <Grid item>
-                <AccountCircle />
-              </Grid>
-              <Grid item>
-                <TextField
-                  required
-                  label="Enter username"
-                  value={username}
-                  onChange={event => setUsername(event.target.value)}
-                />
-              </Grid>
-            </Grid>
-            <Button type="submit" value="Submit" variant="outlined">
+            <TextField className={classes.field}
+              required
+              label="GitHub Username"
+              value={username}
+              variant="outlined"
+              fullWidth
+              onChange={event => setUsername(event.target.value)}
+            />
+            <Button type="submit" value="Submit" variant="outlined" fullWidth>
               Search
             </Button>
           </FormFilter>
 
-          <GitHubIcon/>
           <h5>Filter by Minimum # of Repos</h5>
           <div>
             <FormFilter
@@ -196,12 +204,12 @@ export default function GithubSearch() {
               autoComplete="off"
               onSubmit={getFilterSearch}
             >
-              <TextField
-                label="# of repos"
+              <TextField className={classes.field}
+                label="Minimum Count"
                 variant="outlined"
                 size="small"
                 value={userReposCount}
-                helperText="General search with username above"
+                // helperText="General search with username above"
                 onChange={event => setUserReposCount(event.target.value)}
               />
               <Button type="submit" value="Submit" variant="outlined">
@@ -334,32 +342,34 @@ export default function GithubSearch() {
       {/* \\\\\ -----------------------REPOS------------------------- /////*/}
       <FilterContainer>
         <div className="repos-list">
-          <GitHubIcon/>
-          <h3>Repos</h3>
+          <TitleFilter>
+            <GitHubIcon/>
+            <h3>Search By Repository</h3>
+          </TitleFilter>
           <FormFilter
             className={classes.root}
             noValidate
             autoComplete="off"
             onSubmit={getReposSearch}
           >
-            <TextField
+            <TextField className={classes.field}
               required
-              label="name"
+              label="Repository Name"
               variant="outlined"
               size="small"
               value={reposName}
               onChange={event => setReposName(event.target.value)}
             />
             <h5>Additional Filters</h5>
-            <TextField
+            <TextField className={classes.field}
               label="Topic"
               variant="outlined"
               size="small"
               value={reposTopic}
               onChange={event => setReposTopic(event.target.value)}
             />
-            <TextField
-              label="Language"
+            <TextField className={classes.field}
+              label="Programming Language"
               variant="outlined"
               size="small"
               value={reposLanguage}
