@@ -11,10 +11,10 @@ const Div = styled.div`
   color: #551A8B;
 `;
 
-export default function Dropdown() {
+const DropDown = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleClick = (event) => {
+  const handleClick = (event :any) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -24,11 +24,10 @@ export default function Dropdown() {
 
   return (
     <>
-      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+      <Button onClick={handleClick}>
         <Div>Features</Div>
       </Button>
       <Menu
-        id="simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
@@ -50,3 +49,5 @@ export default function Dropdown() {
     </>
   );
 }
+
+export default DropDown;

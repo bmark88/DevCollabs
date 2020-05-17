@@ -6,6 +6,7 @@ const Navigation = styled.nav`
   width: 100vw;
   height: 60px;
   display: flex;
+  justify-content: space-between;
   background-color: #fff;
   position: fixed;
   text-transform: uppercase;
