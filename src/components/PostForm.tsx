@@ -25,7 +25,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function PostForm(props: any) {
   const classes = useStyles()
-  const [postData, setPostData] = useState("")
+  // const [postData, setPostData] = useState("")
+  const [postState, setPostState] = useState({
+    message: "",
+    image: ""
+  })
   const [error, setError] = useState(false)
 
   const onSubmitFunction = (event: any) => {
@@ -34,7 +38,9 @@ export default function PostForm(props: any) {
     const groupId = props.group // <---------------- Change accordinly
     const session = JSON.parse(localStorage.getItem("session") || '{}')
     const userId = session.id
-    const data = { userId, data: postData }
+    // const data = { userId, data: postData }
+    console.log('postState.image ==>', postState.image)
+    const data = { userId, data: postState.message, image_url: postState.image }
 
     if(data.data !== "") {
       axios({
@@ -43,8 +49,10 @@ export default function PostForm(props: any) {
         data: data,
       })
         .then(res => {
-          console.log('res.data',res.data)
-          // setPostData("")
+          console.log('postState ==>', postState)
+          console.log('res.data in PostForm.tsx',res.data)
+          // console.log(postData)
+
           props.postFunction(props.group)
         })
         .catch(() => setError(true))
@@ -61,10 +69,9 @@ export default function PostForm(props: any) {
           placeholder="What's up?"
           fullWidth
           autoComplete="off"
-          value={postData}
-          onChange={e => {
-            if (e.target.value !== "") setPostData(e.target.value)
-          }}
+          value={postState.message}
+          // onChange={e => setPostData(e.target.value)}
+          onChange={e => setPostState({...postState, message: e.target.value})}
         />
         <input
           accept="image/*"
@@ -72,6 +79,8 @@ export default function PostForm(props: any) {
           id="raised-button-file"
           multiple
           type="file"
+          onChange={e => setPostState({...postState, image: e.target.value})}
+          // onSubmit={e => setState({...state, image: e.target.value})}
         />
         <label htmlFor="raised-button-file">
           <Button component="span">

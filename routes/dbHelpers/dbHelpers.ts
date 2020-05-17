@@ -275,19 +275,22 @@ module.exports = db => {
       .catch(e => console.error(e.stack))
   }
 
-  const createPost = (group_id, user_id, data) => {
+  const createPost = (group_id, user_id, data, image_url) => {
     return db
       .query(
         `
       INSERT INTO posts 
-      (group_id, user_id, data, created_at)
+      (group_id, user_id, data, image_url, created_at)
       VALUES
-      ($1 , $2, $3, NOW())
+      ($1 , $2, $3, $4, NOW())
       RETURNING *;
       `,
-        [group_id, user_id, data]
+        [group_id, user_id, data, image_url]
+        // [group_id, user_id, data, image_url | null]
       )
-      .then(res => res.rows[0])
+      .then(res => {
+        console.log('res.rows[0]', res.rows[0])
+        return res.rows[0]})
       .catch(e => e)
   }
 
