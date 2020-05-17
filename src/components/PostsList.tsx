@@ -21,7 +21,8 @@ const PostsList = ({ posts }: Props) => {
         key={post.id} 
         id={post.id} 
         user={post.username} 
-        created_at={post.created_at} 
+        created_at={post.created_at}
+        image_url={post.image_url}
       >
         {post.data}
       </Post>
