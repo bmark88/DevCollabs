@@ -24,7 +24,7 @@ import { sizing } from "@material-ui/system"
  * [x] display repos
  * [] search for multiple
  * [] search using filters
- * [] default forks  
+ * [] default forks
  */
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -62,7 +62,7 @@ interface APIRepoResults {
 }
 export default function GithubSearch() {
   const classes = useStyles()
-/**
+  /**
  * user 
  * INPUT fields
  * username
@@ -112,20 +112,22 @@ total_count
   const [username, setUsername] = useState("")
   const [userFilters, setUserFilters] = useState("")
 
-
   const [results, setResults] = useState<APIResults>({ user: {}, repos: {} })
 
   const [reposName, setReposName] = useState("")
   const [reposTopic, setReposTopic] = useState("")
   const [reposLanguage, setReposLanguage] = useState("")
 
+  const [reposResults, setReposResults] = useState<APIRepoResults>({
+    total_count: 0,
+    incomplete_results: true,
+    items: [],
+  })
 
-  const [reposResults, setReposResults] = useState<APIRepoResults>({ total_count: 0, incomplete_results: true, items: [] })
-  
   console.log(results)
   console.log(reposResults)
 
-  console.log('-------------')
+  console.log("-------------")
 
   const getUserSearch = (event: any) => {
     event.preventDefault()
@@ -178,16 +180,18 @@ total_count
     //topic:ruby+topic:rails
     //does a general search of repos
     //forks counts
-    // updated 
+    // updated
     //
 
     axios
-      .get(
-        `https://api.github.com/search/repositories?q=${repo}`
-      )
+      .get(`https://api.github.com/search/repositories?q=${reposName}`)
       .then(repos => {
         console.log(repos.data)
-        setReposSearch({total_count: repos.data.total_count, incomplete_results: repos.data.incomplete_results, items: repos.data.items})
+        setReposResults({
+          total_count: repos.data.total_count,
+          incomplete_results: repos.data.incomplete_results,
+          items: repos.data.items,
+        })
       })
       .catch(error => console.log(error))
   }
@@ -197,9 +201,13 @@ total_count
   if (reposArr.length > 0) {
     sortedReposByDate = reposArr.sort((a, b) => b.id - a.id).slice(0, 4)
   }
+  const reposResultsArr: Array<any> = reposResults.items
 
+  
   return (
     <div className={classes.margin}>
+
+      <h3>Users</h3>
       <form onSubmit={getUserSearch}>
         <Grid container spacing={1} alignItems="flex-end">
           <Grid item>
@@ -219,6 +227,31 @@ total_count
           value="Submit"
           onSubmit={getUserSearch}
           variant="outlined"
+        >
+          Search
+        </Button>
+      </form>
+
+      <h3>Filters</h3>
+      <form
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+        onSubmit={getFilterSearch}
+      >
+        <TextField
+          id="outlined-basic"
+          label="# of repos"
+          variant="outlined"
+          size="small"
+          value={userFilters}
+          onChange={event => setUserFilters(event.target.value)}
+        />
+        <Button
+          type="submit"
+          value="Submit"
+          variant="outlined"
+          onSubmit={getFilterSearch}
         >
           Search
         </Button>
@@ -312,31 +345,7 @@ total_count
         )}
       </List>
 
-      <h3>Filters</h3>
-      <form
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={getFilterSearch}
-      >
-        <TextField
-          id="outlined-basic"
-          label="# of repos"
-          variant="outlined"
-          size="small"
-          value={userFilters}
-          onChange={event => setUserFilters(event.target.value)}
-        />
-        <Button
-          type="submit"
-          value="Submit"
-          variant="outlined"
-          onSubmit={getFilterSearch}
-        >
-          Search
-        </Button>
-      </form>
-{/* ------------------------------------------------ */}
+      {/* -----------------------REPOS------------------------- */}
 
       <h3>Repos</h3>
       <form
@@ -344,7 +353,7 @@ total_count
         noValidate
         autoComplete="off"
         onSubmit={getReposSearch}
-        >
+      >
         <TextField
           id="outlined-basic"
           label="name"
@@ -352,17 +361,16 @@ total_count
           size="small"
           value={reposName}
           onChange={event => setReposName(event.target.value)}
-          />
+        />
 
-          <h3>Filters</h3>
-          <TextField
+        <h3>Filters</h3>
+        <TextField
           id="outlined-basic"
           label="Topic"
           variant="outlined"
           size="small"
           value={reposTopic}
           onChange={event => setReposTopic(event.target.value)}
-
         />
         <TextField
           id="outlined-basic"
@@ -371,7 +379,6 @@ total_count
           size="small"
           value={reposLanguage}
           onChange={event => setReposLanguage(event.target.value)}
-
         />
         <Button
           type="submit"
@@ -381,43 +388,47 @@ total_count
         >
           Search
         </Button>
-
       </form>
+
+      {/* ---------------------RESULTS--------------------------- */}
 
       <List className={classes.root} subheader={<li />}>
         <li key={`section-3`} className={classes.listSection}>
           <ul className={classes.ul}>
-          {/* setReposSearch({total_count: repos.data.total_count, incomplete_results: repos.data.incomplete_results, items: repos.data.items}) */}
-
+            {/* setReposSearch({total_count: repos.data.total_count, incomplete_results: repos.data.incomplete_results, items: repos.data.items}) */}
             {reposResults.incomplete_results === false && (
               <ListSubheader>
                 <h2>{`Repos ${results.user.login}`}</h2>
               </ListSubheader>
             )}
-
             {reposResults.total_count && (
               <ListItem key={`item-2-1`}>
-                <ListItemText primary={`Name: ${reposResults.user.name}`} />
+                <ListItemText primary={`Name: ${reposResults.items.name}`} />
               </ListItem>
             )}
-            {reposResults.items[0] && (
+    
+          </ul>
+        </li>
+        {reposResults.items[0] && (
+          <li key={`section-2`} className={classes.listSection}>
+            <ul className={classes.ul}>
               <ListSubheader>
                 <h2>{`User's Repos`}</h2>
               </ListSubheader>
-              // {reposResults.items.map(repo => (
-              //   <ListItem key={`item-2-${repo.id}`}>
-              //     <ListItemText primary={`Name: ${repo.name}`} />
-              //     <ListItemText
-              //       primary={`Day Created: ${repo.created_at.slice(0, 10)}`}
-              //     />
-              //                       <ListItemText
-              //       primary={`Language ${repo.langage}`}
-              //     />
-              //   </ListItem>
-              // ))}
-              )}
-          </ul>
-        </li>
+              {reposResultsArr.map(repo => (
+                <ListItem key={`item-2-${repo.id}`}>
+                  <ListItemText primary={`Name: ${repo.name}`} />
+                  <ListItemText
+                    primary={`Day Created: ${repo.created_at.slice(0, 10)}`}
+                  />
+                  <ListItemText primary={`Language ${repo.language}`} />
+                  <ListItemText primary={`Forks Count: ${repo.forks_count}`} />
+
+                </ListItem>
+              ))}
+            </ul>
+          </li>
+        )}
       </List>
     </div>
   )
