@@ -180,7 +180,7 @@ export default function GithubSearch() {
                   label="Enter username"
                   value={username}
                   onChange={event => setUsername(event.target.value)}
-                  helperText="Some important text"
+                  // helperText="Some important text"
                 />
               </Grid>
             </Grid>
