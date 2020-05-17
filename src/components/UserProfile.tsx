@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { List, ListSubheader } from "@material-ui/core"
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 interface Props {
   postCount :number
@@ -10,13 +11,22 @@ interface Props {
 }
 
 const Div = styled.div`
-  // border: solid;
+  display: flex;
+  align-items: center;
+  margin: 1em;
 `;
 
 const Content = styled.div`
   border: solid;
   margin: 1em;
   min-width: 345px;
+`;
+
+const AdminBadge = styled.div`
+  display: flex;
+  border-radius: 20px;
+  padding: 0.1em;
+  border: solid 1px;
 `;
 
 const UserProfile = ({ postCount, subscriptions, userName } :Props) => {
@@ -33,7 +43,12 @@ const UserProfile = ({ postCount, subscriptions, userName } :Props) => {
             <>
               <Div key={index}>
                 <b>{group.name}</b>
-                {group.is_admin && <p>You are an Admin for this group</p>} 
+                {group.is_admin && 
+                  <AdminBadge>
+                    <AccountCircleIcon/>
+                    Admin
+                  </AdminBadge>
+                }
               </Div>
             </>
           )
