@@ -26,7 +26,7 @@ const UserProfile = ({ postCount, subscriptions, children } :Props) => {
         return (
           <>
             <Div key={index}>
-              Group: {group.id} 
+              Group: {group.group_id} 
               {group.is_admin && <p>You are an Admin for this group</p>} 
             </Div>
           </>

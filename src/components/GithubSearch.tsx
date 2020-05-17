@@ -58,7 +58,7 @@ export default function GithubSearch() {
     //if username is exact
     Promise.all([
       axios.get(`https://api.github.com/users/${username}`),
-      axios.get(`https://api.github.com/users/ej2brown/repos`),
+      axios.get(`https://api.github.com/users/${username}/repos`),
     ])
       .then(([user, repos]) => {
         console.log(user)
@@ -113,7 +113,7 @@ export default function GithubSearch() {
       <List className={classes.root} subheader={<li />} >
         <li key={`section-1`} className={classes.listSection}>
           <ul className={classes.ul}>
-            {results.user.name && (
+            {results.user.login && (
               <ListSubheader><h2>{`User ${results.user.login}`}</h2></ListSubheader>
             )}
 
