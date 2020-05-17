@@ -9,7 +9,6 @@ interface Props {
 }
 
 const UserContainer = styled.div`
-  margin: 1em;
   width: 100%;
 `;
 
@@ -25,6 +24,17 @@ const Li = styled.li`
   display: inline
 `;
 
+const Button =styled.button`
+  position: absolute;
+  right: 0px
+`
+
+const Div = styled.div`
+  position: relative;
+  margin: 2px;
+`
+
+
 const UserList = ({ users } :Props) => {
   // console.log(users.map(user => user))
   return (
@@ -33,11 +43,11 @@ const UserList = ({ users } :Props) => {
       <Ul>
         {users.map((user :any, index :number) => {
           return (
-            <div key={index}>
+            <Div key={index} >
               <Li>{user.username}</Li>
-              <button>Add rating</button>
+              <Button>Add rating</Button>
               {/* <div>{user.email}</div> */}
-            </div>
+            </Div>
           )
         })}
       </Ul>
