@@ -50,10 +50,12 @@ const ExpansionPanelDetails = withStyles(theme => ({
 }))(MuiExpansionPanelDetails)
 
 interface Props {
-  // publicGroups: any
+  subscriptions: any
 }
 
-export default function TopicBoard({  }: Props) {
+export default function TopicBoard({ subscriptions }: Props) {
+  console.log('2-subscriptions', subscriptions)
+
   const username = JSON.parse(localStorage.getItem("session") || "{}").username.toString()
   const [expanded, setExpanded] = useState("panel1")
   // const [subscription, setSubscription] = useState()
@@ -110,7 +112,7 @@ export default function TopicBoard({  }: Props) {
           <Typography>Groups</Typography>
         </ExpansionPanelSummary>
 
-          <IndexGroupList />
+          <IndexGroupList subscriptions={subscriptions}/>
 
         <ExpansionPanelDetails>
           <Typography></Typography>
