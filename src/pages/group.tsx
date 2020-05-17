@@ -88,7 +88,7 @@ const GroupPage = () => {
 
   // console.log(state)
 
-  const handlePost = groupID => {
+  const handlePost = (groupID :number) => {
     setGroup(groupID)
   }
 
