@@ -19,7 +19,7 @@ const Content = styled.div`
   border: solid;
   margin: 1em;
   min-width: 345px;
-  height: 300px;
+  height: 400px;
 `;
 
 const AdminBadge = styled.div`
@@ -30,14 +30,22 @@ const AdminBadge = styled.div`
   border: solid 1px;
 `;
 
+const ListTitle = styled.h3`
+  background-color: white;
+`;
+
 const UserProfile = ({ postCount, subscriptions, userName } :Props) => {
   return (
     <>
     <Content>
+      <List style={{maxHeight: '100%', overflow: 'auto'}}>
       <h1>{userName}</h1>
       <h3>Total Posts: {postCount}</h3>
-      <List style={{maxHeight: '100%', overflow: 'auto'}}>
-      <ListSubheader><h3>{`Your Subbed Groups`}</h3></ListSubheader>
+      <ListSubheader>
+        <ListTitle>
+          {`Your Subbed Groups`}
+        </ListTitle>
+      </ListSubheader>
         {subscriptions.map((group :any, index :number) => {
           return (
             <>
