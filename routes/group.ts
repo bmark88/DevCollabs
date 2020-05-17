@@ -133,6 +133,7 @@ module.exports = db => {
         console.log("5 - PASS  ~ DELETING")
         dbHelpers
           .deleteSubscription(userId, groupId)
+          .then(data => res.send(data))
           .catch(() => res.status(400).send("Could not delete subscription"))
       }
     })
