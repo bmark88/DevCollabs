@@ -37,10 +37,6 @@ function GroupTestElement(props: any) {
   const [sub, setSub] = useState(false)
   const [disable, setDisable] = useState(false)
 
-  //   console.log("-----GroupTestElement--------")
-  //   console.log("subscription =>", subscription)
-  //   console.log("props-->", props)
-  //   console.log("~~~~~~")
   //   console.log("sub true or not", props.sub)
   //   console.log("from grouptestelent", name)
   //   console.log("from goruptestele", id)
@@ -54,17 +50,13 @@ function GroupTestElement(props: any) {
     }).then(isSubbed => {
       setSub(isSubbed.data)
     })
-
   }, [])
-const reableButton = () => {
-   setDisable(false)
-}
+
+
   const handleSub = () => {
     const data = { userId }
 
     if (subscription.is_admin) return toastNotif("isAdmin")
-    console.log("================")
-    console.log(sub)
 
     sub
       ?( axios({
@@ -89,7 +81,7 @@ const reableButton = () => {
           .catch(() => console.log("sub unsuccess"))
     setSub(!sub)
     setDisable(true)
-    setTimeout(reableButton, 1000)
+    setTimeout(function() {setDisable(false)}, 1000)
   }
 
   return (
@@ -111,7 +103,7 @@ export default function IndexGroupList({ subscriptions }: Props) {
       .id
     console.log("userID", userId)
     axios.get("http://localhost:3001/group/public").then(data => {
-      console.log(data.data) // called once
+      console.log(data.data)
       setAllGroups(data.data)
     })
     //     axios.get(`http://localhost:3001/group/u/${userId}`).then(data => {

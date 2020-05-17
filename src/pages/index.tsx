@@ -37,7 +37,7 @@ export default function IndexPage() {
     subscriptions, 
     fetchUserSubscriptions 
   } = useApplicationData();
-  console.log('1-subscriptions', subscriptions)
+  
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
