@@ -51,14 +51,10 @@ const FilterContainer = styled.div`
   padding: 20px;
   border: solid 2px;
   margin: 1em;
-  // align-items: flex-start;
-  // margin: auto;
-  // alignItems: center;
-  // margin-left: auto;
+  min-width: 345px;
 `;
 
 const FormFilter = styled.form`
-  // border: solid;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -79,9 +75,9 @@ interface APIResults {
 //   byFollowers: number
 // }
 interface APIRepoResults {
-  total_count: number
-  incomplete_results: boolean
-  items: array
+  total_count :number
+  incomplete_results :boolean
+  items :object[]
 }
 export default function GithubSearch() {
   const classes = useStyles()
@@ -200,11 +196,11 @@ export default function GithubSearch() {
           <div>
             <FormFilter
               className={classes.root}
-              noValidate
               autoComplete="off"
               onSubmit={getFilterSearch}
             >
               <TextField className={classes.field}
+                required
                 label="Minimum Count"
                 variant="outlined"
                 size="small"
@@ -348,7 +344,6 @@ export default function GithubSearch() {
           </TitleFilter>
           <FormFilter
             className={classes.root}
-            noValidate
             autoComplete="off"
             onSubmit={getReposSearch}
           >
@@ -379,7 +374,7 @@ export default function GithubSearch() {
               type="submit"
               value="Submit"
               variant="outlined"
-              // onSubmit={getReposSearch}
+              onSubmit={getReposSearch}
             >
               Search
             </Button>
