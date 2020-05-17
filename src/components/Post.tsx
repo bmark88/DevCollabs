@@ -34,11 +34,13 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1161,
   },
   media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '28.125%', // wide view
   },
   reply: {
     maxWidth: '50%'
+  },
+  clicked: {
+    paddingTop: '56.25%', // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -57,15 +59,21 @@ interface Props {
   id: number,
   user: string,
   children: string,
-  created_at: string
+  created_at: string,
+  image_url: string
 }
 
-export default function Post({ user, children, created_at } :Props) {
+export default function Post({ user, children, created_at, image_url } :Props) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+  };
+
+  const handleClick = () => {
+    setClicked(!clicked);
   };
 
   return (
@@ -82,11 +90,16 @@ export default function Post({ user, children, created_at } :Props) {
         title={user}
         subheader={created_at}
       />
-      {/* <CardMedia
-        className={classes.media}
-        image="(insert image path)"
-        title="receive title from props"
-      /> */}
+      {image_url && 
+        <CardMedia
+          className={clsx(classes.media, {
+            [classes.clicked]: clicked,
+          })}
+          image={image_url}
+          title="receive title from props"
+          onClick={handleClick}
+        />
+      }
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {children}
