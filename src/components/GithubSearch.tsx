@@ -323,7 +323,7 @@ export default function GithubSearch() {
               {reposResults.total_count && (
                 <ListItem key={`item-3-1`}>
                   <ListItemText
-                    primary={`Total Count: ${results.user}`}
+                    primary={`Total Count: ${results.user.length}`}
                   />
                 </ListItem>
               )}
