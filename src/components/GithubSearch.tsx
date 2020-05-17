@@ -179,7 +179,6 @@ export default function GithubSearch() {
                   label="Enter username"
                   value={username}
                   onChange={event => setUsername(event.target.value)}
-                  // helperText="Some important text"
                 />
               </Grid>
             </Grid>
@@ -190,25 +189,25 @@ export default function GithubSearch() {
 
           <h5>Filters</h5>
           <div>
-
-          <form
-            className={classes.root}
-            noValidate
-            autoComplete="off"
-            onSubmit={getFilterSearch}
+            <form
+              className={classes.root}
+              noValidate
+              autoComplete="off"
+              onSubmit={getFilterSearch}
             >
-            <TextField
-              label="# of repos"
-              variant="outlined"
-              size="small"
-              value={userReposCount}
-              onChange={event => setUserReposCount(event.target.value)}
+              <TextField
+                label="# of repos"
+                variant="outlined"
+                size="small"
+                value={userReposCount}
+                helperText="General search with username above"
+                onChange={event => setUserReposCount(event.target.value)}
               />
-            <Button type="submit" value="Submit" variant="outlined">
-              Search
-            </Button>
-          </form>
-              </div>
+              <Button type="submit" value="Submit" variant="outlined">
+                Search
+              </Button>
+            </form>
+          </div>
 
           {/* \\\\\ ----------------------- RESULTS ------------------------- /////*/}
 
@@ -377,25 +376,25 @@ export default function GithubSearch() {
 
           <List className={classes.root} subheader={<li />}>
             {reposResults.incomplete_results === false && (
-              <li key={`section-4`} className={classes.listSection}>
+              <li key={`section-4-0`} className={classes.listSection}>
                 <ul className={classes.ul}>
                   <ListSubheader>
                     <h2>{`Repos Results`}</h2>
                   </ListSubheader>
                   {reposResults.total_count && (
-                    <ListItem key={`item-4-1`}>
+                    <ListItem key={`item-4-2`}>
                       <ListItemText
                         primary={`Total Count: ${reposResults.total_count}`}
                       />
                     </ListItem>
                   )}
                   {reposResultsArr.map(repo => (
-                    <div>
-                      <ListItem key={`item-4-${repo.id}-1`}>
+                    <div key={`section-5-${repo.id}-2`}>
+                      <ListItem key={`item-4-${repo.id}-2`}>
                         <ListItemText primary={`Name: ${repo.name}`} />
                       </ListItem>
 
-                      <ListItem key={`item-4-${repo.id}-2`}>
+                      <ListItem key={`item-4-${repo.id}-3`}>
                         <ListItemText
                           primary={`Day Created: ${repo.created_at.slice(
                             0,
@@ -403,10 +402,10 @@ export default function GithubSearch() {
                           )}`}
                         />
                       </ListItem>
-                      <ListItem key={`item-4-${repo.id}-3`}>
+                      <ListItem key={`item-4-${repo.id}-4`}>
                         <ListItemText primary={`Language ${repo.language}`} />
                       </ListItem>
-                      <ListItem key={`item-4-${repo.id}-4`}>
+                      <ListItem key={`item-4-${repo.id}-5`}>
                         <ListItemText
                           primary={`Forks Count: ${repo.forks_count}`}
                         />
