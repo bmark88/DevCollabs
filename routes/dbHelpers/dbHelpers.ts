@@ -147,6 +147,38 @@ module.exports = db => {
         return res.rows[0]
       })
   }
+  
+  const createGroupAndSubscription = function (userId, groupName) {
+    return db
+      .query(
+        `
+        INSERT INTO groups
+        (name)
+        VALUES
+        ($1)
+        RETURNING *;
+        `,
+        [groupName]
+      )
+      .then(res => res.rows[0].id)
+      .then(groupId => {
+         return db.query(
+          `
+          INSERT INTO subscriptions
+          (group_id, user_id, is_admin)
+          VALUES
+          ($1, $2, $3)
+          RETURNING *;
+          `,
+          [groupId, userId, true]
+        )
+        .then(res => {
+          console.log('sub added', res.rows[0])
+          return res.rows[0]
+        })
+        .catch(e => e)
+      })
+  }
 
   /**
    * Add a subscription to db using localstorage session to get userId.
@@ -175,7 +207,7 @@ module.exports = db => {
         `
         DELETE FROM subscriptions
         WHERE user_id = $1
-        AND group_id = $2; 
+        AND group_id = $2;
       `,
         [userID, groupID]
       )
@@ -300,7 +332,8 @@ module.exports = db => {
         `
       DELETE FROM subscriptions
       WHERE user_id = $1 
-      AND group_id = $2;
+      AND group_id = $2
+      RETURNING *;
         `,
         [user_id, group_id]
       )
@@ -326,6 +359,30 @@ module.exports = db => {
         }
         return true
       })
+      .catch(e => console.log(e))
+  }
+
+  const getUserPostsCount = (user_id) => {
+    return db
+      .query(`
+        SELECT COUNT(*) FROM posts
+        WHERE user_id = $1;
+      `,
+      [user_id])
+      .then(res => res.rows[0])
+      .catch(e => console.error('error!!', e.stack));
+  };
+
+  const getAllUserSubscriptions = (user_id) => {
+    return db
+      .query(`
+        SELECT subscriptions.* FROM subscriptions
+        JOIN users ON (user_id = users.id)
+        WHERE user_id = $1;
+      `,
+      [user_id])
+      .then(res => res.rows)
+      .catch(e => console.error('error!!', e.stack));
   }
 
   return {
@@ -334,6 +391,7 @@ module.exports = db => {
     getGroup,
     getGroupsNames,
     addGroup,
+    createGroupAndSubscription,
     getPostWithGroupID,
     changeUserInfo,
     deleteGroup,
@@ -346,5 +404,7 @@ module.exports = db => {
     getAllGroups,
     deleteSubscription,
     checkUserSubscription,
+    getUserPostsCount,
+    getAllUserSubscriptions
   }
 }

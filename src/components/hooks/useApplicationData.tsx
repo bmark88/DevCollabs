@@ -9,6 +9,9 @@ export default function useApplicationData() {
     groups: [],
     posts: [],
   })
+  const [postCount, setPostCount] = useState(0);
+  const [subscriptions, setSubscriptions] = useState([]);
+  const [news, setNews] = useState([]);
 
   //get a users id from session json data. returns {id:number}
   const userId: number = JSON.parse(localStorage.getItem("session") || "{}").id
@@ -71,16 +74,44 @@ const fetchGroups = () => {
       .catch(error => console.log(error))
   }
 
+  const fetchUserPosts = (userID :number) => {
+    axios
+      .get(`http://localhost:3001/profile/${userID}`)
+      .then(response => setPostCount(response.data.totalPosts.count))
+      .catch(e => console.error('error!!', e.stack));
+  };
+
+  const fetchUserSubscriptions = (userID :number) => {
+    axios
+    .get(`http://localhost:3001/profile/${userID}`)
+    .then(response => setSubscriptions(response.data.userSubscriptions))
+    .catch(e => console.error('error!!', e.stack));
+  }
+
+  const fetchNews = () => {
+    axios
+      .get('http://hn.algolia.com/api/v1/search?tags=front_page')
+      .then(res => {
+        setNews(res.data.hits)
+        console.log('res.data ==>', res.data)
+      })
+      .catch(e => console.error('error', e.stack))
+  };
+
   useEffect(() => {
     fetchGroups()
-    // .then(groupId => {
-    //   // console.log(groupId)
-    //   fetchPosts(groupId)
-    // })
+    fetchNews()
   }, [])
 
   return {
     state,
     setGroup,
+    fetchGroups,
+    fetchUserPosts,
+    fetchUserSubscriptions,
+    postCount,
+    subscriptions,
+    fetchNews,
+    news
   }
 }
