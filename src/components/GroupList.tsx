@@ -15,7 +15,13 @@ const Div = styled.div`
   padding: 1em;
   min-width: 250px;
   margin: 1em;
-  // min-height: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+  @media (max-width:1890px) {
+    // height: 10%;
+  }
 `
 
 export default function GroupList({ groups, setGroup }: Props) {

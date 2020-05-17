@@ -34,7 +34,12 @@ export default function useApplicationData() {
 
   const fetchPosts = (groupId: number) => {
     //gets all group posts. returns array<[id:number ,group_id:number, user_id:number, created_at:time]>
-   
+    axios
+      .get(`http://localhost:3001/group/g/${groupId}`)
+      .then(response => {
+        setState({ ...state, posts: response.data })
+      })
+      .catch(error => console.log(error))
   }
   /*
 const fetchGroups = () => {
@@ -68,10 +73,15 @@ const fetchGroups = () => {
 
   useEffect(() => {
     fetchGroups()
+    // .then(groupId => {
+    //   // console.log(groupId)
+    //   fetchPosts(groupId)
+    // })
   }, [])
 
   return {
     state,
     setGroup,
+    fetchGroups
   }
 }
