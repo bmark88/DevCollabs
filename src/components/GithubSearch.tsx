@@ -1,24 +1,16 @@
 import React, { useState } from "react"
 import axios from "axios"
-
-import Input from "@material-ui/core/Input"
-import InputLabel from "@material-ui/core/InputLabel"
-import InputAdornment from "@material-ui/core/InputAdornment"
-import FormControl from "@material-ui/core/FormControl"
-import TextField from "@material-ui/core/TextField"
-import Grid from "@material-ui/core/Grid"
-import AccountCircle from "@material-ui/icons/AccountCircle"
 import styled from "styled-components"
-import Button from "@material-ui/core/Button"
-
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemText from "@material-ui/core/ListItemText"
-import ListSubheader from "@material-ui/core/ListSubheader"
-import { sizing } from "@material-ui/system"
-import Paper from "@material-ui/core/Paper"
 import GitHubIcon from '@material-ui/icons/GitHub';
+import { 
+  Button, 
+  List, 
+  ListItem, 
+  ListItemText, 
+  ListSubheader,
+  TextField
+} from  "@material-ui/core"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -39,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: 0,
     },
     field: {
-      margin: "0.2em",
+      marginBottom: "0.2em",
     },
   })
 )
@@ -52,6 +44,8 @@ const FilterContainer = styled.div`
   border: solid 2px;
   margin: 1em;
   min-width: 345px;
+  display: flex;
+  justify-content: center;
 `;
 
 const FormFilter = styled.form`
@@ -184,18 +178,19 @@ export default function GithubSearch() {
               label="GitHub Username"
               value={username}
               variant="outlined"
-              fullWidth
               onChange={event => setUsername(event.target.value)}
             />
-            <Button type="submit" value="Submit" variant="outlined" fullWidth>
+            <Button 
+              type="submit" 
+              value="Search" 
+              variant="contained"
+            >
               Search
             </Button>
           </FormFilter>
-
           <h5>Filter by Minimum # of Repos</h5>
           <div>
             <FormFilter
-              className={classes.root}
               autoComplete="off"
               onSubmit={getFilterSearch}
             >
@@ -208,7 +203,11 @@ export default function GithubSearch() {
                 // helperText="General search with username above"
                 onChange={event => setUserReposCount(event.target.value)}
               />
-              <Button type="submit" value="Submit" variant="outlined">
+              <Button 
+                type="submit" 
+                value="Submit" 
+                variant="contained"
+              >
                 Search
               </Button>
             </FormFilter>
@@ -343,7 +342,6 @@ export default function GithubSearch() {
             <h3>Search By Repository</h3>
           </TitleFilter>
           <FormFilter
-            className={classes.root}
             autoComplete="off"
             onSubmit={getReposSearch}
           >
@@ -373,7 +371,7 @@ export default function GithubSearch() {
             <Button
               type="submit"
               value="Submit"
-              variant="outlined"
+              variant="contained"
               onSubmit={getReposSearch}
             >
               Search
