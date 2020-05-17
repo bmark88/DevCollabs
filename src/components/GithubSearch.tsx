@@ -51,10 +51,10 @@ interface APIResults {
   repos: any
 }
 
-interface filters {
-  byRepos: number
-  byFollowers: number
-}
+// interface filters {
+//   byRepos: number
+//   byFollowers: number
+// }
 interface APIRepoResults {
   total_count: number
   incomplete_results: boolean
@@ -62,59 +62,25 @@ interface APIRepoResults {
 }
 export default function GithubSearch() {
   const classes = useStyles()
-  /**
- * user 
- * INPUT fields
- * username
-
-    filters {
-     # of repos
-      *# of followers
-    }
-
-
-  OUTPUT fields
-
-  name
-   company
-   location
-   email
-   hireable
-   bio
-   followers_url
-   following_url
-   User's Repos {
-   name, 
-   created_at 
-
-REPOS
-
-INPUT fields
-name
-
-filters {
-  topic
-  language
-}
-
-OUTPUT fields
-total_count
-  items {
-  name
-  updated
-  created_at
-  forks counts
-}
-
-
-}
+/**
+ * USER 
+ * @input_fields username, filters { # of repos, *# of followers }
+ * @output_fields name, company, location, email, hireable, bio, followers_count, following_count
+ * @output_fields User's Repos { name, created_at } 
+ * 
+ * REPOS
+ * @input_fields name filters { topic, language }
+ * @output_fields total_count, items { name, updated, created_at, forks_count }
  */
-  const [username, setUsername] = useState("")
-  const [userFilters, setUserFilters] = useState("")
+
+  const [username, setUsername] = useState("brown")
+  const [userReposCount, setUserReposCount] = useState(3)
+  // const [userFilters, setUserFilters] = useState("")
+
 
   const [results, setResults] = useState<APIResults>({ user: {}, repos: {} })
 
-  const [reposName, setReposName] = useState("")
+  const [reposName, setReposName] = useState("lhl-final")
   const [reposTopic, setReposTopic] = useState("")
   const [reposLanguage, setReposLanguage] = useState("")
 
@@ -126,8 +92,7 @@ total_count
 
   console.log(results)
   console.log(reposResults)
-
-  console.log("-------------")
+  console.log("-------------------")
 
   const getUserSearch = (event: any) => {
     event.preventDefault()
@@ -148,24 +113,19 @@ total_count
 
   const getFilterSearch = (event: any) => {
     event.preventDefault()
-    if (byRepos) username = `${username}+repos:%3E${byRepos}`
-    if (byFollowers) username = `${username}+followers:%3E${byFollowers}`
+    let searchQuery:string = username;
+    if (userReposCount) searchQuery = `${username}+repos:%3E${userReposCount}`
+    // if (byFollowers) username = `${username}+followers:%3E${byFollowers}`
+    console.log('->', searchQuery)
 
-    //does a general search
-    Promise.all([
-      axios.get(`https://api.github.com/search/users?q=${username}`),
-    ])
-      .then(([user, repos]) => {
-        setUserFilters({ user: user.data, repos: repos.data })
+    //does a general query search
+      axios.get(`https://api.github.com/search/users?q=${searchQuery}`)
+      .then(res => {
+        setResults({ user: res.data.items, repos: null })
+
+        // setUserReposCount({ user: user.data, repos: repos.data })
       })
       .catch(error => console.log(error))
-
-    // if multiple users returned
-    //   if (res.data.items.length > 1) {
-    //   }
-    //   console.log(res.data.items[0])
-    //   setResults(res.data.items[0])
-    // })
   }
 
   //Find repositories via various criteria. This method returns up to 100 results per page.
@@ -182,9 +142,13 @@ total_count
     //forks counts
     // updated
     //
+    let searchQuery:string = reposName;
+    if (reposTopic) searchQuery = `${searchQuery}+topic:${reposTopic}`
+    if (reposLanguage) searchQuery = `${searchQuery}+language:${reposLanguage}`
+    console.log('->', searchQuery)
 
     axios
-      .get(`https://api.github.com/search/repositories?q=${reposName}`)
+      .get(`https://api.github.com/search/repositories?q=${searchQuery}&sort=stars&order=desc`)
       .then(repos => {
         console.log(repos.data)
         setReposResults({
@@ -198,16 +162,18 @@ total_count
 
   const reposArr: Array<any> = results.repos
   let sortedReposByDate: Array<any> = []
-  if (reposArr.length > 0) {
+  if (results.repos && reposArr.length > 0) {
     sortedReposByDate = reposArr.sort((a, b) => b.id - a.id).slice(0, 4)
   }
+  const userFilterArr: Array<any> = results.user
+
   const reposResultsArr: Array<any> = reposResults.items
 
-  
   return (
     <div className={classes.margin}>
+      {/* \\\\\-----------------------USER-------------------------///// */}
 
-      <h3>Users</h3>
+      <h3>User</h3>
       <form onSubmit={getUserSearch}>
         <Grid container spacing={1} alignItems="flex-end">
           <Grid item>
@@ -215,17 +181,20 @@ total_count
           </Grid>
           <Grid item>
             <TextField
+            required
               id="github-search-username"
               label="Enter username"
+              defaultValue="ej2brown"
               value={username}
               onChange={event => setUsername(event.target.value)}
+              helperText="Some important text"
+
             />
           </Grid>
         </Grid>
         <Button
           type="submit"
           value="Submit"
-          onSubmit={getUserSearch}
           variant="outlined"
         >
           Search
@@ -244,23 +213,24 @@ total_count
           label="# of repos"
           variant="outlined"
           size="small"
-          value={userFilters}
-          onChange={event => setUserFilters(event.target.value)}
+          value={userReposCount}
+          onChange={event => setUserReposCount(event.target.value)}
         />
         <Button
           type="submit"
           value="Submit"
           variant="outlined"
-          onSubmit={getFilterSearch}
         >
           Search
         </Button>
       </form>
 
+      {/* \\\\\ ----------------------- RESULTS ------------------------- /////*/}
+
       <List className={classes.root} subheader={<li />}>
         <li key={`section-1`} className={classes.listSection}>
           <ul className={classes.ul}>
-            {results.user.name && (
+            {results.user.login && (
               <ListSubheader>
                 <h2>{`User ${results.user.login}`}</h2>
               </ListSubheader>
@@ -308,7 +278,7 @@ total_count
               </ListItem>
             )}
 
-            {results.user.followers_url && (
+            {results.user.followers && (
               <ListItem key={`item-1-9`}>
                 <ListItemText
                   primary={`Followers: ${results.user.followers}`}
@@ -316,7 +286,7 @@ total_count
               </ListItem>
             )}
 
-            {results.user.following_url && (
+            {results.user.following && (
               <ListItem key={`item-1-10`}>
                 <ListItemText
                   primary={`Following: ${results.user.following}`}
@@ -326,7 +296,7 @@ total_count
           </ul>
         </li>
 
-        {results.repos[0] && (
+        {results.repos && results.repos[0] && (
           <li key={`section-2`} className={classes.listSection}>
             <ul className={classes.ul}>
               <ListSubheader>
@@ -343,9 +313,35 @@ total_count
             </ul>
           </li>
         )}
+      {/* \\\\\ -----------------------FILTERS------------------------- /////*/}
+      {!results.repos && userReposCount > 1 && (
+          <li key={`section-3`} className={classes.listSection}>
+            <ul className={classes.ul}>
+              <ListSubheader>
+                <h2>{`User's List`}</h2>
+              </ListSubheader>
+              {reposResults.total_count && (
+                <ListItem key={`item-3-1`}>
+                  <ListItemText
+                    primary={`Total Count: ${results.user}`}
+                  />
+                </ListItem>
+              )}
+              {userFilterArr.map(repo => (
+                <ListItem key={`item-3-${repo.id}`}>
+                  <ListItemText primary={`Name: ${repo.login}`} />
+                  <ListItemText
+                    primary={`URL: ${repo.html_url}`}
+                  />
+                </ListItem>
+              ))}
+            </ul>
+          </li>
+        )}
+
       </List>
 
-      {/* -----------------------REPOS------------------------- */}
+      {/* \\\\\ -----------------------REPOS------------------------- /////*/}
 
       <h3>Repos</h3>
       <form
@@ -359,11 +355,12 @@ total_count
           label="name"
           variant="outlined"
           size="small"
+          defaultValue="lhl-final"
           value={reposName}
           onChange={event => setReposName(event.target.value)}
         />
 
-        <h3>Filters</h3>
+        <h5>Filters</h5>
         <TextField
           id="outlined-basic"
           label="Topic"
@@ -384,47 +381,48 @@ total_count
           type="submit"
           value="Submit"
           variant="outlined"
-          onSubmit={getReposSearch}
+          // onSubmit={getReposSearch}
         >
           Search
         </Button>
       </form>
 
-      {/* ---------------------RESULTS--------------------------- */}
+      {/* \\\\\ ---------------------RESULTS--------------------------- /////*/}
 
       <List className={classes.root} subheader={<li />}>
-        <li key={`section-3`} className={classes.listSection}>
-          <ul className={classes.ul}>
-            {/* setReposSearch({total_count: repos.data.total_count, incomplete_results: repos.data.incomplete_results, items: repos.data.items}) */}
-            {reposResults.incomplete_results === false && (
-              <ListSubheader>
-                <h2>{`Repos ${results.user.login}`}</h2>
-              </ListSubheader>
-            )}
-            {reposResults.total_count && (
-              <ListItem key={`item-2-1`}>
-                <ListItemText primary={`Name: ${reposResults.items.name}`} />
-              </ListItem>
-            )}
-    
-          </ul>
-        </li>
-        {reposResults.items[0] && (
-          <li key={`section-2`} className={classes.listSection}>
+        {reposResults.incomplete_results === false && (
+          <li key={`section-4`} className={classes.listSection}>
             <ul className={classes.ul}>
               <ListSubheader>
-                <h2>{`User's Repos`}</h2>
+                <h2>{`Repos Results`}</h2>
               </ListSubheader>
-              {reposResultsArr.map(repo => (
-                <ListItem key={`item-2-${repo.id}`}>
-                  <ListItemText primary={`Name: ${repo.name}`} />
+              {reposResults.total_count && (
+                <ListItem key={`item-4-1`}>
                   <ListItemText
-                    primary={`Day Created: ${repo.created_at.slice(0, 10)}`}
+                    primary={`Total Count: ${reposResults.total_count}`}
                   />
-                  <ListItemText primary={`Language ${repo.language}`} />
-                  <ListItemText primary={`Forks Count: ${repo.forks_count}`} />
-
                 </ListItem>
+              )}
+              {reposResultsArr.map(repo => (
+                <div>
+                  <ListItem key={`item-4-${repo.id}-1`}>
+                    <ListItemText primary={`Name: ${repo.name}`} />
+                  </ListItem>
+
+                  <ListItem key={`item-4-${repo.id}-2`}>
+                    <ListItemText
+                      primary={`Day Created: ${repo.created_at.slice(0, 10)}`}
+                    />
+                  </ListItem>
+                  <ListItem key={`item-4-${repo.id}-2`}>
+                    <ListItemText primary={`Language ${repo.language}`} />
+                  </ListItem>
+                  <ListItem key={`item-4-${repo.id}-2`}>
+                    <ListItemText
+                      primary={`Forks Count: ${repo.forks_count}`}
+                    />
+                  </ListItem>
+                </div>
               ))}
             </ul>
           </li>
