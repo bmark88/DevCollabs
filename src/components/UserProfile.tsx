@@ -9,7 +9,7 @@ import CardContent from "@material-ui/core/CardContent"
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
 import { Divider } from "@material-ui/core"
-import { RoomCard} from '../components/rooms'
+import { RoomCard } from "../components/rooms"
 interface Props {
   postCount: number
   subscriptions: any
@@ -22,11 +22,13 @@ const Div = styled.div`
   margin: 1em;
 `
 
-const Content = styled.div`
-  border: solid;
-  margin: 1em;
-  min-width: 10%;
-  height: 400px;
+const Ul = styled.ul`
+  position: relative;
+  max-height: 288px;
+  overflow: hidden;
+  overflow-y: scroll;
+  margin-left: 0px;
+  width: 100%;
 `
 
 const AdminBadge = styled.div`
@@ -35,6 +37,8 @@ const AdminBadge = styled.div`
   border-radius: 20px;
   padding: 0.1em;
   border: solid 1px;
+  position: absolute;
+  right: 0px;
 `
 
 const ListTitle = styled.h3`
@@ -43,15 +47,18 @@ const ListTitle = styled.h3`
 
 const UserProfile = ({ postCount, subscriptions, userName }: Props) => {
   return (
-    <RoomCard title= {userName} image="https://hackernoon.com/hn-images/1*TYAzzTJ60x-qg5N81ElU9A.png" >
-        <div>
+    <RoomCard
+      title={userName}
+      image="https://hackernoon.com/hn-images/1*TYAzzTJ60x-qg5N81ElU9A.png"
+    >
+      <div>
         <Typography variant="h6" gutterBottom>
-            Total Posts: {postCount}
-          </Typography>
-          <Divider />
-          <ListSubheader></ListSubheader>
-            <ListTitle>{`Your Subbed Groups`}</ListTitle>
-          
+          Total Posts: {postCount}
+        </Typography>
+        <Divider />
+        <ListSubheader></ListSubheader>
+        <ListTitle>{`Your Subbed Groups`}</ListTitle>
+        <Ul>
           {subscriptions.map((group: any, index: number) => {
             return (
               <Div key={index}>
@@ -65,9 +72,9 @@ const UserProfile = ({ postCount, subscriptions, userName }: Props) => {
               </Div>
             )
           })}
-          </div>
+        </Ul>
+      </div>
     </RoomCard>
-    
   )
 }
 export default UserProfile
