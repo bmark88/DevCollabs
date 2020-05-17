@@ -43,7 +43,7 @@ export default function PostForm(props: any) {
         data: data,
       })
         .then(res => {
-          // console.log(res.data)
+          console.log('res.data',res.data)
           // setPostData("")
           props.postFunction(props.group)
         })
@@ -66,16 +66,18 @@ export default function PostForm(props: any) {
             if (e.target.value !== "") setPostData(e.target.value)
           }}
         />
-        <OutlinedInput
-          id="create-post"
-          placeholder="What's up?"
-          fullWidth
-          autoComplete="off"
-          value={postData}
-          onChange={event => {
-            setPostData(event.target.value)
-          }}
+        <input
+          accept="image/*"
+          style={{ display: 'none' }}
+          id="raised-button-file"
+          multiple
+          type="file"
         />
+        <label htmlFor="raised-button-file">
+          <Button component="span">
+            Upload Image
+          </Button>
+        </label> 
         <Button
           type="submit"
           variant="contained"
