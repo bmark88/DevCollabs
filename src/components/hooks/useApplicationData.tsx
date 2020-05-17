@@ -11,6 +11,7 @@ export default function useApplicationData() {
   })
   const [postCount, setPostCount] = useState(0);
   const [subscriptions, setSubscriptions] = useState([]);
+  const [news, setNews] = useState([]);
 
   //get a users id from session json data. returns {id:number}
   const userId: number = JSON.parse(localStorage.getItem("session") || "{}").id
@@ -87,12 +88,19 @@ const fetchGroups = () => {
     .catch(e => console.error('error!!', e.stack));
   }
 
+  const fetchNews = () => {
+    axios
+      .get('http://hn.algolia.com/api/v1/search?tags=front_page')
+      .then(res => {
+        setNews(res.data.hits)
+        console.log('res.data ==>', res.data)
+      })
+      .catch(e => console.error('error', e.stack))
+  };
+
   useEffect(() => {
     fetchGroups()
-    // .then(groupId => {
-    //   // console.log(groupId)
-    //   fetchPosts(groupId)
-    // })
+    fetchNews()
   }, [])
 
   return {
@@ -102,6 +110,8 @@ const fetchGroups = () => {
     fetchUserPosts,
     fetchUserSubscriptions,
     postCount,
-    subscriptions
+    subscriptions,
+    fetchNews,
+    news
   }
 }
