@@ -79,7 +79,7 @@ export default function GithubSearch() {
    */
 
   const [username, setUsername] = useState("")
-  const [userReposCount, setUserReposCount] = useState()
+  const [userReposCount, setUserReposCount] = useState("")
   // const [userFilters, setUserFilters] = useState("")
 
   const [results, setResults] = useState<APIResults>({ user: {}, repos: {} })
@@ -176,7 +176,6 @@ export default function GithubSearch() {
               <Grid item>
                 <TextField
                   required
-                  id="github-search-username"
                   label="Enter username"
                   value={username}
                   onChange={event => setUsername(event.target.value)}
@@ -190,24 +189,26 @@ export default function GithubSearch() {
           </form>
 
           <h5>Filters</h5>
+          <div>
+
           <form
             className={classes.root}
             noValidate
             autoComplete="off"
             onSubmit={getFilterSearch}
-          >
+            >
             <TextField
-              id="outlined-basic"
               label="# of repos"
               variant="outlined"
               size="small"
               value={userReposCount}
               onChange={event => setUserReposCount(event.target.value)}
-            />
+              />
             <Button type="submit" value="Submit" variant="outlined">
               Search
             </Button>
           </form>
+              </div>
 
           {/* \\\\\ ----------------------- RESULTS ------------------------- /////*/}
 
@@ -269,7 +270,7 @@ export default function GithubSearch() {
                 )}
 
                 {results.user.followers && (
-                  <ListItem key={`item-1-9`}>
+                  <ListItem key={`item-1-8`}>
                     <ListItemText
                       primary={`Followers: ${results.user.followers}`}
                     />
@@ -277,7 +278,7 @@ export default function GithubSearch() {
                 )}
 
                 {results.user.following && (
-                  <ListItem key={`item-1-10`}>
+                  <ListItem key={`item-1-9`}>
                     <ListItemText
                       primary={`Following: ${results.user.following}`}
                     />
@@ -318,7 +319,7 @@ export default function GithubSearch() {
                     </ListItem>
                   )}
                   {userFilterArr.map(repo => (
-                    <ListItem key={`item-3-${repo.id}`}>
+                    <ListItem key={`item-3-${repo.id}-1`}>
                       <ListItemText primary={`Name: ${repo.login}`} />
                       <ListItemText primary={`URL: ${repo.html_url}`} />
                     </ListItem>
@@ -341,7 +342,6 @@ export default function GithubSearch() {
           >
             <TextField
               required
-              id="outlined-basic"
               label="name"
               variant="outlined"
               size="small"
@@ -350,7 +350,6 @@ export default function GithubSearch() {
             />
             <h5>Filters</h5>
             <TextField
-              id="outlined-basic"
               label="Topic"
               variant="outlined"
               size="small"
@@ -358,7 +357,6 @@ export default function GithubSearch() {
               onChange={event => setReposTopic(event.target.value)}
             />
             <TextField
-              id="outlined-basic"
               label="Language"
               variant="outlined"
               size="small"
@@ -405,10 +403,10 @@ export default function GithubSearch() {
                           )}`}
                         />
                       </ListItem>
-                      <ListItem key={`item-4-${repo.id}-2`}>
+                      <ListItem key={`item-4-${repo.id}-3`}>
                         <ListItemText primary={`Language ${repo.language}`} />
                       </ListItem>
-                      <ListItem key={`item-4-${repo.id}-2`}>
+                      <ListItem key={`item-4-${repo.id}-4`}>
                         <ListItemText
                           primary={`Forks Count: ${repo.forks_count}`}
                         />
