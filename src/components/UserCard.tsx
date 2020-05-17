@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import UserProfile from "../components/UserProfile"
+import useApplicationData from "../components/hooks/useApplicationData"
 
 const UserCard = () => {
+  const { 
+    postCount,
+    subscriptions, 
+    fetchUserPosts, 
+    fetchUserSubscriptions 
+  } = useApplicationData();
+  const userID = JSON.parse(localStorage.getItem('session') || '{}').id
+  const userName = JSON.parse(localStorage.getItem('session') || '{}').username
+
+  useEffect(() => {
+    fetchUserPosts(userID)
+    fetchUserSubscriptions(userID)
+  }, [])
+
   return (
-    <div>User Card</div>
+    <>
+      <UserProfile userName={userName} postCount={postCount} subscriptions={subscriptions} />
+    </>
   )
 };
 
