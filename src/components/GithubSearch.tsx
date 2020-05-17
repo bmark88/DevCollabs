@@ -390,11 +390,11 @@ export default function GithubSearch() {
                   )}
                   {reposResultsArr.map(repo => (
                     <div key={`section-5-${repo.id}-2`}>
-                      <ListItem key={`item-4-${repo.id}-2`}>
+                      <ListItem>
                         <ListItemText primary={`Name: ${repo.name}`} />
                       </ListItem>
 
-                      <ListItem key={`item-4-${repo.id}-3`}>
+                      <ListItem>
                         <ListItemText
                           primary={`Day Created: ${repo.created_at.slice(
                             0,
@@ -402,10 +402,10 @@ export default function GithubSearch() {
                           )}`}
                         />
                       </ListItem>
-                      <ListItem key={`item-4-${repo.id}-4`}>
+                      <ListItem>
                         <ListItemText primary={`Language ${repo.language}`} />
                       </ListItem>
-                      <ListItem key={`item-4-${repo.id}-5`}>
+                      <ListItem>
                         <ListItemText
                           primary={`Forks Count: ${repo.forks_count}`}
                         />
