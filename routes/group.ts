@@ -56,32 +56,15 @@ module.exports = db => {
     })
   })
 
-  router.post("/:name", (req, res) => {
-    const subscription = { group_id: "", user_id: "" }
-    dbHelpers
-      .addGroup(req.params.name)
-      .then(group => {
-        subscription.group_id = group.id
-        console.log("1-subscription group", subscription)
-      })
-      .then(() => {
-        dbHelpers
-          .getUserWithEmail("alice@hotmail.com")
-          .then(user => {
-            subscription.user_id = user.id
-            console.log("2-subscription user", subscription)
-          })
-          .then(() => {
-            console.log("3-subscription object: ", subscription),
-              dbHelpers
-                .addSubscription(
-                  subscription.group_id,
-                  subscription.user_id,
-                  true
-                )
-                .then(result => console.log("result ", result))
-          })
-      })
+  router.get("/:group_id/:user_id", (req, res) => {
+    const userId = req.params.user_id
+    const groupId = req.params.group_id
+    console.log(userId)
+    console.log(groupId)
+    dbHelpers.checkUserSubscription(userId, groupId).then(isSubbed => {
+      console.log(isSubbed) 
+      res.send(isSubbed)
+    })
   })
 
   router.delete("/delete/:group_id", (req, res) => {
@@ -93,9 +76,13 @@ module.exports = db => {
     dbHelpers.getSubscriptionsWithUser(userId, groupId).then(subscription => {
       console.log("2-subscription", subscription)
       if (subscription.is_admin === true) {
-        dbHelpers.deleteGroup(groupId).then(data => console.log(data))
-      } else {
-        throw new Error("error: unable to delete group")
+        dbHelpers
+          .deleteGroup(groupId)
+          .then(data => {
+            res.send(data)
+            console.log("here", data)
+          })
+          .catch(e => console.log(e))
       }
     })
   })
@@ -113,7 +100,8 @@ module.exports = db => {
     const userId = req.body.userId
     const groupId = req.params.groupId
     console.log("2 - for user and group : ", userId, groupId)
-
+    console.log(typeof userId)
+    console.log(typeof groupId)
     dbHelpers.checkUserSubscription(userId, groupId).then(isUserSubscribed => {
       console.log(isUserSubscribed)
       if (isUserSubscribed === true) {
@@ -123,7 +111,11 @@ module.exports = db => {
 
         dbHelpers
           .addSubscription(groupId, userId, false)
-          .then(result => console.log("6 - result ", result))
+          .then(result => {
+            res.send(result)
+            console.log("6 - result ", result)
+          })
+          .catch(e => console.log(e))
       }
     })
   })
@@ -137,9 +129,7 @@ module.exports = db => {
 
     dbHelpers.checkUserSubscription(userId, groupId).then(isUserSubscribed => {
       console.log(isUserSubscribed)
-      if (isUserSubscribed === false) {
-        return console.log("User does not have a subsciption to the group!")
-      } else {
+      if (isUserSubscribed === true) {
         console.log("5 - PASS  ~ DELETING")
         dbHelpers
           .deleteSubscription(userId, groupId)
@@ -159,5 +149,6 @@ module.exports = db => {
       })
       .catch(e => res.status(400).send(e))
   })
+
   return router
 }
