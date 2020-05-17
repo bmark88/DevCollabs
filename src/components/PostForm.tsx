@@ -29,24 +29,26 @@ export default function PostForm(props: any) {
   const [error, setError] = useState(false)
 
   const onSubmitFunction = (event: any) => {
-    setError(false)
+    // setError(false)
     event.preventDefault()
     const groupId = props.group // <---------------- Change accordinly
     const session = JSON.parse(localStorage.getItem("session") || '{}')
     const userId = session.id
     const data = { userId, data: postData }
-    axios({
-      method: "post",
-      url: `http://localhost:3001/group/${groupId}/post/create`,
-      data: data,
-    })
-      .then(res => {
-        console.log(res.data)
-        setPostData("")
-        props.postFunction(props.group)
+
+    if(data.data !== "") {
+      axios({
+        method: "post",
+        url: `http://localhost:3001/group/${groupId}/post/create`,
+        data: data,
       })
-      .catch(() => setError(true))
-    
+        .then(res => {
+          // console.log(res.data)
+          // setPostData("")
+          props.postFunction(props.group)
+        })
+        .catch(() => setError(true))
+    }
   }
   return (
     <Container component="main" maxWidth="sm">
@@ -54,6 +56,16 @@ export default function PostForm(props: any) {
         <InputLabel htmlFor="create-post" className={classes.label}>
           CREATE POST
         </InputLabel>
+        <OutlinedInput
+          id="create-post"
+          placeholder="What's up?"
+          fullWidth
+          autoComplete="off"
+          value={postData}
+          onChange={e => {
+            if (e.target.value !== "") setPostData(e.target.value)
+          }}
+        />
         <OutlinedInput
           id="create-post"
           placeholder="What's up?"

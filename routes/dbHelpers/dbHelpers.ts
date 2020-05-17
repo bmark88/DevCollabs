@@ -303,7 +303,8 @@ module.exports = db => {
         SELECT posts.*, username
         FROM posts
         JOIN users ON posts.user_id = users.id
-        WHERE group_id = $1;
+        WHERE group_id = $1
+        ORDER BY id DESC;
         `,
         [groupId]
       )
