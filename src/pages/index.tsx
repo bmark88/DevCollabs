@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import { navigate } from "gatsby"
 
+//hooks
+import socketChat from "../components/hooks/socketChat"
+import usePublic from "../components/hooks/usePublic"
+
 //components
 import Chat from "../components/Chat"
 import Navbar from "../components/Navbar"
-import socketChat from "../components/hooks/socketChat"
 import TopicBoard from "../components/TopicBoard"
 import News from "../components/News"
-import useApplicationData from "../components/hooks/useApplicationData";
+import UserCard from "../components/UserCard"
+import UserList from "../components/UserList"
 
 const Main = styled.main`
   margin-top: 80px;
@@ -30,6 +34,8 @@ const TopicsContainer = styled.div`
 `
 
 export default function IndexPage() {
+  let { users, messages, handleSubmit } = socketChat("public")
+  const { usersList } = usePublic();
 
   let { users, messages, handleSubmit } = socketChat("public")
   // const { subscriptions } = useApplicationData()
@@ -54,9 +60,8 @@ export default function IndexPage() {
     <>
       <Navbar />
       <Main>
-        <div>
-          Placeholder for user profile card
-        </div>
+        <UserCard/>
+        <UserList users={usersList} />
         <TopicsContainer>
           <TopicBoard subscriptions={subscriptions}/>
         </TopicsContainer>

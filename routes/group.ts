@@ -59,17 +59,17 @@ module.exports = db => {
   router.get("/:group_id/:user_id", (req, res) => {
     const userId = req.params.user_id
     const groupId = req.params.group_id
-    console.log(userId)
-    console.log(groupId)
+    // console.log(userId)
+    // console.log(groupId)
     dbHelpers.checkUserSubscription(userId, groupId).then(isSubbed => {
-      console.log(isSubbed) 
+      // console.log(isSubbed) 
       res.send(isSubbed)
     })
   })
 
   router.delete("/delete/:group_id", (req, res) => {
-    console.log(req.body)
-    console.log(req.params)
+    // console.log(req.body)
+    // console.log(req.params)
     const userId = req.body.id
     const groupId = req.params.group_id
 
