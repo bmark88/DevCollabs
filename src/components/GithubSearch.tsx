@@ -20,19 +20,32 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       position: "relative",
       overflow: "auto",
-      maxHeight: 600,
+      maxHeight: 300,
+      textAlign: 'center',
       "& div": {},
     },
     listSection: {
       backgroundColor: "inherit",
+      marginTop: 15
     },
     ul: {
       backgroundColor: "inherit",
+      margin: 0,
+    },
+    text: {
+      margin: 0,
       padding: 0,
+    },
+    resultsRepo: {
+      marginBottom: 20
     },
     field: {
       marginBottom: "0.2em",
     },
+    gitHub: {
+      display: "flex",
+      flexDirection: "column",
+    }
   })
 )
 
@@ -57,6 +70,12 @@ const FormFilter = styled.form`
 const TitleFilter = styled.div`
   display: flex;
   padding: 1em;
+`;
+
+const Test = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 `;
 
 interface APIResults {
@@ -162,8 +181,7 @@ export default function GithubSearch() {
   const reposResultsArr: Array<any> = reposResults.items
 
   return (
-    <>
-    {/* <DivFlex className={classes.margin}> */}
+    <DivFlex>
       <FilterContainer>
         {/* \\\\\-----------------------USER-------------------------///// */}
 
@@ -184,6 +202,7 @@ export default function GithubSearch() {
               type="submit" 
               value="Search" 
               variant="contained"
+              color="primary"
             >
               Search
             </Button>
@@ -207,6 +226,7 @@ export default function GithubSearch() {
                 type="submit" 
                 value="Submit" 
                 variant="contained"
+                color="primary"
               >
                 Search
               </Button>
@@ -219,19 +239,19 @@ export default function GithubSearch() {
             <li key={`section-1`} className={classes.listSection}>
               <ul className={classes.ul}>
                 {results.user.login && (
-                  <ListSubheader>
+                  <ListSubheader style={{padding:"12px"}}>
                     <h2>{`User ${results.user.login}`}</h2>
                   </ListSubheader>
                 )}
 
                 {results.user.name && (
-                  <ListItem key={`item-1-1`}>
+                  <ListItem key={`item-1-1`} className={classes.text}>
                     <ListItemText primary={`Name: ${results.user.name}`} />
                   </ListItem>
                 )}
 
                 {results.user.company && (
-                  <ListItem key={`item-1-2`}>
+                  <ListItem key={`item-1-2`} className={classes.text}>
                     <ListItemText
                       primary={`Company: ${results.user.company}`}
                     />
@@ -239,7 +259,7 @@ export default function GithubSearch() {
                 )}
 
                 {results.user.location && (
-                  <ListItem key={`item-1-3`}>
+                  <ListItem key={`item-1-3`} className={classes.text}>
                     <ListItemText
                       primary={`Location: ${results.user.location}`}
                     />
@@ -247,13 +267,13 @@ export default function GithubSearch() {
                 )}
 
                 {results.user.email && (
-                  <ListItem key={`item-1-4`}>
+                  <ListItem key={`item-1-4`} className={classes.text}>
                     <ListItemText primary={`Email: ${results.user.email}`} />
                   </ListItem>
                 )}
 
                 {results.user.hireable && (
-                  <ListItem key={`item-1-5`}>
+                  <ListItem key={`item-1-5`} className={classes.text}>
                     <ListItemText
                       primary={`hireable: ${results.user.hireable}`}
                     />
@@ -261,19 +281,19 @@ export default function GithubSearch() {
                 )}
 
                 {results.user.bio && (
-                  <ListItem key={`item-1-6`}>
+                  <ListItem key={`item-1-6`} className={classes.text}>
                     <ListItemText primary={`Bio: "${results.user.bio}"`} />
                   </ListItem>
                 )}
 
                 {results.user.html_url && (
-                  <ListItem key={`item-1-7`}>
+                  <ListItem key={`item-1-7`} className={classes.text}>
                     <ListItemText primary={`URL: ${results.user.html_url}`} />
                   </ListItem>
                 )}
 
                 {results.user.followers && (
-                  <ListItem key={`item-1-8`}>
+                  <ListItem key={`item-1-8`} className={classes.text}>
                     <ListItemText
                       primary={`Followers: ${results.user.followers}`}
                     />
@@ -281,7 +301,7 @@ export default function GithubSearch() {
                 )}
 
                 {results.user.following && (
-                  <ListItem key={`item-1-9`}>
+                  <ListItem key={`item-1-9`} className={classes.text}>
                     <ListItemText
                       primary={`Following: ${results.user.following}`}
                     />
@@ -293,11 +313,11 @@ export default function GithubSearch() {
             {results.repos && results.repos[0] && (
               <li key={`section-2`} className={classes.listSection}>
                 <ul className={classes.ul}>
-                  <ListSubheader>
+                  <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`User's Repos`}</h2>
                   </ListSubheader>
                   {sortedReposByDate.map(repo => (
-                    <ListItem key={`item-2-${repo.id}`}>
+                    <ListItem key={`item-2-${repo.id}`} className={classes.text}>
                       <ListItemText primary={`Name: ${repo.name}`} />
                       <ListItemText
                         primary={`Day Created: ${repo.created_at.slice(0, 10)}`}
@@ -308,25 +328,32 @@ export default function GithubSearch() {
               </li>
             )}
             {/* \\\\\ -----------------------FILTERS RESULTS------------------------- /////*/}
-            {!results.repos && userReposCount > 1 && (
+            {!results.repos && parseInt(userReposCount) > 1 && (
               <li key={`section-3`} className={classes.listSection}>
                 <ul className={classes.ul}>
-                  <ListSubheader>
+                  <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`User's List`}</h2>
                   </ListSubheader>
+                  {/* HERE!!!!!! */}
                   {reposResults.total_count && (
-                    <ListItem key={`item-3-1`}>
+                    <ListItem key={`item-3-1`} className={classes.text}>
                       <ListItemText
                         primary={`Total Count: ${results.user.length}`}
                       />
                     </ListItem>
                   )}
                   {userFilterArr.map(repo => (
-                    <ListItem key={`item-3-${repo.id}-1`}>
+                    // <Test>
+                    <ListItem key={`item-3-${repo.id}-1`} className={classes.gitHub}>
                       <ListItemText primary={`GitHub Username: ${repo.login}`} />
                       {/* <ListItemText primary={`URL: ${repo.html_url}`} /> */}
-                      <a href={repo.html_url}>{repo.html_url}</a>
+                      <ListItemText>
+                        <a href={repo.html_url}>
+                          {repo.html_url}
+                        </a>
+                      </ListItemText>
                     </ListItem>
+                    // </Test>
                   ))}
                 </ul>
               </li>
@@ -372,6 +399,7 @@ export default function GithubSearch() {
               type="submit"
               value="Submit"
               variant="contained"
+              color="primary"
               onSubmit={getReposSearch}
             >
               Search
@@ -384,23 +412,23 @@ export default function GithubSearch() {
             {reposResults.incomplete_results === false && (
               <li key={`section-4-0`} className={classes.listSection}>
                 <ul className={classes.ul}>
-                  <ListSubheader>
+                  <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`Repos Results`}</h2>
                   </ListSubheader>
                   {reposResults.total_count && (
-                    <ListItem key={`item-4-2`}>
+                    <ListItem key={`item-4-2`} className={classes.text}>
                       <ListItemText
                         primary={`Total Count: ${reposResults.total_count}`}
                       />
                     </ListItem>
                   )}
                   {reposResultsArr.map(repo => (
-                    <div key={`section-5-${repo.id}-2`}>
-                      <ListItem>
+                    <div key={`section-5-${repo.id}-2`} className={classes.resultsRepo}>
+                      <ListItem className={classes.text}>
                         <ListItemText primary={`Name: ${repo.name}`} />
                       </ListItem>
 
-                      <ListItem>
+                      <ListItem className={classes.text}>
                         <ListItemText
                           primary={`Day Created: ${repo.created_at.slice(
                             0,
@@ -408,10 +436,10 @@ export default function GithubSearch() {
                           )}`}
                         />
                       </ListItem>
-                      <ListItem>
+                      <ListItem className={classes.text}>
                         <ListItemText primary={`Language ${repo.language}`} />
                       </ListItem>
-                      <ListItem>
+                      <ListItem className={classes.text}>
                         <ListItemText
                           primary={`Forks Count: ${repo.forks_count}`}
                         />
@@ -424,7 +452,6 @@ export default function GithubSearch() {
           </List>
         </div>
       </FilterContainer>
-    {/* </DivFlex> */}
-    </>
+    </DivFlex>
   )
 }
