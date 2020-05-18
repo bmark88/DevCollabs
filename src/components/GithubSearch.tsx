@@ -188,7 +188,7 @@ console.log('userFilterArr', userFilterArr)
         <div className="user-list">
           <TitleFilter>
             <GitHubIcon/>
-            <h3>Search By User</h3>
+            <h3 style={{marginLeft: 10}}>Search By User</h3>
           </TitleFilter>
           <FormFilter onSubmit={getUserSearch}>
             <TextField className={classes.field}
@@ -367,7 +367,7 @@ console.log('userFilterArr', userFilterArr)
         <div className="repos-list">
           <TitleFilter>
             <GitHubIcon/>
-            <h3>Search By Repository</h3>
+            <h3 style={{marginLeft: 10}}>Search By Repository</h3>
           </TitleFilter>
           <FormFilter
             autoComplete="off"
