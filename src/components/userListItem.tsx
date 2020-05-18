@@ -29,7 +29,7 @@ export default function UserListItem(props: any) {
   useEffect(() => {
     axios
       .get(`http://localhost:3001/rate/${user.id}`)
-      .then(data => setValue(data.data.avg))
+      .then(data => setValue(Number(data.data.avg)))
       .catch(e => console.log(e))
   }, [])
 
@@ -43,8 +43,10 @@ export default function UserListItem(props: any) {
         axios
           .get(`http://localhost:3001/rate/${user.id}`)
           .then(data => {
+
             setIsChecked(false)
-            setValue(parseFloat(data.data.avg))
+            console.log(typeof data.data.avg)
+            setValue(Number(data.data.avg))
           })
           .catch(e => console.log(e))
       })
