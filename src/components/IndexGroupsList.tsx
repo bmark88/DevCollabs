@@ -39,17 +39,17 @@ const ElementDiv = styled.div`
   justify-content: space-between;
 `
 
-const ButtonsDiv =styled.div`
+const ButtonsDiv = styled.div`
   margin-right: 10px;
-`;
+`
 const useStyles = makeStyles({
   groupName: {
     alignSelf: "center",
-    marginLeft: '15px'
+    marginLeft: "15px",
   },
   groupButtons: {
-    margin: '0px 5px 0px 5px'
-  }
+    margin: "0px 5px 0px 5px",
+  },
 })
 
 function GroupTestElement(props: any) {
@@ -110,6 +110,19 @@ function GroupTestElement(props: any) {
 
   const handleDeleteGroup = () => {
     console.log(`delete this group id => ${id}`)
+    axios({
+      method: "DELETE",
+      url: `http://localhost:3001/group/delete/${id}`,
+      data: { id: userId },
+    })
+      .then(data => {
+        console.log(data)
+        axios.get("http://localhost:3001/group/public").then(data => {
+          console.log(data.data)
+          props.setAllGroups(data.data)
+        })
+      })
+      .catch(e => console.log(e))
   }
   return (
     <ElementDiv>
@@ -182,6 +195,7 @@ export default function IndexGroupList({ subscriptions }: Props) {
         group={group}
         subscription={subscription}
         key={group.id}
+        setAllGroups={setAllGroups}
       />
     )
   })
