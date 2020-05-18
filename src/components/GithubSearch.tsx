@@ -186,9 +186,6 @@ export default function GithubSearch() {
   const userFilterArr: Array<any> = results.user
   const reposResultsArr: Array<any> = reposResults.items
 
-  const userFilterArr: Array<any> = results.user
-  const reposResultsArr: Array<any> = reposResults.items
-
   return (
     <DivFlex>
       <FilterContainer>

@@ -42,6 +42,20 @@ export default function PostForm(props: any) {
     console.log('postState.image ==>', postState.image)
     const data = { userId, data: postState.message, image_url: postState.image }
 
+    // if (postState.message.includes('www.'))  {
+    //   let str = postState.message.split('http')
+    //   console.log(str)
+    //   axios.get( `http://api.linkpreview.net/?key=123456&q=https://www.google.com`)  //--TEST CASE 
+    //     // `https://api.linkpreview.net/?key=71de5c5e4e30482ea8aaee1b63be5b20&q=http://${urlForAPI}`
+    //   .then((img) => {
+    //     console.log(img);
+
+    //     // const parsed = JSON.parse(img)
+    //     // console.log(parsed);
+        
+    //   })
+    // }
+
     if(data.data !== "") {
       axios({
         method: "post",
