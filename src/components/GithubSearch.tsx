@@ -78,7 +78,6 @@ export default function GithubSearch() {
    * @output_fields total_count, items { name, updated, created_at, forks_count }
    */
 
-
   const [username, setUsername] = useState("")
   const [userReposCount, setUserReposCount] = useState("")
   // const [userFilters, setUserFilters] = useState("")
