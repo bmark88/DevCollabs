@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import useApplicationData from "./useApplicationData"
 
- function usePublic() {
+export default function usePublic() {
   const [publicGroups, setPublic] = useState({
     groups: [],
   }) //TODO change to array

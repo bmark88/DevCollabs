@@ -11,7 +11,7 @@ interface Props {
 
 const toastNotif = (notification: string) => {
   const typesOfNotif: {
-    isAdmin: string
+    [isAdmin: string] :string
     addSub: string
     removeSub: string
   } = {

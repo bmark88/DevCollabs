@@ -16,6 +16,7 @@ import useApplicationData from "../components/hooks/useApplicationData";
 
 import UserCard from "../components/UserCard"
 import UserList from "../components/UserList"
+import { CollectionsTwoTone } from "@material-ui/icons";
 
 const Main = styled.main`
   margin-top: 80px;
@@ -37,11 +38,9 @@ const TopicsContainer = styled.div`
 `
 
 export default function IndexPage() {
-  let { users, messages, handleSubmit } = socketChat("public")
+  const { users, messages, handleSubmit } = socketChat("public")
   const { usersList } = usePublic();
-
-  let { users, messages, handleSubmit } = socketChat("public")
-  // const { subscriptions } = useApplicationData()
+  
   const { 
     subscriptions, 
     fetchUserSubscriptions 
