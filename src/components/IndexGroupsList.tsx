@@ -1,8 +1,12 @@
-import React from "react"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
+
+import { IconButton, Typography } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline"
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
+import styled from "styled-components"
 
 import axios from "axios"
-
 import { toast } from "react-toastify"
 
 interface Props {
@@ -11,7 +15,7 @@ interface Props {
 
 const toastNotif = (notification: string) => {
   const typesOfNotif: {
-    [isAdmin: string] :string
+    [isAdmin: string]: string
     addSub: string
     removeSub: string
   } = {
@@ -29,13 +33,27 @@ const toastNotif = (notification: string) => {
   })
 }
 
+const ElementDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const useStyles = makeStyles({
+  groupName: {
+    alignSelf: 'center',
+  },
+  groupButton: {
+    paddingRight: '30px'
+  }
+})
+
 function GroupTestElement(props: any) {
   const { name, id } = props.group
   const subscription = props.subscription
-
   const userId = JSON.parse(localStorage.getItem("session") || "{}").id
   const [sub, setSub] = useState(false)
   const [disable, setDisable] = useState(false)
+  const classes = useStyles()
 
   //   console.log("sub true or not", props.sub)
   //   console.log("from grouptestelent", name)
@@ -52,14 +70,13 @@ function GroupTestElement(props: any) {
     })
   }, [])
 
-
   const handleSub = () => {
     const data = { userId }
 
     if (subscription.is_admin) return toastNotif("isAdmin")
 
     sub
-      ?( axios({
+      ? axios({
           method: "delete",
           url: `http://localhost:3001/group/subscription/delete/${id}`,
           data: data,
@@ -69,7 +86,7 @@ function GroupTestElement(props: any) {
             toastNotif("removeSub")
           })
           .catch(() => console.log("unsub unsuccess"))
-      ) : axios({
+      : axios({
           method: "post",
           url: `http://localhost:3001/group/subscription/${id}`,
           data: data,
@@ -81,16 +98,20 @@ function GroupTestElement(props: any) {
           .catch(() => console.log("sub unsuccess"))
     setSub(!sub)
     setDisable(true)
-    setTimeout(function() {setDisable(false)}, 1000)
+    setTimeout(function () {
+      setDisable(false)
+    }, 1000)
   }
 
   return (
-    <div>
-      <p key={id}>{name}</p>
-      <button onClick={handleSub} disabled={disable}>
-        {sub ? "-" : "+"}
-      </button>
-    </div>
+    <ElementDiv>
+      <Typography className={classes.groupName} variant="body1">
+        {name}
+      </Typography>
+      <IconButton className={classes.groupButton} onClick={handleSub} disabled={disable}>
+        {sub ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}
+      </IconButton>
+    </ElementDiv>
   )
 }
 
@@ -115,6 +136,13 @@ export default function IndexGroupList({ subscriptions }: Props) {
     //     })
   }, [])
 
+  const ListDiv = styled.div`
+    margin: 1em;
+    max-height: 368px;
+    overflow: hidden;
+    overflow-y: scroll
+  `
+
   const List = allGroups.map(group => {
     // if (groupBelong.includes(group.name)) {
     //    return <GroupTestElement group={group} sub={true} />
@@ -135,5 +163,5 @@ export default function IndexGroupList({ subscriptions }: Props) {
     )
   })
 
-  return <div>{List}</div>
+  return <ListDiv>{List}</ListDiv>
 }
