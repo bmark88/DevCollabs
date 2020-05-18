@@ -27,3 +27,9 @@ INSERT INTO ratings
   (rater_user_id, rated_user_id, rating)
 VALUES
   (1, 6, 4);
+
+
+INSERT INTO ratings
+  (rater_user_id, rated_user_id, rating)
+VALUES
+  (3, 1, 5);

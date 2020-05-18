@@ -399,6 +399,55 @@ module.exports = db => {
       .catch(e => console.error('error!!', e.stack));
   };
 
+  const getUserRating = (userID) => {
+    return db
+      .query(`
+        SELECT AVG(rating)
+        FROM ratings
+        WHERE rated_user_id = $1;
+      `,[userID])
+      .then(res => res.rows[0])
+      .catch(e => e)
+  }
+
+  const checkRatingExist = (ratedId, raterId) => {
+    return db
+    .query(`
+      SELECT * FROM ratings
+      WHERE rated_user_id = $1
+      AND rater_user_id = $2;
+    `,[ratedId, raterId ])
+    .then(res => res.rows[0] || null)
+    .catch(e => e)
+      
+  }
+  
+  const rateUser = (ratedId, raterId, rating) => {
+    return db
+    .query(`
+    INSERT INTO ratings
+    (rater_user_id, rated_user_id, rating)
+    VALUES
+    ($1, $2, $3)
+    RETURNING *;
+    `,[raterId, ratedId, rating ])
+    .then(res => res.rows[0] || null)
+    .catch(e => e)
+  }
+
+  const updateRating = (ratedId, raterId, newRating) => {
+    return db
+    .query(`
+    UPDATE ratings
+    SET rating = $3
+    WHERE rated_user_id = $1
+    AND rater_user_id = $2
+    RETURNING *;
+    `,[ratedId, raterId, newRating ])
+    .then(res => res.rows[0] || null)
+    .catch(e => e)
+  }
+
   return {
     getUserWithEmail,
     addUser,
@@ -420,6 +469,10 @@ module.exports = db => {
     checkUserSubscription,
     getUserPostsCount,
     getAllUserSubscriptions,
-    getAllUsers
+    getAllUsers,
+    getUserRating,
+    checkRatingExist,
+    rateUser,
+    updateRating
   }
 }

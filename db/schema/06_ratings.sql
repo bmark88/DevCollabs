@@ -3,6 +3,6 @@ CREATE TABLE ratings
 (
   id SERIAL PRIMARY KEY NOT NULL,
   rater_user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  rated_user_id VARCHAR(255) NOT NULL,
-  rating SMALLINT NOT NULL DEFAULT 0
+  rated_user_id INTEGER NOT NULL,
+  rating NUMERIC NOT NULL DEFAULT 0
 );
