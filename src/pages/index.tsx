@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import styled from "styled-components"
 import { navigate } from "gatsby"
 
@@ -11,6 +11,9 @@ import Chat from "../components/Chat"
 import Navbar from "../components/Navbar"
 import TopicBoard from "../components/TopicBoard"
 import News from "../components/News"
+import UserProfile from "../components/UserProfile";
+import useApplicationData from "../components/hooks/useApplicationData";
+
 import UserCard from "../components/UserCard"
 import UserList from "../components/UserList"
 
@@ -23,7 +26,7 @@ const Main = styled.main`
 const TopicsContainer = styled.div`
   background-color: black;
   color: white;
-  width: 50%;
+  width: 43%;
   margin: 1em;
   height: 85%;
 
