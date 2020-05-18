@@ -69,6 +69,7 @@ const GroupPage = () => {
   const [groupName, setGroupName] = useState("")
 
   const createRoomAndNotify = (evt: any) => {
+   
     evt.preventDefault()
     const username = JSON.parse(
       localStorage.getItem("session") || "{}"
@@ -76,8 +77,11 @@ const GroupPage = () => {
     // After room is created, clear state and reset to empty string
     evt.target.querySelector("input").value = ""
     setRoomID(evt.target.querySelector("input").value)
-
-    toast(`${username} has created a new room!`, {
+    
+    setTimeout(()=> {
+      navigate("/room", {state : {roomID}})
+    }, 2000)
+    toast(`${username} will be redirected to ${roomID} shortly`, {
       position: "bottom-right",
       autoClose: 2500,
       closeOnClick: false,
@@ -153,7 +157,7 @@ const GroupPage = () => {
             </RoomCard>
             <RoomCard
               image="https://economictimes.indiatimes.com/thumb/msid-73420856,width-1200,height-900,resizemode-4,imgsize-272701/getty.jpg?from=mdr"
-              title="Create A Room"
+              title="Create or Join A Room"
             >
               <Form onSubmit={createRoomAndNotify}>
                 <Input
@@ -178,9 +182,9 @@ const GroupPage = () => {
               title="Join A Room"
             >
               <Div>
-                <Link to="/room/"> Room 1</Link>
-                <Link to="/room/"> Room 2</Link>
-                <Link to="/room/"> Room 3</Link>
+                <Link to="/room/" state={{roomID: 'setRoom1'}}> Room 1</Link>
+                <Link to="/room/" state={{roomID: 'setRoom2'}}> Room 2</Link>
+                <Link to="/room/" state={{roomID: 'setRoom3'}}> Room 3</Link>
               </Div>
             </RoomCard>
           </RoomContainer>
