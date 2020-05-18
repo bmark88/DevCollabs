@@ -15,8 +15,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
   },
   submit: {
-    margin: theme.spacing(1, 0, 0),
-    minWidth: "310px",
+    margin: theme.spacing(1, 50, 0),
+    maxWidth: "310px",
   },
   label: {
     margin: theme.spacing(0, 0, 1),
@@ -59,7 +59,7 @@ export default function PostForm(props: any) {
     }
   }
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main" >
       <form className={classes.form} onSubmit={onSubmitFunction}>
         <InputLabel htmlFor="create-post" className={classes.label}>
           CREATE POST
