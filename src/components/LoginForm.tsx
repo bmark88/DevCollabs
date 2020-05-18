@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function RegisterForm() {
+export default function LoginForm() {
   const classes = useStyles()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")

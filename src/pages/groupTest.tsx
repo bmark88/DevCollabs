@@ -1,6 +1,6 @@
 import React from "react"
 import Layout from '../components/layout'
-import Test from "../components/test"
+import Test from "../components/groupTest"
 
 
 const TestPage = () => (
