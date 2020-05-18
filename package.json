@@ -52,8 +52,16 @@
     "typescript": "^3.9.2"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.2",
+    "@types/react-test-renderer": "^16.9.2",
+    "@types/testing-library__react": "^10.0.1",
+    "babel-jest": "^26.0.1",
+    "babel-preset-gatsby": "^0.4.2",
     "gatsby-plugin-tslint": "0.0.2",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^26.0.1",
     "prettier": "2.0.5",
+    "react-test-renderer": "^16.13.1",
     "tslint": "^6.1.2",
     "tslint-loader": "^3.5.4"
   },
@@ -68,7 +76,7 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "test": "jest",
     "db:reset": "node bin/resetdb.js"
   },
   "repository": {
