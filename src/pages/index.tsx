@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components"
+import styled, { ThemeProvider } from "styled-components"
 import { navigate } from "gatsby"
 
 //hooks
@@ -12,6 +12,7 @@ import Navbar from "../components/Navbar"
 import TopicBoard from "../components/TopicBoard"
 import News from "../components/News"
 import UserProfile from "../components/UserProfile";
+import DarkMode from "../components/DarkMode";
 import useApplicationData from "../components/hooks/useApplicationData";
 
 import UserCard from "../components/UserCard"
@@ -59,17 +60,20 @@ export default function IndexPage() {
   
 
   return (
-    <>
-      <Navbar />
-      <Main>
-        <UserCard/>
-        <UserList users={usersList} />
-        <TopicsContainer>
-          <TopicBoard subscriptions={subscriptions}/>
-        </TopicsContainer>
-        <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
-      </Main>
-      <News />
-    </>
+    <ThemeProvider theme={{ mode: 'dark'}}>
+      <>
+      <DarkMode />
+        <Navbar />
+        <Main>
+          <UserCard/>
+          <UserList users={usersList} />
+          <TopicsContainer>
+            <TopicBoard subscriptions={subscriptions}/>
+          </TopicsContainer>
+          <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
+        </Main>
+        <News />
+      </>
+    </ThemeProvider>
   )
 }
