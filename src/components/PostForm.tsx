@@ -54,6 +54,8 @@ export default function PostForm(props: any) {
           // console.log(postData)
 
           props.postFunction(props.group)
+          setPostState({...postState, message: "",
+          image: ""})
         })
         .catch(() => setError(true))
     }
