@@ -1,23 +1,17 @@
-import React, { useState } from "react"
-import axios from "axios"
 
-import Input from "@material-ui/core/Input"
-import InputLabel from "@material-ui/core/InputLabel"
-import InputAdornment from "@material-ui/core/InputAdornment"
-import FormControl from "@material-ui/core/FormControl"
-import TextField from "@material-ui/core/TextField"
-import Grid from "@material-ui/core/Grid"
-import AccountCircle from "@material-ui/icons/AccountCircle"
-import styled from "styled-components"
-import Button from "@material-ui/core/Button"
-
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles"
-import List from "@material-ui/core/List"
-import ListItem from "@material-ui/core/ListItem"
-import ListItemText from "@material-ui/core/ListItemText"
-import ListSubheader from "@material-ui/core/ListSubheader"
-import { sizing } from "@material-ui/system"
-import Paper from "@material-ui/core/Paper"
+import React, { useState } from "react";
+import axios from "axios";
+import styled from "styled-components";
+import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import GitHubIcon from '@material-ui/icons/GitHub';
+import { 
+  Button, 
+  List, 
+  ListItem, 
+  ListItemText, 
+  ListSubheader,
+  TextField
+} from  "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,42 +22,74 @@ const useStyles = makeStyles((theme: Theme) =>
       position: "relative",
       overflow: "auto",
       maxHeight: 300,
+      textAlign: 'center',
       "& div": {},
     },
     listSection: {
       backgroundColor: "inherit",
+      marginTop: 15,
     },
     ul: {
       backgroundColor: "inherit",
+      margin: 0,
+    },
+    text: {
+      margin: 0,
       padding: 0,
     },
+    resultsRepo: {
+      marginTop: 20
+    },
+    field: {
+      marginBottom: "0.2em",
+    },
+    gitHub: {
+      display: "flex",
+      flexDirection: "column",
+    }
   })
 )
 
 const DivFlex = styled.div`
   display: flex;
-`
-const DivFlexAlign = styled.div`
+`;
+
+const FilterContainer = styled.div`
   padding: 20px;
-  // align-items: flex-start;
-  // margin: auto;
-  // alignItems: center;
-  // margin-left: auto;
-`
+  border: solid 2px;
+  margin: 1em;
+  min-width: 345px;
+  display: flex;
+  justify-content: center;
+`;
+
+const FormFilter = styled.form`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const TitleFilter = styled.div`
+  display: flex;
+  padding: 1em;
+`;
+
+const AdditionalFilters = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 83px;
+`;
 
 interface APIResults {
   user: any
   repos: any
-}
+};
 
-// interface filters {
-//   byRepos: number
-//   byFollowers: number
-// }
 interface APIRepoResults {
-  total_count: number
-  incomplete_results: boolean
-  items: array
+  total_count :number
+  incomplete_results :boolean
+  items :object[]
+
 }
 export default function GithubSearch() {
   const classes = useStyles()
@@ -78,25 +104,28 @@ export default function GithubSearch() {
    * @output_fields total_count, items { name, updated, created_at, forks_count }
    */
 
-  const [username, setUsername] = useState("")
-  const [userReposCount, setUserReposCount] = useState("")
-  // const [userFilters, setUserFilters] = useState("")
+  /**
+   * USER
+   * @input_fields username, filters { # of repos, *# of followers }
+   * @output_fields name, company, location, email, hireable, bio, followers_count, following_count
+   * @output_fields User's Repos { name, created_at }
+   *
+   * REPOS
+   * @input_fields name filters { topic, language }
+   * @output_fields total_count, items { name, updated, created_at, forks_count }
+   */
 
-  const [results, setResults] = useState<APIResults>({ user: {}, repos: {} })
-
-  const [reposName, setReposName] = useState("")
-  const [reposTopic, setReposTopic] = useState("")
-  const [reposLanguage, setReposLanguage] = useState("")
-
+  const [username, setUsername] = useState("");
+  const [userReposCount, setUserReposCount] = useState("");
+  const [results, setResults] = useState<APIResults>({ user: {}, repos: {} });
+  const [reposName, setReposName] = useState("");
+  const [reposTopic, setReposTopic] = useState("");
+  const [reposLanguage, setReposLanguage] = useState("");
   const [reposResults, setReposResults] = useState<APIRepoResults>({
     total_count: 0,
     incomplete_results: true,
     items: [],
-  })
-
-  console.log(results)
-  console.log(reposResults)
-  console.log("-------------------")
+  });
 
   const getUserSearch = (event: any) => {
     event.preventDefault()
@@ -107,20 +136,16 @@ export default function GithubSearch() {
       axios.get(`https://api.github.com/users/${username}/repos`),
     ])
       .then(([user, repos]) => {
-        console.log(user)
-        console.log(repos)
-
         setResults({ user: user.data, repos: repos.data })
       })
       .catch(error => console.log(error))
-  }
+  };
 
   const getFilterSearch = (event: any) => {
     event.preventDefault()
     let searchQuery: string = username
     if (userReposCount) searchQuery = `${username}+repos:%3E${userReposCount}`
     // if (byFollowers) username = `${username}+followers:%3E${byFollowers}`
-    console.log("->", searchQuery)
 
     //does a general query search
     axios
@@ -129,7 +154,7 @@ export default function GithubSearch() {
         setResults({ user: res.data.items, repos: null })
       })
       .catch(error => console.log(error))
-  }
+  };
 
   //Find repositories via various criteria. This method returns up to 100 results per page.
   const getReposSearch = (event: any) => {
@@ -151,83 +176,90 @@ export default function GithubSearch() {
         })
       })
       .catch(error => console.log(error))
-  }
+  };
 
-  const reposArr: Array<any> = results.repos
+  const reposArr: Array<any> = results.repos;
   let sortedReposByDate: Array<any> = []
+
   if (results.repos && reposArr.length > 0) {
     sortedReposByDate = reposArr.sort((a, b) => b.id - a.id).slice(0, 4)
   }
   const userFilterArr: Array<any> = results.user
   const reposResultsArr: Array<any> = reposResults.items
 
-  return (
-    <DivFlex className={classes.margin}>
-      <DivFlexAlign>
-        {/* \\\\\-----------------------USER-------------------------///// */}
+  const userFilterArr: Array<any> = results.user
+  const reposResultsArr: Array<any> = reposResults.items
 
+  return (
+    <DivFlex>
+      <FilterContainer>
+        {/* \\\\\-----------------------USER-------------------------///// */}
         <div className="user-list">
-          <h3>User</h3>
-          <form onSubmit={getUserSearch}>
-            <Grid container spacing={1} alignItems="flex-end">
-              <Grid item>
-                <AccountCircle />
-              </Grid>
-              <Grid item>
-                <TextField
-                  required
-                  label="Enter username"
-                  value={username}
-                  onChange={event => setUsername(event.target.value)}
-                />
-              </Grid>
-            </Grid>
-            <Button type="submit" value="Submit" variant="outlined">
+          <TitleFilter>
+            <GitHubIcon/>
+            <h3 style={{marginLeft: 10}}>Search By User</h3>
+          </TitleFilter>
+          <FormFilter onSubmit={getUserSearch}>
+            <TextField className={classes.field}
+              required
+              label="GitHub Username"
+              value={username}
+              variant="outlined"
+              onChange={event => setUsername(event.target.value)}
+              helperText="Display individual username GitHub analytics"
+            />
+            <Button 
+              type="submit" 
+              value="Search" 
+              variant="contained"
+              color="primary"
+            >
               Search
             </Button>
-          </form>
-
-          <h5>Filters</h5>
+          </FormFilter>
+          <h5 style={{marginBottom: 5}}>Filter by Minimum # of Repos</h5>
           <div>
-            <form
-              className={classes.root}
-              noValidate
+            <FormFilter
               autoComplete="off"
               onSubmit={getFilterSearch}
             >
-              <TextField
-                label="# of repos"
+              <TextField className={classes.field}
+                required
+                label="Minimum Count"
                 variant="outlined"
                 size="small"
                 value={userReposCount}
-                helperText="General search with username above"
+                helperText="Display list of usernames and repositories"
                 onChange={event => setUserReposCount(event.target.value)}
               />
-              <Button type="submit" value="Submit" variant="outlined">
+              <Button 
+                type="submit" 
+                value="Submit" 
+                variant="contained"
+                color="primary"
+              >
                 Search
               </Button>
-            </form>
+            </FormFilter>
           </div>
-
-          {/* \\\\\ ----------------------- RESULTS ------------------------- /////*/}
-
+          {/* \\\\\ -------------------- RESULTS ---------------------- /////*/}
           <List className={classes.root} subheader={<li />}>
             <li key={`section-1`} className={classes.listSection}>
               <ul className={classes.ul}>
                 {results.user.login && (
-                  <ListSubheader>
+                  <ListSubheader style={{padding:"12px"}}>
                     <h2>{`User ${results.user.login}`}</h2>
                   </ListSubheader>
                 )}
 
                 {results.user.name && (
-                  <ListItem key={`item-1-1`}>
+                  <ListItem key={`item-1-1`} className={classes.text}>
                     <ListItemText primary={`Name: ${results.user.name}`} />
                   </ListItem>
                 )}
 
                 {results.user.company && (
-                  <ListItem key={`item-1-2`}>
+                  <ListItem key={`item-1-2`} className={classes.text}>
                     <ListItemText
                       primary={`Company: ${results.user.company}`}
                     />
@@ -235,7 +267,7 @@ export default function GithubSearch() {
                 )}
 
                 {results.user.location && (
-                  <ListItem key={`item-1-3`}>
+                  <ListItem key={`item-1-3`} className={classes.text}>
                     <ListItemText
                       primary={`Location: ${results.user.location}`}
                     />
@@ -243,13 +275,13 @@ export default function GithubSearch() {
                 )}
 
                 {results.user.email && (
-                  <ListItem key={`item-1-4`}>
+                  <ListItem key={`item-1-4`} className={classes.text}>
                     <ListItemText primary={`Email: ${results.user.email}`} />
                   </ListItem>
                 )}
 
                 {results.user.hireable && (
-                  <ListItem key={`item-1-5`}>
+                  <ListItem key={`item-1-5`} className={classes.text}>
                     <ListItemText
                       primary={`hireable: ${results.user.hireable}`}
                     />
@@ -257,27 +289,31 @@ export default function GithubSearch() {
                 )}
 
                 {results.user.bio && (
-                  <ListItem key={`item-1-6`}>
+                  <ListItem key={`item-1-6`} className={classes.text}>
                     <ListItemText primary={`Bio: "${results.user.bio}"`} />
                   </ListItem>
                 )}
 
                 {results.user.html_url && (
-                  <ListItem key={`item-1-7`}>
-                    <ListItemText primary={`URL: ${results.user.html_url}`} />
+                  <ListItem key={`item-1-7`} className={classes.text}>
+                    <a href={`URL: ${results.user.html_url}`} >
+                      {results.user.html_url}
+                    </a>
                   </ListItem>
                 )}
 
-                {results.user.followers && (
-                  <ListItem key={`item-1-8`}>
+                {results.user.followers > 0 && (
+                  <ListItem key={`item-1-8`} className={classes.text}>
                     <ListItemText
                       primary={`Followers: ${results.user.followers}`}
+
                     />
                   </ListItem>
                 )}
 
-                {results.user.following && (
-                  <ListItem key={`item-1-9`}>
+                {results.user.following > 0 && (
+                  <ListItem key={`item-1-9`} className={classes.text}>
+
                     <ListItemText
                       primary={`Following: ${results.user.following}`}
                     />
@@ -289,11 +325,12 @@ export default function GithubSearch() {
             {results.repos && results.repos[0] && (
               <li key={`section-2`} className={classes.listSection}>
                 <ul className={classes.ul}>
-                  <ListSubheader>
+                  <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`User's Repos`}</h2>
                   </ListSubheader>
                   {sortedReposByDate.map(repo => (
-                    <ListItem key={`item-2-${repo.id}`}>
+                    <ListItem key={`item-2-${repo.id}`} className={classes.gitHub}>
+
                       <ListItemText primary={`Name: ${repo.name}`} />
                       <ListItemText
                         primary={`Day Created: ${repo.created_at.slice(0, 10)}`}
@@ -303,24 +340,36 @@ export default function GithubSearch() {
                 </ul>
               </li>
             )}
-            {/* \\\\\ -----------------------FILTERS RESULTS------------------------- /////*/}
-            {!results.repos && userReposCount > 1 && (
+            {/* \\\\\ ---------------FILTERS RESULTS--------------- /////*/}
+            {!results.repos && parseInt(userReposCount) > 1 && (
               <li key={`section-3`} className={classes.listSection}>
                 <ul className={classes.ul}>
-                  <ListSubheader>
+                  <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`User's List`}</h2>
                   </ListSubheader>
-                  {reposResults.total_count && (
-                    <ListItem key={`item-3-1`}>
+                  {reposResults.total_count > 0 && (
+                    <ListItem key={`item-3-1`} className={classes.text}>
                       <ListItemText
                         primary={`Total Count: ${results.user.length}`}
                       />
                     </ListItem>
                   )}
+                  {<ListItemText 
+                    primary={`Total Count: ${userFilterArr.length}`}
+                  />}
                   {userFilterArr.map(repo => (
-                    <ListItem key={`item-3-${repo.id}-1`}>
-                      <ListItemText primary={`Name: ${repo.login}`} />
-                      <ListItemText primary={`URL: ${repo.html_url}`} />
+                    <ListItem 
+                      key={`item-3-${repo.id}-1`} 
+                      className={classes.gitHub}
+                    >
+                      <ListItemText 
+                        primary={`GitHub Username: ${repo.login}`} 
+                      />
+                      <ListItemText>
+                        <a href={repo.html_url}>
+                          {repo.html_url}
+                        </a>
+                      </ListItemText>
                     </ListItem>
                   ))}
                 </ul>
@@ -328,73 +377,77 @@ export default function GithubSearch() {
             )}
           </List>
         </div>
-      </DivFlexAlign>
+      </FilterContainer>
       {/* \\\\\ -----------------------REPOS------------------------- /////*/}
-      <DivFlexAlign>
+      <FilterContainer>
         <div className="repos-list">
-          <h3>Repos</h3>
-          <form
-            className={classes.root}
-            noValidate
+          <TitleFilter>
+            <GitHubIcon/>
+            <h3 style={{marginLeft: 10}}>Search By Repository</h3>
+          </TitleFilter>
+          <FormFilter
             autoComplete="off"
             onSubmit={getReposSearch}
           >
-            <TextField
-              required
-              label="name"
+            <TextField className={classes.field}
+              // required
+              label="Repository Name"
               variant="outlined"
               size="small"
               value={reposName}
               onChange={event => setReposName(event.target.value)}
             />
-            <h5>Filters</h5>
-            <TextField
-              label="Topic"
-              variant="outlined"
-              size="small"
-              value={reposTopic}
-              onChange={event => setReposTopic(event.target.value)}
-            />
-            <TextField
-              label="Language"
-              variant="outlined"
-              size="small"
-              value={reposLanguage}
-              onChange={event => setReposLanguage(event.target.value)}
-            />
-            <Button
-              type="submit"
-              value="Submit"
-              variant="outlined"
-              // onSubmit={getReposSearch}
-            >
-              Search
-            </Button>
-          </form>
+            <AdditionalFilters>
+              <h5 style={{marginBottom: 5}}>Additional Filters</h5>
+              <TextField className={classes.field}
+                label="Topic"
+                variant="outlined"
+                size="small"
+                value={reposTopic}
+                onChange={event => setReposTopic(event.target.value)}
+              />
+              <TextField className={classes.field}
+                label="Programming Language"
+                variant="outlined"
+                size="small"
+                value={reposLanguage}
+                onChange={event => setReposLanguage(event.target.value)}
+              />
+              <Button
+                type="submit"
+                value="Submit"
+                variant="contained"
+                color="primary"
+                onSubmit={getReposSearch}
+              >
+                Search
+              </Button>
+            </AdditionalFilters>
+          </FormFilter>
 
-          {/* \\\\\ ---------------------RESULTS--------------------------- /////*/}
+          {/* \\\\\ ------------------RESULTS------------------ /////*/}
 
           <List className={classes.root} subheader={<li />}>
             {reposResults.incomplete_results === false && (
               <li key={`section-4-0`} className={classes.listSection}>
                 <ul className={classes.ul}>
-                  <ListSubheader>
+                  <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`Repos Results`}</h2>
                   </ListSubheader>
                   {reposResults.total_count && (
-                    <ListItem key={`item-4-2`}>
+                    <ListItem key={`item-4-2`} className={classes.text}>
                       <ListItemText
                         primary={`Total Count: ${reposResults.total_count}`}
                       />
                     </ListItem>
                   )}
                   {reposResultsArr.map(repo => (
-                    <div key={`section-5-${repo.id}-2`}>
-                      <ListItem>
+                    <div key={`section-5-${repo.id}-2`} className={classes.resultsRepo}>
+                      <ListItem className={classes.text}>
                         <ListItemText primary={`Name: ${repo.name}`} />
                       </ListItem>
 
-                      <ListItem>
+                      <ListItem className={classes.text}>
                         <ListItemText
                           primary={`Day Created: ${repo.created_at.slice(
                             0,
@@ -402,10 +455,18 @@ export default function GithubSearch() {
                           )}`}
                         />
                       </ListItem>
-                      <ListItem>
-                        <ListItemText primary={`Language ${repo.language}`} />
+                      <ListItem className={classes.text}>
+                        <ListItemText
+                          primary={`Last Updated: ${repo.updated_at.slice(
+                            0,
+                            10
+                          )}`}
+                        />
                       </ListItem>
-                      <ListItem>
+                      <ListItem className={classes.text}>
+                        <ListItemText primary={`Language: ${repo.language}`} />
+                      </ListItem>
+                      <ListItem className={classes.text}>
                         <ListItemText
                           primary={`Forks Count: ${repo.forks_count}`}
                         />
@@ -417,7 +478,7 @@ export default function GithubSearch() {
             )}
           </List>
         </div>
-      </DivFlexAlign>
+      </FilterContainer>
     </DivFlex>
   )
 }
