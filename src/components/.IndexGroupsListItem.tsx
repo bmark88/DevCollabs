@@ -12,7 +12,7 @@ interface Props {
   onSubmitFunction: any
 }
 
-export default function IndexGroupsListItem({
+function IndexGroupsListItem({
   group,
   button: defaultButton,
   onSubmitFunction,

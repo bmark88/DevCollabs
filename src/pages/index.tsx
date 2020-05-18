@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, { useEffect, useState } from "react";
 import styled from "styled-components"
 import { navigate } from "gatsby"
 
@@ -16,6 +16,7 @@ import useApplicationData from "../components/hooks/useApplicationData";
 
 import UserCard from "../components/UserCard"
 import UserList from "../components/UserList"
+import { CollectionsTwoTone } from "@material-ui/icons";
 
 const Main = styled.main`
   margin-top: 80px;
@@ -37,13 +38,25 @@ const TopicsContainer = styled.div`
 `
 
 export default function IndexPage() {
-  let { users, messages, handleSubmit } = socketChat("public")
+  const { users, messages, handleSubmit } = socketChat("public")
   const { usersList } = usePublic();
-
+  
+  const { 
+    subscriptions, 
+    fetchUserSubscriptions 
+  } = useApplicationData();
+  
   if (!localStorage.getItem("session")) {
     navigate("/login")
     return null
-  }
+  } 
+
+  const userID = JSON.parse(localStorage.getItem('session') || '{}').id
+
+  useEffect(() => {
+    fetchUserSubscriptions(userID)
+  }, [])
+  
 
   return (
     <>
@@ -52,7 +65,7 @@ export default function IndexPage() {
         <UserCard/>
         <UserList users={usersList} />
         <TopicsContainer>
-          <TopicBoard />
+          <TopicBoard subscriptions={subscriptions}/>
         </TopicsContainer>
         <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
       </Main>
