@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Rating from "@material-ui/lab/Rating"
 import { makeStyles } from "@material-ui/core/styles"
+import Checkbox from "@material-ui/core/Checkbox"
+import Favorite from "@material-ui/icons/Favorite"
 import axios from "axios"
 
 const useStyles = makeStyles({
@@ -22,6 +24,7 @@ const Div = styled.div`
 
 export default function UserListItem(props: any) {
   const [value, setValue] = useState(0)
+  const [isChecked, setIsChecked] = useState(false)
   const index = props.index
   const user = props.user
   const classes = useStyles()
@@ -30,8 +33,7 @@ export default function UserListItem(props: any) {
   useEffect(() => {
     axios
       .get(`http://localhost:3001/rate/${user.id}`)
-      .then(data => 
-         setValue(data.data.avg))
+      .then(data => setValue(data.data.avg))
       .catch(e => console.log(e))
   }, [])
 
@@ -40,17 +42,46 @@ export default function UserListItem(props: any) {
     console.log(currentUserID)
     setValue(newValue)
   }
+  
+  const handleCheck = () => {
+    setIsChecked(!isChecked)
+  }
   return (
     <Div key={index}>
-      <Li>{user.username}</Li>
-      <Rating
-        readOnly={currentUserID === user.id ? true : false}
-        className={classes.rate}
-        name={user.username}
-        value={value}
-        onChange={handleOnChange}
-        precision={0.5}
-      />
+      {currentUserID === user.id ? (
+        <Checkbox
+          checked
+          disabled
+          checkedIcon={<Favorite />}
+          name={user.username}
+        />
+      ) : (
+        <Checkbox
+          checked={isChecked}
+          name={user.username}
+          onChange={handleCheck}
+        />
+      )}
+
+      {user.username}
+      {currentUserID === user.id ? (
+        <Rating
+          readOnly
+          className={classes.rate}
+          name={user.username}
+          value={value}
+          precision={0.5}
+        />
+      ) : (
+        <Rating
+          readOnly={!isChecked}
+          className={classes.rate}
+          name={user.username}
+          value={value}
+          onChange={handleOnChange}
+          precision={0.5}
+        />
+      )}
     </Div>
   )
 }
