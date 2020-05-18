@@ -62,7 +62,7 @@ module.exports = db => {
     // console.log(userId)
     // console.log(groupId)
     dbHelpers.checkUserSubscription(userId, groupId).then(isSubbed => {
-      // console.log(isSubbed) 
+      // console.log(isSubbed)
       res.send(isSubbed)
     })
   })
@@ -75,15 +75,17 @@ module.exports = db => {
 
     dbHelpers.getSubscriptionsWithUser(userId, groupId).then(subscription => {
       console.log("2-subscription", subscription)
-      if (subscription.is_admin === true) {
-        dbHelpers
-          .deleteGroup(groupId)
-          .then(data => {
-            res.send(data)
-          })
-          .catch(e => console.error(e))
-      }
-    })
+      if (subscription) {
+        if (subscription.is_admin === true) {
+          dbHelpers
+            .deleteGroup(groupId)
+            .then(data => {
+              res.send(data)
+            })
+            .catch(e => console.error(e))
+        }
+      } else { res.status(400).send(null) }
+    }).catch(e => console.error(e))
   })
 
   router.delete("/:group_id/leave", (req, res) => {
@@ -133,7 +135,7 @@ module.exports = db => {
         dbHelpers
           .deleteSubscription(userId, groupId)
           .then(data => res.send(data))
-          .catch((e) => console.error(e))
+          .catch(e => console.error(e))
       }
     })
   })
