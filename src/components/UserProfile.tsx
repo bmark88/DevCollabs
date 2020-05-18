@@ -39,6 +39,10 @@ const AdminBadge = styled.div`
   border: solid 1px;
   position: absolute;
   right: 0px;
+  
+  @media (max-width:1200px) {
+    position: relative;
+  }
 `
 
 const ListTitle = styled.h3`
