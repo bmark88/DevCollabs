@@ -24,6 +24,6 @@ const ProfilePage = () => {
       <UserProfile postCount={postCount} subscriptions={subscriptions} />
     </Layout>
   )
-}
+} 
 
 export default ProfilePage;
