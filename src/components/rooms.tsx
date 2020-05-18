@@ -25,12 +25,10 @@ const useStyles = makeStyles({
     ['@media (max-width:800px)']: {
       maxWidth: 190,
       minWidth: 190,
-      margin: 0,
     }
   },
   font: {
     ['@media (max-width:800px)']: {
-      // fontSize: '17px',
     }
   },
   media: {

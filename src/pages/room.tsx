@@ -23,8 +23,11 @@ const LiveHTML = styled.div`
   }
 `;
 
-const RoomPage = () => {
-  const { users, messages, handleSubmit, websocketIDE, conn } = socketChat('Room 1')
+const RoomPage = ({location}) => {
+  
+  const RoomName = location.state.roomID
+  const { users, messages, handleSubmit, websocketIDE, conn } = socketChat(RoomName)
+  
   const welcomeHTML = `<h1>Welcome Devs!</h1>
 
     <p>This is your coding sandbox, feel free to

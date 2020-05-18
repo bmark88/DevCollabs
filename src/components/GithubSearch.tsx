@@ -1,7 +1,8 @@
-import React, { useState } from "react"
-import axios from "axios"
-import styled from "styled-components"
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles"
+
+import React, { useState } from "react";
+import axios from "axios";
+import styled from "styled-components";
+import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import GitHubIcon from '@material-ui/icons/GitHub';
 import { 
   Button, 
@@ -10,7 +11,7 @@ import {
   ListItemText, 
   ListSubheader,
   TextField
-} from  "@material-ui/core"
+} from  "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,7 +52,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const DivFlex = styled.div`
   display: flex;
-`
+`;
+
 const FilterContainer = styled.div`
   padding: 20px;
   border: solid 2px;
@@ -81,16 +83,13 @@ const AdditionalFilters = styled.div`
 interface APIResults {
   user: any
   repos: any
-}
+};
 
-// interface filters {
-//   byRepos: number
-//   byFollowers: number
-// }
 interface APIRepoResults {
   total_count :number
   incomplete_results :boolean
   items :object[]
+
 }
 export default function GithubSearch() {
   const classes = useStyles()
@@ -105,21 +104,28 @@ export default function GithubSearch() {
    * @output_fields total_count, items { name, updated, created_at, forks_count }
    */
 
-  const [username, setUsername] = useState("")
-  const [userReposCount, setUserReposCount] = useState("")
-  // const [userFilters, setUserFilters] = useState("")
+  /**
+   * USER
+   * @input_fields username, filters { # of repos, *# of followers }
+   * @output_fields name, company, location, email, hireable, bio, followers_count, following_count
+   * @output_fields User's Repos { name, created_at }
+   *
+   * REPOS
+   * @input_fields name filters { topic, language }
+   * @output_fields total_count, items { name, updated, created_at, forks_count }
+   */
 
-  const [results, setResults] = useState<APIResults>({ user: {}, repos: {} })
-
-  const [reposName, setReposName] = useState("")
-  const [reposTopic, setReposTopic] = useState("")
-  const [reposLanguage, setReposLanguage] = useState("")
-
+  const [username, setUsername] = useState("");
+  const [userReposCount, setUserReposCount] = useState("");
+  const [results, setResults] = useState<APIResults>({ user: {}, repos: {} });
+  const [reposName, setReposName] = useState("");
+  const [reposTopic, setReposTopic] = useState("");
+  const [reposLanguage, setReposLanguage] = useState("");
   const [reposResults, setReposResults] = useState<APIRepoResults>({
     total_count: 0,
     incomplete_results: true,
     items: [],
-  })
+  });
 
   const getUserSearch = (event: any) => {
     event.preventDefault()
@@ -133,7 +139,7 @@ export default function GithubSearch() {
         setResults({ user: user.data, repos: repos.data })
       })
       .catch(error => console.log(error))
-  }
+  };
 
   const getFilterSearch = (event: any) => {
     event.preventDefault()
@@ -148,7 +154,7 @@ export default function GithubSearch() {
         setResults({ user: res.data.items, repos: null })
       })
       .catch(error => console.log(error))
-  }
+  };
 
   //Find repositories via various criteria. This method returns up to 100 results per page.
   const getReposSearch = (event: any) => {
@@ -170,21 +176,21 @@ export default function GithubSearch() {
         })
       })
       .catch(error => console.log(error))
-  }
+  };
 
-  const reposArr: Array<any> = results.repos
+  const reposArr: Array<any> = results.repos;
   let sortedReposByDate: Array<any> = []
+
   if (results.repos && reposArr.length > 0) {
     sortedReposByDate = reposArr.sort((a, b) => b.id - a.id).slice(0, 4)
   }
   const userFilterArr: Array<any> = results.user
   const reposResultsArr: Array<any> = reposResults.items
-console.log('userFilterArr', userFilterArr)
+
   return (
     <DivFlex>
       <FilterContainer>
         {/* \\\\\-----------------------USER-------------------------///// */}
-
         <div className="user-list">
           <TitleFilter>
             <GitHubIcon/>
@@ -233,9 +239,7 @@ console.log('userFilterArr', userFilterArr)
               </Button>
             </FormFilter>
           </div>
-
-          {/* \\\\\ ----------------------- RESULTS ------------------------- /////*/}
-
+          {/* \\\\\ -------------------- RESULTS ---------------------- /////*/}
           <List className={classes.root} subheader={<li />}>
             <li key={`section-1`} className={classes.listSection}>
               <ul className={classes.ul}>
@@ -289,20 +293,24 @@ console.log('userFilterArr', userFilterArr)
 
                 {results.user.html_url && (
                   <ListItem key={`item-1-7`} className={classes.text}>
-                    <ListItemText primary={`URL: ${results.user.html_url}`} />
+                    <a href={`URL: ${results.user.html_url}`} >
+                      {results.user.html_url}
+                    </a>
                   </ListItem>
                 )}
 
-                {results.user.followers && (
+                {results.user.followers > 0 && (
                   <ListItem key={`item-1-8`} className={classes.text}>
                     <ListItemText
                       primary={`Followers: ${results.user.followers}`}
+
                     />
                   </ListItem>
                 )}
 
-                {results.user.following && (
+                {results.user.following > 0 && (
                   <ListItem key={`item-1-9`} className={classes.text}>
+
                     <ListItemText
                       primary={`Following: ${results.user.following}`}
                     />
@@ -319,6 +327,7 @@ console.log('userFilterArr', userFilterArr)
                   </ListSubheader>
                   {sortedReposByDate.map(repo => (
                     <ListItem key={`item-2-${repo.id}`} className={classes.gitHub}>
+
                       <ListItemText primary={`Name: ${repo.name}`} />
                       <ListItemText
                         primary={`Day Created: ${repo.created_at.slice(0, 10)}`}
@@ -328,7 +337,7 @@ console.log('userFilterArr', userFilterArr)
                 </ul>
               </li>
             )}
-            {/* \\\\\ -----------------------FILTERS RESULTS------------------------- /////*/}
+            {/* \\\\\ ---------------FILTERS RESULTS--------------- /////*/}
             {!results.repos && parseInt(userReposCount) > 1 && (
               <li key={`section-3`} className={classes.listSection}>
                 <ul className={classes.ul}>
@@ -346,9 +355,13 @@ console.log('userFilterArr', userFilterArr)
                     primary={`Total Count: ${userFilterArr.length}`}
                   />}
                   {userFilterArr.map(repo => (
-                    <ListItem key={`item-3-${repo.id}-1`} className={classes.gitHub}>
-                      <ListItemText primary={`GitHub Username: ${repo.login}`} />
-                      {/* <ListItemText primary={`URL: ${repo.html_url}`} /> */}
+                    <ListItem 
+                      key={`item-3-${repo.id}-1`} 
+                      className={classes.gitHub}
+                    >
+                      <ListItemText 
+                        primary={`GitHub Username: ${repo.login}`} 
+                      />
                       <ListItemText>
                         <a href={repo.html_url}>
                           {repo.html_url}
@@ -409,7 +422,7 @@ console.log('userFilterArr', userFilterArr)
             </AdditionalFilters>
           </FormFilter>
 
-          {/* \\\\\ ---------------------RESULTS--------------------------- /////*/}
+          {/* \\\\\ ------------------RESULTS------------------ /////*/}
 
           <List className={classes.root} subheader={<li />}>
             {reposResults.incomplete_results === false && (
@@ -440,7 +453,15 @@ console.log('userFilterArr', userFilterArr)
                         />
                       </ListItem>
                       <ListItem className={classes.text}>
-                        <ListItemText primary={`Language ${repo.language}`} />
+                        <ListItemText
+                          primary={`Last Updated: ${repo.updated_at.slice(
+                            0,
+                            10
+                          )}`}
+                        />
+                      </ListItem>
+                      <ListItem className={classes.text}>
+                        <ListItemText primary={`Language: ${repo.language}`} />
                       </ListItem>
                       <ListItem className={classes.text}>
                         <ListItemText
