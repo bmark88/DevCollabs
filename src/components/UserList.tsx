@@ -41,7 +41,7 @@ const UserList = ({ users }: Props) => {
         <Ul>
           {users.map((user: any, index: number) => {
             return (
-              <UserListItem index= {index} user={user} />
+              <UserListItem key={index} index= {index} user={user} />
               // <Div key={index}>
               //   <form onSubmit={handleOnSubmit}>
               //     <Li>{user.username}</Li>

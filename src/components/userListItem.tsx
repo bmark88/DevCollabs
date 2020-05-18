@@ -13,10 +13,6 @@ const useStyles = makeStyles({
   },
 })
 
-const Li = styled.li`
-  display: inline;
-`
-
 const Div = styled.div`
   position: relative;
   margin: 2px;
@@ -37,12 +33,23 @@ export default function UserListItem(props: any) {
       .catch(e => console.log(e))
   }, [])
 
-  const handleOnChange = (event, newValue) => {
-    console.log(user.id)
-    console.log(currentUserID)
-    setValue(newValue)
+  const handleOnChange = (_event: any, newValue: any) => {
+    axios
+      .post(`http://localhost:3001/rate/${user.id}`, {
+        raterId: currentUserID,
+        rating: newValue,
+      })
+      .then(() => {
+        axios
+          .get(`http://localhost:3001/rate/${user.id}`)
+          .then(data => {
+            setIsChecked(false)
+            setValue(parseFloat(data.data.avg))
+          })
+          .catch(e => console.log(e))
+      })
   }
-  
+
   const handleCheck = () => {
     setIsChecked(!isChecked)
   }

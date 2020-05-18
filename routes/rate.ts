@@ -7,7 +7,10 @@ module.exports = db => {
     const ratedUserId = req.params.user_id
     dbHelpers
       .getUserRating(ratedUserId)
-      .then(data => res.send(data))
+      .then(data => {
+         console.log(data)
+         res.send(data)
+      })
       .catch(e => res.status(400).send(e))
   })
 
@@ -31,7 +34,7 @@ module.exports = db => {
         } else {
           //Change user rating if it does
           dbHelpers
-            .updateRating(ratedId, ratedId, rating)
+            .updateRating(ratedId, raterId, rating)
             .then(data => {
               res.send(data)
               console.log(data)

@@ -31,14 +31,14 @@ const News = () => {
       <List>
         {news.map((article :any, index :number) => {
           return (
-            <>
-            <ListItemLink href={article.url} >
+            
+            <ListItemLink key={index} href={article.url} >
               {article.url && (
                   <ListItemText primary={article.title} secondary={article.created_at}/>
                 )
               }
             </ListItemLink>
-            </>
+            
           )
         })}
       </List>
