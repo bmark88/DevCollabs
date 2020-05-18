@@ -435,6 +435,19 @@ module.exports = db => {
     .catch(e => e)
   }
 
+  const updateRating = (ratedId, raterId, newRating) => {
+    return db
+    .query(`
+    UPDATE ratings
+    SET rating = $3
+    WHERE rated_user_id = $1
+    AND rater_user_id = $2
+    RETURNING *;
+    `,[ratedId, raterId, newRating ])
+    .then(res => res.rows[0] || null)
+    .catch(e => e)
+  }
+
   return {
     getUserWithEmail,
     addUser,
@@ -458,6 +471,8 @@ module.exports = db => {
     getAllUserSubscriptions,
     getAllUsers,
     getUserRating,
-    checkRatingExist
+    checkRatingExist,
+    rateUser,
+    updateRating
   }
 }
