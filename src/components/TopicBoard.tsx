@@ -5,8 +5,7 @@ import MuiExpansionPanel from "@material-ui/core/ExpansionPanel"
 import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary"
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails"
 import Typography from "@material-ui/core/Typography"
-import IndexGroupsList from "./IndexGroupsList"
-import Test from './test'
+import IndexGroupList from './IndexGroupsList'
 const ExpansionPanel = withStyles({
   root: {
     border: "1px solid rgba(0, 0, 0, .125)",
@@ -51,10 +50,11 @@ const ExpansionPanelDetails = withStyles(theme => ({
 }))(MuiExpansionPanelDetails)
 
 interface Props {
-  // publicGroups: any
+  subscriptions: any
 }
 
-export default function TopicBoard({  }: Props) {
+export default function TopicBoard({ subscriptions }: Props) {
+
   const username = JSON.parse(localStorage.getItem("session") || "{}").username.toString()
   const [expanded, setExpanded] = useState("panel1")
   // const [subscription, setSubscription] = useState()
@@ -111,7 +111,7 @@ export default function TopicBoard({  }: Props) {
           <Typography>Groups</Typography>
         </ExpansionPanelSummary>
 
-          <Test />
+          <IndexGroupList subscriptions={subscriptions}/>
 
         <ExpansionPanelDetails>
           <Typography></Typography>

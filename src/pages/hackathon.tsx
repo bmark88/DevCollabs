@@ -102,11 +102,14 @@ const StatsTable = styled(Paper)`
   width: 75%;
   max-width: 800px;
   min-width: 450px;
-  margin: 0 auto;
+  // margin: 0 auto;
 `;
 
 const Section = styled.section`
+  padding: 1em;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 export default function StickyHeadTable() {
   const classes = useStyles();
@@ -125,7 +128,7 @@ export default function StickyHeadTable() {
   return (
     <Layout>
       <Section>
-        <GithubSearch/>
+        {/* <GithubSearch/> */}
         <StatsTable className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
@@ -171,6 +174,7 @@ export default function StickyHeadTable() {
             onChangeRowsPerPage={handleChangeRowsPerPage}
           />
         </StatsTable>
+        <GithubSearch/>
       </Section>
     </Layout>
   );
