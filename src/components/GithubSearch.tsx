@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
@@ -88,6 +89,7 @@ interface APIRepoResults {
   total_count :number
   incomplete_results :boolean
   items :object[]
+
 }
 export default function GithubSearch() {
   const classes = useStyles()
@@ -101,7 +103,6 @@ export default function GithubSearch() {
    * @input_fields name filters { topic, language }
    * @output_fields total_count, items { name, updated, created_at, forks_count }
    */
-
 
   /**
    * USER
@@ -302,12 +303,14 @@ export default function GithubSearch() {
                   <ListItem key={`item-1-8`} className={classes.text}>
                     <ListItemText
                       primary={`Followers: ${results.user.followers}`}
+
                     />
                   </ListItem>
                 )}
 
                 {results.user.following > 0 && (
                   <ListItem key={`item-1-9`} className={classes.text}>
+
                     <ListItemText
                       primary={`Following: ${results.user.following}`}
                     />
@@ -315,6 +318,7 @@ export default function GithubSearch() {
                 )}
               </ul>
             </li>
+
             {results.repos && results.repos[0] && (
               <li key={`section-2`} className={classes.listSection}>
                 <ul className={classes.ul}>
@@ -323,6 +327,7 @@ export default function GithubSearch() {
                   </ListSubheader>
                   {sortedReposByDate.map(repo => (
                     <ListItem key={`item-2-${repo.id}`} className={classes.gitHub}>
+
                       <ListItemText primary={`Name: ${repo.name}`} />
                       <ListItemText
                         primary={`Day Created: ${repo.created_at.slice(0, 10)}`}
