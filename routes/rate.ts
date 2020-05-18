@@ -11,7 +11,7 @@ module.exports = db => {
          console.log(data)
          res.send(data)
       })
-      .catch(e => res.status(400).send(e))
+      .catch(e => console.error(e))
   })
 
   router.post("/:rated_id", (req, res) => {
@@ -30,7 +30,7 @@ module.exports = db => {
               res.send(data)
               console.log("rating added")
             })
-            .catch(e => res.status(400).send(e))
+            .catch(e => console.error(e))
         } else {
           //Change user rating if it does
           dbHelpers
@@ -40,10 +40,10 @@ module.exports = db => {
               console.log(data)
               console.log("rating updated")
             })
-            .catch(e => res.status(400).send(e))
+            .catch(e => console.error(e))
         }
       })
-      .catch(e => res.status(400).send(e))
+      .catch(e => console.error(e))
   })
 
   return router
