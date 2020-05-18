@@ -4,6 +4,7 @@ import { IconButton, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline"
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
+import DeleteIcon from "@material-ui/icons/Delete"
 import styled from "styled-components"
 
 import axios from "axios"
@@ -38,12 +39,16 @@ const ElementDiv = styled.div`
   justify-content: space-between;
 `
 
+const ButtonsDiv =styled.div`
+  margin-right: 10px;
+`;
 const useStyles = makeStyles({
   groupName: {
-    alignSelf: 'center',
+    alignSelf: "center",
+    marginLeft: '15px'
   },
-  groupButton: {
-    paddingRight: '30px'
+  groupButtons: {
+    margin: '0px 5px 0px 5px'
   }
 })
 
@@ -103,14 +108,32 @@ function GroupTestElement(props: any) {
     }, 1000)
   }
 
+  const handleDeleteGroup = () => {
+    console.log(`delete this group id => ${id}`)
+  }
   return (
     <ElementDiv>
       <Typography className={classes.groupName} variant="body1">
         {name}
       </Typography>
-      <IconButton className={classes.groupButton} onClick={handleSub} disabled={disable}>
-        {sub ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}
-      </IconButton>
+      <ButtonsDiv>
+        {subscription.is_admin && (
+          <IconButton
+            className={classes.groupButtons}
+            onClick={handleDeleteGroup}
+            disabled={disable}
+          >
+            <DeleteIcon />
+          </IconButton>
+        )}
+        <IconButton
+          className={classes.groupButtons}
+          onClick={handleSub}
+          disabled={disable}
+        >
+          {sub ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}
+        </IconButton>
+      </ButtonsDiv>
     </ElementDiv>
   )
 }
@@ -140,7 +163,7 @@ export default function IndexGroupList({ subscriptions }: Props) {
     margin: 1em;
     max-height: 368px;
     overflow: hidden;
-    overflow-y: scroll
+    overflow-y: scroll;
   `
 
   const List = allGroups.map(group => {
