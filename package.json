@@ -52,6 +52,8 @@
     "typescript": "^3.9.2"
   },
   "devDependencies": {
+    "@types/jest": "^25.2.2",
+    "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "^26.0.1",
     "babel-preset-gatsby": "^0.4.2",
     "gatsby-plugin-tslint": "0.0.2",
