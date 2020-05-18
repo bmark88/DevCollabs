@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     listSection: {
       backgroundColor: "inherit",
-      marginTop: 15
+      marginTop: 15,
     },
     ul: {
       backgroundColor: "inherit",
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: 0,
     },
     resultsRepo: {
-      marginBottom: 20
+      marginTop: 20
     },
     field: {
       marginBottom: "0.2em",
@@ -72,10 +72,10 @@ const TitleFilter = styled.div`
   padding: 1em;
 `;
 
-const Test = styled.div`
+const AdditionalFilters = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-top: 83px;
 `;
 
 interface APIResults {
@@ -179,7 +179,7 @@ export default function GithubSearch() {
   }
   const userFilterArr: Array<any> = results.user
   const reposResultsArr: Array<any> = reposResults.items
-
+console.log('userFilterArr', userFilterArr)
   return (
     <DivFlex>
       <FilterContainer>
@@ -197,6 +197,7 @@ export default function GithubSearch() {
               value={username}
               variant="outlined"
               onChange={event => setUsername(event.target.value)}
+              helperText="Display individual username GitHub analytics"
             />
             <Button 
               type="submit" 
@@ -207,7 +208,7 @@ export default function GithubSearch() {
               Search
             </Button>
           </FormFilter>
-          <h5>Filter by Minimum # of Repos</h5>
+          <h5 style={{marginBottom: 5}}>Filter by Minimum # of Repos</h5>
           <div>
             <FormFilter
               autoComplete="off"
@@ -219,7 +220,7 @@ export default function GithubSearch() {
                 variant="outlined"
                 size="small"
                 value={userReposCount}
-                // helperText="General search with username above"
+                helperText="Display list of usernames and repositories"
                 onChange={event => setUserReposCount(event.target.value)}
               />
               <Button 
@@ -317,7 +318,7 @@ export default function GithubSearch() {
                     <h2>{`User's Repos`}</h2>
                   </ListSubheader>
                   {sortedReposByDate.map(repo => (
-                    <ListItem key={`item-2-${repo.id}`} className={classes.text}>
+                    <ListItem key={`item-2-${repo.id}`} className={classes.gitHub}>
                       <ListItemText primary={`Name: ${repo.name}`} />
                       <ListItemText
                         primary={`Day Created: ${repo.created_at.slice(0, 10)}`}
@@ -334,16 +335,17 @@ export default function GithubSearch() {
                   <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`User's List`}</h2>
                   </ListSubheader>
-                  {/* HERE!!!!!! */}
-                  {reposResults.total_count && (
+                  {reposResults.total_count > 0 && (
                     <ListItem key={`item-3-1`} className={classes.text}>
                       <ListItemText
                         primary={`Total Count: ${results.user.length}`}
                       />
                     </ListItem>
                   )}
+                  {<ListItemText 
+                    primary={`Total Count: ${userFilterArr.length}`}
+                  />}
                   {userFilterArr.map(repo => (
-                    // <Test>
                     <ListItem key={`item-3-${repo.id}-1`} className={classes.gitHub}>
                       <ListItemText primary={`GitHub Username: ${repo.login}`} />
                       {/* <ListItemText primary={`URL: ${repo.html_url}`} /> */}
@@ -353,7 +355,6 @@ export default function GithubSearch() {
                         </a>
                       </ListItemText>
                     </ListItem>
-                    // </Test>
                   ))}
                 </ul>
               </li>
@@ -373,37 +374,39 @@ export default function GithubSearch() {
             onSubmit={getReposSearch}
           >
             <TextField className={classes.field}
-              required
+              // required
               label="Repository Name"
               variant="outlined"
               size="small"
               value={reposName}
               onChange={event => setReposName(event.target.value)}
             />
-            <h5>Additional Filters</h5>
-            <TextField className={classes.field}
-              label="Topic"
-              variant="outlined"
-              size="small"
-              value={reposTopic}
-              onChange={event => setReposTopic(event.target.value)}
-            />
-            <TextField className={classes.field}
-              label="Programming Language"
-              variant="outlined"
-              size="small"
-              value={reposLanguage}
-              onChange={event => setReposLanguage(event.target.value)}
-            />
-            <Button
-              type="submit"
-              value="Submit"
-              variant="contained"
-              color="primary"
-              onSubmit={getReposSearch}
-            >
-              Search
-            </Button>
+            <AdditionalFilters>
+              <h5 style={{marginBottom: 5}}>Additional Filters</h5>
+              <TextField className={classes.field}
+                label="Topic"
+                variant="outlined"
+                size="small"
+                value={reposTopic}
+                onChange={event => setReposTopic(event.target.value)}
+              />
+              <TextField className={classes.field}
+                label="Programming Language"
+                variant="outlined"
+                size="small"
+                value={reposLanguage}
+                onChange={event => setReposLanguage(event.target.value)}
+              />
+              <Button
+                type="submit"
+                value="Submit"
+                variant="contained"
+                color="primary"
+                onSubmit={getReposSearch}
+              >
+                Search
+              </Button>
+            </AdditionalFilters>
           </FormFilter>
 
           {/* \\\\\ ---------------------RESULTS--------------------------- /////*/}
