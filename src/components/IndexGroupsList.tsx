@@ -60,11 +60,6 @@ function GroupTestElement(props: any) {
   const [disable, setDisable] = useState(false)
   const classes = useStyles()
 
-  //   console.log("sub true or not", props.sub)
-  //   console.log("from grouptestelent", name)
-  //   console.log("from goruptestele", id)
-  //   console.log("sub-->", sub)
-  //   console.log("-------------")
 
   useEffect(() => {
     axios({
@@ -151,6 +146,12 @@ function GroupTestElement(props: any) {
   )
 }
 
+const ListDiv = styled.div`
+margin: 1em;
+max-height: 368px;
+overflow: hidden;
+overflow-y: scroll;
+`
 export default function IndexGroupList({ subscriptions }: Props) {
   const [allGroups, setAllGroups] = useState([])
   //   const [groupBelong, setGroupBelong] = useState([])
@@ -163,28 +164,11 @@ export default function IndexGroupList({ subscriptions }: Props) {
       console.log(data.data)
       setAllGroups(data.data)
     })
-    //     axios.get(`http://localhost:3001/group/u/${userId}`).then(data => {
-    //       const groupNameBelongArr = data.data.map(group => {
-    //          return group.name
-    //        })
-    //        console.log("groupArr", groupNameBelongArr)
-    //       setGroupBelong(groupNameBelongArr)
-    //     })
+
   }, [])
 
-  const ListDiv = styled.div`
-    margin: 1em;
-    max-height: 368px;
-    overflow: hidden;
-    overflow-y: scroll;
-  `
+  const List = allGroups.map((group, index) => {
 
-  const List = allGroups.map(group => {
-    // if (groupBelong.includes(group.name)) {
-    //    return <GroupTestElement group={group} sub={true} />
-    // } else {
-    //
-    // }
     let subscription = subscriptions
       ? subscriptions.find(sub => sub.group_id === group.id)
       : {}
@@ -192,9 +176,9 @@ export default function IndexGroupList({ subscriptions }: Props) {
 
     return (
       <GroupTestElement
+        key = {index}
         group={group}
         subscription={subscription}
-        key={group.id}
         setAllGroups={setAllGroups}
       />
     )
