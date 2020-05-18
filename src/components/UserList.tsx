@@ -22,21 +22,14 @@ const UserContainer = styled.div`
 `
 
 const Ul = styled.ul`
+  margin-left: 0;
   list-style: none;
   height: 400px;
   overflow: hidden;
   overflow-y: scroll;
 `
 
-const Li = styled.li`
-  display: inline;
-`
 
-
-const Div = styled.div`
-  position: relative;
-  margin: 2px;
-`
 
 const UserList = ({ users }: Props) => {
   const [value, setValue] = useState(0)
