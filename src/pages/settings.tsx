@@ -18,6 +18,6 @@ const RegisterPage = () => {
          <SettingsForm />
       </Layout>
    )
-}
+} 
 
 export default RegisterPage
