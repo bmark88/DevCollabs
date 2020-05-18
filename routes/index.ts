@@ -9,6 +9,15 @@ module.exports = db => {
     dbHelpers.getUserWithEmail("alice@hotmail.com").then(data => res.send(data))
   })
 
+  router.get("/users", (req, res) => {
+    dbHelpers
+      .getAllUsers()
+      .then(data => {
+        res.send(data)
+      })
+      .catch(e => console.error('error ==>', e.stack));
+  });
+
   router.post("/register", (req, res) => {
     const user = req.body
     dbHelpers.addUser(user).then(data => {

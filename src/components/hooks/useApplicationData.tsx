@@ -93,7 +93,7 @@ const fetchGroups = () => {
       .get('http://hn.algolia.com/api/v1/search?tags=front_page')
       .then(res => {
         setNews(res.data.hits)
-        console.log('res.data ==>', res.data)
+        // console.log('res.data ==>', res.data)
       })
       .catch(e => console.error('error', e.stack))
   };

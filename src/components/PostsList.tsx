@@ -7,8 +7,6 @@ interface Props {
 }
 
 const PostContainer = styled.div`
-  // display: flex;
-
   @media (max-width: 1880px) {
     width: 80%;
     margin: 0 auto;
@@ -17,12 +15,20 @@ const PostContainer = styled.div`
 
 const PostsList = ({ posts }: Props) => {
   if (!posts) {return null} 
-  const PostsList = posts.reverse().map((post :any) => {
+  const PostsList = posts.map((post :any) => {
     return (
-      <Post key={post.id} id={post.id} user={post.username} created_at={post.created_at} >{post.data}</Post>
+      <Post 
+        key={post.id} 
+        id={post.id} 
+        user={post.username} 
+        created_at={post.created_at}
+        image_url={post.image_url}
+      >
+        {post.data}
+      </Post>
     )
   })
-  return PostsList
+  return PostsList;
 }
 
 export { PostsList, PostContainer }
