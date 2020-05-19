@@ -119,8 +119,8 @@ function GroupTestElement(props: any) {
       .catch(e => console.log(e))
   }
   return (
-    <ElementDiv>
-      <Typography className={classes.groupName} variant="body1">
+    <ElementDiv className="dark">
+      <Typography className={`${classes.groupName} ${"dark"}`} variant="body1">
         {name}
       </Typography>
       <ButtonsDiv>

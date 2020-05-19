@@ -65,11 +65,13 @@ export default function TopicBoard({ subscriptions }: Props) {
   return (
     <div>
       <ExpansionPanel
+        style={{backgroundColor: "gray"}}
         square
         expanded={expanded === "panel1"}
         onChange={handleChange("panel1")}
       >
         <ExpansionPanelSummary
+          className="dark"
           aria-controls="panel1d-content"
           id="panel1d-header"
         >
@@ -77,8 +79,7 @@ export default function TopicBoard({ subscriptions }: Props) {
             Welcome, <strong>{username}</strong>
           </Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          {/* <Typography> */}
+        <ExpansionPanelDetails className="dark">
             <p>
               <strong>{username}</strong>, we are happy you've made the decision
               to collaborate with other developers.
@@ -97,9 +98,10 @@ export default function TopicBoard({ subscriptions }: Props) {
             </ol>
             <div>Created At: {moment().format("lll")}</div>
           {/* </Typography> */}
-        </ExpansionPanelDetails>
+        </ExpansionPanelDetails >
       </ExpansionPanel>
       <ExpansionPanel
+        style={{backgroundColor: "gray"}}
         square
         expanded={expanded === "panel2"}
         onChange={handleChange("panel2")}
@@ -110,14 +112,12 @@ export default function TopicBoard({ subscriptions }: Props) {
         >
           <Typography>Groups</Typography>
         </ExpansionPanelSummary>
-
+        <ExpansionPanelDetails className="dark">
           <IndexGroupList subscriptions={subscriptions}/>
-
-        <ExpansionPanelDetails>
-          <Typography></Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
       <ExpansionPanel
+        style={{backgroundColor: "gray"}}
         square
         expanded={expanded === "panel3"}
         onChange={handleChange("panel3")}
@@ -128,7 +128,7 @@ export default function TopicBoard({ subscriptions }: Props) {
         >
           <Typography>Random Post 3</Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className="dark">
           <Typography>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
             malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum

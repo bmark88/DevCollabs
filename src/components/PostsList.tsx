@@ -12,7 +12,7 @@ const PostContainer = styled.div`
   //   margin: 0 auto;
   // }
 
-  @media (max-width:620px) {
+@media (max-width:620px) {
     // position: 'absolute';
     width: '80%';
     margin-left: 2em;
