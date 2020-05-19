@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm renders correctly 1`] = `
+<div
+  className="MuiPaper-root MuiCard-root makeStyles-root-1 MuiPaper-elevation1 MuiPaper-rounded"
+>
+  <div
+    className="MuiCardMedia-root makeStyles-media-3"
+    style={
+      Object {
+        "backgroundImage": "url(\\"https://sociorocketnewsen.files.wordpress.com/2014/01/anonymous.jpg?w=580&h=350\\")",
+      }
+    }
+  />
+  <div
+    className="MuiCardContent-root"
+  >
+    <h2
+      className="MuiTypography-root makeStyles-font-2 MuiTypography-h5 MuiTypography-gutterBottom MuiTypography-alignCenter"
+    >
+      Create A Group
+    </h2>
+  </div>
+  <div
+    className="sc-AxirZ gRXEyv makeStyles-font-2"
+  />
+</div>
+`;
