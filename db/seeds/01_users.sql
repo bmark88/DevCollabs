@@ -53,7 +53,6 @@ VALUES
     ('zack10', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
 
 
-
 INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
@@ -65,6 +64,7 @@ VALUES
     ('zack12', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
     INSERT INTO users
     (username, password, email, avatar_image)
+    
 VALUES
     ('zack13', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
     INSERT INTO users

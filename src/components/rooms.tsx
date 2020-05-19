@@ -19,11 +19,11 @@ const useStyles = makeStyles({
     marginTop: 0,
     margin: 15,
     ['@media (max-width:1200px)']: {
-      maxWidth: 200,
+      maxWidth: 400,
       minWidth: 200,
     },
     ['@media (max-width:800px)']: {
-      maxWidth: 190,
+      maxWidth: 300,
       minWidth: 190,
     }
   },

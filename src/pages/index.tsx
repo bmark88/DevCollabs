@@ -22,19 +22,36 @@ const Main = styled.main`
   margin-top: 80px;
   display: flex;
   background-color: ;
+  @media (max-width: 800px) {
+    display: inline-block;
+  }
+
 `
 
 const TopicsContainer = styled.div`
   background-color: black;
   color: white;
   width: 43%;
-  margin: 1em;
+  // margin: 1em;
   height: 85%;
 
-  @media (max-width: 1000px) {
-    width: 90%;
-    margin: 1.4em;
+  // width: 50%;
+  // float: left;
+  // display: flex;
+  @media (max-width: 1200px) {
+    // position: absolute;
+    // top: 800px;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+        display: -webkit-inline-box;
+      }  
   }
+
+  // @media (max-width: 1000px) {
+  //   width: 90%;
+  //   margin: 1.4em;
+  // }
 `
 
 export default function IndexPage() {
@@ -61,7 +78,7 @@ export default function IndexPage() {
   return (
     <>
       <Navbar />
-      <Main>
+      <Main class="container">
         <UserCard/>
         <UserList users={usersList} />
         <TopicsContainer>

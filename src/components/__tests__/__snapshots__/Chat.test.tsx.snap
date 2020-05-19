@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chat component renders correctly 1`] = `
+<div
+  className="sc-AxhCb jGFQTj"
+>
+  <div
+    className="sc-AxhUy hsSTiu"
+  >
+    <h4>
+      Online Members
+    </h4>
+    <li
+      className="sc-AxgMl lazBhf"
+    >
+      aliceLand1
+    </li>
+    <li
+      className="sc-AxgMl lazBhf"
+    >
+      johnDoe2
+    </li>
+  </div>
+  <div
+    className="sc-AxiKw fZyRUb"
+  >
+    <span>
+      <b>
+        : 
+      </b>
+      <p
+        className="sc-AxirZ jLJDQb"
+      />
+    </span>
+    <span>
+      <b>
+        : 
+      </b>
+      <p
+        className="sc-AxirZ jLJDQb"
+      />
+    </span>
+  </div>
+  <form
+    className="sc-AxheI dzsoZX"
+  >
+    <div
+      className="MuiFormControl-root MuiTextField-root WithStyles(ForwardRef(TextField))-root-1 MuiFormControl-fullWidth"
+    >
+      <div
+        className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-fullWidth MuiInputBase-formControl"
+        onClick={[Function]}
+      >
+        <input
+          aria-invalid={false}
+          autoComplete="off"
+          autoFocus={false}
+          className="MuiInputBase-input MuiOutlinedInput-input"
+          disabled={false}
+          name="message"
+          onAnimationStart={[Function]}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="Send a Message"
+          required={false}
+          type="text"
+        />
+        <fieldset
+          aria-hidden={true}
+          className="PrivateNotchedOutline-root-40 MuiOutlinedInput-notchedOutline"
+          style={
+            Object {
+              "paddingLeft": 8,
+            }
+          }
+        >
+          <legend
+            className="PrivateNotchedOutline-legend-41"
+            style={
+              Object {
+                "width": 0.01,
+              }
+            }
+          >
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "&#8203;",
+                }
+              }
+            />
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+    <button
+      className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+      disabled={false}
+      onBlur={[Function]}
+      onDragLeave={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex={0}
+      type="submit"
+    >
+      <span
+        className="MuiButton-label"
+      >
+        Send
+      </span>
+    </button>
+  </form>
+</div>
+`;

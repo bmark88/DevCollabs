@@ -32,6 +32,9 @@ const ExpansionPanelSummary = withStyles({
     "&$expanded": {
       minHeight: 75,
     },
+    ['@media (max-width:1200px)']: {
+      position: 'relative',
+    },
   },
   content: {
     "&$expanded": {

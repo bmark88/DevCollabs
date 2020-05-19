@@ -28,10 +28,14 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
+    {/* <header>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    </header> */}
       <Navbar />
       <div
         style={{
           marginTop: `60px`,
+          top: 0,
           // maxWidth: 960,
           // padding: `0 1.0875rem 1.45rem`,
         }}
@@ -48,3 +52,4 @@ const Layout = ({ children }: Props) => {
 }
 
 export default Layout
+ 

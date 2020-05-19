@@ -20,6 +20,7 @@ const Div = styled.div`
   display: flex;
   align-items: center;
   margin: 1em;
+
 `
 
 const Ul = styled.ul`
@@ -29,6 +30,7 @@ const Ul = styled.ul`
   overflow-y: scroll;
   margin-left: 0px;
   width: 100%;
+  
 `
 
 const AdminBadge = styled.div`
@@ -41,12 +43,15 @@ const AdminBadge = styled.div`
   right: 0px;
   
   @media (max-width:1200px) {
-    position: relative;
+    margin: 10px;
   }
 `
 
 const ListTitle = styled.h3`
   background-color: white;
+  @media (max-width:1200px) {
+    margin: 10px;
+  }
 `
 
 const UserProfile = ({ postCount, subscriptions, userName }: Props) => {

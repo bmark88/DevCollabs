@@ -1,3 +1,11 @@
+// For testing db reset
+// const path = require("path");
+
+// const ENV = process.env.NODE_ENV || "";
+// const PATH = path.resolve(__dirname, "../.env." + ENV);
+
+// require("dotenv").config({ path: PATH });
+
 // load .env data into process.env
 require('dotenv').config();
 

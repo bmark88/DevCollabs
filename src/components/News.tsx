@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import styled from "styled-components"
 
 
 interface Props {
@@ -17,6 +18,14 @@ interface Props {
 function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
   return <ListItem button component="a" {...props} />;
 }
+const Div = styled.div`
+float: left;
+display: flex;
+@media (max-width: 800px) {
+  width: 100%;
+    display: inline-block;
+  }  
+`
 
 const News = () => {
   const { news } = useApplicationData();
