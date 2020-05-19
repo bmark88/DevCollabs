@@ -1,8 +1,13 @@
-import React from "react"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
+
+import { IconButton, Typography, Tooltip } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline"
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
+import DeleteIcon from "@material-ui/icons/Delete"
+import styled from "styled-components"
 
 import axios from "axios"
-
 import { toast } from "react-toastify"
 
 interface Props {
@@ -11,7 +16,7 @@ interface Props {
 
 const toastNotif = (notification: string) => {
   const typesOfNotif: {
-    [isAdmin: string] :string
+    [isAdmin: string]: string
     addSub: string
     removeSub: string
   } = {
@@ -29,19 +34,31 @@ const toastNotif = (notification: string) => {
   })
 }
 
+const ElementDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const ButtonsDiv = styled.div`
+  margin-right: 10px;
+`
+const useStyles = makeStyles({
+  groupName: {
+    alignSelf: "center",
+    marginLeft: "15px",
+  },
+  groupButtons: {
+    margin: "0px 5px 0px 5px",
+  },
+})
+
 function GroupTestElement(props: any) {
   const { name, id } = props.group
   const subscription = props.subscription
-
   const userId = JSON.parse(localStorage.getItem("session") || "{}").id
   const [sub, setSub] = useState(false)
   const [disable, setDisable] = useState(false)
-
-  //   console.log("sub true or not", props.sub)
-  //   console.log("from grouptestelent", name)
-  //   console.log("from goruptestele", id)
-  //   console.log("sub-->", sub)
-  //   console.log("-------------")
+  const classes = useStyles()
 
   useEffect(() => {
     axios({
@@ -52,14 +69,13 @@ function GroupTestElement(props: any) {
     })
   }, [])
 
-
   const handleSub = () => {
     const data = { userId }
 
     if (subscription.is_admin) return toastNotif("isAdmin")
 
     sub
-      ?( axios({
+      ? axios({
           method: "delete",
           url: `http://localhost:3001/group/subscription/delete/${id}`,
           data: data,
@@ -69,7 +85,7 @@ function GroupTestElement(props: any) {
             toastNotif("removeSub")
           })
           .catch(() => console.log("unsub unsuccess"))
-      ) : axios({
+      : axios({
           method: "post",
           url: `http://localhost:3001/group/subscription/${id}`,
           data: data,
@@ -81,19 +97,76 @@ function GroupTestElement(props: any) {
           .catch(() => console.log("sub unsuccess"))
     setSub(!sub)
     setDisable(true)
-    setTimeout(function() {setDisable(false)}, 1000)
+    setTimeout(function () {
+      setDisable(false)
+    }, 1000)
   }
 
+  const handleDeleteGroup = () => {
+    console.log(`delete this group id => ${id}`)
+    axios({
+      method: "DELETE",
+      url: `http://localhost:3001/group/delete/${id}`,
+      data: { id: userId },
+    })
+      .then(data => {
+        console.log(data)
+        axios.get("http://localhost:3001/group/public").then(data => {
+          console.log(data.data)
+          props.setAllGroups(data.data)
+        })
+      })
+      .catch(e => console.log(e))
+  }
   return (
-    <div>
-      <p key={id}>{name}</p>
-      <button onClick={handleSub} disabled={disable}>
-        {sub ? "-" : "+"}
-      </button>
-    </div>
+    <ElementDiv>
+      <Typography className={classes.groupName} variant="body1">
+        {name}
+      </Typography>
+      <ButtonsDiv>
+        {subscription.is_admin && (
+          <Tooltip title="Delete Group" arrow>
+            <IconButton
+              className={classes.groupButtons}
+              onClick={handleDeleteGroup}
+              disabled={disable}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        )}
+        {sub ? (
+          <Tooltip title="Unsubscribe" arrow>
+            <IconButton
+              className={classes.groupButtons}
+              onClick={handleSub}
+              disabled={disable}
+            >
+              <RemoveCircleOutlineIcon />
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <Tooltip title="Subscribe" arrow>
+            <IconButton
+              className={classes.groupButtons}
+              onClick={handleSub}
+              disabled={disable}
+            >
+              <AddCircleOutlineIcon />
+            </IconButton>
+          </Tooltip>
+        )}
+      </ButtonsDiv>
+    </ElementDiv>
   )
 }
 
+const ListDiv = styled.div`
+  margin: 1em;
+  max-height: 368px;
+  overflow: hidden;
+  overflow-y: scroll;
+`
 export default function IndexGroupList({ subscriptions }: Props) {
   const [allGroups, setAllGroups] = useState([])
   //   const [groupBelong, setGroupBelong] = useState([])
@@ -106,21 +179,9 @@ export default function IndexGroupList({ subscriptions }: Props) {
       console.log(data.data)
       setAllGroups(data.data)
     })
-    //     axios.get(`http://localhost:3001/group/u/${userId}`).then(data => {
-    //       const groupNameBelongArr = data.data.map(group => {
-    //          return group.name
-    //        })
-    //        console.log("groupArr", groupNameBelongArr)
-    //       setGroupBelong(groupNameBelongArr)
-    //     })
   }, [])
 
-  const List = allGroups.map(group => {
-    // if (groupBelong.includes(group.name)) {
-    //    return <GroupTestElement group={group} sub={true} />
-    // } else {
-    //
-    // }
+  const List = allGroups.map((group, index) => {
     let subscription = subscriptions
       ? subscriptions.find(sub => sub.group_id === group.id)
       : {}
@@ -128,12 +189,13 @@ export default function IndexGroupList({ subscriptions }: Props) {
 
     return (
       <GroupTestElement
+        key={index}
         group={group}
         subscription={subscription}
-        key={group.id}
+        setAllGroups={setAllGroups}
       />
     )
   })
 
-  return <div>{List}</div>
+  return <ListDiv>{List}</ListDiv>
 }
