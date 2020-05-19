@@ -32,9 +32,11 @@ const News = () => {
         {news.map((article :any, index :number) => {
           return (
             
-            <ListItemLink key={index} href={article.url} >
+            <ListItemLink key={index} href={article.url} id="dark">
               {article.url && (
-                  <ListItemText primary={article.title} secondary={article.created_at}/>
+                  <>
+                  <ListItemText primary={article.title} secondary={article.created_at} className="dark2"/>
+                  </>
                 )
               }
             </ListItemLink>

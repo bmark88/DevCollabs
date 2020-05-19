@@ -12,15 +12,27 @@ const GlobalStyle = createGlobalStyle`
   //   color: ${props => props.theme.mode === 'dark' ? '#EEE' : '#111'}
   // }
 
-  // span {
-  //   // background-color: gray;
-  //   // color: red;
-  // }
+  span {
+    color: ${props => props.theme.mode === 'dark' ? 'red' : 'ffb400'}
+    background-color: red;
+  }
+  
+  .dark {
+    background-color: ${props => props.theme.mode === 'dark' ? 'gray' : '#EEE'};
+    color: ${props => props.theme.mode === 'dark' ? '#EEE' : '#111'}
+  }
 
-  // p {
-  //   // background-color: gray;
-  //   // opacity: 70%;
-  // }
+  .dark2 {
+    background-color: ${props => props.theme.mode === 'dark' ? '#111' : '#EEE'};
+    color: ${props => props.theme.mode === 'dark' ? '#EEE' : '#111'}
+  }
+
+  p {
+    // background-color: gray;
+    // opacity: 70%;
+    color: white;
+    backgroundcolor: red;
+  }
 
   // input {
   //   background-color: white;

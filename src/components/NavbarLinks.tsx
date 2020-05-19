@@ -19,6 +19,7 @@ const Div = styled.div`
 `;
 
 const Img = styled.img`
+  min-width: 47px;
   width: 47px;
   height: 47px;
   border-radius: 50%;

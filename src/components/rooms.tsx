@@ -64,7 +64,7 @@ const RoomCard = ({ children, image, title } :Props) => {
 
   return (
     <Card className={classes.root}>  
-        <CardMedia
+        <CardMedia 
           className={classes.media}
           image={image}
         />

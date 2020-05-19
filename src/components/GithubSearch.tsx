@@ -191,9 +191,9 @@ export default function GithubSearch() {
 
   return (
     <DivFlex>
-      <FilterContainer>
+      <FilterContainer className={"dark"}>
         {/* \\\\\-----------------------USER-------------------------///// */}
-        <div className="user-list">
+        <div className="user-list dark">
           <TitleFilter>
             <GitHubIcon/>
             <h3 style={{marginLeft: 10}}>Search By User</h3>
@@ -242,9 +242,9 @@ export default function GithubSearch() {
             </FormFilter>
           </div>
           {/* \\\\\ -------------------- RESULTS ---------------------- /////*/}
-          <List className={classes.root} subheader={<li />}>
-            <li key={`section-1`} className={classes.listSection}>
-              <ul className={classes.ul}>
+          <List className={`${classes.ul} ${"dark"}`} subheader={<li />}>
+            <li key={`section-1`} className={`${classes.listSection} ${"dark"}`}>
+              <ul className={`${classes.ul} dark`}>
                 {results.user.login && (
                   <ListSubheader style={{padding:"12px"}}>
                     <h2>{`User ${results.user.login}`}</h2>
@@ -322,10 +322,10 @@ export default function GithubSearch() {
             </li>
 
             {results.repos && results.repos[0] && (
-              <li key={`section-2`} className={classes.listSection}>
-                <ul className={classes.ul}>
+              <li key={`section-2`} className={`${classes.listSection} dark`}>
+                <ul className={`${classes.ul} dark`}>
                   <ListSubheader style={{padding:"15px", margin: 0}}>
-                    <h2>{`User's Repos`}</h2>
+                    <h2 className="dark">{`User's Repos`}</h2>
                   </ListSubheader>
                   {sortedReposByDate.map(repo => (
                     <ListItem key={`item-2-${repo.id}`} className={classes.gitHub}>
@@ -341,8 +341,8 @@ export default function GithubSearch() {
             )}
             {/* \\\\\ ---------------FILTERS RESULTS--------------- /////*/}
             {!results.repos && parseInt(userReposCount) > 1 && (
-              <li key={`section-3`} className={classes.listSection}>
-                <ul className={classes.ul}>
+              <li key={`section-3`} className={`${classes.listSection} dark`}>
+                <ul className={`${classes.ul} dark`}>
                   <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`User's List`}</h2>
                   </ListSubheader>
@@ -378,8 +378,8 @@ export default function GithubSearch() {
         </div>
       </FilterContainer>
       {/* \\\\\ -----------------------REPOS------------------------- /////*/}
-      <FilterContainer>
-        <div className="repos-list">
+      <FilterContainer className={"dark"}>
+        <div className={`repos-list dark`}>
           <TitleFilter>
             <GitHubIcon/>
             <h3 style={{marginLeft: 10}}>Search By Repository</h3>
@@ -426,10 +426,10 @@ export default function GithubSearch() {
 
           {/* \\\\\ ------------------RESULTS------------------ /////*/}
 
-          <List className={classes.root} subheader={<li />}>
+          <List className={`${classes.ul} ${"dark"}`} subheader={<li />}>
             {reposResults.incomplete_results === false && (
               <li key={`section-4-0`} className={classes.listSection}>
-                <ul className={classes.ul}>
+                <ul className={`${classes.ul} ${"dark"}`}>
                   <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`Repos Results`}</h2>
                   </ListSubheader>
