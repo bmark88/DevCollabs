@@ -5,9 +5,10 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { ReactNode, useState } from "react"
+import React, { ReactNode, useState, useEffect } from "react"
 // import { useStaticQuery, graphql } from "gatsby"
 import Navbar from './Navbar' 
+import storage from "local-storage-fallback"
 
 import "./layout.css"
 import DarkMode from "../components/DarkMode"
@@ -18,8 +19,18 @@ interface Props {
   children: ReactNode
 }
 
+const getInitialTheme = () => {
+  const savedTheme = storage.getItem('theme')
+  return savedTheme ? JSON.parse(savedTheme) : { mode: 'light' }
+};
+
 const Layout = ({ children }: Props) => {
-  const [theme, setTheme] = useState({ mode: 'light'})
+  const [theme, setTheme] = useState(getInitialTheme)
+  
+  useEffect(() => {
+    storage.setItem('theme', JSON.stringify(theme))
+  }, [theme])
+
   // const data = useStaticQuery(graphql`
   //   query SiteTitleQuery {
   //     site {
@@ -33,8 +44,6 @@ const Layout = ({ children }: Props) => {
   const ThemeButton = styled(Brightness3Icon)`
     position: fixed;
     z-index: 5;
-    // top: 60px;
-    // right: 0;
     top: 8px;
     left: 0;
   `;
