@@ -10,13 +10,16 @@ const P = styled.p`
 `;
 
 const TimeStamp = styled.p`
-  margin: -5px 0 5px 0;
   font-size: 12px;
+  margin: 0;
 `;
 
 const MessageContainer = styled.div`
   font-size: 18px;
   margin: 0.5em;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 580px;
 `;
 
 const Message = ({ children } :Props) => {

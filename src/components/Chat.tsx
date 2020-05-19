@@ -76,7 +76,7 @@ const ChatMessage = styled.div`
   width: 96%;
   border-radius: 10px;
   border: solid 1px #ccdae6;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 `
 
 const Message = styled.div`
