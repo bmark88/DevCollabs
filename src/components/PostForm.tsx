@@ -49,6 +49,7 @@ export default function PostForm(props: any) {
           .replace("http://", "")
           .replace("https://", "")
           .split(/[/?#]/)[0]
+      }
         return axios
           .get(
             `https://api.linkpreview.net/?key=71de5c5e4e30482ea8aaee1b63be5b20&q=http://${urlForAPI}`
@@ -60,7 +61,6 @@ export default function PostForm(props: any) {
             return postState
           })
           .catch(e => console.error("error in the api get request", e.stack))
-      }
     };
 
     if (data.data !== "") {

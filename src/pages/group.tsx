@@ -23,7 +23,7 @@ toast.configure();
 const Main = styled.div`
   display: flex;
 
-  @media (max-width: 1011px) {
+  @media (max-width: 400px) {
     flex-direction: column;
   }
 

@@ -3,8 +3,8 @@ import styled from "styled-components"
 import GroupListItem from "./GroupListItem"
 
 interface Props {
-  groups: object[]
-  group: object
+  groups: any
+  group: any
   setGroup: any
 }
 
@@ -14,18 +14,21 @@ const Div = styled.div`
   border-radius: 6px;
   padding: 1em;
   min-width: 250px;
+  max-height: 80vh;
   margin: 1em;
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
+  overflow-y: scroll;
   
-  @media (max-width:1890px) {
-    // height: 10%;
+  @media (max-width:780px) {
+    height: 150px;
   }
-`
+`;
 
 export default function GroupList({ groups, setGroup }: Props) {
-  const GroupList = groups.map(group => {
+  const GroupList = groups.map((group :any) => {
     return (
       <GroupListItem
         key={group.id}
