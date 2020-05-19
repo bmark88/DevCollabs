@@ -59,7 +59,7 @@ export default function IndexPage() {
       <Layout>
         <Navbar />
         <Main>
-          <UserCard/>
+          <UserCard />
           <UserList users={usersList} />
           <TopicsContainer className="dark">
             <TopicBoard subscriptions={subscriptions}/>

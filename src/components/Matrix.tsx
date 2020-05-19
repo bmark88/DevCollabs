@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Canvas = styled.canvas`
   margin: 0;
+  top: 0;
   height: 100%;
   width: 100%;
   z-index: -1;
