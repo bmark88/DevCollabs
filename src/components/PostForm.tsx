@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
       // position: 'absolute',
       width: '75vw',
     },
+    backgroundColor: 'white',
+    padding: '1em',
+    borderRadius: '6px',
   },
   submit: {
     maxWidth: "310px",

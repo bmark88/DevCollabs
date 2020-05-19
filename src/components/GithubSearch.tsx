@@ -61,6 +61,7 @@ const FilterContainer = styled.div`
   min-width: 345px;
   display: flex;
   justify-content: center;
+  background-color: white;
 `;
 
 const FormFilter = styled.form`
@@ -70,6 +71,7 @@ const FormFilter = styled.form`
 `;
 
 const TitleFilter = styled.div`
+  color: black;
   display: flex;
   padding: 1em;
 `;

@@ -40,13 +40,13 @@ const NavbarLinks = (props: any) => {
       {props.username && (
       <>
         <Div>
-          <Link to="/profile">
+          <Link to="/settings">
           <Img 
             src={"https://planetbotanix.com/wp-content/uploads/2017/08/Female-Avatar-1-300x300-300x300.jpg"} 
             alt="avatar-image"
           />
           </Link>
-          <NavItem className="avatar" to="/profile">
+          <NavItem className="avatar" to="/settings">
               {props.username}
           </NavItem>
         </Div>
