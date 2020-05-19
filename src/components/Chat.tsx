@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { withStyles, makeStyles } from "@material-ui/core/styles"
 import { MessageContainer, TimeStamp } from "./Message"
 import {
-  Button,
   TextField,
   InputAdornment,
   IconButton,
@@ -131,7 +130,7 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
           autoComplete="off"
           InputProps={{
             endAdornment: (
-              <InputAdornment position="start">
+              <InputAdornment position="end">
                 <IconButton
                   aria-label="Send"
                   type="submit"
