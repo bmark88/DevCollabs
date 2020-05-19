@@ -1,43 +1,40 @@
 import React from "react"
-import styled from "styled-components"
+import { Button, makeStyles } from "@material-ui/core"
 
 interface Props {
-  group: object
-  groups: object
   setGroup: any
   name: string
   id: any
-}
+};
 
-const Li = styled.li`
-  list-style: none;
-  background-color: #551A8B;
-  justify-content: center;
-  color: white;
-  border: solid;
-  border-color: black;
-  border-radius: 20px;
-  display: flex;
-  width: 200px;
-
-  &:hover {
-    background-color: white;
-    color: #551A8B;
-    border-color: #551A8B;
-    font-weight: bold;
-  }
-
-  &:active {
-    color: white;
-    background-color: gray;
-    border-color: black;
-  }
-`;
+const useStyles = makeStyles(() => ({
+  groupButton: {
+    borderColor: "#551A8B",
+    marginBottom: "0.5em",
+    fontWeight: "bold",
+    color: "#551A8B",
+    backgroundColor: '#FFF',
+    "&:hover": {
+      backgroundColor: "#C0C0C0",
+      color: "#FFF",
+      borderColor: "#551A8B",
+      fontWeight: "bold",
+      borderWidth: '2px',
+    },
+  },
+}));
 
 export default function GroupListItem({ id, name, setGroup } :Props) {
+  const classes = useStyles();
+
   return (
-  <>
-    <Li onClick={() => setGroup(id)}>{name}</Li>
-  </>
+    <Button 
+      fullWidth 
+      className={classes.groupButton}
+      variant="outlined" 
+      onClick={() => setGroup(id)}
+    >
+      {name}
+    </Button>
   )
-}
+};

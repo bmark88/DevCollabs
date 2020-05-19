@@ -14,22 +14,21 @@ interface Props {
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
-    minWidth: 345,
+    maxWidth: 240,
+    minWidth: 240,
     marginTop: 0,
     margin: 15,
     ['@media (max-width:1200px)']: {
-      maxWidth: 200,
-      minWidth: 200,
+      maxWidth: 240,
+      minWidth: 240,
     },
-    ['@media (max-width:800px)']: {
-      maxWidth: 190,
-      minWidth: 190,
+    ['@media (max-width: 620px)']: {
+      maxWidth: 260,
+      minWidth: 260,
     }
   },
   font: {
-    ['@media (max-width:800px)']: {
-    }
+    fontSize: '18px',
   },
   media: {
     height: 140,
@@ -39,6 +38,13 @@ const useStyles = makeStyles({
 const RoomContainer = styled.div`
   margin: 1em;
   display: flex;
+  justify-content: center;
+  min-width: 330px;
+
+  @media (max-width: 620px) {
+    margin: 0;
+    padding: 0;
+  }
   
   @media (max-width: 1880px) {
     flex-wrap: wrap;
@@ -49,7 +55,7 @@ const RoomContainer = styled.div`
 const Div = styled.div`
   display: flex;
   justify-content: center;
-  padding: 1em;
+  padding: 0.5em;
   font-size: 20px;
 `;
 
