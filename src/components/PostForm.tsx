@@ -13,24 +13,26 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: "100%",
     marginTop: theme.spacing(1),
+    display: 'flex',
+    flexDirection:'column',
   },
   submit: {
-    margin: theme.spacing(1, 50, 0),
     maxWidth: "310px",
+    margin: '0 auto',
   },
   label: {
     margin: theme.spacing(0, 0, 1),
   },
-}))
+}));
 
 export default function PostForm(props: any) {
-  const classes = useStyles()
-  // const [postData, setPostData] = useState("")
+  const classes = useStyles();
   const [postState, setPostState] = useState({
     message: "",
     image: "",
-  })
-  const [error, setError] = useState(false)
+  });
+
+  const [error, setError] = useState(false);
 
   const onSubmitFunction = (event: any) => {
     setError(false)
@@ -40,10 +42,6 @@ export default function PostForm(props: any) {
     const session = JSON.parse(localStorage.getItem("session") || "{}")
     const userId = session.id
     const data = { userId, data: postState.message, image_url: postState.image }
-
-    console.log("data", data)
-    console.log("postState", postState)
-    console.log("-----------------------")
 
     const checkData = (cb?: any) => {
       if (postState.message.includes("www.")) {
@@ -63,7 +61,7 @@ export default function PostForm(props: any) {
           })
           .catch(e => console.error("error in the api get request", e.stack))
       }
-    }
+    };
 
     if (data.data !== "") {
       checkData()?.then(() => {
@@ -95,7 +93,6 @@ export default function PostForm(props: any) {
           fullWidth
           autoComplete="off"
           value={postState.message}
-          // onChange={e => setPostData(e.target.value)}
           onChange={e =>
             setPostState({ ...postState, message: e.target.value })
           }
@@ -107,7 +104,6 @@ export default function PostForm(props: any) {
           multiple
           type="file"
           onChange={e => setPostState({ ...postState, image: e.target.value })}
-          // onSubmit={e => setState({...state, image: e.target.value})}
         />
         <label htmlFor="raised-button-file">
           <Button component="span">Upload Image</Button>

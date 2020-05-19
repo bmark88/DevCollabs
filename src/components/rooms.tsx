@@ -14,8 +14,8 @@ interface Props {
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
-    minWidth: 345,
+    maxWidth: 225,
+    minWidth: 225,
     marginTop: 0,
     margin: 15,
     ['@media (max-width:1200px)']: {
@@ -28,6 +28,7 @@ const useStyles = makeStyles({
     }
   },
   font: {
+    fontSize: '18px',
     ['@media (max-width:800px)']: {
     }
   },
@@ -39,6 +40,7 @@ const useStyles = makeStyles({
 const RoomContainer = styled.div`
   margin: 1em;
   display: flex;
+  justify-content: center;
   
   @media (max-width: 1880px) {
     flex-wrap: wrap;
@@ -49,7 +51,7 @@ const RoomContainer = styled.div`
 const Div = styled.div`
   display: flex;
   justify-content: center;
-  padding: 1em;
+  padding: 0.5em;
   font-size: 20px;
 `;
 

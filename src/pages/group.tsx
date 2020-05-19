@@ -28,7 +28,7 @@ const Main = styled.div`
   }
 
   @media (min-width: 1890px) {
-    justify-content: space-between;
+    // justify-content: space-between;
   }
 `;
 
@@ -43,15 +43,16 @@ const Form = styled.form`
 
 const Section = styled.section`
   display: flex;
+  width: 50%;
   flex-direction: column;
 `;
 
 const HideChat = styled.div`
   display: flex;
   flex-direction: row;
-  @media (max-width: 1880px) {
-    display: none;
-  }
+  // @media (max-width: 1880px) {
+  //   display: none;
+  // }
 `;
 
 const GroupPage = () => {
