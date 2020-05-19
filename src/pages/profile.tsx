@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import UserProfile from "../components/UserProfile";
 import useApplicationData from "../components/hooks/useApplicationData";
 

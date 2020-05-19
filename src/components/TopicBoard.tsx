@@ -63,7 +63,7 @@ export default function TopicBoard({ subscriptions }: Props) {
   }
 
   return (
-    <div>
+    <>
       <ExpansionPanel
         style={{backgroundColor: "gray"}}
         square
@@ -137,6 +137,6 @@ export default function TopicBoard({ subscriptions }: Props) {
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    </div>
+    </>
   )
 }

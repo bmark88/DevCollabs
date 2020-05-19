@@ -11,7 +11,7 @@ import Navbar from './Navbar'
 import storage from "local-storage-fallback"
 
 import "./layout.css"
-import DarkMode from "../components/DarkMode"
+import DarkMode from "./DarkMode"
 import styled, { ThemeProvider } from "styled-components"
 import Brightness3Icon from '@material-ui/icons/Brightness3';
 

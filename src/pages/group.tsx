@@ -8,8 +8,8 @@ import { Button, Input } from "@material-ui/core";
 //components
 import GroupList from "../components/GroupList";
 import { PostsList, PostContainer } from "../components/PostsList";
-import { RoomCard, RoomContainer } from "../components/rooms";
-import Layout from "../components/layout";
+import { RoomCard, RoomContainer } from "../components/Rooms";
+import Layout from "../components/Layout";
 import Chat from "../components/Chat";
 import PostForm from "../components/PostForm";
 import axios from "axios";

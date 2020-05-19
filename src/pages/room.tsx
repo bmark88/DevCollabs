@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { navigate } from "gatsby"
 import Chat from "../components/Chat"
 import CodeSnippet from "../components/CodeSnippet"
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import socketChat from "../components/hooks/socketChat"
 import styled from "styled-components"
 
@@ -23,7 +23,7 @@ const LiveHTML = styled.div`
   }
 `;
 
-const RoomPage = ({location}) => {
+const RoomPage = ({location} :any) => {
   
   const RoomName = location.state.roomID
   const { users, messages, handleSubmit, websocketIDE, conn } = socketChat(RoomName)
@@ -51,7 +51,7 @@ const RoomPage = ({location}) => {
     return null
   }
 
-  conn.on("IDE", data => {
+  conn.on("IDE", (data :any) => {
     setSnippetValue(data.value)
   })
 

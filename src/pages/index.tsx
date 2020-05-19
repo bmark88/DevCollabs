@@ -19,19 +19,28 @@ import UserList from "../components/UserList";
 const Main = styled.main`
   margin-top: 80px;
   display: flex;
+
+  @media (max-width: 1200px) {
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 const TopicsContainer = styled.div`
-  // background-color: black;
-  // color: white;
-  width: 43%;
+  width: 30%;
   margin: 1em;
   height: 85%;
+  flex: 1;
+  min-width: 600px;
 
   @media (max-width: 1000px) {
-    width: 90%;
+    // width: 90%;
     margin: 1.4em;
   }
+`;
+
+const UsersContainer = styled.div`
+  display: flex;
 `;
 
 export default function IndexPage() {
@@ -59,8 +68,10 @@ export default function IndexPage() {
       <Layout>
         <Navbar />
         <Main>
-          <UserCard />
-          <UserList users={usersList} />
+          <UsersContainer>
+            <UserCard />
+            <UserList users={usersList} />
+          </UsersContainer>
           <TopicsContainer className="dark">
             <TopicBoard subscriptions={subscriptions}/>
           </TopicsContainer>

@@ -10,7 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import styled from "styled-components"
 
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import GithubSearch from '../components/GithubSearch';
 
 const columns = [
