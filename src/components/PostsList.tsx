@@ -13,7 +13,7 @@ const PostContainer = styled.div`
   }
 `;
 
-const PostsList = ({ posts }: Props) => {
+const PostsList = ({ posts }: Props) :any=> {
   if (!posts) {return null} 
   const PostsList = posts.map((post :any) => {
     return (
