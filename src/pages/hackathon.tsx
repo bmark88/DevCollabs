@@ -116,11 +116,11 @@ export default function StickyHeadTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (newPage :any) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event :any) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
@@ -128,9 +128,8 @@ export default function StickyHeadTable() {
   return (
     <Layout>
       <Section>
-        {/* <GithubSearch/> */}
         <StatsTable className={classes.root}>
-          <TableContainer className={classes.container}>
+          <TableContainer className={`${classes.container} ${"dark"}`}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>

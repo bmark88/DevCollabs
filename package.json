@@ -35,6 +35,7 @@
     "ikea-name-generator": "^1.0.3",
     "jsonwebtoken": "^8.5.1",
     "libpq": "^1.8.9",
+    "local-storage-fallback": "^4.1.1",
     "moment": "^2.25.3",
     "pg": "^8.1.0",
     "pg-native": "^3.0.0",

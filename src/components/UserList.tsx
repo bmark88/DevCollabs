@@ -26,7 +26,7 @@ const Ul = styled.ul`
 const UserList = ({ users }: Props) => {
   return (
     <RoomCard title="Users List" image="https://bit.ly/3bDrCnh">
-      <UserContainer>
+      <UserContainer className="dark">
         <Ul>
           {users.map((user: any, index: number) => {
             return <UserListItem key={index} index= {index} user={user} />

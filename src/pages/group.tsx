@@ -179,10 +179,11 @@ console.log(state)
                 <Link to="/room/" state={{roomID: 'setRoom1'}}> Room 1</Link>
                 <Link to="/room/" state={{roomID: 'setRoom2'}}> Room 2</Link>
                 <Link to="/room/" state={{roomID: 'setRoom3'}}> Room 3</Link>
+                <Link to="/room/" state={{roomID: 'setRoom4'}}> Room 4</Link>
               </Div>
             </RoomCard>
           </RoomContainer>
-          <PostContainer>
+          <PostContainer className="dark">
             <PostForm group={group} postFunction={handlePost} />
             <PostsList posts={posts} />
           </PostContainer>

@@ -5,17 +5,32 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { ReactNode } from "react"
+import React, { ReactNode, useState, useEffect } from "react"
 // import { useStaticQuery, graphql } from "gatsby"
 import Navbar from './Navbar' 
+import storage from "local-storage-fallback"
 
 import "./layout.css"
+import DarkMode from "../components/DarkMode"
+import styled, { ThemeProvider } from "styled-components"
+import Brightness3Icon from '@material-ui/icons/Brightness3';
 
 interface Props {
   children: ReactNode
 }
 
+const getInitialTheme = () => {
+  const savedTheme = storage.getItem('theme')
+  return savedTheme ? JSON.parse(savedTheme) : { mode: 'light' }
+};
+
 const Layout = ({ children }: Props) => {
+  const [theme, setTheme] = useState(getInitialTheme)
+  
+  useEffect(() => {
+    storage.setItem('theme', JSON.stringify(theme))
+  }, [theme])
+
   // const data = useStaticQuery(graphql`
   //   query SiteTitleQuery {
   //     site {
@@ -26,8 +41,24 @@ const Layout = ({ children }: Props) => {
   //   }
   // `)
 
+  const ThemeButton = styled(Brightness3Icon)`
+    position: fixed;
+    z-index: 5;
+    top: 8px;
+    left: 0;
+  `;
+
   return (
     <>
+    <ThemeProvider theme={theme}>
+    <ThemeButton 
+      fontSize='large'
+      onClick={e => setTheme(theme.mode === 'dark' ? 
+      { mode: 'light' } : { mode: 'dark' })}
+    >
+      Change Theme
+    </ThemeButton> 
+    <DarkMode />
       <Navbar />
       <div
         style={{
@@ -43,6 +74,7 @@ const Layout = ({ children }: Props) => {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
+    </ThemeProvider>
     </>
   )
 }
