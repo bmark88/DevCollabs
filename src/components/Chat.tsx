@@ -90,9 +90,10 @@ const H4 = styled.h4`
 `
 const User = styled.div`
   margin-right: 20px;
+  margin-bottom: 20px
 `
 
-const UserMessage =styled.div`
+const UserMessage = styled.div`
   word-break: break-all;
 `
 const Chat = ({ users, messages, handleSubmit }: Props) => {
@@ -107,16 +108,17 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
       </UserList>
       <MessageContainer>
         {messages.map((msg: any, index: number) => (
-          <ChatMessage key={index}>
-            <Message>
-              <User>
-                <b>{msg.user}</b>
-              </User>
-              <UserMessage>{msg.message}</UserMessage>
-            </Message>
-
+          <>
             <TimeStamp style={{ marginLeft: "10px" }}>{msg.date}</TimeStamp>
-          </ChatMessage>
+            <ChatMessage key={index}>
+              <Message>
+                <User>
+                  <b>{msg.user}</b>
+                </User>
+                <UserMessage>{msg.message}</UserMessage>
+              </Message>
+            </ChatMessage>
+          </>
         ))}
       </MessageContainer>
       <SubmitButton onSubmit={handleSubmit}>
