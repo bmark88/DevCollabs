@@ -19,7 +19,7 @@ const MessageContainer = styled.div`
   margin: 0.5em;
   overflow: hidden;
   overflow-y: scroll;
-  max-height: 580px;
+  max-height: 543px;
 `;
 
 const Message = ({ children } :Props) => {
