@@ -4,6 +4,7 @@ import { IconButton, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline"
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
+import DeleteIcon from "@material-ui/icons/Delete"
 import styled from "styled-components"
 
 import axios from "axios"
@@ -38,13 +39,17 @@ const ElementDiv = styled.div`
   justify-content: space-between;
 `
 
+const ButtonsDiv = styled.div`
+  margin-right: 10px;
+`
 const useStyles = makeStyles({
   groupName: {
-    alignSelf: 'center',
+    alignSelf: "center",
+    marginLeft: "15px",
   },
-  groupButton: {
-    paddingRight: '30px'
-  }
+  groupButtons: {
+    margin: "0px 5px 0px 5px",
+  },
 })
 
 function GroupTestElement(props: any) {
@@ -55,11 +60,6 @@ function GroupTestElement(props: any) {
   const [disable, setDisable] = useState(false)
   const classes = useStyles()
 
-  //   console.log("sub true or not", props.sub)
-  //   console.log("from grouptestelent", name)
-  //   console.log("from goruptestele", id)
-  //   console.log("sub-->", sub)
-  //   console.log("-------------")
 
   useEffect(() => {
     axios({
@@ -103,18 +103,55 @@ function GroupTestElement(props: any) {
     }, 1000)
   }
 
+  const handleDeleteGroup = () => {
+    console.log(`delete this group id => ${id}`)
+    axios({
+      method: "DELETE",
+      url: `http://localhost:3001/group/delete/${id}`,
+      data: { id: userId },
+    })
+      .then(data => {
+        console.log(data)
+        axios.get("http://localhost:3001/group/public").then(data => {
+          console.log(data.data)
+          props.setAllGroups(data.data)
+        })
+      })
+      .catch(e => console.log(e))
+  }
   return (
     <ElementDiv>
       <Typography className={classes.groupName} variant="body1">
         {name}
       </Typography>
-      <IconButton className={classes.groupButton} onClick={handleSub} disabled={disable}>
-        {sub ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}
-      </IconButton>
+      <ButtonsDiv>
+        {subscription.is_admin && (
+          <IconButton
+            className={classes.groupButtons}
+            onClick={handleDeleteGroup}
+            disabled={disable}
+          >
+            <DeleteIcon />
+          </IconButton>
+        )}
+        <IconButton
+          className={classes.groupButtons}
+          onClick={handleSub}
+          disabled={disable}
+        >
+          {sub ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}
+        </IconButton>
+      </ButtonsDiv>
     </ElementDiv>
   )
 }
 
+const ListDiv = styled.div`
+margin: 1em;
+max-height: 368px;
+overflow: hidden;
+overflow-y: scroll;
+`
 export default function IndexGroupList({ subscriptions }: Props) {
   const [allGroups, setAllGroups] = useState([])
   //   const [groupBelong, setGroupBelong] = useState([])
@@ -127,28 +164,11 @@ export default function IndexGroupList({ subscriptions }: Props) {
       console.log(data.data)
       setAllGroups(data.data)
     })
-    //     axios.get(`http://localhost:3001/group/u/${userId}`).then(data => {
-    //       const groupNameBelongArr = data.data.map(group => {
-    //          return group.name
-    //        })
-    //        console.log("groupArr", groupNameBelongArr)
-    //       setGroupBelong(groupNameBelongArr)
-    //     })
+
   }, [])
 
-  const ListDiv = styled.div`
-    margin: 1em;
-    max-height: 368px;
-    overflow: hidden;
-    overflow-y: scroll
-  `
+  const List = allGroups.map((group, index) => {
 
-  const List = allGroups.map(group => {
-    // if (groupBelong.includes(group.name)) {
-    //    return <GroupTestElement group={group} sub={true} />
-    // } else {
-    //
-    // }
     let subscription = subscriptions
       ? subscriptions.find(sub => sub.group_id === group.id)
       : {}
@@ -156,9 +176,10 @@ export default function IndexGroupList({ subscriptions }: Props) {
 
     return (
       <GroupTestElement
+        key = {index}
         group={group}
         subscription={subscription}
-        key={group.id}
+        setAllGroups={setAllGroups}
       />
     )
   })

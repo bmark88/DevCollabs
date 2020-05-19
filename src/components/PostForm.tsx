@@ -28,38 +28,63 @@ export default function PostForm(props: any) {
   // const [postData, setPostData] = useState("")
   const [postState, setPostState] = useState({
     message: "",
-    image: ""
+    image: "",
   })
   const [error, setError] = useState(false)
 
   const onSubmitFunction = (event: any) => {
-    // setError(false)
+    setError(false)
     event.preventDefault()
+
     const groupId = props.group // <---------------- Change accordinly
-    const session = JSON.parse(localStorage.getItem("session") || '{}')
+    const session = JSON.parse(localStorage.getItem("session") || "{}")
     const userId = session.id
-    // const data = { userId, data: postData }
-    console.log('postState.image ==>', postState.image)
     const data = { userId, data: postState.message, image_url: postState.image }
 
-    if(data.data !== "") {
-      axios({
-        method: "post",
-        url: `http://localhost:3001/group/${groupId}/post/create`,
-        data: data,
-      })
-        .then(res => {
-          console.log('postState ==>', postState)
-          console.log('res.data in PostForm.tsx',res.data)
-          // console.log(postData)
+    console.log("data", data)
+    console.log("postState", postState)
+    console.log("-----------------------")
 
-          props.postFunction(props.group)
+    const checkData = (cb?: any) => {
+      if (postState.message.includes("www.")) {
+        var urlForAPI = postState.message
+          .replace("http://", "")
+          .replace("https://", "")
+          .split(/[/?#]/)[0]
+        return axios
+          .get(
+            `https://api.linkpreview.net/?key=71de5c5e4e30482ea8aaee1b63be5b20&q=http://${urlForAPI}`
+          )
+          .then(res => {
+            setPostState({ ...postState, image: res.data.image })
+            data.image_url = res.data.image
+            cb(postState)
+            return postState
+          })
+          .catch(e => console.error("error in the api get request", e.stack))
+      }
+    }
+
+    if (data.data !== "") {
+      checkData()?.then(() => {
+        axios({
+          method: "post",
+          url: `http://localhost:3001/group/${groupId}/post/create`,
+          data: data,
         })
+          .then(() => {
+            props.postFunction(props.group)
+            setPostState({ ...postState, message: "",
+            image: "", })
+
+          })
         .catch(() => setError(true))
+      })
     }
   }
+
   return (
-    <Container component="main" >
+    <Container component="main">
       <form className={classes.form} onSubmit={onSubmitFunction}>
         <InputLabel htmlFor="create-post" className={classes.label}>
           CREATE POST
@@ -71,22 +96,22 @@ export default function PostForm(props: any) {
           autoComplete="off"
           value={postState.message}
           // onChange={e => setPostData(e.target.value)}
-          onChange={e => setPostState({...postState, message: e.target.value})}
+          onChange={e =>
+            setPostState({ ...postState, message: e.target.value })
+          }
         />
         <input
           accept="image/*"
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           id="raised-button-file"
           multiple
           type="file"
-          onChange={e => setPostState({...postState, image: e.target.value})}
+          onChange={e => setPostState({ ...postState, image: e.target.value })}
           // onSubmit={e => setState({...state, image: e.target.value})}
         />
         <label htmlFor="raised-button-file">
-          <Button component="span">
-            Upload Image
-          </Button>
-        </label> 
+          <Button component="span">Upload Image</Button>
+        </label>
         <Button
           type="submit"
           variant="contained"

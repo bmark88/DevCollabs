@@ -207,7 +207,7 @@ module.exports = db => {
         `
         DELETE FROM subscriptions
         WHERE user_id = $1
-        AND group_id = $2;
+        AND group_id = $2; 
       `,
         [userID, groupID]
       )
