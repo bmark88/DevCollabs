@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { IconButton, Typography } from "@material-ui/core"
+import { IconButton, Typography, Tooltip } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline"
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline"
@@ -59,7 +59,6 @@ function GroupTestElement(props: any) {
   const [sub, setSub] = useState(false)
   const [disable, setDisable] = useState(false)
   const classes = useStyles()
-
 
   useEffect(() => {
     axios({
@@ -126,31 +125,47 @@ function GroupTestElement(props: any) {
       </Typography>
       <ButtonsDiv>
         {subscription.is_admin && (
-          <IconButton
-            className={classes.groupButtons}
-            onClick={handleDeleteGroup}
-            disabled={disable}
-          >
-            <DeleteIcon />
-          </IconButton>
+          <Tooltip title="Delete Group" arrow>
+            <IconButton
+              className={classes.groupButtons}
+              onClick={handleDeleteGroup}
+              disabled={disable}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
         )}
-        <IconButton
-          className={classes.groupButtons}
-          onClick={handleSub}
-          disabled={disable}
-        >
-          {sub ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}
-        </IconButton>
+        {sub ? (
+          <Tooltip title="Unsubscribe" arrow>
+            <IconButton
+              className={classes.groupButtons}
+              onClick={handleSub}
+              disabled={disable}
+            >
+              <RemoveCircleOutlineIcon />
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <Tooltip title="Subscribe" arrow>
+            <IconButton
+              className={classes.groupButtons}
+              onClick={handleSub}
+              disabled={disable}
+            >
+              <AddCircleOutlineIcon />
+            </IconButton>
+          </Tooltip>
+        )}
       </ButtonsDiv>
     </ElementDiv>
   )
 }
 
 const ListDiv = styled.div`
-margin: 1em;
-max-height: 368px;
-overflow: hidden;
-overflow-y: scroll;
+  margin: 1em;
+  max-height: 368px;
+  overflow: hidden;
+  overflow-y: scroll;
 `
 export default function IndexGroupList({ subscriptions }: Props) {
   const [allGroups, setAllGroups] = useState([])
@@ -164,11 +179,9 @@ export default function IndexGroupList({ subscriptions }: Props) {
       console.log(data.data)
       setAllGroups(data.data)
     })
-
   }, [])
 
   const List = allGroups.map((group, index) => {
-
     let subscription = subscriptions
       ? subscriptions.find(sub => sub.group_id === group.id)
       : {}
@@ -176,7 +189,7 @@ export default function IndexGroupList({ subscriptions }: Props) {
 
     return (
       <GroupTestElement
-        key = {index}
+        key={index}
         group={group}
         subscription={subscription}
         setAllGroups={setAllGroups}
