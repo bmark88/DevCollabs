@@ -80,6 +80,7 @@ const ChatMessage = styled.div`
 
 const Message = styled.div`
   display: flex;
+  color: black;
   justify-content: space-between;
   margin: 5px 15px 5px 15px;
 `
@@ -98,7 +99,7 @@ const UserMessage = styled.div`
 const Chat = ({ users, messages, handleSubmit }: Props) => {
   const classes = useStyles()
   return (
-    <Div>
+    <Div className="dark">
       <UserList>
         <H4>ONLINE CHAT</H4>
         {/* {users.map((user: string, index: number) => (
@@ -122,6 +123,7 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
       </MessageContainer>
       <SubmitButton onSubmit={handleSubmit}>
         <MessageTextField
+          className="dark"
           type="text"
           name="message"
           variant="outlined"
