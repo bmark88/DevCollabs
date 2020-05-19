@@ -22,6 +22,7 @@ const Div = styled.div`
   border-color: #f0f0f0;
   border-width: 2px;
   min-width: 400px;
+  max-width: 600px;
   position: relative;
   margin: 1em;
   opacity: 80%;
@@ -87,7 +88,13 @@ const H4 = styled.h4`
   margin-top: 15px;
   margin-bottom: 15px;
 `
+const User = styled.div`
+  margin-right: 20px;
+`
 
+const UserMessage =styled.div`
+  word-break: break-all;
+`
 const Chat = ({ users, messages, handleSubmit }: Props) => {
   const classes = useStyles()
   return (
@@ -102,12 +109,13 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
         {messages.map((msg: any, index: number) => (
           <ChatMessage key={index}>
             <Message>
-              <b>{msg.user}</b>
-              {msg.message}
+              <User>
+                <b>{msg.user}</b>
+              </User>
+              <UserMessage>{msg.message}</UserMessage>
             </Message>
-          
-              <TimeStamp style={{marginLeft:'10px'}}>{msg.date}</TimeStamp>
-            
+
+            <TimeStamp style={{ marginLeft: "10px" }}>{msg.date}</TimeStamp>
           </ChatMessage>
         ))}
       </MessageContainer>
