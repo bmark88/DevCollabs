@@ -26,13 +26,11 @@ const db = new Pool(dbParams)
 
 const indexRoutes = require("./routes/index.ts")
 const groupRoutes = require("./routes/group.ts")
-const roomRoutes = require("./routes/room.ts")
 const profileRoutes = require("./routes/profile.ts")
 const rateRoutes = require("./routes/rate.ts")
 
 app.use("/", indexRoutes(db))
 app.use("/group", groupRoutes(db))
-app.use("/room", roomRoutes(io))
 app.use("/profile", profileRoutes(db))
 app.use("/rate", rateRoutes(db))
 

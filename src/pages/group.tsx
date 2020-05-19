@@ -1,58 +1,60 @@
-import React, { useState } from "react"
-import "react-toastify/dist/ReactToastify.css"
-import { toast } from "react-toastify"
-import { Link, navigate } from "gatsby"
-import styled from "styled-components"
-import { Button, Input } from "@material-ui/core"
+import React, { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { Link, navigate } from "gatsby";
+import styled from "styled-components";
+import { Button, Input } from "@material-ui/core";
 
 //components
-import GroupList from "../components/GroupList"
-import { PostsList, PostContainer } from "../components/PostsList"
-import { RoomCard, RoomContainer } from "../components/rooms"
-import Layout from "../components/layout"
-import Chat from "../components/Chat"
-import PostForm from "../components/PostForm"
-import Axios from "axios"
+import GroupList from "../components/GroupList";
+import { PostsList, PostContainer } from "../components/PostsList";
+import { RoomCard, RoomContainer } from "../components/rooms";
+import Layout from "../components/layout";
+import Chat from "../components/Chat";
+import PostForm from "../components/PostForm";
+import axios from "axios";
 
 //hooks
-import socketChat from "../components/hooks/socketChat"
-import useApplicationData from "../components/hooks/useApplicationData"
+import socketChat from "../components/hooks/socketChat";
+import useApplicationData from "../components/hooks/useApplicationData";
 
-toast.configure()
+toast.configure();
 
 const Main = styled.div`
   display: flex;
 
-  @media (max-width: 1011px) {
+  @media (max-width: 620px) {
     flex-direction: column;
+    // align-items: center;
   }
 
   @media (min-width: 1890px) {
-    justify-content: space-between;
+    // justify-content: space-between;
   }
-`
+`;
 
 const Div = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 const Form = styled.form`
   width: 80%;
-`
+`;
 
 const Section = styled.section`
   display: flex;
+  width: 50%;
   flex-direction: column;
-`
+`;
 
 const HideChat = styled.div`
   display: flex;
   flex-direction: row;
-  @media (max-width: 1880px) {
+  @media (max-width: 1000px) {
     display: none;
   }
-`
+`;
 
 const GroupPage = () => {
   //redirect if not logged in
@@ -90,33 +92,24 @@ const GroupPage = () => {
     })
   }
 
-  // console.log(state)
-
   const handlePost = (groupID :number) => {
     setGroup(groupID)
   }
 
-  /*
-  TO BE FIXED: WE NEED FIXED POSTLIST COMPONENT TO USE CONDITIONALS TO ACCOUNT FOR GROUPS WITH NO POSTS
-  FOR NOW I JUST MADE A POST <POST>EMPTY</POST> WHEN THERE IS NO POST 
-  */
-
-  const handleCreateGroup = event => {
+  const handleCreateGroup = (event :any) => {
     event.preventDefault()
     const userId = JSON.parse(localStorage.getItem("session") || "{}").id
-    // console.log("userId ", userId)
-    // console.log("groupName ", groupName)
-    Axios.post("http://localhost:3001/group/g/create", {
-      userId,
-      groupName,
-    })
-      .then(data => {
+
+    if(groupName !== "") {
+      axios.post("http://localhost:3001/group/g/create", {
+        userId,
+        groupName,
+      })
+      .then(() => {
         setGroupName("")
         fetchGroups()
       })
-      .catch(e => {
-        // console.log("already exist")
-        // console.log(e)
+      .catch(() => {
         toast(`Group name is already taken`, {
           position: "bottom-right",
           autoClose: 2500,
@@ -125,7 +118,8 @@ const GroupPage = () => {
           hideProgressBar: true,
         })
       })
-  }
+    }
+  };
 
   return (
     <Layout>
