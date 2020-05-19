@@ -7,25 +7,25 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.mode === 'dark' ? '#EEE' : '#111'}
   }
 
-  div {
-    background-color: ${props => props.theme.mode === 'dark' ? '#111' : '#EEE'};
-    color: ${props => props.theme.mode === 'dark' ? '#EEE' : '#111'}
-  }
+  // div {
+  //   background-color: ${props => props.theme.mode === 'dark' ? '#111' : '#EEE'};
+  //   color: ${props => props.theme.mode === 'dark' ? '#EEE' : '#111'}
+  // }
 
-  span {
-    // background-color: gray;
-    color: red;
-  }
+  // span {
+  //   // background-color: gray;
+  //   // color: red;
+  // }
 
-  p {
-    // background-color: gray;
-    // opacity: 70%;
-  }
+  // p {
+  //   // background-color: gray;
+  //   // opacity: 70%;
+  // }
 
-  input {
-    background-color: white;
-    color: white;
-  }
+  // input {
+  //   background-color: white;
+  //   color: white;
+  // }
   
 `;
 
