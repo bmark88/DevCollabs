@@ -22,8 +22,8 @@ const Main = styled.main`
 `;
 
 const TopicsContainer = styled.div`
-  background-color: black;
-  color: white;
+  // background-color: black;
+  // color: white;
   width: 43%;
   margin: 1em;
   height: 85%;
@@ -61,7 +61,7 @@ export default function IndexPage() {
         <Main>
           <UserCard/>
           <UserList users={usersList} />
-          <TopicsContainer>
+          <TopicsContainer className="dark">
             <TopicBoard subscriptions={subscriptions}/>
           </TopicsContainer>
           <Chat users={users} messages={messages} handleSubmit={handleSubmit} />

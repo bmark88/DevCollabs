@@ -22,8 +22,8 @@ const News = () => {
   const { news } = useApplicationData();
 
   return (
-    <Card variant="outlined">
-      <CardContent>
+    <Card variant="outlined" className="dark">
+      <CardContent className="dark">
       <Typography variant="h5" component="h2">
           News
       </Typography>
@@ -32,10 +32,10 @@ const News = () => {
         {news.map((article :any, index :number) => {
           return (
             
-            <ListItemLink key={index} href={article.url} id="dark">
+            <ListItemLink key={index} href={article.url} className="dark">
               {article.url && (
                   <>
-                  <ListItemText primary={article.title} secondary={article.created_at} className="dark2"/>
+                  <ListItemText primary={article.title} secondary={article.created_at} className="dark"/>
                   </>
                 )
               }

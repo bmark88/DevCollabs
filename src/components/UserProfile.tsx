@@ -1,12 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { List, ListSubheader } from "@material-ui/core"
+import { ListSubheader } from "@material-ui/core"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
-import { makeStyles } from "@material-ui/core/styles"
-import Card from "@material-ui/core/Card"
-import CardActions from "@material-ui/core/CardActions"
-import CardContent from "@material-ui/core/CardContent"
-import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography"
 import { Divider } from "@material-ui/core"
 import { RoomCard } from "../components/rooms"
@@ -55,20 +50,20 @@ const UserProfile = ({ postCount, subscriptions, userName }: Props) => {
       title={userName}
       image="https://hackernoon.com/hn-images/1*TYAzzTJ60x-qg5N81ElU9A.png"
     >
-      <div>
-        <Typography variant="h6" gutterBottom>
+      <div className="dark">
+        <Typography variant="h6" gutterBottom className="dark">
           Total Posts: {postCount}
         </Typography>
         <Divider />
         <ListSubheader></ListSubheader>
-        <ListTitle>{`Your Subbed Groups`}</ListTitle>
+        <ListTitle className="dark">{`Your Subbed Groups`}</ListTitle>
         <Ul>
           {subscriptions.map((group: any, index: number) => {
             return (
-              <Div key={index}>
+              <Div key={index} className="dark">
                 <b>{group.name}</b>
                 {group.is_admin && (
-                  <AdminBadge>
+                  <AdminBadge className="dark">
                     <AccountCircleIcon />
                     Admin
                   </AdminBadge>

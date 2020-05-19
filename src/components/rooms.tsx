@@ -63,12 +63,12 @@ const RoomCard = ({ children, image, title } :Props) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>  
+    <Card className={`${classes.root} ${"dark"}`}>  
         <CardMedia 
-          className={classes.media}
+          className={`${classes.media} ${"dark"}`}
           image={image}
         />
-        <CardContent>
+        <CardContent className="dark">
           <Typography gutterBottom align="center" variant="h5" component="h2" className={classes.font}>
             {title}
           </Typography>

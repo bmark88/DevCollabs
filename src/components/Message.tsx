@@ -20,6 +20,8 @@ const MessageContainer = styled.div`
   overflow: hidden;
   overflow-y: scroll;
   max-height: 543px;
+  // background-color: gray;
+  // z-index: 5;
 `;
 
 const Message = ({ children } :Props) => {
