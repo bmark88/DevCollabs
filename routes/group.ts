@@ -29,11 +29,11 @@ module.exports = db => {
   router.post("/:groupId/post/create", (req, res) => {
     //req.body should be JSON of { "userId" : id, "data": "string"}
     const { groupId } = req.params
-    const { userId, data } = req.body
+    const { userId, data, image_url } = req.body
     dbHelpers.getSubscriptionsWithUser(userId, groupId).then(subscription => {
       if (subscription) {
         dbHelpers
-          .createPost(groupId, userId, data)
+          .createPost(groupId, userId, data, image_url)
           .then(post => res.send(post))
           .catch(() => res.status(400).send("Could not create post"))
       } else {
