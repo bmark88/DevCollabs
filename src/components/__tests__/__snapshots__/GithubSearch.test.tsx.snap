@@ -1,0 +1,858 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GithubSearch properly search for a user 1`] = `
+<div
+  className="sc-AxjAm jhiTqR"
+>
+  <div
+    className="sc-AxirZ hZkZfM"
+  >
+    <div
+      className="user-list"
+    >
+      <div
+        className="sc-AxhCb gJAryh"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"
+          />
+        </svg>
+        <h3
+          style={
+            Object {
+              "marginLeft": 10,
+            }
+          }
+        >
+          Search By User
+        </h3>
+      </div>
+      <form
+        className="sc-AxiKw grJAoi"
+        onSubmit={[Function]}
+      >
+        <div
+          className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+        >
+          <label
+            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
+            data-shrink={false}
+            htmlFor="username-testfield"
+            id="username-testfield-label"
+          >
+            GitHub Username
+            <span
+              aria-hidden={true}
+              className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+            >
+               
+              *
+            </span>
+          </label>
+          <div
+            className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+            onClick={[Function]}
+          >
+            <input
+              aria-describedby="username-testfield-helper-text"
+              aria-invalid={false}
+              autoFocus={false}
+              className="MuiInputBase-input MuiOutlinedInput-input"
+              disabled={false}
+              id="username-testfield"
+              onAnimationStart={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              type="text"
+              value=""
+            />
+            <fieldset
+              aria-hidden={true}
+              className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                className="PrivateNotchedOutline-legendLabelled-77"
+              >
+                <span>
+                  GitHub Username
+                   *
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+          <p
+            className="MuiFormHelperText-root MuiFormHelperText-contained Mui-required"
+            id="username-testfield-helper-text"
+          >
+            Display individual username GitHub analytics
+          </p>
+        </div>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+          disabled={false}
+          onBlur={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="submit"
+          value="Search"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Search
+          </span>
+        </button>
+      </form>
+      <h5
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }
+      >
+        Filter by Minimum # of Repos
+      </h5>
+      <div>
+        <form
+          autoComplete="off"
+          className="sc-AxiKw grJAoi"
+          onSubmit={[Function]}
+        >
+          <div
+            className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined Mui-required Mui-required"
+              data-shrink={false}
+            >
+              Minimum Count
+              <span
+                aria-hidden={true}
+                className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+              >
+                 
+                *
+              </span>
+            </label>
+            <div
+              className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                disabled={false}
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={true}
+                type="text"
+                value=""
+              />
+              <fieldset
+                aria-hidden={true}
+                className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+              >
+                <legend
+                  className="PrivateNotchedOutline-legendLabelled-77"
+                >
+                  <span>
+                    Minimum Count
+                     *
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+            <p
+              className="MuiFormHelperText-root MuiFormHelperText-contained Mui-required MuiFormHelperText-marginDense"
+            >
+              Display list of usernames and repositories
+            </p>
+          </div>
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="submit"
+            value="Submit"
+          >
+            <span
+              className="MuiButton-label"
+            >
+              Search
+            </span>
+          </button>
+        </form>
+      </div>
+      <ul
+        className="MuiList-root makeStyles-root-1 MuiList-padding MuiList-subheader"
+      >
+        <li />
+        <li
+          className="makeStyles-listSection-2"
+        >
+          <ul
+            className="makeStyles-ul-3"
+          />
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    className="sc-AxirZ hZkZfM"
+  >
+    <div
+      className="repos-list"
+    >
+      <div
+        className="sc-AxhCb gJAryh"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"
+          />
+        </svg>
+        <h3
+          style={
+            Object {
+              "marginLeft": 10,
+            }
+          }
+        >
+          Search By Repository
+        </h3>
+      </div>
+      <form
+        autoComplete="off"
+        className="sc-AxiKw grJAoi"
+        onSubmit={[Function]}
+      >
+        <div
+          className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+        >
+          <label
+            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+            data-shrink={false}
+          >
+            Repository Name
+          </label>
+          <div
+            className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+            onClick={[Function]}
+          >
+            <input
+              aria-invalid={false}
+              autoFocus={false}
+              className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+              disabled={false}
+              onAnimationStart={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={false}
+              type="text"
+              value=""
+            />
+            <fieldset
+              aria-hidden={true}
+              className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                className="PrivateNotchedOutline-legendLabelled-77"
+              >
+                <span>
+                  Repository Name
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          className="sc-AxhUy jioWxF"
+        >
+          <h5
+            style={
+              Object {
+                "marginBottom": 5,
+              }
+            }
+          >
+            Additional Filters
+          </h5>
+          <div
+            className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+              data-shrink={false}
+            >
+              Topic
+            </label>
+            <div
+              className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                disabled={false}
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={false}
+                type="text"
+                value=""
+              />
+              <fieldset
+                aria-hidden={true}
+                className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+              >
+                <legend
+                  className="PrivateNotchedOutline-legendLabelled-77"
+                >
+                  <span>
+                    Topic
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+          </div>
+          <div
+            className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+              data-shrink={false}
+            >
+              Programming Language
+            </label>
+            <div
+              className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                disabled={false}
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={false}
+                type="text"
+                value=""
+              />
+              <fieldset
+                aria-hidden={true}
+                className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+              >
+                <legend
+                  className="PrivateNotchedOutline-legendLabelled-77"
+                >
+                  <span>
+                    Programming Language
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+          </div>
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onSubmit={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="submit"
+            value="Submit"
+          >
+            <span
+              className="MuiButton-label"
+            >
+              Search
+            </span>
+          </button>
+        </div>
+      </form>
+      <ul
+        className="MuiList-root makeStyles-root-1 MuiList-padding MuiList-subheader"
+      >
+        <li />
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`GithubSearch renders correctly 1`] = `
+<div
+  className="sc-AxjAm jhiTqR"
+>
+  <div
+    className="sc-AxirZ hZkZfM"
+  >
+    <div
+      className="user-list"
+    >
+      <div
+        className="sc-AxhCb gJAryh"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"
+          />
+        </svg>
+        <h3
+          style={
+            Object {
+              "marginLeft": 10,
+            }
+          }
+        >
+          Search By User
+        </h3>
+      </div>
+      <form
+        className="sc-AxiKw grJAoi"
+        onSubmit={[Function]}
+      >
+        <div
+          className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+        >
+          <label
+            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined Mui-required Mui-required"
+            data-shrink={false}
+          >
+            GitHub Username
+            <span
+              aria-hidden={true}
+              className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+            >
+               
+              *
+            </span>
+          </label>
+          <div
+            className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl"
+            onClick={[Function]}
+          >
+            <input
+              aria-invalid={false}
+              autoFocus={false}
+              className="MuiInputBase-input MuiOutlinedInput-input"
+              disabled={false}
+              onAnimationStart={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={true}
+              type="text"
+              value=""
+            />
+            <fieldset
+              aria-hidden={true}
+              className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                className="PrivateNotchedOutline-legendLabelled-77"
+              >
+                <span>
+                  GitHub Username
+                   *
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+          <p
+            className="MuiFormHelperText-root MuiFormHelperText-contained Mui-required"
+          >
+            Display individual username GitHub analytics
+          </p>
+        </div>
+        <button
+          className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+          disabled={false}
+          onBlur={[Function]}
+          onDragLeave={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex={0}
+          type="submit"
+          value="Search"
+        >
+          <span
+            className="MuiButton-label"
+          >
+            Search
+          </span>
+        </button>
+      </form>
+      <h5
+        style={
+          Object {
+            "marginBottom": 5,
+          }
+        }
+      >
+        Filter by Minimum # of Repos
+      </h5>
+      <div>
+        <form
+          autoComplete="off"
+          className="sc-AxiKw grJAoi"
+          onSubmit={[Function]}
+        >
+          <div
+            className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined Mui-required Mui-required"
+              data-shrink={false}
+            >
+              Minimum Count
+              <span
+                aria-hidden={true}
+                className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+              >
+                 
+                *
+              </span>
+            </label>
+            <div
+              className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                disabled={false}
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={true}
+                type="text"
+                value=""
+              />
+              <fieldset
+                aria-hidden={true}
+                className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+              >
+                <legend
+                  className="PrivateNotchedOutline-legendLabelled-77"
+                >
+                  <span>
+                    Minimum Count
+                     *
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+            <p
+              className="MuiFormHelperText-root MuiFormHelperText-contained Mui-required MuiFormHelperText-marginDense"
+            >
+              Display list of usernames and repositories
+            </p>
+          </div>
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="submit"
+            value="Submit"
+          >
+            <span
+              className="MuiButton-label"
+            >
+              Search
+            </span>
+          </button>
+        </form>
+      </div>
+      <ul
+        className="MuiList-root makeStyles-root-1 MuiList-padding MuiList-subheader"
+      >
+        <li />
+        <li
+          className="makeStyles-listSection-2"
+        >
+          <ul
+            className="makeStyles-ul-3"
+          />
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    className="sc-AxirZ hZkZfM"
+  >
+    <div
+      className="repos-list"
+    >
+      <div
+        className="sc-AxhCb gJAryh"
+      >
+        <svg
+          aria-hidden={true}
+          className="MuiSvgIcon-root"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"
+          />
+        </svg>
+        <h3
+          style={
+            Object {
+              "marginLeft": 10,
+            }
+          }
+        >
+          Search By Repository
+        </h3>
+      </div>
+      <form
+        autoComplete="off"
+        className="sc-AxiKw grJAoi"
+        onSubmit={[Function]}
+      >
+        <div
+          className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+        >
+          <label
+            className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+            data-shrink={false}
+          >
+            Repository Name
+          </label>
+          <div
+            className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+            onClick={[Function]}
+          >
+            <input
+              aria-invalid={false}
+              autoFocus={false}
+              className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+              disabled={false}
+              onAnimationStart={[Function]}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={false}
+              type="text"
+              value=""
+            />
+            <fieldset
+              aria-hidden={true}
+              className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+            >
+              <legend
+                className="PrivateNotchedOutline-legendLabelled-77"
+              >
+                <span>
+                  Repository Name
+                </span>
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+        <div
+          className="sc-AxhUy jioWxF"
+        >
+          <h5
+            style={
+              Object {
+                "marginBottom": 5,
+              }
+            }
+          >
+            Additional Filters
+          </h5>
+          <div
+            className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+              data-shrink={false}
+            >
+              Topic
+            </label>
+            <div
+              className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                disabled={false}
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={false}
+                type="text"
+                value=""
+              />
+              <fieldset
+                aria-hidden={true}
+                className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+              >
+                <legend
+                  className="PrivateNotchedOutline-legendLabelled-77"
+                >
+                  <span>
+                    Topic
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+          </div>
+          <div
+            className="MuiFormControl-root MuiTextField-root makeStyles-field-6"
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-marginDense MuiInputLabel-outlined"
+              data-shrink={false}
+            >
+              Programming Language
+            </label>
+            <div
+              className="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-formControl MuiInputBase-marginDense MuiOutlinedInput-marginDense"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense"
+                disabled={false}
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={false}
+                type="text"
+                value=""
+              />
+              <fieldset
+                aria-hidden={true}
+                className="PrivateNotchedOutline-root-75 MuiOutlinedInput-notchedOutline"
+              >
+                <legend
+                  className="PrivateNotchedOutline-legendLabelled-77"
+                >
+                  <span>
+                    Programming Language
+                  </span>
+                </legend>
+              </fieldset>
+            </div>
+          </div>
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+            disabled={false}
+            onBlur={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onSubmit={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            tabIndex={0}
+            type="submit"
+            value="Submit"
+          >
+            <span
+              className="MuiButton-label"
+            >
+              Search
+            </span>
+          </button>
+        </div>
+      </form>
+      <ul
+        className="MuiList-root makeStyles-root-1 MuiList-padding MuiList-subheader"
+      >
+        <li />
+      </ul>
+    </div>
+  </div>
+</div>
+`;

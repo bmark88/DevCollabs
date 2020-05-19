@@ -5,7 +5,7 @@ interface Props {
   setGroup: any
   name: string
   id: any
-};
+}
 
 const useStyles = makeStyles(() => ({
   groupButton: {
@@ -13,28 +13,29 @@ const useStyles = makeStyles(() => ({
     marginBottom: "0.5em",
     fontWeight: "bold",
     color: "#551A8B",
-    backgroundColor: '#FFF',
+    backgroundColor: "#FFF",
     "&:hover": {
       backgroundColor: "#C0C0C0",
       color: "#FFF",
       borderColor: "#551A8B",
       fontWeight: "bold",
-      borderWidth: '2px',
+      borderWidth: "2px",
     },
   },
-}));
+}))
 
-export default function GroupListItem({ id, name, setGroup } :Props) {
-  const classes = useStyles();
+export default function GroupListItem({ id, name, setGroup }: Props) {
+  const classes = useStyles()
 
   return (
-    <Button 
-      fullWidth 
+    <Button
+      key={id}
+      fullWidth
       className={classes.groupButton}
-      variant="outlined" 
+      variant="outlined"
       onClick={() => setGroup(id)}
     >
       {name}
     </Button>
   )
-};
+}

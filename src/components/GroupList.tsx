@@ -4,7 +4,7 @@ import GroupListItem from "./GroupListItem"
 
 interface Props {
   groups: any
-  group: any
+  // group: any
   setGroup: any
 }
 

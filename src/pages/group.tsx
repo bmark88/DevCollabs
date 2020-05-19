@@ -69,7 +69,7 @@ const GroupPage = () => {
   const { group, groups, posts } = state
   const [roomID, setRoomID] = useState("")
   const [groupName, setGroupName] = useState("")
-
+console.log(state)
   const createRoomAndNotify = (evt: any) => {
    
     evt.preventDefault()
