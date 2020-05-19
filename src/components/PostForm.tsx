@@ -15,6 +15,10 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     display: 'flex',
     flexDirection:'column',
+    ['@media (max-width:620px)']: {
+      // position: 'absolute',
+      width: '75vw',
+    },
   },
   submit: {
     maxWidth: "310px",

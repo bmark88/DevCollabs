@@ -23,8 +23,9 @@ toast.configure();
 const Main = styled.div`
   display: flex;
 
-  @media (max-width: 400px) {
+  @media (max-width: 620px) {
     flex-direction: column;
+    // align-items: center;
   }
 
   @media (min-width: 1890px) {
@@ -50,9 +51,9 @@ const Section = styled.section`
 const HideChat = styled.div`
   display: flex;
   flex-direction: row;
-  // @media (max-width: 1880px) {
-  //   display: none;
-  // }
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 const GroupPage = () => {

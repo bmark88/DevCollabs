@@ -7,9 +7,16 @@ interface Props {
 }
 
 const PostContainer = styled.div`
-  @media (max-width: 1880px) {
-    width: 80%;
-    margin: 0 auto;
+  // @media (max-width: 1880px) {
+  //   width: 80%;
+  //   margin: 0 auto;
+  // }
+
+  @media (max-width:620px) {
+    // position: 'absolute';
+    width: '80%';
+    margin-left: 2em;
+    min-width: 80vw;
   }
 `;
 

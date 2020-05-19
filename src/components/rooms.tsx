@@ -40,6 +40,11 @@ const RoomContainer = styled.div`
   display: flex;
   justify-content: center;
   min-width: 330px;
+
+  @media (max-width: 620px) {
+    margin: 0;
+    padding: 0;
+  }
   
   @media (max-width: 1880px) {
     flex-wrap: wrap;
