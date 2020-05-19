@@ -86,6 +86,7 @@ export default function RegisterForm() {
             fullWidth
             id="username"
             label="Username"
+            inputProps={{ "data-testid": "username-input" }}
             autoFocus
             value={username}
             onChange={event => setUsername(event.target.value)}
@@ -97,6 +98,7 @@ export default function RegisterForm() {
             fullWidth
             id="email"
             label="Email"
+            inputProps={{ "data-testid": "email-input" }}
             autoFocus
             value={email}
             onChange={event => setEmail(event.target.value)}
@@ -107,6 +109,7 @@ export default function RegisterForm() {
             required
             fullWidth
             label="Password"
+            inputProps={{ "data-testid": "password-input" }}
             type={showPassword ? "text" : "password"}
             id="password"
             value={password}
@@ -131,6 +134,7 @@ export default function RegisterForm() {
             fullWidth
             id="avatar"
             label="Avatar"
+            inputProps={{ "data-testid": "avatar-input" }}
             autoFocus
             value={avatar}
             onChange={event => setAvatar(event.target.value)}
@@ -141,6 +145,7 @@ export default function RegisterForm() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            data-testid="sign-up"
           >
             Sign Up
           </Button>
