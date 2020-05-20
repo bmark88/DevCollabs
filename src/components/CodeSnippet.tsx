@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react"
+import React, { useState } from "react"
 import AceEditor from "react-ace";
 import styled from "styled-components";
 import FileCopyIcon from '@material-ui/icons/FileCopy';
