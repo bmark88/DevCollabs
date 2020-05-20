@@ -25,7 +25,7 @@ const Layout = ({ children }: Props) => {
 
   const ThemeButton = styled(Brightness3Icon)`
     position: fixed;
-    z-index: 5;
+    z-index: 500;
     top: 8px;
     left: 0;
   `;
