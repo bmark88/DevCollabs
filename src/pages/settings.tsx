@@ -7,7 +7,7 @@ import Layout from '../components/Layout'
 
 
 const RegisterPage = () => {
-   if(!localStorage.getItem('session')) {
+   if(typeof window !== 'undefined' && !window.localStorage.getItem('session')) {
       navigate('/login')
       return null;
     }

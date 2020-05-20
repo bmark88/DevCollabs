@@ -11,8 +11,8 @@ const ProfilePage = () => {
     fetchUserPosts, 
     fetchUserSubscriptions 
   } = useApplicationData();
-  const userID = JSON.parse(localStorage.getItem('session') || '{}').id
-  const userName = JSON.parse(localStorage.getItem('session') || '{}').username
+  const userID = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem('session') || '{}').id
+  const userName = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem('session') || '{}').username
 
   useEffect(() => {
     fetchUserPosts(userID)

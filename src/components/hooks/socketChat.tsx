@@ -17,9 +17,9 @@ export default function socketChat(roomId: string) {
 
   const conn = socketIOClient(ENDPOINT)
   useEffect(() => {
-    if (localStorage.getItem("session")) {
+    if (typeof window !== 'undefined' && window.localStorage.getItem("session")) {
       const userName: string = JSON.parse(
-        localStorage.getItem("session") || "{}"
+        typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}"
       ).username
       setUser(userName)
 
@@ -41,9 +41,9 @@ export default function socketChat(roomId: string) {
     }
 
     return () => {
-      if (localStorage.getItem("session")) {
+      if (typeof window !== 'undefined' && window.localStorage.getItem("session")) {
         const userName: string = JSON.parse(
-          localStorage.getItem("session") || "{}"
+          typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}"
         ).username
 
         conn.emit("leaveRoom", { userName, roomId })

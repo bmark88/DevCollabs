@@ -24,7 +24,7 @@ const LiveHTML = styled.div`
 `;
 
 const RoomPage = ({location} :any) => {
-  const RoomName = location.state.roomID
+  const RoomName = location.state? location.state.roomID : undefined
   const { users, messages, handleSubmit, websocketIDE, conn } = socketChat(RoomName)
   
   const welcomeHTML = `<h1>Welcome Devs!</h1>
@@ -45,7 +45,7 @@ const RoomPage = ({location} :any) => {
   `;
   const [snippetValue, setSnippetValue] = useState(welcomeHTML)
 
-  if (!localStorage.getItem("session")) {
+  if (typeof window !== 'undefined' && !window.localStorage.getItem("session")) {
     navigate("/login")
     return null
   }

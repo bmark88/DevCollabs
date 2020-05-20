@@ -63,7 +63,7 @@ const ListDiv = styled.div`
 
 export default function TopicBoard({ subscriptions }: Props) {
 
-  const username = JSON.parse(localStorage.getItem("session") || "{}").username.toString()
+  const username = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}").username
   const [expanded, setExpanded] = useState("panel1")
   const handleChange = (panel: any) => (newExpanded: any) => {
     setExpanded(newExpanded ? panel : false)

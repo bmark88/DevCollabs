@@ -1,24 +1,36 @@
 import React, { ReactNode, useEffect, useState } from "react"
-import AceEditor from "react-ace";
+
 import styled from "styled-components";
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import copy from 'copy-to-clipboard';
 
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-twilight";
 
 import { toast } from "react-toastify";
 
 toast.configure();
 
 const ClipBoard = styled.div`
-  bottom: 50px;
+  bottom: 50px; 
   left: 11em;
   position: absolute;
 `;
 
+const AceEditor = (props:any) => {
+  if (typeof window !== 'undefined') {
+    const Ace = require('react-ace').default;
+    require('ace-builds/src-noconflict/mode-javascript');
+    require('ace-builds/src-noconflict/theme-twilight');
+
+    return <Ace {...props}/>
+  }
+
+  return null;
+}
+
+
 const CodeSnippet = (props : any) => {
   const [snippetValue, setSnippetValue] = useState("")
+
 
   function onChange(newValue :string) {
     setSnippetValue(newValue)

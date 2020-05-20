@@ -6,7 +6,7 @@ import axios from "axios"
 function GroupTestElement(props) {
 
    const { name, id } = props.group
-   const userId = JSON.parse(localStorage.getItem("session") || "{}")
+   const userId = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}")
    .id
    const [sub, setSub] = useState(false)
    const [disable, setDisable] = useState(false)

@@ -60,7 +60,7 @@ export default function LoginForm() {
       data: data,
     })
       .then(data => {
-        localStorage.setItem("session", JSON.stringify(data.data))
+        typeof window !== 'undefined' && window.localStorage.setItem("session", JSON.stringify(data.data))
         navigate("/")
       })
       .catch(() => setError(true))

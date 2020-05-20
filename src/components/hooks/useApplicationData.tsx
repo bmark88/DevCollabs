@@ -13,7 +13,7 @@ export default function useApplicationData() {
   const [news, setNews] = useState([]);
 
   //get a users id from session json data. returns {id:number}
-  const userId: number = JSON.parse(localStorage.getItem("session") || "{}").id
+  const userId: number = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}").id
 
   //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchGroups = () => {
