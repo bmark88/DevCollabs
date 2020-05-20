@@ -89,7 +89,7 @@ export default function Post({ user, children, created_at, image_url } :Props) {
           </IconButton>
         }
         title={user}
-        subheader={created_at}
+        subheader={`${new Date(created_at).toString().slice(3, 15)}, ${new Date(created_at).toString().slice(16, 25)}`}
       />
       {image_url && 
         <CardMedia
