@@ -37,6 +37,8 @@ const TopicsContainer = styled.div`
 `;
 
 const ResponsiveChat = styled.div`
+  display: flex;
+
   @media (max-width: 1200px) {
       position: absolute;
       right: 2em;
