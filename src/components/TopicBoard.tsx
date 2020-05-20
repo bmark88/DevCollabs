@@ -116,27 +116,6 @@ export default function TopicBoard({ subscriptions }: Props) {
           <IndexGroupList subscriptions={subscriptions}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-      <ExpansionPanel
-        style={{backgroundColor: "gray"}}
-        square
-        expanded={expanded === "panel3"}
-        onChange={handleChange("panel3")}
-      >
-        <ExpansionPanelSummary
-          aria-controls="panel3d-content"
-          id="panel3d-header"
-        >
-          <Typography>Random Post 3</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails className="dark">
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
     </>
   )
 }
