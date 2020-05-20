@@ -96,7 +96,7 @@ const User = styled.div`
 const UserMessage = styled.div`
   word-break: break-all;
 `
-const Chat = ({ users, messages, handleSubmit }: Props) => {
+const Chat = ({ messages, handleSubmit }: Props) => {
   const classes = useStyles()
   return (
     <Div className="dark">
