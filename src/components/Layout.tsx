@@ -30,6 +30,11 @@ const Layout = ({ children }: Props) => {
     left: 0;
   `;
 
+  const Footer = styled.footer`
+  position: absolute;
+  bottom: 0;
+`;
+
   return (
     <>
     <ThemeProvider theme={theme}>
@@ -44,12 +49,12 @@ const Layout = ({ children }: Props) => {
       <Navbar />
       <div style={{marginTop: `60px`}}>
         <main>{children}</main>
-        <footer>
+        <Footer>
           {new Date().getFullYear()}  
           {` `}
           <a href="https://github.com/bmark88/lhl-final/">DevCollab Open Source </a>   
            | Bradley Mark, Elizabeth Brown, Tomas Wen - Made with Love 🖤 
-        </footer>
+        </Footer>
       </div>
     </ThemeProvider>
     </>
