@@ -279,7 +279,7 @@ module.exports = db => {
       INSERT INTO posts 
       (group_id, user_id, data, image_url, created_at)
       VALUES
-      ($1 , $2, $3, $4, NOW())
+      ($1 , $2, $3, $4]
       RETURNING *;
       `,
         [group_id, user_id, data, image_url]
