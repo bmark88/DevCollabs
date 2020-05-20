@@ -34,6 +34,7 @@ describe("GroupList", () => {
     // const { getByLabelText, debug } = render(<GroupList />)
     // render(<GroupList/>)
     const group = queryByLabelText("Test Group 1")
+    expect(group).toBeDefined()
 
   })
 })
