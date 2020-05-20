@@ -175,7 +175,7 @@ const GroupPage = () => {
                   color="primary"
                   fullWidth
                 >
-                  Create
+                  Create/Join
                 </Button>
               </Form>
             </RoomCard>
