@@ -15,6 +15,7 @@ import {
   findByText,
   getByLabelText,
   getByTestId,
+  waitForElement
 } from "@testing-library/react"
 
 import GithubSearch from "../GithubSearch"
@@ -39,25 +40,35 @@ describe("GithubSearch", () => {
         getByTestId,
         findByTestId,
         getAllByText,
-        debug
+        debug,
+        waitForElement
       } = render(<GithubSearch />)
       // const tree = renderer.create(<GithubSearch />).toJSON()
       // console.log(tree)
       fireEvent.change(getByTestId("username-input"), {
         target: { value: "ej2brown" },
       })
-      // debug()
       expect(getByTestId("username-input")).toBeDefined()
 
-      await fireEvent.click(getByTestId("username-submit"))
-     expect(getByText("user ej2brown"))
-      debug()
+      const submitButton = getByTestId("username-submit");
+     
+      // act(() => {
+        fireEvent.click(submitButton)
+      // })
+
+      // const results = getByText("User ej2brown");
+
+      // await waitFor(() => expect(results).toBeDefined()
+      
+      const usernameResults = await waitFor(() => getByText("User ej2brown"))
+      
       // const input = screen.find("input")
       // screen.getByTestId(`username-input`)
       // getByLabelText("GitHub Username")
       // expect(queryByLabelText("GitHub Username")).toBeNull();
       // expect(username, { selector: { input: 'value'} })
-      // expect(getByText("ej2brown").toBeDefined())
+
+      expect(usernameResults).toBeDefined()
 
 
   })

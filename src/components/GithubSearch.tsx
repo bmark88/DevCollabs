@@ -238,14 +238,14 @@ export default function GithubSearch() {
                 value="Submit" 
                 variant="contained"
                 color="primary"
-                id="username-submit"
+                data-testid="users-list-submit"
               >
                 Search
               </Button>
             </FormFilter>
           </div>
           {/* \\\\\ -------------------- RESULTS ---------------------- /////*/}
-          <List className={`${classes.ul} ${"dark"}`} subheader={<li />}>
+          <List data-testid="username-results" className={`${classes.ul} ${"dark"}`} subheader={<li />}>
             <li key={`section-1`} className={`${classes.listSection} ${"dark"}`}>
               <ul className={`${classes.ul} dark`}>
                 {results.user.login && (
