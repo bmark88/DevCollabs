@@ -8,8 +8,8 @@ import { Button, Input } from "@material-ui/core";
 //components
 import GroupList from "../components/GroupList";
 import { PostsList, PostContainer } from "../components/PostsList";
-import { RoomCard, RoomContainer } from "../components/rooms";
-import Layout from "../components/layout";
+import { RoomCard, RoomContainer } from "../components/Rooms";
+import Layout from "../components/Layout";
 import Chat from "../components/Chat";
 import PostForm from "../components/PostForm";
 import axios from "axios";
@@ -25,11 +25,6 @@ const Main = styled.div`
 
   @media (max-width: 620px) {
     flex-direction: column;
-    // align-items: center;
-  }
-
-  @media (min-width: 1890px) {
-    // justify-content: space-between;
   }
 `;
 
@@ -51,6 +46,7 @@ const Section = styled.section`
 const HideChat = styled.div`
   display: flex;
   flex-direction: row;
+  
   @media (max-width: 1000px) {
     display: none;
   }
@@ -179,6 +175,7 @@ const GroupPage = () => {
                 <Link to="/room/" state={{roomID: 'setRoom1'}}> Room 1</Link>
                 <Link to="/room/" state={{roomID: 'setRoom2'}}> Room 2</Link>
                 <Link to="/room/" state={{roomID: 'setRoom3'}}> Room 3</Link>
+                <Link to="/room/" state={{roomID: 'setRoom4'}}> Room 4</Link>
               </Div>
             </RoomCard>
           </RoomContainer>

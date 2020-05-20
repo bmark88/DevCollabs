@@ -16,10 +16,8 @@ module.exports = db => {
         `,
         [email]
       )
-      .then(res => {
-        if (res.rows.length === 0) return null
-        return res.rows[0]
-      })
+      .then(res => res.rows[0] || null)
+      .catch(e => e.stack);
   }
   /**
    * Add a new user to the database.
@@ -173,7 +171,6 @@ module.exports = db => {
           [groupId, userId, true]
         )
         .then(res => {
-          // console.log('sub added', res.rows[0])
           return res.rows[0]
         })
         .catch(e => e)
@@ -212,7 +209,7 @@ module.exports = db => {
         [userID, groupID]
       )
       .then(res => res.rows[0])
-      .catch(e => console.error("error ===>", e.stack))
+      .catch(e => e.stack)
   }
 
   const changeUserInfo = user => {
@@ -233,7 +230,7 @@ module.exports = db => {
         ]
       )
       .then(res => res.rows[0])
-      .catch(e => console.error(e.stack))
+      .catch(e => e.stack)
   }
 
   /**
@@ -251,7 +248,7 @@ module.exports = db => {
         [group_id]
       )
       .then(res => res.rows[0])
-      .catch(e => console.error(e.stack))
+      .catch(e => e.stack)
   }
 
   /**
@@ -272,7 +269,7 @@ module.exports = db => {
         [user_id, group_id]
       )
       .then(res => res.rows[0])
-      .catch(e => console.error(e.stack))
+      .catch(e => e.stack)
   }
 
   const createPost = (group_id, user_id, data, image_url) => {
@@ -288,14 +285,11 @@ module.exports = db => {
         [group_id, user_id, data, image_url]
         // [group_id, user_id, data, image_url | null]
       )
-      .then(res => {
-        console.log('res.rows[0]', res.rows[0])
-        return res.rows[0]})
-      .catch(e => e)
+      .then(res => res.rows[0])
+      .catch(e => e.stack)
   }
 
   /**
-   * get all groups posts
    * @param {{integer}} groupId
    * @return {array<[group_id:interger, user_id:interger, data:string, created_at:time]>}
    */
@@ -342,11 +336,10 @@ module.exports = db => {
         [user_id, group_id]
       )
       .then(res => res.rows[0])
-      .catch(e => console.error(e.stack))
+      .catch(e => e.stack)
   }
 
   const checkUserSubscription = function (user_id, group_id) {
-    // console.log("3 - checking db ")
     return db
       .query(
         `
@@ -357,13 +350,12 @@ module.exports = db => {
         [user_id, group_id]
       )
       .then(res => {
-        // console.log('4 - result from db and length: ', res.rows, res.rows.length)
         if (res.rows.length === 0) {
           return false
         }
         return true
       })
-      .catch(e => console.log(e))
+      .catch(e => e.stack)
   }
 
   const getUserPostsCount = (user_id) => {
@@ -374,7 +366,7 @@ module.exports = db => {
       `,
       [user_id])
       .then(res => res.rows[0])
-      .catch(e => console.error('error!!', e.stack));
+      .catch(e => e.stack);
   };
 
   const getAllUserSubscriptions = (user_id) => {
@@ -386,7 +378,7 @@ module.exports = db => {
       `,
       [user_id])
       .then(res => res.rows)
-      .catch(e => console.error('error!!', e.stack));
+      .catch(e => e.stack);
   };
 
   const getAllUsers = () => {
@@ -396,7 +388,7 @@ module.exports = db => {
         FROM users;
       `)
       .then(res => res.rows)
-      .catch(e => console.error('error!!', e.stack));
+      .catch(e => e.stack);
   };
 
   const getUserRating = (userID) => {

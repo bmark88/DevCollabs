@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    // backgroundColor: 'white',
+    padding: '1em',
+    color: 'black'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -71,8 +74,8 @@ export default function SettingsForm() {
     }
   }
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+    <Container component="main" maxWidth="xs" className="dark">
+      <div className={`${classes.paper} ${"dark"}`}>
         <Avatar className={classes.avatar}>
           <SettingsIcon />
         </Avatar>
@@ -131,7 +134,7 @@ export default function SettingsForm() {
             id="avatar-image"
             label="Avatar Image"
             placeholder="Avatar Link?"
-            // value={avatar}
+            value={avatar}
             onChange={event => setAvatar(event.target.value)}
           />
           <Button

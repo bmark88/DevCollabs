@@ -24,8 +24,8 @@ const Navbar = () => {
   if (session) username = session.username
 
   return (
-    <Navigation>
-      <NavbarLinks  username={username}/>
+    <Navigation className="dark">
+      <NavbarLinks  username={username} className="dark"/>
     </Navigation>
   )
 }

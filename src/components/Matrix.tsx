@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Canvas = styled.canvas`
   margin: 0;
+  top: 0;
   height: 100%;
   width: 100%;
   z-index: -1;
@@ -43,10 +44,6 @@ export default function MatrixPage() {
   setInterval(matrix, 100);
 }, 200)
 })
-  return (
-    <>
-    <Canvas id='canv' width={500} height={200}>hello</Canvas>
-    {/* <h1>Hello World</h1> */}
-    </>
-  )
+  
+  return <Canvas id='canv' width={500} height={200}>hello</Canvas>
 }

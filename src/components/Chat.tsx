@@ -16,9 +16,8 @@ interface Props {
 }
 
 const Div = styled.div`
-  border: solid;
-  border-radius: 10px;
-  border-color: #f0f0f0;
+  border: solid 1px gray;
+  border-radius: 5px;
   border-width: 2px;
   min-width: 400px;
   max-width: 600px;
@@ -26,6 +25,7 @@ const Div = styled.div`
   margin: 1em;
   opacity: 80%;
   max-height: 700px;
+  min-height: 72.5vh;
   @media (max-width: 1000px) {
     display: none;
   }
@@ -80,6 +80,7 @@ const ChatMessage = styled.div`
 
 const Message = styled.div`
   display: flex;
+  color: black;
   justify-content: space-between;
   margin: 5px 15px 5px 15px;
 `
@@ -98,7 +99,7 @@ const UserMessage = styled.div`
 const Chat = ({ users, messages, handleSubmit }: Props) => {
   const classes = useStyles()
   return (
-    <Div>
+    <Div className="dark">
       <UserList>
         <H4>ONLINE CHAT</H4>
         {/* {users.map((user: string, index: number) => (
@@ -122,6 +123,7 @@ const Chat = ({ users, messages, handleSubmit }: Props) => {
       </MessageContainer>
       <SubmitButton onSubmit={handleSubmit}>
         <MessageTextField
+          className="dark"
           type="text"
           name="message"
           variant="outlined"

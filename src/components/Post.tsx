@@ -77,8 +77,9 @@ export default function Post({ user, children, created_at, image_url } :Props) {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={`${classes.root} ${"dark"}`}>
       <CardHeader
+        className={"dark"}
         avatar={
           <Img src={"https://planetbotanix.com/wp-content/uploads/2017/08/Female-Avatar-1-300x300-300x300.jpg"} alt="avatar-image"/>
         }
@@ -100,12 +101,12 @@ export default function Post({ user, children, created_at, image_url } :Props) {
           onClick={handleClick}
         />
       }
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+      <CardContent className="dark">
+        <Typography variant="body2" color="textSecondary" component="p" className="dark">
           {children}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
+      <CardActions disableSpacing className="dark">
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
