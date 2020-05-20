@@ -1,6 +1,19 @@
 INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
+    ('tomas-wen', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'tomaswen@gmail.com', '/src/images/johnDoe.png');
+    INSERT INTO users
+    (username, password, email, avatar_image)
+VALUES
+    ('bradley-mark', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'bmark88@gmail.com', '/src/images/johnDoe.png');
+    INSERT INTO users
+    (username, password, email, avatar_image)
+VALUES
+    ('elizabeth-brown', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'elizabethjbrown78@gmail.com', '/src/images/johnDoe.png');
+
+INSERT INTO users
+    (username, password, email, avatar_image)
+VALUES
     ('aliceLand1', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'alice@hotmail.com', '/src/images/profile-hex.png');
 
 INSERT INTO users
@@ -26,57 +39,4 @@ VALUES
 INSERT INTO users
     (username, password, email, avatar_image)
 VALUES
-    ('zack6', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-
-    INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
-    ('zack7', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-
-
-INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
-    ('zack8', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-
-
-INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
-    ('zack9', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-
-
-
-INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
-    ('zack10', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-
-
-
-INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
-    ('zack11', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-
-INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
     ('zack12', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-    INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
-    ('zack13', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-    INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
-    ('zack14', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-    INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
-    ('zack15', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-    INSERT INTO users
-    (username, password, email, avatar_image)
-VALUES
-    ('zack16', '$2b$12$LB4EMjoNdb9pW1Y8UTcL5eR4ub7Teo..YQTGcdDeEMMulK/7.usNq', 'zack@hotmail.com', '/src/images/johnDoe.png');
-

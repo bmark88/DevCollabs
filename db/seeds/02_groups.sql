@@ -1,14 +1,14 @@
 INSERT INTO groups
   (name)
 VALUES
-  ('Group 1');
+  ('LHL Students');
 
 INSERT INTO groups
   (name)
 VALUES
-  ('Group 2');
+  ('Elite Coders');
   
 INSERT INTO groups
   (name)
 VALUES
-  ('Group 3');
+  ('Coding Help');
