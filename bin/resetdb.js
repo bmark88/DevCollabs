@@ -8,7 +8,7 @@ const Client = require('pg-native');
 
 // PG connection setup
 const connectionString = process.env.DATABASE_URL ||
-  `postgresql://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+  `postgres://teyeapineocncc:8830857906899fbf827a4838201122f97f7a933d0450c95ed56723a821838702@ec2-52-207-25-133.compute-1.amazonaws.com:5432/db1ujnl1tpkusa`;
 const client = new Client();
 
 // Loads the schema files from db/schema
