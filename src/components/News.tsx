@@ -8,6 +8,7 @@ import Divider from "@material-ui/core/Divider"
 import Card from "@material-ui/core/Card"
 import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography"
+import * as moment from "moment"
 
 interface Props {
   children: string
@@ -35,11 +36,7 @@ const News = () => {
                   <>
                     <ListItemText
                       primary={article.title}
-                      secondary={`${new Date(article.created_at)
-                        .toString()
-                        .slice(3, 15)}, ${new Date(article.created_at)
-                        .toString()
-                        .slice(16, 21)}`}
+                      secondary={moment(article.created_at).calendar()}
                       className="dark"
                     />
                   </>
