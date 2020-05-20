@@ -29,20 +29,20 @@ export default function UserListItem(props: any) {
 
   useEffect(() => {
     axios
-      .get(`https://dev-collabs-backend.herokuapp.com/rate/${user.id}`)
+      .get(`localhost:8000/rate/${user.id}`)
       .then(data => setValue(Number(data.data.avg)))
       .catch(e => console.log(e))
   }, [])
 
   const handleOnChange = (_event: any, newValue: any) => {
     axios
-      .post(`https://dev-collabs-backend.herokuapp.com/rate/${user.id}`, {
+      .post(`localhost:8000/rate/${user.id}`, {
         raterId: currentUserID,
         rating: newValue,
       })
       .then(() => {
         axios
-          .get(`https://dev-collabs-backend.herokuapp.com/rate/${user.id}`)
+          .get(`localhost:8000/rate/${user.id}`)
           .then(data => {
 
             setIsChecked(false)
