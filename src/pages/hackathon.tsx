@@ -122,7 +122,7 @@ export default function StickyHeadTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleChangePage = (newPage :any) => {
+  const handleChangePage = (event :any, newPage :any) => {
     setPage(newPage);
   };
 
