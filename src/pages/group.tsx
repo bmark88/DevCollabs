@@ -116,7 +116,7 @@ const GroupPage = () => {
     }
     else if (groupName !== "") {
       axios
-        .post("http://localhost:3001/group/g/create", {
+        .post("https://dev-collabs-backend.herokuapp.com/group/g/create", {
           userId,
           groupName,
         })
