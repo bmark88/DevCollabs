@@ -16,9 +16,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection:'column',
     ['@media (max-width:620px)']: {
-      // position: 'absolute',
       width: '75vw',
     },
+    padding: '1em',
+    borderRadius: '6px',
   },
   submit: {
     maxWidth: "310px",
@@ -42,7 +43,7 @@ export default function PostForm(props: any) {
     setError(false)
     event.preventDefault()
 
-    const groupId = props.group // <---------------- Change accordinly
+    const groupId = props.group
     const session = JSON.parse(localStorage.getItem("session") || "{}")
     const userId = session.id
     const data = { userId, data: postState.message, image_url: postState.image }
@@ -86,12 +87,13 @@ export default function PostForm(props: any) {
   }
 
   return (
-    <Container component="main">
-      <form className={classes.form} onSubmit={onSubmitFunction}>
-        <InputLabel htmlFor="create-post" className={classes.label}>
+    <Container component="main" className="dark">
+      <form className={`${classes.form} ${"dark"}`} onSubmit={onSubmitFunction}>
+        <InputLabel htmlFor="create-post" className={`${classes.label} ${"dark"}`}>
           CREATE POST
         </InputLabel>
         <OutlinedInput
+          className="dark"
           id="create-post"
           placeholder="What's up?"
           fullWidth

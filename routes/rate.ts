@@ -8,16 +8,15 @@ module.exports = db => {
     dbHelpers
       .getUserRating(ratedUserId)
       .then(data => {
-         console.log(data)
          res.send(data)
       })
-      .catch(e => console.error(e))
+      .catch(e => e.stack)
   })
 
   router.post("/:rated_id", (req, res) => {
     const ratedId = req.params.rated_id
     const { raterId, rating } = req.body
-    console.log(ratedId, raterId, rating)
+
     dbHelpers
       .checkRatingExist(ratedId, raterId)
       .then(data => {
@@ -28,22 +27,19 @@ module.exports = db => {
             .rateUser(ratedId, raterId, rating)
             .then(data => {
               res.send(data)
-              console.log("rating added")
             })
-            .catch(e => console.error(e))
+            .catch(e => e.stack)
         } else {
           //Change user rating if it does
           dbHelpers
             .updateRating(ratedId, raterId, rating)
             .then(data => {
               res.send(data)
-              console.log(data)
-              console.log("rating updated")
             })
-            .catch(e => console.error(e))
+            .catch(e => e.stack)
         }
       })
-      .catch(e => console.error(e))
+      .catch(e => e.stack)
   })
 
   return router

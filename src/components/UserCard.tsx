@@ -18,9 +18,11 @@ const UserCard = () => {
   }, [])
 
   return (
-    <>
-      <UserProfile userName={userName} postCount={postCount} subscriptions={subscriptions} />
-    </>
+      <UserProfile 
+        userName={userName} 
+        postCount={postCount} 
+        subscriptions={subscriptions}
+      />
   )
 };
 

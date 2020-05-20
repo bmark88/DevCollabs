@@ -14,6 +14,7 @@ interface Props {
 
 const useStyles = makeStyles({
   root: {
+    backgroundColor: '#EEE',
     maxWidth: 240,
     minWidth: 240,
     marginTop: 0,
@@ -56,6 +57,7 @@ const Div = styled.div`
   display: flex;
   justify-content: center;
   padding: 0.5em;
+  margin-bottom: -0.25em;
   font-size: 20px;
 `;
 
@@ -63,17 +65,17 @@ const RoomCard = ({ children, image, title } :Props) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>  
-        <CardMedia
-          className={classes.media}
+    <Card className={`${classes.root} ${"dark"}`}>  
+        <CardMedia 
+          className={`${classes.media} ${"dark"}`}
           image={image}
         />
-        <CardContent>
+        <CardContent className="dark">
           <Typography gutterBottom align="center" variant="h5" component="h2" className={classes.font}>
             {title}
           </Typography>
         </CardContent>
-        <Div className={classes.font}>
+        <Div className={`${classes.font} ${"dark"}`}>
           {children}
         </Div>
     </Card>

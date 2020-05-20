@@ -8,11 +8,9 @@ import axios from "axios"
 
 const useStyles = makeStyles({
   rate: {
-    right: "0px",
-    position: 'absolute',
-    ['@media (max-width:1200px)']: {
-      position: 'relative'
-    },
+    right: 0,
+    marginTop: "-10px",
+    marginBottom: 20,
   },
 })
 

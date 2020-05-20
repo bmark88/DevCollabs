@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { navigate } from "gatsby";
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,7 +11,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import styled from "styled-components"
 
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import GithubSearch from '../components/GithubSearch';
 
 const columns = [
@@ -112,15 +113,20 @@ const Section = styled.section`
   align-items: center;
 `;
 export default function StickyHeadTable() {
+  if (!localStorage.getItem("session")) {
+    navigate("/login")
+    return null
+  }
+
   const classes = useStyles();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (newPage :any) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event :any) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
@@ -128,9 +134,8 @@ export default function StickyHeadTable() {
   return (
     <Layout>
       <Section>
-        {/* <GithubSearch/> */}
         <StatsTable className={classes.root}>
-          <TableContainer className={classes.container}>
+          <TableContainer className={`${classes.container} ${"dark"}`}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
