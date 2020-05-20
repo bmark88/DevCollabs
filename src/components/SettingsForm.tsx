@@ -63,7 +63,7 @@ export default function SettingsForm() {
       }
       axios({
         method: "post",
-        url: "http://localhost:3001/settings",
+        url: "https://dev-collabs-backend.herokuapp.com/settings",
         data: data,
       })
         .then(res => res)

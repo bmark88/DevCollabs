@@ -122,7 +122,7 @@ export default function StickyHeadTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleChangePage = (newPage :any) => {
+  const handleChangePage = (event :any, newPage :any) => {
     setPage(newPage);
   };
 
@@ -134,17 +134,17 @@ export default function StickyHeadTable() {
   return (
     <Layout>
       <Section>
-        <StatsTable className={classes.root}>
+        <StatsTable className={`${classes.root} dark`}>
           <TableContainer className={`${classes.container} ${"dark"}`}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
-                <TableRow>
+                <TableRow className="dark">
                   {columns.map((column) => (
                     <TableCell
                       key={column.id}
                       align={column.align}
                       style={{ minWidth: column.minWidth }}
-                      className={classes.title}
+                      className={`${classes.title} dark`}
                     >
                       {column.label}
                     </TableCell>

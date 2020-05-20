@@ -32,6 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
     ul: {
       backgroundColor: "inherit",
       margin: 0,
+      marginTop: "-15px",
+      // position: "relative",
+      overflow: "auto",
+      maxHeight: 300,      
     },
     text: {
       margin: 0,
@@ -250,7 +254,7 @@ export default function GithubSearch() {
               <ul className={`${classes.ul} dark`}>
                 {results.user.login && (
                   <ListSubheader style={{padding:"12px"}}>
-                    <h2>{`User ${results.user.login}`}</h2>
+                    <h2 className="dark">{`User ${results.user.login}`}</h2>
                   </ListSubheader>
                 )}
 
@@ -285,7 +289,7 @@ export default function GithubSearch() {
                 {results.user.hireable && (
                   <ListItem key={`item-1-5`} className={classes.text}>
                     <ListItemText
-                      primary={`hireable: ${results.user.hireable}`}
+                      primary={`Hireable: ${results.user.hireable}`}
                     />
                   </ListItem>
                 )}
