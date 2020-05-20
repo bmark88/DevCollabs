@@ -72,7 +72,7 @@ export default function PostForm(props: any) {
       checkData()?.then(() => {
         axios({
           method: "post",
-          url: `http://localhost:3001/group/${groupId}/post/create`,
+          url: `https://dev-collabs-backend.herokuapp.com/group/${groupId}/post/create`,
           data: data,
         })
           .then(() => {
