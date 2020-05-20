@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { User } from "../../helpers/interfaces"
-import { ThreeDRotationSharp } from "@material-ui/icons"
 
 export default function useApplicationData() {
   const [state, setState] = useState<User>({
@@ -30,62 +29,32 @@ export default function useApplicationData() {
              groups: response.data,
           })
         })
-        .catch(error => console.log(error))
+        .catch(error => error.stack)
       })
-      .catch(error => console.log(error))
+      .catch(error => error.stack)
   }
 
-  const fetchPosts = (groupId: number) => {
-    //gets all group posts. returns array<[id:number ,group_id:number, user_id:number, created_at:time]>
-    axios
-      .get(`http://localhost:3001/group/g/${groupId}`)
-      .then(response => {
-        setState({ ...state, posts: response.data })
-      })
-      .catch(error => console.log(error))
-  }
-  /*
-const fetchGroups = () => {
-    axios
-      .get(`http://localhost:3001/group/u/${userId}`)
-      .then(response => {
-        return { group: response.data[0].id, groups: response.data }
-      })
-      .then(group => {
-        //gets all group posts. returns array<[id:number ,group_id:number, user_id:number, created_at:time]>
-        axios
-          .get(`http://localhost:3001/group/g/${group.group}`)
-          .then(response => {
-            setState({ ...state, posts: response.data, ...group })
-          })
-          .catch(error => console.log(error))
-      })
-      .catch(error => console.log(error))
-  }
-*/
-
-  //TO DO: too wet
   const setGroup = (groupId: number) => {
     axios
       .get(`http://localhost:3001/group/g/${groupId}`)
       .then(response => {
         setState({ ...state, group: groupId, posts: response.data })
       })
-      .catch(error => console.log(error))
+      .catch(error => error.stack)
   }
 
   const fetchUserPosts = (userID :number) => {
     axios
       .get(`http://localhost:3001/profile/${userID}`)
       .then(response => setPostCount(response.data.totalPosts.count))
-      .catch(e => console.error('error!!', e.stack));
+      .catch(e => e.stack);
   };
 
   const fetchUserSubscriptions = (userID :number) => {
     axios
     .get(`http://localhost:3001/profile/${userID}`)
     .then(response => setSubscriptions(response.data.userSubscriptions))
-    .catch(e => console.error('error!!', e.stack));
+    .catch(e => e.stack);
   }
 
   const fetchNews = () => {
@@ -93,9 +62,8 @@ const fetchGroups = () => {
       .get('http://hn.algolia.com/api/v1/search?tags=front_page')
       .then(res => {
         setNews(res.data.hits)
-        // console.log('res.data ==>', res.data)
       })
-      .catch(e => console.error('error', e.stack))
+      .catch(e => e.stack)
   };
 
   useEffect(() => {

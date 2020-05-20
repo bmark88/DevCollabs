@@ -6,7 +6,6 @@ module.exports = db => {
   // get all groups that exist. returns {array<[id:interger, name:string]>}
   router.get("/public", (req, res) => {
     dbHelpers.getAllGroups().then(data => {
-      // console.log(data)
       res.send(data)
     })
   })
@@ -59,22 +58,17 @@ module.exports = db => {
   router.get("/:group_id/:user_id", (req, res) => {
     const userId = req.params.user_id
     const groupId = req.params.group_id
-    // console.log(userId)
-    // console.log(groupId)
+
     dbHelpers.checkUserSubscription(userId, groupId).then(isSubbed => {
-      // console.log(isSubbed)
       res.send(isSubbed)
     })
   })
 
   router.delete("/delete/:group_id", (req, res) => {
-    // console.log(req.body)
-    // console.log(req.params)
     const userId = req.body.id
     const groupId = req.params.group_id
 
     dbHelpers.getSubscriptionsWithUser(userId, groupId).then(subscription => {
-      console.log("2-subscription", subscription)
       if (subscription) {
         if (subscription.is_admin === true) {
           dbHelpers
@@ -82,10 +76,10 @@ module.exports = db => {
             .then(data => {
               res.send(data)
             })
-            .catch(e => console.error(e))
+            .catch(e => e.stack)
         }
       } else { res.status(400).send(null) }
-    }).catch(e => console.error(e))
+    }).catch(e => e.stack)
   })
 
   router.delete("/:group_id/leave", (req, res) => {
@@ -96,60 +90,44 @@ module.exports = db => {
   })
 
   router.post("/subscription/:groupId", (req, res) => {
-    // console.log("1 - POST subscription")
-
     const userId = req.body.userId
     const groupId = req.params.groupId
-    // console.log("2 - for user and group : ", userId, groupId)
-    // console.log(typeof userId)
-    // console.log(typeof groupId)
-    dbHelpers.checkUserSubscription(userId, groupId).then(isUserSubscribed => {
-      // console.log(isUserSubscribed)
-      if (isUserSubscribed === true) {
-        return console.log("User is already subscibed!")
-      } else {
-        // console.log("5 - PASS  ~ POSTING")
 
+    dbHelpers.checkUserSubscription(userId, groupId).then(isUserSubscribed => {
+      if (!isUserSubscribed) {
         dbHelpers
           .addSubscription(groupId, userId, false)
           .then(result => {
             res.send(result)
-            // console.log("6 - result ", result)
           })
-          .catch(e => console.error(e))
+          .catch(e => e.stack)
       }
     })
   })
 
   router.delete("/subscription/delete/:groupId", (req, res) => {
-    // console.log("1 - DELETE subscription")
-
     const userId = req.body.userId
     const groupId = req.params.groupId
-    // console.log("2 - user and group : ", userId, groupId)
 
     dbHelpers.checkUserSubscription(userId, groupId).then(isUserSubscribed => {
-      // console.log(isUserSubscribed)
       if (isUserSubscribed === true) {
-        // console.log("5 - PASS  ~ DELETING")
         dbHelpers
           .deleteSubscription(userId, groupId)
           .then(data => res.send(data))
-          .catch(e => console.error(e))
+          .catch(e => e.stack)
       }
     })
   })
 
   router.post("/g/create", (req, res) => {
     const { userId, groupName } = req.body
-    console.log("userId ", userId)
-    console.log("groupName ", groupName)
+    
     dbHelpers
       .createGroupAndSubscription(userId, groupName)
       .then(data => {
         res.send(data)
       })
-      .catch(e => console.error(e))
+      .catch(e => e.stack)
   })
   return router
 }

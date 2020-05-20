@@ -24,7 +24,6 @@ const LiveHTML = styled.div`
 `;
 
 const RoomPage = ({location} :any) => {
-  
   const RoomName = location.state.roomID
   const { users, messages, handleSubmit, websocketIDE, conn } = socketChat(RoomName)
   
