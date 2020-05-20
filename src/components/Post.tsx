@@ -14,6 +14,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import styled from "styled-components"
+import * as moment from "moment"
 
 const Img = styled.img`
   width: 47px;
@@ -89,7 +90,7 @@ export default function Post({ user, children, created_at, image_url } :Props) {
           </IconButton>
         }
         title={user}
-        subheader={`${new Date(created_at).toString().slice(3, 15)}, ${new Date(created_at).toString().slice(16, 25)}`}
+        subheader={moment(created_at).calendar()}
       />
       {image_url && 
         <CardMedia
