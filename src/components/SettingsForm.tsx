@@ -134,7 +134,7 @@ export default function SettingsForm() {
             id="avatar-image"
             label="Avatar Image"
             placeholder="Avatar Link?"
-            // value={avatar}
+            value={avatar}
             onChange={event => setAvatar(event.target.value)}
           />
           <Button
