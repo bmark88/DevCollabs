@@ -9,6 +9,8 @@ interface Props {
 
 const UserContainer = styled.div`
   width: 100%;
+  display: flex;
+  justify-self: center;
   
   @media (max-width:1200px) {
     position: relative;
@@ -16,7 +18,7 @@ const UserContainer = styled.div`
 `;
 
 const Ul = styled.ul`
-  margin-left: 0;
+  margin-left: 35px;
   list-style: none;
   height: 400px;
   overflow: hidden;

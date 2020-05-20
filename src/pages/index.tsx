@@ -21,26 +21,31 @@ const Main = styled.main`
   display: flex;
 
   @media (max-width: 1200px) {
-    align-items: center;
     flex-direction: column;
   }
 `;
 
 const TopicsContainer = styled.div`
-  width: 30%;
   margin: 1em;
   height: 85%;
   flex: 1;
   min-width: 600px;
 
   @media (max-width: 1000px) {
-    // width: 90%;
     margin: 1.4em;
   }
 `;
 
+const ResponsiveChat = styled.div`
+  @media (max-width: 1200px) {
+      position: absolute;
+      right: 2em;
+    }
+`;
+
 const UsersContainer = styled.div`
   display: flex;
+  margin: 1em 0;
 `;
 
 export default function IndexPage() {
@@ -75,7 +80,13 @@ export default function IndexPage() {
           <TopicsContainer className="dark">
             <TopicBoard subscriptions={subscriptions}/>
           </TopicsContainer>
-          <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
+          <ResponsiveChat>
+            <Chat 
+              users={users} 
+              messages={messages} 
+              handleSubmit={handleSubmit} 
+            />
+          </ResponsiveChat>
         </Main>
         <News />
       </Layout>
