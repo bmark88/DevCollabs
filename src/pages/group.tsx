@@ -94,32 +94,23 @@ const GroupPage = () => {
   const handleCreateGroup = (event: any) => {
     event.preventDefault()
     const userId = JSON.parse(localStorage.getItem("session") || "{}").id
-
-    if(groupName !== "") {
-      axios.post("https://dev-collabs-backend.herokuapp.com/group/g/create", {
-        userId,
-        groupName,
+    if (groupName.length > 15) {
+      toast(`Group name is too long`, {
+        position: "bottom-right",
+        autoClose: 2500,
+        closeOnClick: false,
+        pauseOnHover: false,
+        hideProgressBar: true,
       })
-      .then(() => {
-        setGroupName("")
-        fetchGroups()
-      })
-    }
-    // if (groupName.length > 15) {
-    //   toast(`Group name is too long`, {
-    //     position: "bottom-right",
-    //     autoClose: 2500,
-    //     closeOnClick: false,
-    //     pauseOnHover: false,
-    //     hideProgressBar: true,
-    else if (groupName !== "") {
+    } else if (groupName !== "") {
       axios
-        .post("http://localhost:3001/group/g/create", {
+        .post("https://dev-collabs-backend.herokuapp.com/group/g/create", {
           userId,
           groupName,
         })
         .then(() => {
           setGroupName("")
+          setCounter(15)
           fetchGroups()
         })
         .catch(() => {
