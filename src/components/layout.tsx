@@ -44,6 +44,12 @@ const Layout = ({ children }: Props) => {
       <Navbar />
       <div style={{marginTop: `60px`}}>
         <main>{children}</main>
+        <footer>
+          {new Date().getFullYear()}  
+          {` `}
+          <a href="https://github.com/bmark88/lhl-final/">DevCollab Open Source </a>   
+           | Bradley Mark, Elizabeth Brown, Tomas Wen - Made with Love 🖤 
+        </footer>
       </div>
     </ThemeProvider>
     </>
