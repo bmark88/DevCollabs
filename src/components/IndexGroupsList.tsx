@@ -162,6 +162,7 @@ const ListDiv = styled.div`
   overflow: hidden;
   overflow-y: scroll;
 `
+
 export default function IndexGroupList({ subscriptions }: Props) {
   const [allGroups, setAllGroups] = useState([])
 

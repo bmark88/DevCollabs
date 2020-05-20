@@ -48,6 +48,7 @@ const ResponsiveChat = styled.div`
 const UsersContainer = styled.div`
   display: flex;
   margin: 1em 0;
+  max-height: 650px;
 
   @media (max-width: 1000px) {
     justify-content: center;
