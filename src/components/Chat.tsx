@@ -98,8 +98,6 @@ const UserMessage = styled.div`
 `
 const Chat = ({ users, messages, handleSubmit }: Props) => {
   const classes = useStyles()
-  console.log(users)
-  console.log(messages)
   return (
     <Div className="dark">
       <UserList>

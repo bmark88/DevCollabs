@@ -1,6 +1,5 @@
 import React from "react"
 import renderer from "react-test-renderer"
-// import { render } from "@types/testing-library__react"
 
 import { render, cleanup } from "@testing-library/react"
 
