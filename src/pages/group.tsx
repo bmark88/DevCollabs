@@ -102,19 +102,7 @@ const GroupPage = () => {
         pauseOnHover: false,
         hideProgressBar: true,
       })
-    }
-    else if(groupName !== "") {
-      axios.post("https://dev-collabs-backend.herokuapp.com/group/g/create", {
-        userId,
-        groupName,
-      })
-      .then(() => {
-        setGroupName("")
-        setCounter(15)
-        fetchGroups()
-      })
-    }
-    else if (groupName !== "") {
+    } else if (groupName !== "") {
       axios
         .post("https://dev-collabs-backend.herokuapp.com/group/g/create", {
           userId,
@@ -122,6 +110,7 @@ const GroupPage = () => {
         })
         .then(() => {
           setGroupName("")
+          setCounter(15)
           fetchGroups()
         })
         .catch(() => {
