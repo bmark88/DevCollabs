@@ -70,7 +70,7 @@ const GroupPage = () => {
     evt.preventDefault()
     const username = JSON.parse(
       typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}"
-    ).username.toString()
+    ).username
     // After room is created, clear state and reset to empty string
     evt.target.querySelector("input").value = ""
     setRoomID(evt.target.querySelector("input").value.trim().toLowerCase())
