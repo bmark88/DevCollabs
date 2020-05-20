@@ -1,52 +1,56 @@
-import React from "react";
+import React from "react"
 import useApplicationData from "./hooks/useApplicationData"
-import List from '@material-ui/core/List';
-import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-
+import List from "@material-ui/core/List"
+import ListItem, { ListItemProps } from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
+import Divider from "@material-ui/core/Divider"
+import Card from "@material-ui/core/Card"
+import CardContent from "@material-ui/core/CardContent"
+import Typography from "@material-ui/core/Typography"
 
 interface Props {
-  children :string
-};
+  children: string
+}
 
-function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
-  return <ListItem button component="a" {...props} />;
+function ListItemLink(props: ListItemProps<"a", { button?: true }>) {
+  return <ListItem button component="a" {...props} />
 }
 
 const News = () => {
-  const { news } = useApplicationData();
+  const { news } = useApplicationData()
 
   return (
     <Card variant="outlined" className="dark">
       <CardContent className="dark">
-      <Typography variant="h5" component="h2">
+        <Typography variant="h5" component="h2">
           News
-      </Typography>
-      <Divider />
-      <List>
-        {news.map((article :any, index :number) => {
-          return (
-            
-            <ListItemLink key={index} href={article.url} className="dark">
-              {article.url && (
+        </Typography>
+        <Divider />
+        <List>
+          {news.map((article: any, index: number) => {
+            return (
+              <ListItemLink key={index} href={article.url} className="dark">
+                {article.url && (
                   <>
-                  <ListItemText primary={article.title} secondary={article.created_at} className="dark"/>
+                    <ListItemText
+                      primary={article.title}
+                      secondary={`${new Date(article.created_at)
+                        .toString()
+                        .slice(3, 15)}, ${new Date(article.created_at)
+                        .toString()
+                        .slice(16, 25)}`}
+                      className="dark"
+                    />
                   </>
-                )
-              }
-            </ListItemLink>
-            
-          )
-        })}
-      </List>
+                )}
+              </ListItemLink>
+            )
+          })}
+        </List>
       </CardContent>
     </Card>
-  );
-};
+  )
+}
 
-export default News;
+export default News

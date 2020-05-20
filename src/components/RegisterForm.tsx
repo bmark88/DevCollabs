@@ -59,7 +59,7 @@ export default function RegisterForm() {
     }
     axios({
       method: "post",
-      url: "http://localhost:3001/register",
+      url: "https://dev-collabs-backend.herokuapp.com/register",
       data: data,
     })
       .then(res => {

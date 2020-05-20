@@ -56,7 +56,7 @@ export default function LoginForm() {
     }
     axios({
       method: "post",
-      url: "http://localhost:3001/login",
+      url: "https://dev-collabs-backend.herokuapp.com/login",
       data: data,
     })
       .then(data => {
