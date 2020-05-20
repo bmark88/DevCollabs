@@ -12,8 +12,8 @@ import { toast } from "react-toastify";
 toast.configure();
 
 const ClipBoard = styled.div`
-  bottom: 0;
-  left: 11.5em;
+  bottom: 50px;
+  left: 11em;
   position: absolute;
 `;
 
@@ -47,7 +47,7 @@ const CodeSnippet = (props : any) => {
         fontSize="16px"
         mode="javascript"
         theme="twilight"
-        height="84.7vh"
+        height="80vh"
         width="520px"
         value={props.snippetValue}
         onChange={onChange}
