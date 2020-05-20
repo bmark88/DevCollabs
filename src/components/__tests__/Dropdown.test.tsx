@@ -16,7 +16,19 @@ describe("Dropdown", () => {
     expect(tree).toMatchSnapshot()
   })
 
-  xit("shows feature when page is loaded", async () => {})
+  xit("shows feature when page is loaded", async () => {
+    const {
+      queryByLabelText,
+      getByLabelText,
+      getByText,
+      getByTestId,
+      findByTestId,
+    } = render(<Dropdown />)
+
+    // waitFor = await getByText('features')
+          // fireEvent.click(getByText('features'))
+
+  })
 
   xit("shows pages when clicked", async () => {})
 

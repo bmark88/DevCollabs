@@ -30,19 +30,6 @@ describe("CodeSnippet", () => {
   })
 
 
-xit("Username displays when someone has entered ", async () => {
-
-})
-
-
-xit("the value changes in the IDE", async () => {
-
-})
-
-
-xit("The CAD changes according ", async () => {
-
-})
 
 
 })

@@ -206,12 +206,14 @@ export default function GithubSearch() {
               variant="outlined"
               onChange={event => setUsername(event.target.value)}
               helperText="Display individual username GitHub analytics"
+              inputProps={{ "data-testid": "username-input" }}
             />
             <Button 
               type="submit" 
               value="Search" 
               variant="contained"
               color="primary"
+              data-testid="username-submit"
             >
               Search
             </Button>
@@ -236,6 +238,7 @@ export default function GithubSearch() {
                 value="Submit" 
                 variant="contained"
                 color="primary"
+                id="username-submit"
               >
                 Search
               </Button>

@@ -12,7 +12,7 @@ import Chat from "../components/Chat";
 import Navbar from "../components/Navbar";
 import TopicBoard from "../components/TopicBoard";
 import News from "../components/News";
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import UserCard from "../components/UserCard";
 import UserList from "../components/UserList";
 
