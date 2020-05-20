@@ -74,7 +74,7 @@ const GroupPage = () => {
     ).username.toString()
     // After room is created, clear state and reset to empty string
     evt.target.querySelector("input").value = ""
-    setRoomID(evt.target.querySelector("input").value)
+    setRoomID(evt.target.querySelector("input").value.trim().toLowerCase())
     
     setTimeout(()=> {
       navigate("/room", {state : {roomID}})
@@ -155,7 +155,7 @@ const GroupPage = () => {
                   placeholder="Room Name"
                   value={roomID}
                   disableUnderline
-                  onChange={evt => setRoomID(evt.target.value)}
+                  onChange={evt => setRoomID(evt.target.value.trim().toLowerCase())}
                 />
                 <Button
                   type="submit"
