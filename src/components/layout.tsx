@@ -38,9 +38,10 @@ const Layout = ({ children }: Props) => {
       >
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
+          {new Date().getFullYear()}  
           {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          <a href="https://github.com/bmark88/lhl-final/">DevCollab Open Source </a>   
+           | Bradley Mark, Elizabeth Brown, Tomas Wen - Made with Love 🖤 
         </footer>
       </div>
     </>
