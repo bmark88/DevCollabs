@@ -31,12 +31,11 @@ const Layout = ({ children }: Props) => {
   `;
 
   const Footer = styled.div`
-  position: absolute;
+  position: relative;
   bottom: 0;
 `;
 
   return (
-    <>
     <ThemeProvider theme={theme}>
     <ThemeButton 
       fontSize='large'
@@ -48,14 +47,13 @@ const Layout = ({ children }: Props) => {
     <DarkMode />
       <Navbar />
         <main style={{marginTop: `60px`}}>{children}</main>
-    </ThemeProvider>
-        <footer style={{position: 'absolute', bottom: '0'}}> 
+        <Footer > 
           {new Date().getFullYear()}  
           {` `}
           <a href="https://github.com/bmark88/lhl-final/">DevCollab Open Source </a>   
            | Bradley Mark, Elizabeth Brown, Tomas Wen - Made with Love 🖤 
-        </footer>
-    </>
+        </Footer>
+    </ThemeProvider>
   )
 }
 
