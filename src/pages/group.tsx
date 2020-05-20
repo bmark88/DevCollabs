@@ -110,6 +110,7 @@ const GroupPage = () => {
       })
       .then(() => {
         setGroupName("")
+        setCounter(15)
         fetchGroups()
       })
     }
