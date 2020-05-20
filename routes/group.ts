@@ -83,7 +83,7 @@ module.exports = db => {
   })
 
   router.delete("/:group_id/leave", (req, res) => {
-    const userID = JSON.parse(localStorage.getItem("session") || "{}").id
+    const userID = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}").id
     const groupID = req.params.group_id
 
     dbHelpers.removeSubscription(userID, groupID)

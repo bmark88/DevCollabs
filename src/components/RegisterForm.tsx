@@ -63,7 +63,7 @@ export default function RegisterForm() {
       data: data,
     })
       .then(res => {
-        localStorage.setItem("session", JSON.stringify(res.data))
+        typeof window !== 'undefined' && window.localStorage.setItem("session", JSON.stringify(res.data))
         navigate("/")
       })
       .catch(() => setError(true))

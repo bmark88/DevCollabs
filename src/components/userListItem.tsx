@@ -25,7 +25,7 @@ export default function UserListItem(props: any) {
   const index = props.index
   const user = props.user
   const classes = useStyles()
-  const currentUserID = JSON.parse(localStorage.getItem("session")).id
+  const currentUserID = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem("session")).id
 
   useEffect(() => {
     axios

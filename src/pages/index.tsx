@@ -64,12 +64,12 @@ export default function IndexPage() {
     fetchUserSubscriptions 
   } = useApplicationData();
   
-  if (!localStorage.getItem("session")) {
+  if (typeof window !== 'undefined' && !window.localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
 
-  const userID = JSON.parse(localStorage.getItem('session') || '{}').id;
+  const userID = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem('session') || '{}').id;
 
   useEffect(() => {
     fetchUserSubscriptions(userID)

@@ -32,7 +32,7 @@ const Img = styled.img`
 const NavbarLinks = (props: any) => {
   const logout = (event :any) =>  {
     event.preventDefault();
-    localStorage.removeItem('session');
+    typeof window !== 'undefined' && window.localStorage.removeItem('session');
     navigate("/login")
   }
   

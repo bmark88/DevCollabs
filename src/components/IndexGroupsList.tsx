@@ -55,7 +55,7 @@ const useStyles = makeStyles({
 function GroupTestElement(props: any) {
   const { name, id } = props.group
   const subscription = props.subscription
-  const userId = JSON.parse(localStorage.getItem("session") || "{}").id
+  const userId = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}").id
   const [sub, setSub] = useState(false)
   const [disable, setDisable] = useState(false)
   const classes = useStyles()

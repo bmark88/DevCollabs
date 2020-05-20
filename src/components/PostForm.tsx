@@ -44,7 +44,7 @@ export default function PostForm(props: any) {
     event.preventDefault()
 
     const groupId = props.group
-    const session = JSON.parse(localStorage.getItem("session") || "{}")
+    const session = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}")
     const userId = session.id
     const data = { userId, data: postState.message, image_url: postState.image }
 

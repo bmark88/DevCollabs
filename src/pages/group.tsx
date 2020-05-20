@@ -54,7 +54,7 @@ const HideChat = styled.div`
 
 const GroupPage = () => {
   //redirect if not logged in
-  if (!localStorage.getItem("session")) {
+  if (typeof window !== 'undefined' && !window.localStorage.getItem("session")) {
     navigate("/login")
     return null
   }
@@ -69,7 +69,7 @@ const GroupPage = () => {
   const createRoomAndNotify = (evt: any) => {
     evt.preventDefault()
     const username = JSON.parse(
-      localStorage.getItem("session") || "{}"
+      typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}"
     ).username.toString()
     // After room is created, clear state and reset to empty string
     evt.target.querySelector("input").value = ""
@@ -93,7 +93,7 @@ const GroupPage = () => {
 
   const handleCreateGroup = (event: any) => {
     event.preventDefault()
-    const userId = JSON.parse(localStorage.getItem("session") || "{}").id
+    const userId = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem("session") || "{}").id
     if (groupName.length > 15) {
       toast(`Group name is too long`, {
         position: "bottom-right",

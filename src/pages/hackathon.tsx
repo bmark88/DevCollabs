@@ -113,7 +113,7 @@ const Section = styled.section`
   align-items: center;
 `;
 export default function StickyHeadTable() {
-  if (!localStorage.getItem("session")) {
+  if (typeof window !== 'undefined' && !window.localStorage.getItem("session")) {
     navigate("/login")
     return null
   }

@@ -19,7 +19,7 @@ const Navigation = styled.nav`
 `
 
 const Navbar = () => {
-  const session = JSON.parse(localStorage.getItem('session') || '{}')
+  const session = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem('session') || '{}')
   let username :string = '';
   if (session) username = session.username
 

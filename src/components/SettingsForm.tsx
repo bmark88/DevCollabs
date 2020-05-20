@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SettingsForm() {
   const classes:Record<"form" | "submit" | "paper" | "avatar", string> = useStyles()
-  const userData = JSON.parse(localStorage.getItem('session') || '{}')
+  const userData = JSON.parse(typeof window !== 'undefined' && window.localStorage.getItem('session') || '{}')
 
   const [id, setID] = useState(userData.id)
   const [username, setUsername] = useState(userData.username)
@@ -69,7 +69,7 @@ export default function SettingsForm() {
         .then(res => res)
         .catch(() => setError(true))
     
-      localStorage.removeItem("session")
+      typeof window !== 'undefined' && window.localStorage.removeItem("session")
       navigate('/login')
     }
   }
