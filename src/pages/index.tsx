@@ -12,25 +12,46 @@ import Chat from "../components/Chat";
 import Navbar from "../components/Navbar";
 import TopicBoard from "../components/TopicBoard";
 import News from "../components/News";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import UserCard from "../components/UserCard";
 import UserList from "../components/UserList";
 
 const Main = styled.main`
   margin-top: 80px;
   display: flex;
+
+  @media (max-width: 1200px) {
+    flex-direction: column;
+  }
 `;
 
 const TopicsContainer = styled.div`
-  // background-color: black;
-  // color: white;
-  width: 43%;
   margin: 1em;
   height: 85%;
+  flex: 1;
+  min-width: 450px;
 
   @media (max-width: 1000px) {
-    width: 90%;
     margin: 1.4em;
+  }
+`;
+
+const ResponsiveChat = styled.div`
+  display: flex;
+
+  @media (max-width: 1200px) {
+      position: absolute;
+      right: 2em;
+    }
+`;
+
+const UsersContainer = styled.div`
+  display: flex;
+  margin: 1em 0;
+  max-height: 650px;
+
+  @media (max-width: 1000px) {
+    justify-content: center;
   }
 `;
 
@@ -59,12 +80,20 @@ export default function IndexPage() {
       <Layout>
         <Navbar />
         <Main>
-          <UserCard />
-          <UserList users={usersList} />
+          <UsersContainer>
+            <UserCard />
+            <UserList users={usersList} />
+          </UsersContainer>
           <TopicsContainer className="dark">
             <TopicBoard subscriptions={subscriptions}/>
           </TopicsContainer>
-          <Chat users={users} messages={messages} handleSubmit={handleSubmit} />
+          <ResponsiveChat>
+            <Chat 
+              users={users} 
+              messages={messages} 
+              handleSubmit={handleSubmit} 
+            />
+          </ResponsiveChat>
         </Main>
         <News />
       </Layout>

@@ -4,7 +4,7 @@ import { ListSubheader } from "@material-ui/core"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 import Typography from "@material-ui/core/Typography"
 import { Divider } from "@material-ui/core"
-import { RoomCard } from "../components/rooms"
+import { RoomCard } from "../components/Rooms"
 interface Props {
   postCount: number
   subscriptions: any
