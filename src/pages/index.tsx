@@ -29,7 +29,7 @@ const TopicsContainer = styled.div`
   margin: 1em;
   height: 85%;
   flex: 1;
-  min-width: 600px;
+  min-width: 450px;
 
   @media (max-width: 1000px) {
     margin: 1.4em;

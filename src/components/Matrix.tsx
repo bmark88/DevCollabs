@@ -44,10 +44,6 @@ export default function MatrixPage() {
   setInterval(matrix, 100);
 }, 200)
 })
-  return (
-    <>
-    <Canvas id='canv' width={500} height={200}>hello</Canvas>
-    {/* <h1>Hello World</h1> */}
-    </>
-  )
+  
+  return <Canvas id='canv' width={500} height={200}>hello</Canvas>
 }
