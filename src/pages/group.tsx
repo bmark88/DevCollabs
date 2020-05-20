@@ -97,7 +97,7 @@ const GroupPage = () => {
     const userId = JSON.parse(localStorage.getItem("session") || "{}").id
 
     if(groupName !== "") {
-      axios.post("http://localhost:3001/group/g/create", {
+      axios.post("https://dev-collabs-backend.herokuapp.com/group/g/create", {
         userId,
         groupName,
       })

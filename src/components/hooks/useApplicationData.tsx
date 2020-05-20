@@ -18,10 +18,10 @@ export default function useApplicationData() {
   //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchGroups = () => {
     axios
-      .get(`http://localhost:3001/group/u/${userId}`)
+      .get(`https://dev-collabs-backend.herokuapp.com/group/u/${userId}`)
       .then(response => {
         axios
-        .get(`http://localhost:3001/group/g/${response.data[0].id}`)
+        .get(`https://dev-collabs-backend.herokuapp.com/group/g/${response.data[0].id}`)
         .then(data => {
           setState({ ...state,
              posts: data.data,
@@ -36,7 +36,7 @@ export default function useApplicationData() {
 
   const setGroup = (groupId: number) => {
     axios
-      .get(`http://localhost:3001/group/g/${groupId}`)
+      .get(`https://dev-collabs-backend.herokuapp.com/group/g/${groupId}`)
       .then(response => {
         setState({ ...state, group: groupId, posts: response.data })
       })
@@ -45,14 +45,14 @@ export default function useApplicationData() {
 
   const fetchUserPosts = (userID :number) => {
     axios
-      .get(`http://localhost:3001/profile/${userID}`)
+      .get(`https://dev-collabs-backend.herokuapp.com/profile/${userID}`)
       .then(response => setPostCount(response.data.totalPosts.count))
       .catch(e => e.stack);
   };
 
   const fetchUserSubscriptions = (userID :number) => {
     axios
-    .get(`http://localhost:3001/profile/${userID}`)
+    .get(`https://dev-collabs-backend.herokuapp.com/profile/${userID}`)
     .then(response => setSubscriptions(response.data.userSubscriptions))
     .catch(e => e.stack);
   }

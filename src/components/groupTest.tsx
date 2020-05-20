@@ -14,7 +14,7 @@ function GroupTestElement(props) {
    useEffect(()=>{
       axios({
          method: 'get',
-         url: `http://localhost:3001/group/${id}/${userId}`
+         url: `https://dev-collabs-backend.herokuapp.com/group/${id}/${userId}`
       }).then(isSubbed => {
          setSub(isSubbed.data)
       })
@@ -26,7 +26,7 @@ function GroupTestElement(props) {
       sub ? (
          axios({
             method: "delete",
-            url: `http://localhost:3001/group/subscription/delete/${id}`,
+            url: `https://dev-collabs-backend.herokuapp.com/group/subscription/delete/${id}`,
             data: data,
          })
          .then(() => {
@@ -37,7 +37,7 @@ function GroupTestElement(props) {
       : (
          axios({
             method: "post",
-            url: `http://localhost:3001/group/subscription/${id}`,
+            url: `https://dev-collabs-backend.herokuapp.com/group/subscription/${id}`,
             data: data,
          })
          .then(() => {
@@ -62,7 +62,7 @@ export default function Test() {
   const [allGroups, setAllGroups] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:3001/group/public").then(data => {
+    axios.get("https://dev-collabs-backend.herokuapp.com/group/public").then(data => {
       setAllGroups(data.data)
     })
   }, [])

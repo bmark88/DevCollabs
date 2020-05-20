@@ -10,7 +10,7 @@ export default function usePublic() {
   //gets all group names of a user. returns {array<[id:number ,name:string]>} data
   const fetchAllGroups = () => {
     axios
-      .get(`http://localhost:3001/group/public`)
+      .get(`https://dev-collabs-backend.herokuapp.com/group/public`)
       .then(response => {
         setPublic({ ...publicGroups, groups: response.data })
       })
@@ -19,7 +19,7 @@ export default function usePublic() {
 
   const fetchAllUsers = () => {
     axios
-      .get(`http://localhost:3001/users`)
+      .get(`https://dev-collabs-backend.herokuapp.com/users`)
       .then(response => {
         // console.log('fetchAllUsers response ==>', response.data)
         setUsersList(response.data);

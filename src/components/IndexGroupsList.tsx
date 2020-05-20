@@ -63,7 +63,7 @@ function GroupTestElement(props: any) {
   useEffect(() => {
     axios({
       method: "get",
-      url: `http://localhost:3001/group/${id}/${userId}`,
+      url: `https://dev-collabs-backend.herokuapp.com/group/${id}/${userId}`,
     }).then(isSubbed => {
       setSub(isSubbed.data)
     })
@@ -77,7 +77,7 @@ function GroupTestElement(props: any) {
     sub
       ? axios({
           method: "delete",
-          url: `http://localhost:3001/group/subscription/delete/${id}`,
+          url: `https://dev-collabs-backend.herokuapp.com/group/subscription/delete/${id}`,
           data: data,
         })
           .then(() => {
@@ -86,7 +86,7 @@ function GroupTestElement(props: any) {
           .catch(e => e.stack)
       : axios({
           method: "post",
-          url: `http://localhost:3001/group/subscription/${id}`,
+          url: `https://dev-collabs-backend.herokuapp.com/group/subscription/${id}`,
           data: data,
         })
           .then(() => {
@@ -103,11 +103,11 @@ function GroupTestElement(props: any) {
   const handleDeleteGroup = () => {
     axios({
       method: "DELETE",
-      url: `http://localhost:3001/group/delete/${id}`,
+      url: `https://dev-collabs-backend.herokuapp.com/group/delete/${id}`,
       data: { id: userId },
     })
       .then((data) => {
-        axios.get("http://localhost:3001/group/public").then(data => {
+        axios.get("https://dev-collabs-backend.herokuapp.com/group/public").then(data => {
           props.setAllGroups(data.data)
         })
       })
@@ -167,7 +167,7 @@ export default function IndexGroupList({ subscriptions }: Props) {
   const [allGroups, setAllGroups] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:3001/group/public").then(data => {
+    axios.get("https://dev-collabs-backend.herokuapp.com/group/public").then(data => {
       setAllGroups(data.data)
     })
   }, [])
