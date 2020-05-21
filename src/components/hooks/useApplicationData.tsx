@@ -59,7 +59,7 @@ export default function useApplicationData() {
 
   const fetchNews = () => {
     axios
-      .get('http://hn.algolia.com/api/v1/search?tags=front_page')
+      .get('https://hn.algolia.com/api/v1/search?tags=front_page')
       .then(res => {
         setNews(res.data.hits)
       })

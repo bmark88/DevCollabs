@@ -46,7 +46,6 @@ export default function UserListItem(props: any) {
           .then(data => {
 
             setIsChecked(false)
-            console.log(typeof data.data.avg)
             setValue(Number(data.data.avg))
           })
           .catch(e => console.log(e))
