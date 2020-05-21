@@ -6,5 +6,5 @@ CREATE TABLE posts
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   data TEXT NOT NULL,
   image_url VARCHAR(255),
-  created_at DATE NOT NULL
+  created_at TIMESTAMP NOT NULL
 );
