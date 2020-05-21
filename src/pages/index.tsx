@@ -97,5 +97,11 @@ export default function IndexPage() {
         </Main>
         <News />
       </Layout>
+            //   <footer>
+            //   {new Date().getFullYear()}  
+            //   {` `}
+            //   <a href="https://github.com/bmark88/lhl-final/">DevCollab Open Source </a>   
+            //    | Bradley Mark, Elizabeth Brown, Tomas Wen - Made with Love 🖤 
+            // </footer>
   );
 };

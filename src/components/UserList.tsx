@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { RoomCard } from "./Rooms"
-import UserListItem from './UserListItem'
+import UserListItem from './userListItem'
 
 interface Props {
   users: any

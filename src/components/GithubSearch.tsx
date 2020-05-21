@@ -327,7 +327,7 @@ export default function GithubSearch() {
 
             {results.repos && results.repos[0] && (
               <li key={`section-2`} className={`${classes.listSection} dark`}>
-                <ul className={`${classes.ul} dark`}>
+                <ul className={` dark`} style={{backgroundColor: 'inherit'}}>
                   <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2 className="dark">{`User's Repos`}</h2>
                   </ListSubheader>
@@ -346,7 +346,7 @@ export default function GithubSearch() {
             {/* \\\\\ ---------------FILTERS RESULTS--------------- /////*/}
             {!results.repos && parseInt(userReposCount) > 1 && (
               <li key={`section-3`} className={`${classes.listSection} dark`}>
-                <ul className={`${classes.ul} dark`}>
+                <ul className={`dark`} style={{backgroundColor: "inherit"}}>
                   <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`User's List`}</h2>
                   </ListSubheader>
@@ -433,7 +433,7 @@ export default function GithubSearch() {
           <List className={`${classes.ul} ${"dark"}`} subheader={<li />}>
             {reposResults.incomplete_results === false && (
               <li key={`section-4-0`} className={classes.listSection}>
-                <ul className={`${classes.ul} ${"dark"}`}>
+                <ul className={` ${"dark"}`}>
                   <ListSubheader style={{padding:"15px", margin: 0}}>
                     <h2>{`Repos Results`}</h2>
                   </ListSubheader>
